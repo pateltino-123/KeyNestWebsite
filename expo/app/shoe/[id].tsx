@@ -22,6 +22,8 @@ import {
   ChevronLeft,
   ExternalLink,
   X,
+  Bell,
+  TrendingDown,
 } from "lucide-react-native";
 import * as Haptics from "expo-haptics";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
@@ -32,6 +34,11 @@ import { useUser } from "@/contexts/UserContext";
 import ReviewsModal from "@/components/ReviewsModal";
 import { getProductById, mapKicksProductToShoe } from "@/services/kicksApi";
 import { useTheme } from "@/contexts/ThemeContext";
+import { generateDealInfo } from "@/mocks/priceData";
+import DealScoreBadge from "@/components/DealScoreBadge";
+import PriceChart from "@/components/PriceChart";
+import RetailerComparison from "@/components/RetailerComparison";
+import PriceAlertModal from "@/components/PriceAlertModal";
 
 const FALLBACK_IMAGE = "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=400&fit=crop";
 
@@ -69,10 +76,12 @@ const generateBuyLinks = (shoe: Shoe): BuyLink[] => {
 export default function ShoeDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const insets = useSafeAreaInsets();
-  const { isInWishlist, addToWishlist, removeFromWishlist, measurements } = useUser();
+  const { isInWishlist, addToWishlist, removeFromWishlist, measurements, getPriceAlert } = useUser();
   const { colors } = useTheme();
   const [showReviews, setShowReviews] = useState(false);
   const [showBuyModal, setShowBuyModal] = useState(false);
+  const [showPriceAlert, setShowPriceAlert] = useState(false);
+  const [selectedRetailer, setSelectedRetailer] = useState<string | undefined>(undefined);
   const queryClient = useQueryClient();
 
   const cachedShoe = useMemo(() => {
@@ -110,6 +119,13 @@ export default function ShoeDetailScreen() {
   const isWishlisted = shoe ? isInWishlist(shoe.id) : false;
   const brandTip = shoe ? brandSizingTips.find((t) => t.brand === shoe.brand) : null;
   const buyLinks = shoe ? generateBuyLinks(shoe) : [];
+
+  const dealInfo = useMemo(() => {
+    if (!shoe) return null;
+    return generateDealInfo(shoe.id, shoe.price);
+  }, [shoe]);
+
+  const existingAlert = shoe ? getPriceAlert(shoe.id) : undefined;
 
   const handleWishlistToggle = useCallback(() => {
     if (!shoe) return;
@@ -303,6 +319,85 @@ export default function ShoeDetailScreen() {
             </View>
           </View>
 
+          {dealInfo && (
+            <View style={styles.section}>
+              <View style={styles.priceSectionHeader}>
+                <Text style={[styles.sectionTitle, { color: colors.text }]}>Price Tracking</Text>
+                <Pressable
+                  style={[styles.alertBtn, { backgroundColor: existingAlert?.isActive ? `${colors.warning}20` : colors.surfaceAlt }]}
+                  onPress={() => {
+                    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                    setShowPriceAlert(true);
+                  }}
+                >
+                  <Bell size={14} color={existingAlert?.isActive ? colors.warning : colors.textMuted} />
+                  <Text style={[styles.alertBtnText, { color: existingAlert?.isActive ? colors.warning : colors.textMuted }]}>
+                    {existingAlert?.isActive ? `Alert: ${existingAlert.targetPrice}` : "Set Alert"}
+                  </Text>
+                </Pressable>
+              </View>
+
+              <DealScoreBadge
+                score={dealInfo.dealScore}
+                priceChange30d={dealInfo.priceChange30d}
+              />
+
+              <View style={styles.priceStatsRow}>
+                <View style={[styles.priceStat, { backgroundColor: colors.surfaceAlt }]}>
+                  <Text style={[styles.priceStatLabel, { color: colors.textMuted }]}>Lowest Now</Text>
+                  <Text style={[styles.priceStatValue, { color: colors.accent }]}>${dealInfo.currentLowest}</Text>
+                </View>
+                <View style={[styles.priceStat, { backgroundColor: colors.surfaceAlt }]}>
+                  <Text style={[styles.priceStatLabel, { color: colors.textMuted }]}>Hist. Low</Text>
+                  <Text style={[styles.priceStatValue, { color: colors.text }]}>${dealInfo.historicalLow}</Text>
+                </View>
+                <View style={[styles.priceStat, { backgroundColor: colors.surfaceAlt }]}>
+                  <Text style={[styles.priceStatLabel, { color: colors.textMuted }]}>Retail</Text>
+                  <Text style={[styles.priceStatValue, { color: colors.text }]}>${dealInfo.retailPrice}</Text>
+                </View>
+              </View>
+
+              <Text style={[styles.chartLabel, { color: colors.textSecondary }]}>90-Day Price History</Text>
+              <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.retailerFilter}>
+                <Pressable
+                  style={[
+                    styles.retailerChip,
+                    { backgroundColor: colors.surfaceAlt, borderColor: colors.border },
+                    !selectedRetailer && { backgroundColor: colors.primary, borderColor: colors.primary },
+                  ]}
+                  onPress={() => setSelectedRetailer(undefined)}
+                >
+                  <Text style={[styles.retailerChipText, { color: colors.textSecondary }, !selectedRetailer && { color: "#FFF" }]}>Lowest</Text>
+                </Pressable>
+                {["StockX", "GOAT", "Flight Club"].map((r) => (
+                  <Pressable
+                    key={r}
+                    style={[
+                      styles.retailerChip,
+                      { backgroundColor: colors.surfaceAlt, borderColor: colors.border },
+                      selectedRetailer === r && { backgroundColor: colors.primary, borderColor: colors.primary },
+                    ]}
+                    onPress={() => setSelectedRetailer(r)}
+                  >
+                    <Text style={[styles.retailerChipText, { color: colors.textSecondary }, selectedRetailer === r && { color: "#FFF" }]}>{r}</Text>
+                  </Pressable>
+                ))}
+              </ScrollView>
+              <PriceChart
+                priceHistory={dealInfo.priceHistory}
+                retailer={selectedRetailer}
+                targetPrice={existingAlert?.targetPrice}
+              />
+            </View>
+          )}
+
+          {dealInfo && (
+            <View style={styles.section}>
+              <Text style={[styles.sectionTitle, { color: colors.text }]}>Price Comparison</Text>
+              <RetailerComparison retailers={dealInfo.retailers} />
+            </View>
+          )}
+
           <View style={styles.section}>
             <Text style={[styles.sectionTitle, { color: colors.text }]}>Description</Text>
             <Text style={[styles.description, { color: colors.textSecondary }]} numberOfLines={3}>{shoe.description}</Text>
@@ -387,9 +482,28 @@ export default function ShoeDetailScreen() {
         </View>
       </Modal>
 
+      {shoe && dealInfo && (
+        <PriceAlertModal
+          visible={showPriceAlert}
+          onClose={() => setShowPriceAlert(false)}
+          shoeId={shoe.id}
+          shoeName={`${shoe.brand} ${shoe.name}`}
+          dealInfo={dealInfo}
+        />
+      )}
+
       <View style={[styles.bottomBar, { paddingBottom: insets.bottom + 16, backgroundColor: colors.surface, borderTopColor: colors.borderLight }]}>
         <Pressable style={[styles.askButton, { backgroundColor: colors.surfaceAlt }]} onPress={handleAskAssistant}>
           <MessageCircle size={20} color={colors.accent} />
+        </Pressable>
+        <Pressable
+          style={[styles.priceAlertButton, { backgroundColor: colors.surfaceAlt }]}
+          onPress={() => {
+            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+            setShowPriceAlert(true);
+          }}
+        >
+          <Bell size={20} color={existingAlert?.isActive ? colors.warning : colors.accent} />
         </Pressable>
         <Pressable style={[styles.buyButton, { backgroundColor: colors.primary }]} onPress={handleBuyPress}>
           <ShoppingBag size={20} color={colors.white} />
@@ -679,5 +793,71 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginTop: 24,
     lineHeight: 18,
+  },
+  priceSectionHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 12,
+  },
+  alertBtn: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderRadius: 10,
+  },
+  alertBtnText: {
+    fontSize: 12,
+    fontWeight: "600" as const,
+  },
+  priceStatsRow: {
+    flexDirection: "row",
+    gap: 8,
+    marginTop: 12,
+    marginBottom: 16,
+  },
+  priceStat: {
+    flex: 1,
+    alignItems: "center",
+    paddingVertical: 12,
+    borderRadius: 12,
+  },
+  priceStatLabel: {
+    fontSize: 10,
+    fontWeight: "500" as const,
+    marginBottom: 4,
+  },
+  priceStatValue: {
+    fontSize: 16,
+    fontWeight: "800" as const,
+  },
+  chartLabel: {
+    fontSize: 13,
+    fontWeight: "600" as const,
+    marginBottom: 8,
+  },
+  retailerFilter: {
+    marginBottom: 10,
+    maxHeight: 36,
+  },
+  retailerChip: {
+    paddingHorizontal: 12,
+    paddingVertical: 7,
+    borderRadius: 8,
+    borderWidth: 1,
+    marginRight: 8,
+  },
+  retailerChipText: {
+    fontSize: 11,
+    fontWeight: "600" as const,
+  },
+  priceAlertButton: {
+    width: 52,
+    height: 52,
+    borderRadius: 14,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });

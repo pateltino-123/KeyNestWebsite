@@ -1,5 +1,5 @@
 import { Tabs } from "expo-router";
-import { Home, Search, Heart, MessageCircle, User } from "lucide-react-native";
+import { Home, Search, Heart, MessageCircle, User, TrendingDown } from "lucide-react-native";
 import React from "react";
 import { View, StyleSheet, Platform } from "react-native";
 import { BlurView } from "expo-blur";
@@ -76,6 +76,17 @@ export default function TabLayout() {
           tabBarIcon: ({ color, focused }) => (
             <View style={[styles.iconContainer, focused && { backgroundColor: `${colors.primary}15` }]}>
               <Heart size={22} color={color} strokeWidth={focused ? 2.5 : 2} fill={focused ? color : "transparent"} />
+            </View>
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="deals"
+        options={{
+          title: "Deals",
+          tabBarIcon: ({ color, focused }) => (
+            <View style={[styles.iconContainer, focused && { backgroundColor: `${colors.primary}15` }]}>
+              <TrendingDown size={22} color={color} strokeWidth={focused ? 2.5 : 2} />
             </View>
           ),
         }}

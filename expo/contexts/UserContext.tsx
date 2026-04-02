@@ -3,6 +3,8 @@ import createContextHook from "@nkzw/create-context-hook";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { Shoe } from "@/mocks/shoes";
+import { generateDealInfo, DealInfo } from "@/mocks/priceData";
+import { shoes as allShoes } from "@/mocks/shoes";
 
 export interface FootMeasurements {
   leftLength: number;
@@ -42,6 +44,14 @@ export interface ScanHistory {
   measurements: FootMeasurements;
 }
 
+export interface PriceAlert {
+  shoeId: string;
+  targetPrice: number;
+  isActive: boolean;
+  createdAt: string;
+  notificationsSent: number;
+}
+
 interface UserState {
   profile: UserProfile | null;
   measurements: FootMeasurements | null;
@@ -49,6 +59,7 @@ interface UserState {
   wishlist: WishlistItem[];
   scanHistory: ScanHistory[];
   hasCompletedOnboarding: boolean;
+  priceAlerts: PriceAlert[];
 }
 
 const defaultPreferences: UserPreferences = {
@@ -71,6 +82,7 @@ export const [UserProvider, useUser] = createContextHook(() => {
     wishlist: [],
     scanHistory: [],
     hasCompletedOnboarding: false,
+    priceAlerts: [],
   });
 
   const userDataQuery = useQuery({
@@ -191,6 +203,56 @@ export const [UserProvider, useUser] = createContextHook(() => {
     updateState({ hasCompletedOnboarding: true });
   }, [updateState]);
 
+  const setPriceAlert = useCallback((shoeId: string, targetPrice: number) => {
+    setState((prev) => {
+      const existing = prev.priceAlerts.findIndex((a) => a.shoeId === shoeId);
+      let newAlerts: PriceAlert[];
+      if (existing >= 0) {
+        newAlerts = prev.priceAlerts.map((a, i) =>
+          i === existing ? { ...a, targetPrice, isActive: true } : a
+        );
+      } else {
+        newAlerts = [
+          ...prev.priceAlerts,
+          { shoeId, targetPrice, isActive: true, createdAt: new Date().toISOString(), notificationsSent: 0 },
+        ];
+      }
+      const newState = { ...prev, priceAlerts: newAlerts };
+      saveData(newState);
+      return newState;
+    });
+    console.log("[User] Price alert set for shoe:", shoeId, "target:", targetPrice);
+  }, [saveData]);
+
+  const removePriceAlert = useCallback((shoeId: string) => {
+    setState((prev) => {
+      const newState = {
+        ...prev,
+        priceAlerts: prev.priceAlerts.filter((a) => a.shoeId !== shoeId),
+      };
+      saveData(newState);
+      return newState;
+    });
+    console.log("[User] Price alert removed for shoe:", shoeId);
+  }, [saveData]);
+
+  const togglePriceAlert = useCallback((shoeId: string) => {
+    setState((prev) => {
+      const newState = {
+        ...prev,
+        priceAlerts: prev.priceAlerts.map((a) =>
+          a.shoeId === shoeId ? { ...a, isActive: !a.isActive } : a
+        ),
+      };
+      saveData(newState);
+      return newState;
+    });
+  }, [saveData]);
+
+  const getPriceAlert = useCallback((shoeId: string): PriceAlert | undefined => {
+    return state.priceAlerts.find((a) => a.shoeId === shoeId);
+  }, [state.priceAlerts]);
+
   return {
     ...state,
     isLoading: userDataQuery.isLoading,
@@ -202,6 +264,10 @@ export const [UserProvider, useUser] = createContextHook(() => {
     updateWishlistStatus,
     isInWishlist,
     completeOnboarding,
+    setPriceAlert,
+    removePriceAlert,
+    togglePriceAlert,
+    getPriceAlert,
   };
 });
 
