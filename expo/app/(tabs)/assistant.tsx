@@ -143,7 +143,7 @@ Important: If user asks for recommendations and hasn't scanned their feet, kindl
     <KeyboardAvoidingView
       style={[styles.container, { backgroundColor: colors.background }]}
       behavior={Platform.OS === "ios" ? "padding" : "height"}
-      keyboardVerticalOffset={0}
+      keyboardVerticalOffset={Platform.OS === "ios" ? 88 : 68}
     >
       <View style={[styles.header, { paddingTop: insets.top, borderBottomColor: colors.borderLight }]}>
         <View style={[styles.headerIcon, { backgroundColor: colors.surfaceAlt }]}>
@@ -239,7 +239,7 @@ Important: If user asks for recommendations and hasn't scanned their feet, kindl
         </ScrollView>
       </View>
 
-      <View style={[styles.inputContainer, { paddingBottom: insets.bottom + 8, backgroundColor: colors.background, borderTopWidth: 1, borderTopColor: colors.borderLight }]}>
+      <View style={[styles.inputContainer, { paddingBottom: Math.max(insets.bottom, Platform.OS === "ios" ? 88 : 68) + 8, backgroundColor: colors.background, borderTopWidth: 1, borderTopColor: colors.borderLight }]}>
         <View style={styles.inputRow}>
           <TextInput
             ref={inputRef}
@@ -308,7 +308,7 @@ const styles = StyleSheet.create({
   },
   messagesContent: {
     padding: 16,
-    paddingBottom: 120,
+    paddingBottom: 20,
   },
   messageBubble: {
     maxWidth: "85%",
@@ -349,7 +349,7 @@ const styles = StyleSheet.create({
   },
   quickPromptsContainer: {
     borderTopWidth: 1,
-    paddingVertical: 12,
+    paddingVertical: 8,
   },
   quickPromptsScroll: {
     paddingHorizontal: 16,
@@ -367,7 +367,7 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     paddingHorizontal: 16,
-    paddingTop: 12,
+    paddingTop: 10,
   },
   inputRow: {
     flexDirection: "row",
@@ -376,7 +376,8 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    height: 44,
+    minHeight: 44,
+    maxHeight: 100,
     borderRadius: 24,
     paddingHorizontal: 18,
     paddingTop: 12,
