@@ -47,7 +47,7 @@ const generatePriceHistory = (
       const price = Math.round(basePrice * (1 + variance * 0.3));
       points.push({ date: dateStr, price, retailer });
     });
-  });
+  }
 
   return points;
 };
