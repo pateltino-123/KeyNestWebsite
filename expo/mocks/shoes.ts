@@ -183,7 +183,7 @@ export const shoes: Shoe[] = [
     category: "casual",
     activityType: ["everyday", "walking"],
     images: [
-      "https://via.placeholder.com/800x800.png?text=Image+Unavailable",
+      "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=800&h=800&fit=crop",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12],
     colors: ["White", "Black", "Grey"],
@@ -203,7 +203,7 @@ export const shoes: Shoe[] = [
     category: "formal",
     activityType: ["work", "formal"],
     images: [
-      "https://via.placeholder.com/800x800.png?text=Image+Unavailable",
+      "https://images.unsplash.com/photo-1614252235316-8c857d38b5f4?w=800&h=800&fit=crop",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13],
     colors: ["Black", "Brown", "Burgundy"],
@@ -243,7 +243,7 @@ export const shoes: Shoe[] = [
     category: "work",
     activityType: ["work", "standing"],
     images: [
-      "https://via.placeholder.com/800x800.png?text=Image+Unavailable",
+      "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=800&h=800&fit=crop",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13],
     colors: ["Black", "White"],
@@ -285,7 +285,7 @@ export const shoes: Shoe[] = [
     medicalType: "diabetic",
     activityType: ["everyday", "walking"],
     images: [
-      "https://via.placeholder.com/800x800.png?text=Image+Unavailable",
+      "https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=800&h=800&fit=crop",
     ],
     sizes: [6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13, 14],
     colors: ["Black", "Brown"],
@@ -326,7 +326,7 @@ export const shoes: Shoe[] = [
     medicalType: "orthopedic",
     activityType: ["everyday", "walking"],
     images: [
-      "https://via.placeholder.com/800x800.png?text=Image+Unavailable",
+      "https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?w=800&h=800&fit=crop",
     ],
     sizes: [6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13],
     colors: ["Black", "Grey", "Navy"],
@@ -358,7 +358,7 @@ export const shoes: Shoe[] = [
     medicalType: "elderly",
     activityType: ["everyday", "walking"],
     images: [
-      "https://via.placeholder.com/800x800.png?text=Image+Unavailable",
+      "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&h=800&fit=crop",
     ],
     sizes: [6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13],
     colors: ["Black", "White", "Beige"],
@@ -390,7 +390,7 @@ export const shoes: Shoe[] = [
     medicalType: "pediatric",
     activityType: ["everyday", "school"],
     images: [
-      "https://via.placeholder.com/800x800.png?text=Image+Unavailable",
+      "https://images.unsplash.com/photo-1514989940723-e8e51635b782?w=800&h=800&fit=crop",
     ],
     sizes: [8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.5, 13, 13.5, 1, 1.5, 2, 2.5, 3],
     colors: ["Navy/Red", "Black", "Pink/Purple"],
@@ -1121,7 +1121,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "everyday"],
     images: [
-      "https://via.placeholder.com/800x800.png?text=Image+Unavailable",
+      "https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?w=800&h=800&fit=crop",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13],
     colors: ["Black/White", "White", "Grey"],
@@ -1141,7 +1141,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "tempo"],
     images: [
-      "https://via.placeholder.com/800x800.png?text=Image+Unavailable",
+      "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=800&h=800&fit=crop",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13],
     colors: ["Black", "White/Grey", "Navy"],
@@ -1161,7 +1161,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "everyday"],
     images: [
-      "https://via.placeholder.com/800x800.png?text=Image+Unavailable",
+      "https://images.unsplash.com/photo-1539185441755-769473a23570?w=800&h=800&fit=crop",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13, 14],
     colors: ["Black/White", "White", "Grey"],
@@ -1181,7 +1181,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "racing"],
     images: [
-      "https://via.placeholder.com/800x800.png?text=Image+Unavailable",
+      "https://images.unsplash.com/photo-1562183241-b937e95585b6?w=800&h=800&fit=crop",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13],
     colors: ["Black/White", "White", "Navy"],
@@ -1201,7 +1201,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "training"],
     images: [
-      "https://via.placeholder.com/800x800.png?text=Image+Unavailable",
+      "https://images.unsplash.com/photo-1597045566677-8cf032ed6634?w=800&h=800&fit=crop",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13, 14],
     colors: ["Black/White", "Grey", "Navy"],
@@ -1221,7 +1221,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "everyday"],
     images: [
-      "https://via.placeholder.com/800x800.png?text=Image+Unavailable",
+      "https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=800&h=800&fit=crop",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13, 14],
     colors: ["Black", "White/Grey", "Navy"],
@@ -1241,7 +1241,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "everyday"],
     images: [
-      "https://via.placeholder.com/800x800.png?text=Image+Unavailable",
+      "https://images.unsplash.com/photo-1605348532760-6753d2c43329?w=800&h=800&fit=crop",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13, 14],
     colors: ["Black/White", "White", "Grey"],
@@ -1261,7 +1261,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "racing"],
     images: [
-      "https://via.placeholder.com/800x800.png?text=Image+Unavailable",
+      "https://images.unsplash.com/photo-1556906781-9a412961c28c?w=800&h=800&fit=crop",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13],
     colors: ["Black/White", "White", "Navy"],
@@ -1281,7 +1281,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "tempo"],
     images: [
-      "https://via.placeholder.com/800x800.png?text=Image+Unavailable",
+      "https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=800&h=800&fit=crop",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13],
     colors: ["Black", "White/Grey", "Navy"],
