@@ -38,7 +38,13 @@
         }
       ],
       "expo-font",
-      "expo-web-browser"
+      "expo-web-browser",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow shoeFitx to access your camera to scan your feet for accurate sizing."
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true
