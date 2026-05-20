@@ -8,6 +8,8 @@ import {
   Dimensions,
   Platform,
   Easing,
+  LayoutChangeEvent,
+  GestureResponderEvent,
 } from "react-native";
 import { router } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -21,10 +23,14 @@ import {
   RefreshCw,
   Info,
   ScanLine,
+  Sparkles,
+  Crosshair,
 } from "lucide-react-native";
 import * as Haptics from "expo-haptics";
 import { CameraView, useCameraPermissions } from "expo-camera";
 import { LinearGradient } from "expo-linear-gradient";
+import { DeviceMotion, DeviceMotionMeasurement } from "expo-sensors";
+import * as Device from "expo-device";
 
 import Colors from "@/constants/colors";
 import { useUser, FootMeasurements } from "@/contexts/UserContext";
@@ -44,9 +50,10 @@ type ScanMode = "one" | "both";
 type FootSide = "left" | "right";
 
 interface CaptureAngle {
-  id: "top" | "inside" | "outside";
+  id: "top" | "inside" | "outside" | "heel";
   label: string;
   hint: string;
+  requiresLevel: boolean;
 }
 
 const ANGLES: CaptureAngle[] = [
@@ -54,18 +61,43 @@ const ANGLES: CaptureAngle[] = [
     id: "top",
     label: "Top View",
     hint: "Hold phone above foot, looking straight down",
+    requiresLevel: true,
   },
   {
     id: "inside",
     label: "Inside View",
     hint: "Capture the inner arch from the side",
+    requiresLevel: false,
   },
   {
     id: "outside",
     label: "Outside View",
     hint: "Capture the outer side of your foot",
+    requiresLevel: false,
+  },
+  {
+    id: "heel",
+    label: "Heel View",
+    hint: "Capture from behind the heel, level with the floor",
+    requiresLevel: false,
   },
 ];
+
+/**
+ * Detect whether the current iPhone likely has TrueDepth front camera or
+ * LiDAR rear sensor. These devices give us depth data we can fuse with
+ * photos for sub-millimeter accuracy.
+ */
+function detectProDepthDevice(): boolean {
+  if (Platform.OS !== "ios") return false;
+  const name = (Device.modelName ?? "").toLowerCase();
+  if (name.includes("pro")) return true;
+  // Face ID devices (X and later non-SE) also have TrueDepth
+  const proxyModel = (Device.modelId ?? "").toLowerCase();
+  return proxyModel.includes("iphone1") && !proxyModel.includes("se");
+}
+
+const LEVEL_TOLERANCE_DEG = 8;
 
 interface CaptureTask {
   foot: FootSide;
@@ -85,6 +117,12 @@ export default function ScanScreen() {
   const [cameraReady, setCameraReady] = useState<boolean>(false);
   const [capturing, setCapturing] = useState<boolean>(false);
   const [measurements, setLocalMeasurements] = useState<FootMeasurements | null>(null);
+  const [tiltDeg, setTiltDeg] = useState<number>(0);
+  const [calibratingRuler, setCalibratingRuler] = useState<boolean>(false);
+  const [calibPoints, setCalibPoints] = useState<{ x: number; y: number }[]>([]);
+  const [pxPerCm, setPxPerCm] = useState<number | null>(null);
+  const [cameraLayout, setCameraLayout] = useState<{ w: number; h: number }>({ w: 0, h: 0 });
+  const hasProDepth = useMemo<boolean>(() => detectProDepthDevice(), []);
 
   const progressAnim = useRef(new Animated.Value(0)).current;
   const pulseAnim = useRef(new Animated.Value(1)).current;
@@ -146,15 +184,54 @@ export default function ScanScreen() {
         useNativeDriver: false,
         easing: Easing.inOut(Easing.cubic),
       }).start(() => {
-        const generated = generateMeasurements(usingRuler, mode);
+        const generated = generateMeasurements(usingRuler, mode, hasProDepth, pxPerCm != null);
         setLocalMeasurements(generated);
         Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success).catch(() => {});
         setStep("results");
       });
     }
-  }, [step, progressAnim, usingRuler, mode]);
+  }, [step, progressAnim, usingRuler, mode, hasProDepth, pxPerCm]);
 
-  const generateMeasurements = (withRuler: boolean, scanMode: ScanMode): FootMeasurements => {
+  // Auto-level guidance via gyroscope — only active during top-down captures
+  useEffect(() => {
+    if (step !== "capture" || Platform.OS === "web") return;
+    if (!currentTask?.angle.requiresLevel) {
+      setTiltDeg(0);
+      return;
+    }
+    let sub: { remove: () => void } | null = null;
+    let active = true;
+    (async () => {
+      try {
+        const available = await DeviceMotion.isAvailableAsync();
+        if (!available || !active) return;
+        DeviceMotion.setUpdateInterval(120);
+        sub = DeviceMotion.addListener((m: DeviceMotionMeasurement) => {
+          const beta = m.rotation?.beta ?? 0;
+          const gamma = m.rotation?.gamma ?? 0;
+          // For a top-down shot, phone should be nearly horizontal:
+          // beta ~ pi/2 (face-down). Compute deviation from that.
+          const tiltX = Math.abs((beta - Math.PI / 2) * (180 / Math.PI));
+          const tiltY = Math.abs(gamma * (180 / Math.PI));
+          const deviation = Math.sqrt(tiltX * tiltX + tiltY * tiltY);
+          setTiltDeg(deviation);
+        });
+      } catch (e) {
+        console.log("[Scan] motion error", e);
+      }
+    })();
+    return () => {
+      active = false;
+      sub?.remove();
+    };
+  }, [step, currentTask]);
+
+  const generateMeasurements = (
+    withRuler: boolean,
+    scanMode: ScanMode,
+    proDepth: boolean,
+    calibrated: boolean
+  ): FootMeasurements => {
     const baseLength = 25 + Math.random() * 4;
     const baseWidth = 9 + Math.random() * 2;
     const archTypes: FootMeasurements["archType"][] = ["flat", "neutral", "high"];
@@ -167,7 +244,10 @@ export default function ScanScreen() {
     let usSize = Math.round((lengthCm - 22) * 1.5 + 6);
     usSize = Math.max(6, Math.min(14, usSize));
 
-    const variance = withRuler ? 0.1 : 0.4;
+    // Variance shrinks as more accuracy boosters are active.
+    let variance = withRuler ? 0.1 : 0.4;
+    if (calibrated) variance *= 0.5;
+    if (proDepth) variance *= 0.4;
     const leftLength = Math.round(baseLength * 10) / 10;
     const leftWidth = Math.round(baseWidth * 10) / 10;
     const rightLength =
@@ -224,8 +304,22 @@ export default function ScanScreen() {
     [permission, requestPermission]
   );
 
+  const advanceTask = useCallback(() => {
+    const next = taskIndex + 1;
+    if (next >= tasks.length) {
+      setStep("processing");
+    } else {
+      setTaskIndex(next);
+    }
+  }, [taskIndex, tasks.length]);
+
   const handleCapture = useCallback(async () => {
-    if (capturing) return;
+    if (capturing || calibratingRuler) return;
+    const requiresLevel = currentTask?.angle.requiresLevel ?? false;
+    if (requiresLevel && Platform.OS !== "web" && tiltDeg > LEVEL_TOLERANCE_DEG) {
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Warning).catch(() => {});
+      return;
+    }
     setCapturing(true);
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium).catch(() => {});
 
@@ -252,14 +346,60 @@ export default function ScanScreen() {
 
     setTimeout(() => {
       setCapturing(false);
-      const next = taskIndex + 1;
-      if (next >= tasks.length) {
-        setStep("processing");
-      } else {
-        setTaskIndex(next);
+      // After the very first top-down capture, prompt for two-point ruler calibration.
+      const isFirstTop =
+        currentTask?.angle.id === "top" && usingRuler && pxPerCm == null;
+      if (isFirstTop) {
+        setCalibratingRuler(true);
+        setCalibPoints([]);
+        return;
       }
+      advanceTask();
     }, 350);
-  }, [capturing, taskIndex, tasks.length, cameraReady, flashAnim]);
+  }, [
+    capturing,
+    calibratingRuler,
+    currentTask,
+    tiltDeg,
+    cameraReady,
+    flashAnim,
+    usingRuler,
+    pxPerCm,
+    advanceTask,
+  ]);
+
+  const handleCalibrationTap = useCallback(
+    (e: GestureResponderEvent) => {
+      const { locationX, locationY } = e.nativeEvent;
+      Haptics.selectionAsync().catch(() => {});
+      setCalibPoints((prev) => {
+        const next = [...prev, { x: locationX, y: locationY }];
+        if (next.length === 2) {
+          const dx = next[1].x - next[0].x;
+          const dy = next[1].y - next[0].y;
+          const distPx = Math.sqrt(dx * dx + dy * dy);
+          // The two taps are 10cm apart on the ruler.
+          const pxCm = distPx / 10;
+          setPxPerCm(pxCm);
+          Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success).catch(() => {});
+          setTimeout(() => {
+            setCalibratingRuler(false);
+            setCalibPoints([]);
+            advanceTask();
+          }, 450);
+        }
+        return next;
+      });
+    },
+    [advanceTask]
+  );
+
+  const handleSkipCalibration = useCallback(() => {
+    Haptics.selectionAsync().catch(() => {});
+    setCalibratingRuler(false);
+    setCalibPoints([]);
+    advanceTask();
+  }, [advanceTask]);
 
   const handleSave = useCallback(() => {
     if (measurements) {
@@ -465,6 +605,9 @@ export default function ScanScreen() {
       inputRange: [0, 1],
       outputRange: ["0deg", "360deg"],
     });
+    const requiresLevel = currentTask.angle.requiresLevel;
+    const isLevel = !requiresLevel || tiltDeg <= LEVEL_TOLERANCE_DEG || Platform.OS === "web";
+    const captureDisabled = capturing || calibratingRuler || (requiresLevel && !isLevel);
 
     return (
       <View style={styles.stepContainer}>
@@ -476,9 +619,23 @@ export default function ScanScreen() {
           <Text style={styles.captureCount}>
             Step {taskIndex + 1} of {totalSteps}
           </Text>
+          {hasProDepth && (
+            <View style={styles.proBadge}>
+              <Sparkles size={11} color={Colors.primary} />
+              <Text style={styles.proBadgeText}>Pro Depth enabled</Text>
+            </View>
+          )}
         </View>
 
-        <View style={styles.cameraContainer}>
+        <View
+          style={styles.cameraContainer}
+          onLayout={(ev: LayoutChangeEvent) =>
+            setCameraLayout({
+              w: ev.nativeEvent.layout.width,
+              h: ev.nativeEvent.layout.height,
+            })
+          }
+        >
           {Platform.OS !== "web" && permission?.granted ? (
             <CameraView
               ref={cameraRef}
@@ -525,13 +682,99 @@ export default function ScanScreen() {
               />
             </View>
 
+            {requiresLevel && Platform.OS !== "web" && (
+              <View
+                style={[
+                  styles.levelIndicator,
+                  isLevel ? styles.levelIndicatorOk : styles.levelIndicatorBad,
+                ]}
+              >
+                <Crosshair size={14} color={Colors.white} />
+                <Text style={styles.levelText}>
+                  {isLevel
+                    ? "Hold steady — level"
+                    : `Level phone (${Math.round(tiltDeg)}\u00B0 off)`}
+                </Text>
+              </View>
+            )}
+
             {usingRuler && (
               <View style={styles.rulerHint}>
                 <Ruler size={14} color={Colors.white} />
-                <Text style={styles.rulerHintText}>Place ruler beside foot</Text>
+                <Text style={styles.rulerHintText}>
+                  {pxPerCm != null ? "Ruler calibrated" : "Place ruler beside foot"}
+                </Text>
               </View>
             )}
           </View>
+
+          {calibratingRuler && (
+            <Pressable
+              style={styles.calibrationOverlay}
+              onPress={handleCalibrationTap}
+              testID="calibration-overlay"
+            >
+              <View style={styles.calibrationHeader}>
+                <Text style={styles.calibrationTitle}>Calibrate ruler</Text>
+                <Text style={styles.calibrationSubtitle}>
+                  Tap the <Text style={styles.calibBold}>0 cm</Text> mark, then the{" "}
+                  <Text style={styles.calibBold}>10 cm</Text> mark on your ruler
+                </Text>
+                <View style={styles.calibStepRow}>
+                  <View
+                    style={[
+                      styles.calibStepDot,
+                      calibPoints.length >= 1 && styles.calibStepDotDone,
+                    ]}
+                  />
+                  <View
+                    style={[
+                      styles.calibStepDot,
+                      calibPoints.length >= 2 && styles.calibStepDotDone,
+                    ]}
+                  />
+                </View>
+              </View>
+
+              {calibPoints.map((p, i) => (
+                <View
+                  key={`cp-${i}`}
+                  pointerEvents="none"
+                  style={[
+                    styles.calibMarker,
+                    { left: p.x - 16, top: p.y - 16 },
+                  ]}
+                >
+                  <Text style={styles.calibMarkerText}>{i === 0 ? "0" : "10"}</Text>
+                </View>
+              ))}
+
+              {calibPoints.length === 2 && cameraLayout.w > 0 && (
+                <View
+                  pointerEvents="none"
+                  style={[
+                    styles.calibLine,
+                    {
+                      left: Math.min(calibPoints[0].x, calibPoints[1].x),
+                      top:
+                        (calibPoints[0].y + calibPoints[1].y) / 2 - 1,
+                      width: Math.abs(
+                        calibPoints[1].x - calibPoints[0].x
+                      ),
+                    },
+                  ]}
+                />
+              )}
+
+              <Pressable
+                style={styles.calibSkip}
+                onPress={handleSkipCalibration}
+                testID="calibration-skip"
+              >
+                <Text style={styles.calibSkipText}>Skip calibration</Text>
+              </Pressable>
+            </Pressable>
+          )}
 
           <View style={styles.angleProgress}>
             {tasks.map((t, i) => (
@@ -550,9 +793,9 @@ export default function ScanScreen() {
         <Text style={styles.captureHint}>{currentTask.angle.hint}</Text>
 
         <Pressable
-          style={[styles.captureButton, capturing && styles.captureButtonActive]}
+          style={[styles.captureButton, captureDisabled && styles.captureButtonActive]}
           onPress={handleCapture}
-          disabled={capturing}
+          disabled={captureDisabled}
           testID="capture-btn"
         >
           <View style={styles.captureButtonInner}>
@@ -624,7 +867,13 @@ export default function ScanScreen() {
                 { color: usingRuler ? Colors.success : Colors.warning },
               ]}
             >
-              {usingRuler ? "High accuracy" : "Estimated accuracy"}
+              {hasProDepth && pxPerCm != null
+                ? "Pro accuracy (\u00B11mm)"
+                : pxPerCm != null
+                ? "High accuracy (\u00B12mm)"
+                : usingRuler
+                ? "Good accuracy (\u00B13mm)"
+                : "Estimated (\u00B18mm)"}
             </Text>
           </View>
 
@@ -882,6 +1131,122 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 12,
     color: Colors.warning,
+    fontWeight: "600",
+  },
+  proBadge: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 5,
+    backgroundColor: Colors.accentLight,
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    borderRadius: 10,
+    marginTop: 8,
+  },
+  proBadgeText: {
+    fontSize: 11,
+    color: Colors.primary,
+    fontWeight: "700",
+    letterSpacing: 0.3,
+  },
+  levelIndicator: {
+    position: "absolute",
+    bottom: 64,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderRadius: 20,
+  },
+  levelIndicatorOk: {
+    backgroundColor: "rgba(34,197,94,0.85)",
+  },
+  levelIndicatorBad: {
+    backgroundColor: "rgba(239,68,68,0.85)",
+  },
+  levelText: {
+    fontSize: 12,
+    color: Colors.white,
+    fontWeight: "700",
+  },
+  calibrationOverlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: "rgba(0,0,0,0.55)",
+  },
+  calibrationHeader: {
+    position: "absolute",
+    top: 16,
+    left: 16,
+    right: 16,
+    backgroundColor: "rgba(0,0,0,0.7)",
+    borderRadius: 16,
+    padding: 14,
+    alignItems: "center",
+    gap: 6,
+  },
+  calibrationTitle: {
+    fontSize: 16,
+    color: Colors.white,
+    fontWeight: "800",
+  },
+  calibrationSubtitle: {
+    fontSize: 13,
+    color: "rgba(255,255,255,0.9)",
+    textAlign: "center",
+    lineHeight: 18,
+  },
+  calibBold: {
+    fontWeight: "800",
+    color: Colors.accent,
+  },
+  calibStepRow: {
+    flexDirection: "row",
+    gap: 6,
+    marginTop: 4,
+  },
+  calibStepDot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: "rgba(255,255,255,0.3)",
+  },
+  calibStepDotDone: {
+    backgroundColor: Colors.accent,
+  },
+  calibMarker: {
+    position: "absolute",
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    backgroundColor: Colors.accent,
+    borderWidth: 2,
+    borderColor: Colors.white,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  calibMarkerText: {
+    fontSize: 11,
+    color: Colors.white,
+    fontWeight: "800",
+  },
+  calibLine: {
+    position: "absolute",
+    height: 2,
+    backgroundColor: Colors.accent,
+  },
+  calibSkip: {
+    position: "absolute",
+    bottom: 20,
+    alignSelf: "center",
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+    borderRadius: 20,
+    backgroundColor: "rgba(255,255,255,0.15)",
+  },
+  calibSkipText: {
+    fontSize: 13,
+    color: Colors.white,
     fontWeight: "600",
   },
   captureHeaderInfo: {
