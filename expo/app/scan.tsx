@@ -315,11 +315,6 @@ export default function ScanScreen() {
 
   const handleCapture = useCallback(async () => {
     if (capturing || calibratingRuler) return;
-    const requiresLevel = currentTask?.angle.requiresLevel ?? false;
-    if (requiresLevel && Platform.OS !== "web" && tiltDeg > LEVEL_TOLERANCE_DEG) {
-      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Warning).catch(() => {});
-      return;
-    }
     setCapturing(true);
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium).catch(() => {});
 
@@ -337,7 +332,7 @@ export default function ScanScreen() {
     ]).start();
 
     try {
-      if (Platform.OS !== "web" && cameraRef.current && cameraReady) {
+      if (Platform.OS !== "web" && cameraRef.current) {
         await cameraRef.current.takePictureAsync({ skipProcessing: true, quality: 0.4 });
       }
     } catch (e) {
@@ -360,8 +355,6 @@ export default function ScanScreen() {
     capturing,
     calibratingRuler,
     currentTask,
-    tiltDeg,
-    cameraReady,
     flashAnim,
     usingRuler,
     pxPerCm,
@@ -607,7 +600,8 @@ export default function ScanScreen() {
     });
     const requiresLevel = currentTask.angle.requiresLevel;
     const isLevel = !requiresLevel || tiltDeg <= LEVEL_TOLERANCE_DEG || Platform.OS === "web";
-    const captureDisabled = capturing || calibratingRuler || (requiresLevel && !isLevel);
+    // Tilt is a soft hint only — never block capture, since sensors can be noisy or unavailable.
+    const captureDisabled = capturing || calibratingRuler;
 
     return (
       <View style={styles.stepContainer}>
