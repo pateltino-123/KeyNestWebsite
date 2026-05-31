@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import {
   View,
   Text,
@@ -13,8 +13,7 @@ import * as Haptics from "expo-haptics";
 import { Shoe } from "@/mocks/shoes";
 import { useUser } from "@/contexts/UserContext";
 import { useTheme } from "@/contexts/ThemeContext";
-
-const FALLBACK_IMAGE = "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=400&fit=crop";
+import ImagePlaceholder from "@/components/ImagePlaceholder";
 
 interface ShoeCardProps {
   shoe: Shoe;
@@ -25,7 +24,10 @@ interface ShoeCardProps {
 export default function ShoeCard({ shoe, variant = "default", showSizingAlert = true }: ShoeCardProps) {
   const { isInWishlist, addToWishlist, removeFromWishlist, measurements } = useUser();
   const { colors } = useTheme();
-  const imageUri = shoe.images[0] || FALLBACK_IMAGE;
+  const hasImage = shoe.images.length > 0 && shoe.images[0].length > 0;
+  const [imageError, setImageError] = useState(false);
+  const imageUri = hasImage ? shoe.images[0] : "";
+  const showPlaceholder = !hasImage || imageError;
   const isWishlisted = isInWishlist(shoe.id);
   const scaleAnim = React.useRef(new Animated.Value(1)).current;
 
@@ -86,12 +88,17 @@ export default function ShoeCard({ shoe, variant = "default", showSizingAlert = 
           onPressOut={handlePressOut}
           style={styles.horizontalPressable}
         >
-          <Image
-            source={{ uri: imageUri }}
-            style={[styles.horizontalImage, { backgroundColor: colors.surfaceAlt }]}
-            contentFit="cover"
-            transition={200}
-          />
+          {showPlaceholder ? (
+            <ImagePlaceholder height={100} width={100} showText={false} />
+          ) : (
+            <Image
+              source={{ uri: imageUri }}
+              style={[styles.horizontalImage, { backgroundColor: colors.surfaceAlt }]}
+              contentFit="cover"
+              transition={200}
+              onError={() => setImageError(true)}
+            />
+          )}
           <View style={styles.horizontalContent}>
             <Text style={[styles.brand, { color: colors.textSecondary }]}>{shoe.brand}</Text>
             <Text style={[styles.name, { color: colors.text }]} numberOfLines={1}>{shoe.name}</Text>
@@ -125,12 +132,17 @@ export default function ShoeCard({ shoe, variant = "default", showSizingAlert = 
           onPressIn={handlePressIn}
           onPressOut={handlePressOut}
         >
-          <Image
-            source={{ uri: imageUri }}
-            style={[styles.compactImage, { backgroundColor: colors.surfaceAlt }]}
-            contentFit="cover"
-            transition={200}
-          />
+          {showPlaceholder ? (
+            <ImagePlaceholder height={100} width={140} showText={false} borderRadius={12} />
+          ) : (
+            <Image
+              source={{ uri: imageUri }}
+              style={[styles.compactImage, { backgroundColor: colors.surfaceAlt }]}
+              contentFit="cover"
+              transition={200}
+              onError={() => setImageError(true)}
+            />
+          )}
           <View style={styles.compactContent}>
             <Text style={[styles.compactBrand, { color: colors.textSecondary }]}>{shoe.brand}</Text>
             <Text style={[styles.compactName, { color: colors.text }]} numberOfLines={1}>{shoe.name}</Text>
@@ -149,12 +161,17 @@ export default function ShoeCard({ shoe, variant = "default", showSizingAlert = 
         onPressOut={handlePressOut}
       >
         <View style={styles.imageContainer}>
-          <Image
-            source={{ uri: imageUri }}
-            style={[styles.image, { backgroundColor: colors.surfaceAlt }]}
-            contentFit="cover"
-            transition={200}
-          />
+          {showPlaceholder ? (
+            <ImagePlaceholder height={160} showText />
+          ) : (
+            <Image
+              source={{ uri: imageUri }}
+              style={[styles.image, { backgroundColor: colors.surfaceAlt }]}
+              contentFit="cover"
+              transition={200}
+              onError={() => setImageError(true)}
+            />
+          )}
           <Pressable onPress={handleWishlistToggle} style={styles.wishlistButtonAbsolute}>
             <Heart
               size={22}

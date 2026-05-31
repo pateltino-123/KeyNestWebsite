@@ -18,43 +18,42 @@ const createWrapper = () => {
 describe('ScanScreen', () => {
   it('should render intro screen by default', () => {
     render(<ScanScreen />, { wrapper: createWrapper() });
-    expect(screen.getByText('Scan Your Feet')).toBeTruthy();
+    expect(screen.getByText('Foot Scan')).toBeTruthy();
   });
 
   it('should render intro subtitle', () => {
     render(<ScanScreen />, { wrapper: createWrapper() });
-    expect(screen.getByText('Get accurate measurements for perfect shoe recommendations')).toBeTruthy();
+    expect(screen.getByText(/A guided multi-angle scan/)).toBeTruthy();
   });
 
   it('should render instruction steps', () => {
     render(<ScanScreen />, { wrapper: createWrapper() });
-    expect(screen.getByText('Place a credit card next to your foot for scale')).toBeTruthy();
-    expect(screen.getByText('Stand on a flat, well-lit surface')).toBeTruthy();
-    expect(screen.getByText('We will scan both feet and recommend based on the larger one')).toBeTruthy();
+    expect(screen.getByText(/Capture 3 angles per foot/)).toBeTruthy();
+    expect(screen.getByText(/Stand on a flat, well-lit surface/)).toBeTruthy();
   });
 
-  it('should render Start Scanning button', () => {
+  it('should render Get Started button', () => {
     render(<ScanScreen />, { wrapper: createWrapper() });
-    expect(screen.getByText('Start Scanning')).toBeTruthy();
+    expect(screen.getByText('Get Started')).toBeTruthy();
   });
 
-  it('should navigate to left foot scan on Start Scanning press', () => {
+  it('should navigate to mode selection on Get Started press', () => {
     render(<ScanScreen />, { wrapper: createWrapper() });
-    fireEvent.press(screen.getByText('Start Scanning'));
-    expect(screen.getByText('Position your left foot')).toBeTruthy();
+    fireEvent.press(screen.getByText('Get Started'));
+    expect(screen.getByText('How many feet?')).toBeTruthy();
   });
 
-  it('should render camera placeholder text in scan step', () => {
+  it('should render mode options', () => {
     render(<ScanScreen />, { wrapper: createWrapper() });
-    fireEvent.press(screen.getByText('Start Scanning'));
-    expect(screen.getByText('Align your foot with the outline and place a credit card beside it')).toBeTruthy();
-    expect(screen.getByText('Place card here')).toBeTruthy();
+    fireEvent.press(screen.getByText('Get Started'));
+    expect(screen.getByText('Both feet')).toBeTruthy();
+    expect(screen.getByText('One foot')).toBeTruthy();
   });
 
-  it('should render step indicators', () => {
+  it('should show ruler prompt after mode selection', () => {
     render(<ScanScreen />, { wrapper: createWrapper() });
-    expect(screen.getByText('1')).toBeTruthy();
-    expect(screen.getByText('2')).toBeTruthy();
-    expect(screen.getByText('3')).toBeTruthy();
+    fireEvent.press(screen.getByText('Get Started'));
+    fireEvent.press(screen.getByText('Both feet'));
+    expect(screen.getByText('Do you have a ruler?')).toBeTruthy();
   });
 });

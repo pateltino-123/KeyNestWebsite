@@ -19,26 +19,24 @@ const createWrapper = () => {
 };
 
 describe('AssistantScreen', () => {
-  it('should render the Shoe Expert title', () => {
+  it('should render the Shoe Expert name', () => {
     render(<AssistantScreen />, { wrapper: createWrapper() });
-    expect(screen.getByText('Shoe Expert')).toBeTruthy();
+    expect(screen.getByText('Mike')).toBeTruthy();
   });
 
-  it('should render the subtitle', () => {
+  it('should render experience text', () => {
     render(<AssistantScreen />, { wrapper: createWrapper() });
-    expect(screen.getByText('Your AI assistant')).toBeTruthy();
+    expect(screen.getByText(/Shoe Expert/)).toBeTruthy();
   });
 
   it('should render message input', () => {
     render(<AssistantScreen />, { wrapper: createWrapper() });
-    expect(screen.getByPlaceholderText('Ask me anything about shoes...')).toBeTruthy();
+    expect(screen.getByPlaceholderText(/Ask Mike/)).toBeTruthy();
   });
 
   it('should render quick prompts', () => {
     render(<AssistantScreen />, { wrapper: createWrapper() });
-    expect(screen.getByText('Find running shoes under $150')).toBeTruthy();
-    expect(screen.getByText('Best shoes for wide feet')).toBeTruthy();
-    expect(screen.getByText('Nike vs Adidas sizing?')).toBeTruthy();
-    expect(screen.getByText('Recommend casual shoes')).toBeTruthy();
+    expect(screen.getByText(/hot right now/)).toBeTruthy();
+    expect(screen.getByText('I need running shoes')).toBeTruthy();
   });
 });

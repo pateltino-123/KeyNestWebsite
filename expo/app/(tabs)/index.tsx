@@ -19,6 +19,7 @@ import { brandSizingTips } from "@/mocks/sizingTips";
 
 import ShoeCard from "@/components/ShoeCard";
 import MeasurementDisplay from "@/components/MeasurementDisplay";
+import AnimatedListItem from "@/components/AnimatedListItem";
 import { shoes } from "@/mocks/shoes";
 import { useTheme } from "@/contexts/ThemeContext";
 
@@ -27,6 +28,18 @@ export default function HomeScreen() {
   const { measurements, profile } = useUser();
   const { colors } = useTheme();
   const scanButtonScale = React.useRef(new Animated.Value(1)).current;
+  const glowOpacity = React.useRef(new Animated.Value(0.3)).current;
+
+  React.useEffect(() => {
+    const pulse = Animated.loop(
+      Animated.sequence([
+        Animated.timing(glowOpacity, { toValue: 0.6, duration: 1500, useNativeDriver: true }),
+        Animated.timing(glowOpacity, { toValue: 0.3, duration: 1500, useNativeDriver: true }),
+      ])
+    );
+    pulse.start();
+    return () => pulse.stop();
+  }, [glowOpacity]);
 
   const recommendedShoes = React.useMemo(() => {
     return shoes.filter(s => s.category === "running").slice(0, 12);
@@ -91,6 +104,7 @@ export default function HomeScreen() {
         </View>
 
         <Animated.View style={{ transform: [{ scale: scanButtonScale }] }}>
+          <Animated.View style={[styles.scanButtonGlow, { opacity: glowOpacity, backgroundColor: colors.primary }]} />
           <Pressable
             style={[styles.scanButton, { backgroundColor: colors.primary }]}
             onPress={handleScanPress}
@@ -146,10 +160,10 @@ export default function HomeScreen() {
             </View>
           ) : (
             <View style={styles.shoesGrid}>
-              {recommendedShoes.slice(0, 6).map((shoe) => (
-                <View key={shoe.id} style={styles.shoeCardWrapper}>
+              {recommendedShoes.slice(0, 6).map((shoe, idx) => (
+                <AnimatedListItem key={shoe.id} index={idx} style={styles.shoeCardWrapper}>
                   <ShoeCard shoe={shoe} />
-                </View>
+                </AnimatedListItem>
               ))}
             </View>
           )}
@@ -214,6 +228,15 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 25,
     backgroundColor: Colors.surfaceAlt,
+  },
+  scanButtonGlow: {
+    position: "absolute",
+    top: -4,
+    left: 10,
+    right: 10,
+    bottom: -4,
+    borderRadius: 24,
+    zIndex: -1,
   },
   scanButton: {
     backgroundColor: Colors.primary,

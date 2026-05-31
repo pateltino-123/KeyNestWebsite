@@ -20,7 +20,6 @@ describe('shoes mock data', () => {
         expect(Array.isArray(shoe.activityType)).toBe(true);
         expect(shoe.activityType.length).toBeGreaterThan(0);
         expect(Array.isArray(shoe.images)).toBe(true);
-        expect(shoe.images.length).toBeGreaterThan(0);
         expect(Array.isArray(shoe.sizes)).toBe(true);
         expect(shoe.sizes.length).toBeGreaterThan(0);
         expect(Array.isArray(shoe.colors)).toBe(true);
@@ -83,9 +82,8 @@ describe('shoes mock data', () => {
     it('should contain expected categories', () => {
       expect(categories.length).toBeGreaterThan(0);
       const categoryIds = categories.map((c) => c.id);
-      expect(categoryIds).toContain('athletic');
-      expect(categoryIds).toContain('casual');
       expect(categoryIds).toContain('running');
+      expect(categoryIds).toContain('medical');
     });
 
     it('each category should have id, name, and icon', () => {

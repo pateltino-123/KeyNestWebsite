@@ -32,6 +32,7 @@ import { shoes as mockShoes, Shoe } from "@/mocks/shoes";
 import { brandSizingTips } from "@/mocks/sizingTips";
 import { useUser } from "@/contexts/UserContext";
 import ReviewsModal from "@/components/ReviewsModal";
+import ImagePlaceholder from "@/components/ImagePlaceholder";
 import { getProductById, mapKicksProductToShoe } from "@/services/kicksApi";
 import { useTheme } from "@/contexts/ThemeContext";
 import { generateDealInfo } from "@/mocks/priceData";
@@ -39,8 +40,6 @@ import DealScoreBadge from "@/components/DealScoreBadge";
 import PriceChart from "@/components/PriceChart";
 import RetailerComparison from "@/components/RetailerComparison";
 import PriceAlertModal from "@/components/PriceAlertModal";
-
-const FALLBACK_IMAGE = "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=400&fit=crop";
 
 const { width: SCREEN_WIDTH } = Dimensions.get("window");
 
@@ -82,6 +81,7 @@ export default function ShoeDetailScreen() {
   const [showBuyModal, setShowBuyModal] = useState(false);
   const [showPriceAlert, setShowPriceAlert] = useState(false);
   const [selectedRetailer, setSelectedRetailer] = useState<string | undefined>(undefined);
+  const [imageError, setImageError] = useState(false);
   const queryClient = useQueryClient();
 
   const cachedShoe = useMemo(() => {
@@ -161,7 +161,9 @@ export default function ShoeDetailScreen() {
     }
   }, []);
 
-  const imageUri = shoe?.images[0] || FALLBACK_IMAGE;
+  const hasImage = shoe && shoe.images.length > 0 && shoe.images[0].length > 0;
+  const imageUri = hasImage ? shoe!.images[0] : "";
+  const showPlaceholder = !hasImage || imageError;
 
   if (isLoading) {
     return (
@@ -213,12 +215,17 @@ export default function ShoeDetailScreen() {
         contentContainerStyle={{ paddingBottom: insets.bottom + 100 }}
       >
         <View style={styles.imageContainer}>
-          <Image
-            source={{ uri: imageUri }}
-            style={[styles.mainImage, { backgroundColor: colors.surfaceAlt }]}
-            contentFit="cover"
-            transition={300}
-          />
+          {showPlaceholder ? (
+            <ImagePlaceholder height={SCREEN_WIDTH * 0.85} showText />
+          ) : (
+            <Image
+              source={{ uri: imageUri }}
+              style={[styles.mainImage, { backgroundColor: colors.surfaceAlt }]}
+              contentFit="cover"
+              transition={300}
+              onError={() => setImageError(true)}
+            />
+          )}
           <Pressable
             style={[styles.headerButton, { top: insets.top + 10, left: 16, backgroundColor: colors.surface }]}
             onPress={() => router.back()}

@@ -31,9 +31,8 @@ describe('BrowseScreen', () => {
 
   it('should render category chips', () => {
     render(<BrowseScreen />, { wrapper: createWrapper() });
-    expect(screen.getByText('Athletic')).toBeTruthy();
-    expect(screen.getByText('Casual')).toBeTruthy();
     expect(screen.getByText('Running')).toBeTruthy();
+    expect(screen.getByText('Medical')).toBeTruthy();
   });
 
   it('should render shoe count', () => {

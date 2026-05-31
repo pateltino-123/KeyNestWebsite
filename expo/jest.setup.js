@@ -1,6 +1,7 @@
 jest.mock('expo-haptics', () => ({
-  impactAsync: jest.fn(),
-  notificationAsync: jest.fn(),
+  impactAsync: jest.fn(() => Promise.resolve()),
+  notificationAsync: jest.fn(() => Promise.resolve()),
+  selectionAsync: jest.fn(() => Promise.resolve()),
   ImpactFeedbackStyle: { Light: 'light', Medium: 'medium', Heavy: 'heavy' },
   NotificationFeedbackType: { Success: 'success', Warning: 'warning', Error: 'error' },
 }));
@@ -64,6 +65,7 @@ jest.mock('@rork-ai/toolkit-sdk', () => ({
     setMessages: jest.fn(),
     error: null,
   })),
+  createRorkTool: jest.fn((config) => config),
 }));
 
 jest.mock('expo-splash-screen', () => ({

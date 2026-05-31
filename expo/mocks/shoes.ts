@@ -1304,9 +1304,7 @@ export const shoes: Shoe[] = [
     price: 170,
     category: "running",
     activityType: ["running", "long-distance", "recovery"],
-    images: [
-      "https://cdn.runrepeat.com/storage/gallery/product_primary/41233/on-cloudmonster-3-24670501-main.jpg",
-    ],
+    images: [],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13],
     colors: ["Black/White", "White", "Grey"],
     description:
@@ -2352,9 +2350,7 @@ export const shoes: Shoe[] = [
     price: 180,
     category: "running",
     activityType: ["running", "everyday", "training"],
-    images: [
-      "https://www.brooksrunning.com/dw/image/v2/BGPF_PRD/on/demandware.static/-/Sites-brooks-master-catalog/default/dwfb35969f/original/110476/110476-154-l-glycerin-23-mens-dynamic-cushion-road-running-shoe.png",
-    ],
+    images: [],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13, 14],
     colors: ["Black/White", "Grey", "Navy", "White"],
     description:
@@ -2373,9 +2369,7 @@ export const shoes: Shoe[] = [
     price: 190,
     category: "running",
     activityType: ["running", "recovery", "long-distance"],
-    images: [
-      "https://www.brooksrunning.com/dw/image/v2/BGPF_PRD/on/demandware.static/-/Sites-brooks-master-catalog/default/dw5e6f7a8b/images/110450/110450-001-l-glycerin-max-2-mens-road-running-shoe.jpg",
-    ],
+    images: [],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13, 14],
     colors: ["Black/White", "Grey", "Navy"],
     description:
@@ -2629,9 +2623,7 @@ export const shoes: Shoe[] = [
     price: 160,
     category: "running",
     activityType: ["running", "long-distance", "training"],
-    images: [
-      "https://underarmour.scene7.com/is/image/Underarmour/6005377-002_DEFAULT?rp=standard-20pad%7CcartFullDesktop&qlt=85&bgc=f0f0f0&wid=400&hei=500&size=380%2C480&op_usm=1.75%2C0.3%2C2%2C0",
-    ],
+    images: [],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13, 14],
     colors: ["Black/White", "Grey", "Navy"],
     description:
@@ -2650,9 +2642,7 @@ export const shoes: Shoe[] = [
     price: 100,
     category: "running",
     activityType: ["running", "everyday", "beginner"],
-    images: [
-      "https://underarmour.scene7.com/is/image/Underarmour/6005377-002_DEFAULT?rp=standard-20pad%7CcartFullDesktop&qlt=85&bgc=f0f0f0&wid=400&hei=500&size=380%2C480&op_usm=1.75%2C0.3%2C2%2C0",
-    ],
+    images: [],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13, 14],
     colors: ["Black/White", "Grey", "Navy", "White"],
     description:
@@ -2671,9 +2661,7 @@ export const shoes: Shoe[] = [
     price: 130,
     category: "running",
     activityType: ["running", "tempo", "training"],
-    images: [
-      "https://underarmour.scene7.com/is/image/Underarmour/6005377-002_DEFAULT?rp=standard-20pad%7CcartFullDesktop&qlt=85&bgc=f0f0f0&wid=400&hei=500&size=380%2C480&op_usm=1.75%2C0.3%2C2%2C0",
-    ],
+    images: [],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13],
     colors: ["Black/White", "White", "Grey"],
     description:
@@ -2713,9 +2701,7 @@ export const shoes: Shoe[] = [
     price: 170,
     category: "running",
     activityType: ["running", "racing", "tempo"],
-    images: [
-      "https://underarmour.scene7.com/is/image/Underarmour/6005377-002_DEFAULT?rp=standard-20pad%7CcartFullDesktop&qlt=85&bgc=f0f0f0&wid=400&hei=500&size=380%2C480&op_usm=1.75%2C0.3%2C2%2C0",
-    ],
+    images: [],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13],
     colors: ["White/Black", "Black", "Grey"],
     description:
@@ -2755,9 +2741,7 @@ export const shoes: Shoe[] = [
     price: 160,
     category: "running",
     activityType: ["running", "stability", "training"],
-    images: [
-      "https://underarmour.scene7.com/is/image/Underarmour/6005377-002_DEFAULT?rp=standard-20pad%7CcartFullDesktop&qlt=85&bgc=f0f0f0&wid=400&hei=500&size=380%2C480&op_usm=1.75%2C0.3%2C2%2C0",
-    ],
+    images: [],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13],
     colors: ["Black/White", "Grey", "Navy"],
     description:
@@ -2776,9 +2760,7 @@ export const shoes: Shoe[] = [
     price: 75,
     category: "running",
     activityType: ["running", "everyday", "beginner"],
-    images: [
-      "https://underarmour.scene7.com/is/image/Underarmour/6005377-002_DEFAULT?rp=standard-20pad%7CcartFullDesktop&qlt=85&bgc=f0f0f0&wid=400&hei=500&size=380%2C480&op_usm=1.75%2C0.3%2C2%2C0",
-    ],
+    images: [],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13, 14],
     colors: ["Black/White", "Grey", "Navy"],
     description:
@@ -2797,9 +2779,7 @@ export const shoes: Shoe[] = [
     price: 85,
     category: "running",
     activityType: ["running", "everyday", "beginner"],
-    images: [
-      "https://underarmour.scene7.com/is/image/Underarmour/6005377-002_DEFAULT?rp=standard-20pad%7CcartFullDesktop&qlt=85&bgc=f0f0f0&wid=400&hei=500&size=380%2C480&op_usm=1.75%2C0.3%2C2%2C0",
-    ],
+    images: [],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13, 14],
     colors: ["Black/White", "Grey", "Navy"],
     description:
@@ -2818,9 +2798,7 @@ export const shoes: Shoe[] = [
     price: 80,
     category: "running",
     activityType: ["running", "everyday", "beginner"],
-    images: [
-      "https://underarmour.scene7.com/is/image/Underarmour/6005377-002_DEFAULT?rp=standard-20pad%7CcartFullDesktop&qlt=85&bgc=f0f0f0&wid=400&hei=500&size=380%2C480&op_usm=1.75%2C0.3%2C2%2C0",
-    ],
+    images: [],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13, 14],
     colors: ["Black/White", "Grey", "Navy"],
     description:
@@ -2842,9 +2820,7 @@ export const shoes: Shoe[] = [
     category: "medical",
     medicalType: "diabetic",
     activityType: ["everyday", "walking"],
-    images: [
-      "https://images.stockx.com/images/New-Balance-Fresh-Foam-X-More-v6-Black-Product.jpg?fit=fill&bg=FFFFFF&w=700&h=500&fm=webp&auto=compress&q=90&dpr=2&trim=color",
-    ],
+    images: [],
     sizes: [6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13, 14],
     colors: ["Black", "Brown"],
     description:
@@ -2886,9 +2862,7 @@ export const shoes: Shoe[] = [
     category: "medical",
     medicalType: "orthopedic",
     activityType: ["everyday", "walking"],
-    images: [
-      "https://www.reebok.com/cdn/shop/files/100244464_SLC_eCom.jpg?v=1765304464",
-    ],
+    images: [],
     sizes: [6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13],
     colors: ["Black", "Grey", "Navy"],
     description:
@@ -2920,9 +2894,7 @@ export const shoes: Shoe[] = [
     category: "medical",
     medicalType: "elderly",
     activityType: ["everyday", "walking"],
-    images: [
-      "https://www.reebok.com/cdn/shop/files/1x1_rbk_FZD2.jpg?v=1769783505",
-    ],
+    images: [],
     sizes: [6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13],
     colors: ["Black", "White", "Beige"],
     description:
@@ -2954,9 +2926,7 @@ export const shoes: Shoe[] = [
     category: "medical",
     medicalType: "pediatric",
     activityType: ["everyday", "school"],
-    images: [
-      "https://www.reebok.com/cdn/shop/files/100244468_FLT_eCom.jpg?v=1769783399",
-    ],
+    images: [],
     sizes: [8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.5, 13, 13.5, 1, 1.5, 2, 2.5, 3],
     colors: ["Navy/Red", "Black", "Pink/Purple"],
     description:

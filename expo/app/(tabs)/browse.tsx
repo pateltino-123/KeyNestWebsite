@@ -28,6 +28,7 @@ import * as Haptics from "expo-haptics";
 
 import { categories, brands, Shoe, shoes } from "@/mocks/shoes";
 import ShoeCard from "@/components/ShoeCard";
+import AnimatedListItem from "@/components/AnimatedListItem";
 import { useTheme } from "@/contexts/ThemeContext";
 
 const extractUniqueColors = (allShoes: Shoe[]): string[] => {
@@ -188,7 +189,10 @@ export default function BrowseScreen() {
               { backgroundColor: colors.surface, borderColor: colors.borderLight },
               activeFiltersCount > 0 && { backgroundColor: colors.primary, borderColor: colors.primary },
             ]}
-            onPress={() => setShowFilters(true)}
+            onPress={() => {
+              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+              setShowFilters(true);
+            }}
           >
             <SlidersHorizontal
               size={20}
@@ -267,10 +271,10 @@ export default function BrowseScreen() {
               {isFetching && " • Refreshing..."}
             </Text>
             <View style={styles.shoesGrid}>
-              {filteredShoes.map((shoe) => (
-                <View key={shoe.id} style={styles.shoeCardWrapper}>
+              {filteredShoes.map((shoe, idx) => (
+                <AnimatedListItem key={shoe.id} index={idx} style={styles.shoeCardWrapper}>
                   <ShoeCard shoe={shoe} />
-                </View>
+                </AnimatedListItem>
               ))}
             </View>
             {filteredShoes.length === 0 && (

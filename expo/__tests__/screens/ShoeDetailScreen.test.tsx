@@ -42,7 +42,7 @@ describe('ShoeDetailScreen', () => {
   it('should render shoe details for a known shoe id', () => {
     (useLocalSearchParams as jest.Mock).mockReturnValue({ id: '1' });
     render(<ShoeDetailScreen />, { wrapper: createWrapper() });
-    expect(screen.getByText('Air Max 90')).toBeTruthy();
+    expect(screen.getByText('Pegasus 42')).toBeTruthy();
     expect(screen.getByText('Nike')).toBeTruthy();
   });
 
