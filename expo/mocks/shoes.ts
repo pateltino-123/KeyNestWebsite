@@ -195,7 +195,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "stability", "long-distance"],
     images: [
-      "https://img.runningwarehouse.com/watermark/rs.php?path=NSTPM1-1.jpg&nw=780",
+      "https://images.stockx.com/images/Nike-Structure-Plus-Black-White.jpg?fit=fill&bg=FFFFFF&w=700&h=500&fm=webp&auto=compress&q=90&dpr=2&trim=color",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13],
     colors: ["Black/White", "Grey/Navy", "White"],
@@ -237,7 +237,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "racing", "marathon"],
     images: [
-      "https://media.about.nike.com/img/93f5b9be-eb0c-48e5-998f-5030909d1f70/rg119l-sp24-alphafly3-ta-swanson-proto-profile-3827-1x1.jpg",
+      "https://images.stockx.com/images/Nike-Alphafly-Next-3-Proto-Product.jpg?fit=fill&bg=FFFFFF&w=700&h=500&fm=webp&auto=compress&q=90&dpr=2&trim=color",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13],
     colors: ["White/Black", "Black", "Grey/Orange"],
@@ -281,7 +281,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "tempo", "training"],
     images: [
-      "https://img.runningwarehouse.com/watermark/rs.php?path=NZFM6-1.jpg&nw=780",
+      "https://images.stockx.com/images/Nike-Zoom-Fly-6-Black-Smoke-Grey-Product.jpg?fit=fill&bg=FFFFFF&w=700&h=500&fm=webp&auto=compress&q=90&dpr=2&trim=color",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13],
     colors: ["Black/White", "White/Grey", "Navy"],
@@ -302,7 +302,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "racing", "tempo"],
     images: [
-      "https://img.runningwarehouse.com/watermark/rs.php?path=NSFM2-1.jpg&nw=780",
+      "https://static.nike.com/a/images/t_default/u_9ddf04c7-2a9a-4d76-add1-d15af8f0263d,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/07b73ab7-e7d8-43fd-a058-8d4be3cb415a/ZOOMX+STREAKFLY+2+GLAM.png",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13],
     colors: ["White/Black", "Black", "Grey"],
@@ -324,7 +324,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "everyday", "beginner"],
     images: [
-      "https://img.runningwarehouse.com/watermark/rs.php?path=NRVM7-1.jpg&nw=780",
+      "https://www.nike.qa/dw/image/v2/BDVB_PRD/on/demandware.static/-/Sites-akeneo-master-catalog/default/dwba6235bb/nk/608/e/2/3/6/3/608e2363_c30f_4710_8c98_a5303c8886e2.jpg?sw=700&sh=700&sm=fit&q=100&strip=false",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13, 14],
     colors: ["Black/White", "Grey", "Navy", "White"],
@@ -345,7 +345,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "trail"],
     images: [
-      "https://img.runningwarehouse.com/watermark/rs.php?path=NZGM2-1.jpg&nw=780",
+      "https://www.nike.sa/dw/image/v2/BDVB_PRD/on/demandware.static/-/Sites-akeneo-master-catalog/default/dw29651749/nk/0ab/3/6/e/0/b/0ab36e0b_a12d_428c_ba03_108f9ef012ad.jpg?sw=700&sh=700&sm=fit&q=100&strip=false",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13],
     colors: ["Black/Grey", "Green", "Navy"],
@@ -366,7 +366,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "trail", "racing"],
     images: [
-      "https://img.runningwarehouse.com/watermark/rs.php?path=NKGM10-1.jpg&nw=780",
+      "https://www.nike.qa/dw/image/v2/BDVB_PRD/on/demandware.static/-/Sites-akeneo-master-catalog/default/dwe98f1949/nk/8fd/2/7/4/2/1/8fd27421_497c_42d7_9bee_7c4c775ffb47.jpg?sw=700&sh=700&sm=fit&q=100&strip=false",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13],
     colors: ["Black/Orange", "Grey/Green", "Navy"],
@@ -432,7 +432,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "tempo", "training"],
     images: [
-      "https://img.runningwarehouse.com/watermark/rs.php?path=AB13M-1.jpg&nw=780",
+      "https://cdn.runrepeat.com/storage/gallery/product_primary/40797/adidas-adizero-boston-13-23048569-main.jpg",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13],
     colors: ["Black/White", "White", "Navy", "Grey"],
@@ -475,7 +475,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "tempo", "racing"],
     images: [
-      "https://img.runningwarehouse.com/watermark/rs.php?path=AA9M-1.jpg&nw=780",
+      "https://cdn.runrepeat.com/storage/gallery/product_primary/40625/adidas-adizero-adios-9-22951892-main.jpg",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13],
     colors: ["Black/White", "White", "Grey"],
@@ -496,7 +496,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "racing", "long-distance"],
     images: [
-      "https://img.runningwarehouse.com/watermark/rs.php?path=APX2M-1.jpg&nw=780",
+      "https://assets.adidas.com/images/w_600,f_auto,q_auto/436e87f485054d24b293e199d99cd9cd_9366/Adizero_Prime_X_2_Strung_Running_Shoes_Green_HP9708_01_standard.jpg",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13],
     colors: ["White/Black", "Black", "Grey"],
@@ -538,7 +538,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "stability", "everyday"],
     images: [
-      "https://img.runningwarehouse.com/watermark/rs.php?path=ASP2M-1.jpg&nw=780",
+      "https://cdn.runrepeat.com/storage/gallery/product_primary/40418/adidas-supernova-prima-22145771-main.jpg",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13],
     colors: ["Black/White", "Grey", "Navy"],
@@ -559,7 +559,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "everyday", "training"],
     images: [
-      "https://img.runningwarehouse.com/watermark/rs.php?path=AUB5X-1.jpg&nw=780",
+      "https://cdn.runrepeat.com/storage/gallery/product_primary/40449/adidas-ultraboost-5-x-22499466-main.jpg",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13],
     colors: ["Core Black", "Cloud White", "Grey"],
@@ -580,7 +580,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "long-distance", "training"],
     images: [
-      "https://img.runningwarehouse.com/watermark/rs.php?path=AHBM-1.jpg&nw=780",
+      "https://cdn.runrepeat.com/storage/gallery/product_primary/40449/adidas-ultraboost-5-x-22499466-main.jpg",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13],
     colors: ["White/Green", "Black", "Grey"],
@@ -601,7 +601,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "recovery", "long-distance"],
     images: [
-      "https://img.runningwarehouse.com/watermark/rs.php?path=AA3M-1.jpg&nw=780",
+      "https://assets.footlocker.com/is/image/FLDM/KI6154_01?fmt=webp-alpha&bfc=on&wid=500&hei=500",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13],
     colors: ["Black", "White/Grey", "Navy"],
@@ -622,7 +622,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "everyday", "beginner"],
     images: [
-      "https://img.runningwarehouse.com/watermark/rs.php?path=ASL2M-1.jpg&nw=780",
+      "https://assets.footlocker.com/is/image/FLDM/KI6120_01?$tile500jpg$=true&fmt=png-alpha",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13, 14],
     colors: ["Black/White", "White", "Grey"],
@@ -643,7 +643,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "everyday", "beginner"],
     images: [
-      "https://img.runningwarehouse.com/watermark/rs.php?path=AG7M-1.jpg&nw=780",
+      "https://cdn.runrepeat.com/storage/gallery/product_primary/41054/adidas-galaxy-7-24710111-main.jpg",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13, 14],
     colors: ["Black/White", "Grey", "Navy"],
@@ -708,7 +708,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "recovery", "long-distance"],
     images: [
-      "https://nb.scene7.com/is/image/NB/mmorev6_nb_02_i?$pdpflexf2$&wid=440&hei=440",
+      "https://cdn.runrepeat.com/storage/gallery/product_primary/40943/new-balance-fresh-foam-x-more-v-6-23502483-main.jpg",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13, 14],
     colors: ["Black/White", "Grey", "Navy"],
@@ -729,7 +729,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "stability", "training"],
     images: [
-      "https://nb.scene7.com/is/image/NB/m860v15_nb_02_i?$pdpflexf2$&wid=440&hei=440",
+      "https://www.rei.com/media/c76044d3-3244-4602-8ca9-5e9b17e3ef5f.jpg?size=784x588",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13, 14],
     colors: ["Black", "Grey", "Navy", "White"],
@@ -750,7 +750,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "everyday", "casual"],
     images: [
-      "https://nb.scene7.com/is/image/NB/mellipsev1_nb_02_i?$pdpflexf2$&wid=440&hei=440",
+      "https://scandinavianoutdoor.imgix.net/dynamic/productimages/sizes/full/987ee684-c893-4fdb-a2b7-e6c975f1b492.jpeg?w=960&h=960&fit=max&trim=auto&trim-sd=1&blend-mode=multiply&blend=efefef&auto=format,compress",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13],
     colors: ["Black/White", "Grey", "Navy"],
@@ -771,7 +771,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "tempo", "training"],
     images: [
-      "https://nb.scene7.com/is/image/NB/mfcxv5_nb_02_i?$pdpflexf2$&wid=440&hei=440",
+      "https://runningmagazine.ca/wp-content/uploads/2025/06/S225_NB_Rebelv5_MFCXLY5_Product-6-1024x683.jpg",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13],
     colors: ["Black/White", "White", "Grey", "Navy"],
@@ -792,7 +792,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "racing", "marathon"],
     images: [
-      "https://nb.scene7.com/is/image/NB/mscelitev5_nb_02_i?$pdpflexf2$&wid=440&hei=440",
+      "https://images.stockx.com/images/New-Balance-FuelCell-SC-Elite-v5-White-Product.jpg?fit=fill&bg=FFFFFF&w=700&h=500&fm=webp&auto=compress&q=90&dpr=2&trim=color",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13],
     colors: ["White/Black", "Black", "Grey", "Navy"],
@@ -814,7 +814,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "training", "long-distance"],
     images: [
-      "https://nb.scene7.com/is/image/NB/msctrainerv3_nb_02_i?$pdpflexf2$&wid=440&hei=440",
+      "https://images.stockx.com/images/New-Balance-FuelCell-SC-Trainer-v3-Black-Product.jpg?fit=fill&bg=FFFFFF&w=700&h=500&fm=webp&auto=compress&q=90&dpr=2&trim=color",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13],
     colors: ["Black/White", "White", "Grey"],
@@ -835,7 +835,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "racing", "tempo"],
     images: [
-      "https://nb.scene7.com/is/image/NB/mscpacerv2_nb_02_i?$pdpflexf2$&wid=440&hei=440",
+      "https://images.stockx.com/images/New-Balance-FuelCell-SC-Pacer-v2-White-Product.jpg?fit=fill&bg=FFFFFF&w=700&h=500&fm=webp&auto=compress&q=90&dpr=2&trim=color",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13],
     colors: ["White/Black", "Black", "Grey"],
@@ -857,7 +857,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "everyday", "beginner"],
     images: [
-      "https://nb.scene7.com/is/image/NB/mkaiha_nb_02_i?$pdpflexf2$&wid=440&hei=440",
+      "https://schulershoes-magento.s3.amazonaws.com/pub/media/catalog/product/M/F/MFCXLY5_061825213549_1.jpg",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13, 14],
     colors: ["Black/White", "Grey", "Navy"],
@@ -878,7 +878,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "trail"],
     images: [
-      "https://nb.scene7.com/is/image/NB/mhierrov9_nb_02_i?$pdpflexf2$&wid=440&hei=440",
+      "https://images.stockx.com/images/New-Balance-Fresh-Foam-X-Hierro-v9-Black-Product.jpg?fit=fill&bg=FFFFFF&w=700&h=500&fm=webp&auto=compress&q=90&dpr=2&trim=color",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13],
     colors: ["Black/Grey", "Green", "Navy"],
@@ -1305,7 +1305,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "long-distance", "recovery"],
     images: [
-      "https://cdn.runrepeat.com/storage/gallery/product_primary/41239/on-cloudsurfer-max-24716010-main.jpg",
+      "https://cdn.runrepeat.com/storage/gallery/product_primary/41233/on-cloudmonster-3-24670501-main.jpg",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13],
     colors: ["Black/White", "White", "Grey"],
@@ -1326,7 +1326,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "everyday", "training"],
     images: [
-      "https://img.runningwarehouse.com/watermark/rs.php?path=OCS2M-1.jpg&nw=780",
+      "https://gazellesports.com/cdn/shop/files/1721636433824__3MF10121043-cloudsurfer_2-ss25-black-black-m-g6_1946x.jpg?v=1738855793",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13],
     colors: ["Black/White", "White", "Grey", "Navy"],
@@ -1347,7 +1347,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "everyday", "training"],
     images: [
-      "https://img.runningwarehouse.com/watermark/rs.php?path=OCSNM-1.jpg&nw=780",
+      "https://cdn11.bigcommerce.com/s-dxvedf95e5/images/stencil/1280x1280/products/542/22346/Q6wDc5JoE924sRJYtzhTzCUEDbqJKGYR4e5TTktBTpWhwCudNmkREdYzxUHqXliE__98269.1773436187.jpg?c=1",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13],
     colors: ["Black/White", "White", "Grey"],
@@ -1368,7 +1368,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "stability", "everyday"],
     images: [
-      "https://img.runningwarehouse.com/watermark/rs.php?path=OCR3M-1.jpg&nw=780",
+      "https://cdn.runrepeat.com/storage/gallery/product_primary/21319/on-cloudrunner-2-21644119-main.jpg",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13, 14],
     colors: ["Black/White", "Grey", "Navy"],
@@ -1389,7 +1389,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "stability", "training"],
     images: [
-      "https://img.runningwarehouse.com/watermark/rs.php?path=OCF5M-1.jpg&nw=780",
+      "https://dks.scene7.com/is/image/GolfGalaxy/24MAZWCLDSRFR2GLCFTW_Glacier_White?qlt=70&wid=780&hei=780&fmt=pjpeg&op_sharpen=1&fit=constrain",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13],
     colors: ["Black/White", "Grey", "Navy"],
@@ -1410,7 +1410,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "tempo", "everyday"],
     images: [
-      "https://img.runningwarehouse.com/watermark/rs.php?path=OCS4M-1.jpg&nw=780",
+      "https://www.rei.com/media/faa7fc51-fc76-4cfd-97e7-1428673f6eb4.jpg?size=784x588",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13],
     colors: ["Black/White", "White", "Grey"],
@@ -1431,7 +1431,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "racing", "marathon"],
     images: [
-      "https://img.runningwarehouse.com/watermark/rs.php?path=OCBSM-1.jpg&nw=780",
+      "https://images.stockx.com/images/On-Cloudboom-Strike-White-Product.jpg?fit=fill&bg=FFFFFF&w=700&h=500&fm=webp&auto=compress&q=90&dpr=2&trim=color",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13],
     colors: ["White/Black", "Black", "Grey"],
@@ -1453,7 +1453,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "tempo", "training"],
     images: [
-      "https://img.runningwarehouse.com/watermark/rs.php?path=OCF4M-1.jpg&nw=780",
+      "https://images.stockx.com/images/On-Cloudflow-4-Black-Product.jpg?fit=fill&bg=FFFFFF&w=700&h=500&fm=webp&auto=compress&q=90&dpr=2&trim=color",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13],
     colors: ["Black/White", "White", "Grey"],
@@ -1474,7 +1474,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "trail"],
     images: [
-      "https://img.runningwarehouse.com/watermark/rs.php?path=OCV2M-1.jpg&nw=780",
+      "https://images.stockx.com/images/On-Cloudvista-2-Black-Product.jpg?fit=fill&bg=FFFFFF&w=700&h=500&fm=webp&auto=compress&q=90&dpr=2&trim=color",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13],
     colors: ["Black/Grey", "Green", "Navy"],
@@ -1495,7 +1495,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "trail"],
     images: [
-      "https://img.runningwarehouse.com/watermark/rs.php?path=OCSOM-1.jpg&nw=780",
+      "https://images.stockx.com/images/On-Cloudsoma-Black-Product.jpg?fit=fill&bg=FFFFFF&w=700&h=500&fm=webp&auto=compress&q=90&dpr=2&trim=color",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13],
     colors: ["Black/Grey", "Green", "Navy"],
@@ -1539,7 +1539,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "recovery", "long-distance"],
     images: [
-      "https://www.rei.com/media/534c448b-9368-4ba9-9437-844342331bf0.jpg?size=784x588",
+      "https://dms.deckers.com/hoka/image/upload/t_pdp-slider-large-wp/v1776177762/1162011-CBPPL_1.png?_s=RAABAB0",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13, 14],
     colors: ["Black/White", "White", "Grey"],
@@ -1839,7 +1839,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "tempo", "training"],
     images: [
-      "https://www.saucony.com/on/demandware.static/-/Sites-saucony_us/default/dw8c69a0e3/images/large/S20756-12_1.jpg",
+      "https://images.stockx.com/images/Saucony-Endorphin-Speed-5-Black-Product.jpg?fit=fill&bg=FFFFFF&w=700&h=500&fm=webp&auto=compress&q=90&dpr=2&trim=color",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13],
     colors: ["Black/White", "White", "Navy", "Grey"],
@@ -1860,7 +1860,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "everyday", "training"],
     images: [
-      "https://img.runningwarehouse.com/watermark/rs.php?path=SAZM-1.jpg&nw=780",
+      "https://images.stockx.com/images/Saucony-Endorphin-Azura-White-Product.jpg?fit=fill&bg=FFFFFF&w=700&h=500&fm=webp&auto=compress&q=90&dpr=2&trim=color",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13, 14],
     colors: ["White/Crimson", "Black/White", "Navy"],
@@ -1881,7 +1881,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "everyday", "training"],
     images: [
-      "https://img.runningwarehouse.com/watermark/rs.php?path=SR19M-1.jpg&nw=780",
+      "https://cdn.runrepeat.com/storage/gallery/product_primary/41120/saucony-ride-19-hero-24327574-main.jpg",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13, 14],
     colors: ["Black", "White/Grey", "Navy"],
@@ -1902,7 +1902,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "recovery", "long-distance"],
     images: [
-      "https://img.runningwarehouse.com/watermark/rs.php?path=STR23M-1.jpg&nw=780",
+      "https://images.stockx.com/images/Saucony-Triumph-23-Black-Product.jpg?fit=fill&bg=FFFFFF&w=700&h=500&fm=webp&auto=compress&q=90&dpr=2&trim=color",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13],
     colors: ["Black/White", "White", "Grey", "Navy"],
@@ -1923,7 +1923,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "stability", "training"],
     images: [
-      "https://img.runningwarehouse.com/watermark/rs.php?path=SG19M-1.jpg&nw=780",
+      "https://images.stockx.com/images/Saucony-Guide-19-Black-Product.jpg?fit=fill&bg=FFFFFF&w=700&h=500&fm=webp&auto=compress&q=90&dpr=2&trim=color",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13, 14],
     colors: ["Black", "Grey", "Navy"],
@@ -1944,7 +1944,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "stability", "recovery"],
     images: [
-      "https://img.runningwarehouse.com/watermark/rs.php?path=SH25M-1.jpg&nw=780",
+      "https://images.stockx.com/images/Saucony-Hurricane-25-Black-Product.jpg?fit=fill&bg=FFFFFF&w=700&h=500&fm=webp&auto=compress&q=90&dpr=2&trim=color",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13],
     colors: ["Black/White", "Grey", "Navy"],
@@ -1965,7 +1965,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "tempo", "racing"],
     images: [
-      "https://img.runningwarehouse.com/watermark/rs.php?path=SK16M-1.jpg&nw=780",
+      "https://images.stockx.com/images/Saucony-Kinvara-16-Black-Product.jpg?fit=fill&bg=FFFFFF&w=700&h=500&fm=webp&auto=compress&q=90&dpr=2&trim=color",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13],
     colors: ["Black/White", "White", "Grey"],
@@ -1986,7 +1986,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "trail"],
     images: [
-      "https://img.runningwarehouse.com/watermark/rs.php?path=SP16M-1.jpg&nw=780",
+      "https://images.stockx.com/images/Saucony-Peregrine-16-Black-Product.jpg?fit=fill&bg=FFFFFF&w=700&h=500&fm=webp&auto=compress&q=90&dpr=2&trim=color",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13],
     colors: ["Black/Orange", "Grey/Green", "Navy"],
@@ -2007,7 +2007,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "trail", "ultra"],
     images: [
-      "https://img.runningwarehouse.com/watermark/rs.php?path=SXU4M-1.jpg&nw=780",
+      "https://images.stockx.com/images/Saucony-Xodus-Ultra-4-Black-Product.jpg?fit=fill&bg=FFFFFF&w=700&h=500&fm=webp&auto=compress&q=90&dpr=2&trim=color",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13],
     colors: ["Black/Grey", "Green", "Navy"],
@@ -2137,7 +2137,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "recovery", "long-distance"],
     images: [
-      "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_600,h_600/global/378150/01/sv01/fnd/PNA/fmt/png",
+      "https://cdn.runrepeat.com/storage/gallery/product_primary/40878/puma-magnify-nitro-3-23998624-720.jpg",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13],
     colors: ["Black", "White", "Navy"],
@@ -2353,7 +2353,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "everyday", "training"],
     images: [
-      "https://img.runningwarehouse.com/watermark/rs.php?path=BG18M-1.jpg&nw=780",
+      "https://www.brooksrunning.com/dw/image/v2/BGPF_PRD/on/demandware.static/-/Sites-brooks-master-catalog/default/dwfb35969f/original/110476/110476-154-l-glycerin-23-mens-dynamic-cushion-road-running-shoe.png",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13, 14],
     colors: ["Black/White", "Grey", "Navy", "White"],
@@ -2374,7 +2374,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "recovery", "long-distance"],
     images: [
-      "https://img.runningwarehouse.com/watermark/rs.php?path=BGM3M-1.jpg&nw=780",
+      "https://www.brooksrunning.com/dw/image/v2/BGPF_PRD/on/demandware.static/-/Sites-brooks-master-catalog/default/dw5e6f7a8b/images/110450/110450-001-l-glycerin-max-2-mens-road-running-shoe.jpg",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13, 14],
     colors: ["Black/White", "Grey", "Navy"],
@@ -2587,7 +2587,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "racing", "marathon"],
     images: [
-      "https://about.underarmour.com/content/ua/about/en/stories/2025/07/ua-halo-launch/_jcr_content/root/container/multiimage/images/images1_1103834.coreimg.jpg",
+      "https://underarmour.scene7.com/is/image/Underarmour/6005377-002_DEFAULT?rp=standard-20pad%7CcartFullDesktop&qlt=85&bgc=f0f0f0&wid=400&hei=500&size=380%2C480&op_usm=1.75%2C0.3%2C2%2C0",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13],
     colors: ["White/Black", "Black", "Grey"],
@@ -2609,7 +2609,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "tempo", "training"],
     images: [
-      "https://underarmour.scene7.com/is/image/Underarmour/V5-3027600-100_1?wid=600&hei=600",
+      "https://underarmour.scene7.com/is/image/Underarmour/6005377-652_DEFAULT?rp=standard-30pad%7Cpdp&qlt=85&bgc=f0f0f0&wid=800&hei=1000&size=770%2C970&op_usm=1.75%2C0.3%2C2%2C0",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13],
     colors: ["Black/White", "White", "Grey"],
@@ -2630,7 +2630,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "long-distance", "training"],
     images: [
-      "https://underarmour.scene7.com/is/image/Underarmour/V5-3027700-100_1?wid=600&hei=600",
+      "https://underarmour.scene7.com/is/image/Underarmour/6005377-002_DEFAULT?rp=standard-20pad%7CcartFullDesktop&qlt=85&bgc=f0f0f0&wid=400&hei=500&size=380%2C480&op_usm=1.75%2C0.3%2C2%2C0",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13, 14],
     colors: ["Black/White", "Grey", "Navy"],
@@ -2651,7 +2651,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "everyday", "beginner"],
     images: [
-      "https://underarmour.scene7.com/is/image/Underarmour/V5-3027800-100_1?wid=600&hei=600",
+      "https://underarmour.scene7.com/is/image/Underarmour/6005377-002_DEFAULT?rp=standard-20pad%7CcartFullDesktop&qlt=85&bgc=f0f0f0&wid=400&hei=500&size=380%2C480&op_usm=1.75%2C0.3%2C2%2C0",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13, 14],
     colors: ["Black/White", "Grey", "Navy", "White"],
@@ -2672,7 +2672,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "tempo", "training"],
     images: [
-      "https://underarmour.scene7.com/is/image/Underarmour/V5-3027900-100_1?wid=600&hei=600",
+      "https://underarmour.scene7.com/is/image/Underarmour/6005377-002_DEFAULT?rp=standard-20pad%7CcartFullDesktop&qlt=85&bgc=f0f0f0&wid=400&hei=500&size=380%2C480&op_usm=1.75%2C0.3%2C2%2C0",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13],
     colors: ["Black/White", "White", "Grey"],
@@ -2693,7 +2693,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "everyday", "training"],
     images: [
-      "https://underarmour.scene7.com/is/image/Underarmour/V5-3028000-100_1?wid=600&hei=600",
+      "https://dks.scene7.com/is/image/GolfGalaxy/24UARAVLCTLT2WHTCMNS_White_Halo_Gray?qlt=70&wid=780&hei=780&fmt=pjpeg&op_sharpen=1&fit=constrain",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13],
     colors: ["Black/White", "Grey", "Navy"],
@@ -2714,7 +2714,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "racing", "tempo"],
     images: [
-      "https://underarmour.scene7.com/is/image/Underarmour/V5-3028100-100_1?wid=600&hei=600",
+      "https://underarmour.scene7.com/is/image/Underarmour/6005377-002_DEFAULT?rp=standard-20pad%7CcartFullDesktop&qlt=85&bgc=f0f0f0&wid=400&hei=500&size=380%2C480&op_usm=1.75%2C0.3%2C2%2C0",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13],
     colors: ["White/Black", "Black", "Grey"],
@@ -2735,7 +2735,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "stability", "training"],
     images: [
-      "https://underarmour.scene7.com/is/image/Underarmour/V5-3028200-100_1?wid=600&hei=600",
+      "https://underarmour.scene7.com/is/image/Underarmour/6005377-652_DEFAULT?rp=standard-30pad%7Cpdp&qlt=85&bgc=f0f0f0&wid=800&hei=1000&size=770%2C970&op_usm=1.75%2C0.3%2C2%2C0",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13],
     colors: ["Black/White", "Grey", "Navy"],
@@ -2756,7 +2756,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "stability", "training"],
     images: [
-      "https://underarmour.scene7.com/is/image/Underarmour/V5-3028300-100_1?wid=600&hei=600",
+      "https://underarmour.scene7.com/is/image/Underarmour/6005377-002_DEFAULT?rp=standard-20pad%7CcartFullDesktop&qlt=85&bgc=f0f0f0&wid=400&hei=500&size=380%2C480&op_usm=1.75%2C0.3%2C2%2C0",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13],
     colors: ["Black/White", "Grey", "Navy"],
@@ -2777,7 +2777,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "everyday", "beginner"],
     images: [
-      "https://underarmour.scene7.com/is/image/Underarmour/V5-3024800-100_1?wid=600&hei=600",
+      "https://underarmour.scene7.com/is/image/Underarmour/6005377-002_DEFAULT?rp=standard-20pad%7CcartFullDesktop&qlt=85&bgc=f0f0f0&wid=400&hei=500&size=380%2C480&op_usm=1.75%2C0.3%2C2%2C0",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13, 14],
     colors: ["Black/White", "Grey", "Navy"],
@@ -2798,7 +2798,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "everyday", "beginner"],
     images: [
-      "https://underarmour.scene7.com/is/image/Underarmour/V5-3024900-100_1?wid=600&hei=600",
+      "https://underarmour.scene7.com/is/image/Underarmour/6005377-002_DEFAULT?rp=standard-20pad%7CcartFullDesktop&qlt=85&bgc=f0f0f0&wid=400&hei=500&size=380%2C480&op_usm=1.75%2C0.3%2C2%2C0",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13, 14],
     colors: ["Black/White", "Grey", "Navy"],
@@ -2819,7 +2819,7 @@ export const shoes: Shoe[] = [
     category: "running",
     activityType: ["running", "everyday", "beginner"],
     images: [
-      "https://underarmour.scene7.com/is/image/Underarmour/V5-3025000-100_1?wid=600&hei=600",
+      "https://underarmour.scene7.com/is/image/Underarmour/6005377-002_DEFAULT?rp=standard-20pad%7CcartFullDesktop&qlt=85&bgc=f0f0f0&wid=400&hei=500&size=380%2C480&op_usm=1.75%2C0.3%2C2%2C0",
     ],
     sizes: [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13, 14],
     colors: ["Black/White", "Grey", "Navy"],
@@ -2843,7 +2843,7 @@ export const shoes: Shoe[] = [
     medicalType: "diabetic",
     activityType: ["everyday", "walking"],
     images: [
-      "https://www.drcomfort.com/cdn/shop/files/diabetcare-pro-black_800x.png",
+      "https://images.stockx.com/images/New-Balance-Fresh-Foam-X-More-v6-Black-Product.jpg?fit=fill&bg=FFFFFF&w=700&h=500&fm=webp&auto=compress&q=90&dpr=2&trim=color",
     ],
     sizes: [6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13, 14],
     colors: ["Black", "Brown"],
@@ -2887,7 +2887,7 @@ export const shoes: Shoe[] = [
     medicalType: "orthopedic",
     activityType: ["everyday", "walking"],
     images: [
-      "https://www.orthofeet.com/cdn/shop/files/orthostride-plus-black_800x.png",
+      "https://www.reebok.com/cdn/shop/files/100244464_SLC_eCom.jpg?v=1765304464",
     ],
     sizes: [6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13],
     colors: ["Black", "Grey", "Navy"],
@@ -2921,7 +2921,7 @@ export const shoes: Shoe[] = [
     medicalType: "elderly",
     activityType: ["everyday", "walking"],
     images: [
-      "https://www.propetusa.com/cdn/shop/files/seniorcomfort-walk-black_800x.png",
+      "https://www.reebok.com/cdn/shop/files/1x1_rbk_FZD2.jpg?v=1769783505",
     ],
     sizes: [6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13],
     colors: ["Black", "White", "Beige"],
@@ -2955,7 +2955,7 @@ export const shoes: Shoe[] = [
     medicalType: "pediatric",
     activityType: ["everyday", "school"],
     images: [
-      "https://www.striderite.com/cdn/shop/files/kidsfit-growth-navy_800x.png",
+      "https://www.reebok.com/cdn/shop/files/100244468_FLT_eCom.jpg?v=1769783399",
     ],
     sizes: [8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.5, 13, 13.5, 1, 1.5, 2, 2.5, 3],
     colors: ["Navy/Red", "Black", "Pink/Purple"],
