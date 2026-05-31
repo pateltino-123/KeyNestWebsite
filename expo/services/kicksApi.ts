@@ -439,71 +439,51 @@ function cleanBrandName(brand: string): string {
   if (!brand) return "Unknown";
   
   const brandMap: Record<string, string> = {
-    "air jordan": "Jordan",
-    "jordan": "Jordan",
     "nike": "Nike",
     "adidas": "Adidas",
     "new balance": "New Balance",
     "puma": "Puma",
     "reebok": "Reebok",
-    "converse": "Converse",
-    "vans": "Vans",
     "asics": "ASICS",
-    "on": "On Running",
+    "on": "On",
+    "hoka": "Hoka",
+    "saucony": "Saucony",
     "skechers": "Skechers",
+    "brooks": "Brooks",
     "under armour": "Under Armour",
-    "yeezy": "Yeezy",
   };
   
   const lowerBrand = brand.toLowerCase();
   return brandMap[lowerBrand] || brand;
 }
 
-function detectCategory(title: string, _brand: string): "athletic" | "casual" | "formal" | "running" | "work" | "medical" {
+function detectCategory(title: string, _brand: string): "running" | "medical" {
   const lowerTitle = title.toLowerCase();
-  
-  if (lowerTitle.includes("run") || lowerTitle.includes("boost") || lowerTitle.includes("pegasus") || lowerTitle.includes("gel-")) {
-    return "running";
+  if (lowerTitle.includes("diabetic") || lowerTitle.includes("ortho") || lowerTitle.includes("medical")) {
+    return "medical";
   }
-  if (lowerTitle.includes("basketball") || lowerTitle.includes("trainer") || lowerTitle.includes("gym")) {
-    return "athletic";
-  }
-  if (lowerTitle.includes("oxford") || lowerTitle.includes("loafer") || lowerTitle.includes("dress")) {
-    return "formal";
-  }
-  if (lowerTitle.includes("work") || lowerTitle.includes("slip resistant") || lowerTitle.includes("safety")) {
-    return "work";
-  }
-  
-  return "casual";
+  return "running";
 }
 
 function getActivityType(category: string): string[] {
-  switch (category) {
-    case "running":
-      return ["running", "training"];
-    case "athletic":
-      return ["sports", "training"];
-    case "formal":
-      return ["work", "formal"];
-    case "work":
-      return ["work", "standing"];
-    default:
-      return ["everyday", "fashion"];
-  }
+  if (category === "medical") return ["everyday", "walking"];
+  return ["running", "training"];
 }
 
 function getSizingTip(brand: string): string {
   const tips: Record<string, string> = {
-    "jordan": "Jordan typically runs true to size",
-    "air jordan": "Jordan typically runs true to size",
-    "nike": "Nike generally fits true to size",
-    "adidas": "Adidas may run slightly narrow",
-    "yeezy": "Yeezy runs 0.5 size small - size up recommended",
-    "new balance": "New Balance runs wide - consider sizing down for narrow feet",
-    "converse": "Converse runs large - size down 0.5 to 1 full size",
-    "vans": "Vans fits true to size",
-    "puma": "Puma fits true to size",
+    "nike": "Nike running shoes generally fit true to size",
+    "adidas": "Adidas running shoes fit true to size; Adizero models fit snug",
+    "new balance": "New Balance runs wide with excellent width options",
+    "asics": "ASICS fits true to size with wide width availability",
+    "on": "On fits true to size with a snug performance fit",
+    "hoka": "Hoka fits true to size with a roomy toe box",
+    "saucony": "Saucony fits true to size; racing models run narrow",
+    "puma": "Puma Nitro running shoes fit true to size",
+    "reebok": "Reebok FloatZig fits true to size",
+    "skechers": "Skechers performance running shoes fit true to size",
+    "brooks": "Brooks fits true to size with excellent width options",
+    "under armour": "Under Armour running shoes generally fit true to size",
   };
   
   const lowerBrand = brand.toLowerCase();
@@ -568,14 +548,14 @@ const FALLBACK_SHOE_DATA: KicksProduct[] = [
   },
   {
     id: "fallback-6",
-    title: "Converse Chuck Taylor All Star",
-    brand: "Converse",
-    sku: "M9160",
+    title: "Brooks Ghost 18",
+    brand: "Brooks",
+    sku: "110431-001",
     colorway: "Black/White",
-    gender: "Unisex",
-    retail_price: 65,
-    description: "The Converse Chuck Taylor All Star is the original basketball shoe that became a cultural icon.",
-    image_url: "https://images.unsplash.com/photo-1587563871167-1ee9c731aefb?w=400&h=400&fit=crop",
+    gender: "Men",
+    retail_price: 180,
+    description: "The Brooks Ghost 18 delivers soft DNA LOFT v3 cushioning and a smooth ride for everyday road running.",
+    image_url: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=400&h=400&fit=crop",
   },
   {
     id: "fallback-7",

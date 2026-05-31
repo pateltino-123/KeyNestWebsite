@@ -155,11 +155,7 @@ export default function BrowseScreen() {
   const getCategoryIcon = (categoryId: string) => {
     const iconProps = { size: 18, color: selectedCategory === categoryId ? colors.white : colors.textSecondary };
     switch (categoryId) {
-      case "athletic": return <Dumbbell {...iconProps} />;
-      case "casual": return <Shirt {...iconProps} />;
-      case "formal": return <Briefcase {...iconProps} />;
       case "running": return <Footprints {...iconProps} />;
-      case "work": return <HardHat {...iconProps} />;
       case "medical": return <Heart {...iconProps} />;
       default: return null;
     }

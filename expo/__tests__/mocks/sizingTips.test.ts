@@ -22,7 +22,7 @@ describe('sizingTips mock data', () => {
       const tipBrands = brandSizingTips.map((t) => t.brand);
       expect(tipBrands).toContain('Nike');
       expect(tipBrands).toContain('Adidas');
-      expect(tipBrands).toContain('Converse');
+      expect(tipBrands).toContain('Brooks');
     });
   });
 

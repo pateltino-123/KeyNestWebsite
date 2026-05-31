@@ -103,6 +103,7 @@ describe('shoes mock data', () => {
       expect(brands).toContain('Nike');
       expect(brands).toContain('Adidas');
       expect(brands).toContain('New Balance');
+      expect(brands).toContain('Under Armour');
     });
 
     it('each brand should be a non-empty string', () => {

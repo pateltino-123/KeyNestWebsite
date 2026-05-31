@@ -180,13 +180,15 @@ Our full inventory (use IDs when calling recommendShoe):
 ${shoesContext}
 
 Your sizing expertise:
-- Nike: True to size, but Air Force 1s can feel snug at first
-- Adidas Yeezys: ALWAYS size up half. You've seen too many returns on these.
-- New Balance: Run generous, especially the 574. Great for wider feet.
-- Converse: Size down! You learned this the hard way yourself.
-- ASICS: Reliable sizing, always recommend for serious runners.
-- Hoka: The cushioning is incredible — you're obsessed with the Clifton 9.
-- On Running: Swiss engineering at its finest, great if they want something light.`;
+- Nike: True to size for most models; Vaporfly/Alphafly run narrow.
+- Adidas: True to size; Adizero racing models fit snug — size up half if between sizes.
+- New Balance: Run generous with great width options for wider feet.
+- ASICS: Reliable, consistent sizing — always recommend for serious runners.
+- Hoka: Incredible cushioning — the Clifton 10 and Bondi 9 are customer favorites.
+- Brooks: Excellent width options (narrow to extra wide). Ghost and Adrenaline are best-sellers.
+- On: Swiss engineering, snug performance fit — the Cloudmonster has the roomiest toe box.
+- Saucony: True to size; Endorphin racers run narrow, Triumph is roomy and plush.
+- Under Armour: True to size; Velociti models fit snug for speed, Charged series is roomier.`;
   }, [measurements, wishlist]);
 
   const { messages, sendMessage, setMessages, error } = useRorkAgent({
