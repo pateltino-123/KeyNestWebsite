@@ -378,9 +378,10 @@ export default function ProfileScreen() {
                   style={[styles.budgetTextInput, { backgroundColor: colors.surface, color: colors.text, borderColor: colors.borderLight }]}
                   keyboardType="numeric"
                   value={preferences.budgetMin.toString()}
-                  onChangeText={(text) =>
-                    setPreferences({ budgetMin: parseInt(text) || 0 })
-                  }
+                  onChangeText={(text) => {
+                    const num = parseInt(text);
+                    setPreferences({ budgetMin: isNaN(num) ? 0 : num });
+                  }}
                 />
               </View>
               <Text style={[styles.budgetSeparator, { color: colors.textMuted }]}>-</Text>
@@ -390,9 +391,10 @@ export default function ProfileScreen() {
                   style={[styles.budgetTextInput, { backgroundColor: colors.surface, color: colors.text, borderColor: colors.borderLight }]}
                   keyboardType="numeric"
                   value={preferences.budgetMax.toString()}
-                  onChangeText={(text) =>
-                    setPreferences({ budgetMax: parseInt(text) || 500 })
-                  }
+                  onChangeText={(text) => {
+                    const num = parseInt(text);
+                    setPreferences({ budgetMax: isNaN(num) ? 0 : num });
+                  }}
                 />
               </View>
             </View>

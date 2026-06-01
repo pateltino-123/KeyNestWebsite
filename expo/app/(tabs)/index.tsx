@@ -14,7 +14,7 @@ import { Image } from "expo-image";
 import { Footprints, ChevronRight, Sparkles } from "lucide-react-native";
 import * as Haptics from "expo-haptics";
 import Colors from "@/constants/colors";
-import { useUser } from "@/contexts/UserContext";
+import { useUser, useRecommendedShoes } from "@/contexts/UserContext";
 import { brandSizingTips } from "@/mocks/sizingTips";
 
 import ShoeCard from "@/components/ShoeCard";
@@ -41,11 +41,7 @@ export default function HomeScreen() {
     return () => pulse.stop();
   }, [glowOpacity]);
 
-  const recommendedShoes = React.useMemo(() => {
-    return shoes.filter(s => s.category === "running").slice(0, 12);
-  }, []);
-  const recommendedLoading = false;
-  const recommendedError = null;
+  const recommendedShoes = useRecommendedShoes(shoes);
 
   const popularShoes = React.useMemo(() => {
     return shoes.filter(s => s.rating >= 4.7).slice(0, 12);
@@ -54,13 +50,10 @@ export default function HomeScreen() {
   const popularError = null;
 
   React.useEffect(() => {
-    if (recommendedError) {
-      console.error("[Home] Recommended shoes error:", recommendedError);
-    }
     if (popularError) {
       console.error("[Home] Popular shoes error:", popularError);
     }
-  }, [recommendedError, popularError]);
+  }, [popularError]);
 
   const handleScanPress = () => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
@@ -149,12 +142,7 @@ export default function HomeScreen() {
               <Text style={[styles.seeAllText, { color: colors.accent }]}>See All</Text>
             </Pressable>
           </View>
-          {recommendedLoading ? (
-            <View style={styles.loadingContainer}>
-              <ActivityIndicator size="small" color={colors.accent} />
-              <Text style={[styles.loadingText, { color: colors.textMuted }]}>Finding shoes for you...</Text>
-            </View>
-          ) : recommendedShoes.length === 0 ? (
+          {recommendedShoes.length === 0 ? (
             <View style={styles.loadingContainer}>
               <Text style={[styles.loadingText, { color: colors.textMuted }]}>No recommendations available</Text>
             </View>
