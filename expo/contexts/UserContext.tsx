@@ -1,10 +1,17 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import createContextHook from "@nkzw/create-context-hook";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { Shoe } from "@/mocks/shoes";
-import { generateDealInfo, DealInfo } from "@/mocks/priceData";
-import { shoes as allShoes } from "@/mocks/shoes";
+import {
+  saveSecureMeasurements,
+  loadSecureMeasurements,
+  saveSecureProfile,
+  loadSecureProfile,
+  saveNonSensitiveState,
+  loadNonSensitiveState,
+  deleteAllUserData,
+} from "@/services/storage";
+import { sanitizeLog } from "@/utilities/sanitize";
 
 export interface FootMeasurements {
   leftLength: number;
@@ -52,9 +59,7 @@ export interface PriceAlert {
   notificationsSent: number;
 }
 
-interface UserState {
-  profile: UserProfile | null;
-  measurements: FootMeasurements | null;
+interface NonSensitiveState {
   preferences: UserPreferences;
   wishlist: WishlistItem[];
   scanHistory: ScanHistory[];
@@ -71,194 +76,249 @@ const defaultPreferences: UserPreferences = {
   sizeSystem: "US",
 };
 
-const STORAGE_KEY = "solefit_user_data";
+const defaultNonSensitive: NonSensitiveState = {
+  preferences: defaultPreferences,
+  wishlist: [],
+  scanHistory: [],
+  hasCompletedOnboarding: false,
+  priceAlerts: [],
+};
 
 export const [UserProvider, useUser] = createContextHook(() => {
   const queryClient = useQueryClient();
-  const [state, setState] = useState<UserState>({
-    profile: null,
-    measurements: null,
-    preferences: defaultPreferences,
-    wishlist: [],
-    scanHistory: [],
-    hasCompletedOnboarding: false,
-    priceAlerts: [],
-  });
 
-  const userDataQuery = useQuery({
-    queryKey: ["userData"],
+  const [profile, setProfileState] = useState<UserProfile | null>(null);
+  const [measurements, setMeasurementsState] = useState<FootMeasurements | null>(null);
+  const [nonSensitive, setNonSensitive] = useState<NonSensitiveState>(defaultNonSensitive);
+
+  // ── Load sensitive data from SecureStore ──
+
+  const secureDataQuery = useQuery({
+    queryKey: ["secureData"],
     queryFn: async () => {
-      const stored = await AsyncStorage.getItem(STORAGE_KEY);
-      if (stored) {
-        return JSON.parse(stored) as UserState;
-      }
-      return null;
+      const [prof, meas] = await Promise.all([
+        loadSecureProfile<UserProfile>(),
+        loadSecureMeasurements<FootMeasurements>(),
+      ]);
+      return { profile: prof, measurements: meas };
     },
   });
 
   useEffect(() => {
-    if (userDataQuery.data) {
-      setState(userDataQuery.data);
+    if (secureDataQuery.data) {
+      if (secureDataQuery.data.profile) setProfileState(secureDataQuery.data.profile);
+      if (secureDataQuery.data.measurements) setMeasurementsState(secureDataQuery.data.measurements);
     }
-  }, [userDataQuery.data]);
+  }, [secureDataQuery.data]);
 
-  const { mutate: saveData } = useMutation({
-    mutationFn: async (newState: UserState) => {
-      await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(newState));
-      return newState;
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["userData"] });
+  // ── Load non-sensitive data from AsyncStorage ──
+
+  const nonSensitiveQuery = useQuery({
+    queryKey: ["nonSensitiveData"],
+    queryFn: async () => {
+      return (await loadNonSensitiveState<NonSensitiveState>()) ?? defaultNonSensitive;
     },
   });
 
-  const updateState = useCallback((updates: Partial<UserState>) => {
-    setState((prev) => {
-      const newState = { ...prev, ...updates };
-      saveData(newState);
-      return newState;
-    });
-  }, [saveData]);
+  useEffect(() => {
+    if (nonSensitiveQuery.data) {
+      setNonSensitive(nonSensitiveQuery.data);
+    }
+  }, [nonSensitiveQuery.data]);
 
-  const setMeasurements = useCallback((measurements: FootMeasurements) => {
-    const scanRecord: ScanHistory = {
-      id: Date.now().toString(),
-      date: new Date().toISOString(),
-      measurements,
-    };
-    setState((prev) => {
-      const newState = {
-        ...prev,
-        measurements,
-        scanHistory: [scanRecord, ...prev.scanHistory].slice(0, 10),
+  // ── Save non-sensitive ──
+
+  const { mutate: persistNonSensitive } = useMutation({
+    mutationFn: async (data: NonSensitiveState) => {
+      await saveNonSensitiveState(data);
+      return data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["nonSensitiveData"] });
+    },
+  });
+
+  const updateNonSensitive = useCallback(
+    (updates: Partial<NonSensitiveState>) => {
+      setNonSensitive((prev) => {
+        const next = { ...prev, ...updates };
+        persistNonSensitive(next);
+        return next;
+      });
+    },
+    [persistNonSensitive],
+  );
+
+  // ── Measurements (SecureStore) ──
+
+  const setMeasurements = useCallback(
+    (meas: FootMeasurements) => {
+      const scanRecord: ScanHistory = {
+        id: Date.now().toString(),
+        date: new Date().toISOString(),
+        measurements: meas,
       };
-      saveData(newState);
-      return newState;
-    });
-  }, [saveData]);
+      saveSecureMeasurements(meas);
+      setMeasurementsState(meas);
+      updateNonSensitive({
+        scanHistory: [scanRecord, ...nonSensitive.scanHistory].slice(0, 10),
+      });
+    },
+    [updateNonSensitive, nonSensitive.scanHistory],
+  );
 
-  const setPreferences = useCallback((preferences: Partial<UserPreferences>) => {
-    setState((prev) => {
-      const newState = {
-        ...prev,
-        preferences: { ...prev.preferences, ...preferences },
-      };
-      saveData(newState);
-      return newState;
-    });
-  }, [saveData]);
+  // ── Profile (SecureStore) ──
 
-  const setProfile = useCallback((profile: UserProfile) => {
-    updateState({ profile });
-  }, [updateState]);
+  const updateProfile = useCallback(
+    (prof: UserProfile) => {
+      saveSecureProfile(prof);
+      setProfileState(prof);
+    },
+    [],
+  );
 
-  const addToWishlist = useCallback((shoeId: string) => {
-    setState((prev) => {
-      if (prev.wishlist.some((item) => item.shoeId === shoeId)) {
-        return prev;
-      }
+  // ── Preferences ──
+
+  const setPreferences = useCallback(
+    (prefs: Partial<UserPreferences>) => {
+      updateNonSensitive({
+        preferences: { ...nonSensitive.preferences, ...prefs },
+      });
+    },
+    [updateNonSensitive, nonSensitive.preferences],
+  );
+
+  // ── Wishlist ──
+
+  const addToWishlist = useCallback(
+    (shoeId: string) => {
+      if (nonSensitive.wishlist.some((item) => item.shoeId === shoeId)) return;
       const newItem: WishlistItem = {
         shoeId,
         addedAt: new Date().toISOString(),
         status: "saved",
       };
-      const newState = {
-        ...prev,
-        wishlist: [newItem, ...prev.wishlist],
-      };
-      saveData(newState);
-      return newState;
-    });
-  }, [saveData]);
+      updateNonSensitive({ wishlist: [newItem, ...nonSensitive.wishlist] });
+    },
+    [updateNonSensitive, nonSensitive.wishlist],
+  );
 
-  const removeFromWishlist = useCallback((shoeId: string) => {
-    setState((prev) => {
-      const newState = {
-        ...prev,
-        wishlist: prev.wishlist.filter((item) => item.shoeId !== shoeId),
-      };
-      saveData(newState);
-      return newState;
-    });
-  }, [saveData]);
+  const removeFromWishlist = useCallback(
+    (shoeId: string) => {
+      updateNonSensitive({
+        wishlist: nonSensitive.wishlist.filter((item) => item.shoeId !== shoeId),
+      });
+    },
+    [updateNonSensitive, nonSensitive.wishlist],
+  );
 
-  const updateWishlistStatus = useCallback((shoeId: string, status: WishlistItem["status"]) => {
-    setState((prev) => {
-      const newState = {
-        ...prev,
-        wishlist: prev.wishlist.map((item) =>
-          item.shoeId === shoeId ? { ...item, status } : item
+  const updateWishlistStatus = useCallback(
+    (shoeId: string, status: WishlistItem["status"]) => {
+      updateNonSensitive({
+        wishlist: nonSensitive.wishlist.map((item) =>
+          item.shoeId === shoeId ? { ...item, status } : item,
         ),
-      };
-      saveData(newState);
-      return newState;
-    });
-  }, [saveData]);
+      });
+    },
+    [updateNonSensitive, nonSensitive.wishlist],
+  );
 
-  const isInWishlist = useCallback((shoeId: string) => {
-    return state.wishlist.some((item) => item.shoeId === shoeId);
-  }, [state.wishlist]);
+  const isInWishlist = useCallback(
+    (shoeId: string) => {
+      return nonSensitive.wishlist.some((item) => item.shoeId === shoeId);
+    },
+    [nonSensitive.wishlist],
+  );
+
+  // ── Onboarding ──
 
   const completeOnboarding = useCallback(() => {
-    updateState({ hasCompletedOnboarding: true });
-  }, [updateState]);
+    updateNonSensitive({ hasCompletedOnboarding: true });
+  }, [updateNonSensitive]);
 
-  const setPriceAlert = useCallback((shoeId: string, targetPrice: number) => {
-    setState((prev) => {
-      const existing = prev.priceAlerts.findIndex((a) => a.shoeId === shoeId);
+  // ── Price Alerts ──
+
+  const setPriceAlert = useCallback(
+    (shoeId: string, targetPrice: number) => {
+      const existing = nonSensitive.priceAlerts.findIndex((a) => a.shoeId === shoeId);
       let newAlerts: PriceAlert[];
       if (existing >= 0) {
-        newAlerts = prev.priceAlerts.map((a, i) =>
-          i === existing ? { ...a, targetPrice, isActive: true } : a
+        newAlerts = nonSensitive.priceAlerts.map((a, i) =>
+          i === existing ? { ...a, targetPrice, isActive: true } : a,
         );
       } else {
         newAlerts = [
-          ...prev.priceAlerts,
-          { shoeId, targetPrice, isActive: true, createdAt: new Date().toISOString(), notificationsSent: 0 },
+          ...nonSensitive.priceAlerts,
+          {
+            shoeId,
+            targetPrice,
+            isActive: true,
+            createdAt: new Date().toISOString(),
+            notificationsSent: 0,
+          },
         ];
       }
-      const newState = { ...prev, priceAlerts: newAlerts };
-      saveData(newState);
-      return newState;
-    });
-    console.log("[User] Price alert set for shoe:", shoeId, "target:", targetPrice);
-  }, [saveData]);
+      updateNonSensitive({ priceAlerts: newAlerts });
+      // Safe logging: no PII
+      if (__DEV__) {
+        console.log("[User] Price alert updated for item:", sanitizeLog(shoeId.slice(0, 8)));
+      }
+    },
+    [updateNonSensitive, nonSensitive.priceAlerts],
+  );
 
-  const removePriceAlert = useCallback((shoeId: string) => {
-    setState((prev) => {
-      const newState = {
-        ...prev,
-        priceAlerts: prev.priceAlerts.filter((a) => a.shoeId !== shoeId),
-      };
-      saveData(newState);
-      return newState;
-    });
-    console.log("[User] Price alert removed for shoe:", shoeId);
-  }, [saveData]);
+  const removePriceAlert = useCallback(
+    (shoeId: string) => {
+      updateNonSensitive({
+        priceAlerts: nonSensitive.priceAlerts.filter((a) => a.shoeId !== shoeId),
+      });
+      if (__DEV__) {
+        console.log("[User] Price alert removed for item:", sanitizeLog(shoeId.slice(0, 8)));
+      }
+    },
+    [updateNonSensitive, nonSensitive.priceAlerts],
+  );
 
-  const togglePriceAlert = useCallback((shoeId: string) => {
-    setState((prev) => {
-      const newState = {
-        ...prev,
-        priceAlerts: prev.priceAlerts.map((a) =>
-          a.shoeId === shoeId ? { ...a, isActive: !a.isActive } : a
+  const togglePriceAlert = useCallback(
+    (shoeId: string) => {
+      updateNonSensitive({
+        priceAlerts: nonSensitive.priceAlerts.map((a) =>
+          a.shoeId === shoeId ? { ...a, isActive: !a.isActive } : a,
         ),
-      };
-      saveData(newState);
-      return newState;
-    });
-  }, [saveData]);
+      });
+    },
+    [updateNonSensitive, nonSensitive.priceAlerts],
+  );
 
-  const getPriceAlert = useCallback((shoeId: string): PriceAlert | undefined => {
-    return state.priceAlerts.find((a) => a.shoeId === shoeId);
-  }, [state.priceAlerts]);
+  const getPriceAlert = useCallback(
+    (shoeId: string): PriceAlert | undefined => {
+      return nonSensitive.priceAlerts.find((a) => a.shoeId === shoeId);
+    },
+    [nonSensitive.priceAlerts],
+  );
+
+  // ── Full data deletion ──
+
+  const deleteAllData = useCallback(async () => {
+    setProfileState(null);
+    setMeasurementsState(null);
+    setNonSensitive(defaultNonSensitive);
+    await deleteAllUserData();
+    queryClient.invalidateQueries({ queryKey: ["secureData"] });
+    queryClient.invalidateQueries({ queryKey: ["nonSensitiveData"] });
+  }, [queryClient]);
+
+  const isLoading =
+    secureDataQuery.isLoading || nonSensitiveQuery.isLoading;
 
   return {
-    ...state,
-    isLoading: userDataQuery.isLoading,
+    profile,
+    measurements,
+    ...nonSensitive,
+    isLoading,
     setMeasurements,
     setPreferences,
-    setProfile,
+    setProfile: updateProfile,
     addToWishlist,
     removeFromWishlist,
     updateWishlistStatus,
@@ -268,6 +328,7 @@ export const [UserProvider, useUser] = createContextHook(() => {
     removePriceAlert,
     togglePriceAlert,
     getPriceAlert,
+    deleteAllData,
   };
 });
 
@@ -285,10 +346,10 @@ export function useWishlistedShoes(shoes: Shoe[]) {
 
 export function useRecommendedShoes(shoes: Shoe[]) {
   const { measurements, preferences } = useUser();
-  
+
   return useMemo(() => {
     if (!measurements) return shoes.slice(0, 6);
-    
+
     return shoes
       .filter((shoe) => {
         if (preferences.budgetMax > 0 && shoe.price > preferences.budgetMax) {
@@ -297,12 +358,16 @@ export function useRecommendedShoes(shoes: Shoe[]) {
         if (preferences.budgetMin > 0 && shoe.price < preferences.budgetMin) {
           return false;
         }
-        if (preferences.preferredBrands.length > 0 && 
-            !preferences.preferredBrands.includes(shoe.brand)) {
+        if (
+          preferences.preferredBrands.length > 0 &&
+          !preferences.preferredBrands.includes(shoe.brand)
+        ) {
           return false;
         }
-        if (preferences.stylePreferences.length > 0 &&
-            !preferences.stylePreferences.includes(shoe.category)) {
+        if (
+          preferences.stylePreferences.length > 0 &&
+          !preferences.stylePreferences.includes(shoe.category)
+        ) {
           return false;
         }
         return true;
@@ -310,7 +375,7 @@ export function useRecommendedShoes(shoes: Shoe[]) {
       .sort((a, b) => {
         let scoreA = 0;
         let scoreB = 0;
-        
+
         if (measurements.footType === "wide") {
           if (a.widthFit === "wide") scoreA += 2;
           if (b.widthFit === "wide") scoreB += 2;
@@ -320,7 +385,7 @@ export function useRecommendedShoes(shoes: Shoe[]) {
           if (a.widthFit === "narrow") scoreA += 1;
           if (b.widthFit === "narrow") scoreB += 1;
         }
-        
+
         if (measurements.archType === "high") {
           if (a.archSupport === "high") scoreA += 2;
           if (b.archSupport === "high") scoreB += 2;
@@ -328,10 +393,10 @@ export function useRecommendedShoes(shoes: Shoe[]) {
           if (a.archSupport === "high") scoreA += 1;
           if (b.archSupport === "high") scoreB += 1;
         }
-        
+
         scoreA += a.rating * 0.5;
         scoreB += b.rating * 0.5;
-        
+
         return scoreB - scoreA;
       })
       .slice(0, 8);

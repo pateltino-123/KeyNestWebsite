@@ -7,6 +7,8 @@ import {
   Pressable,
   TextInput,
   Modal,
+  Alert,
+  ActivityIndicator,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { router } from "expo-router";
@@ -23,6 +25,8 @@ import {
   Footprints,
   Moon,
   Sun,
+  Trash2,
+  ShieldAlert,
 } from "lucide-react-native";
 import * as Haptics from "expo-haptics";
 
@@ -40,11 +44,14 @@ export default function ProfileScreen() {
     scanHistory,
     setProfile,
     setPreferences,
+    deleteAllData,
   } = useUser();
   const { colors, isDark, toggleTheme } = useTheme();
 
   const [showEditProfile, setShowEditProfile] = useState(false);
   const [showPreferences, setShowPreferences] = useState(false);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
   const [editName, setEditName] = useState(profile?.name || "");
   const [editEmail, setEditEmail] = useState(profile?.email || "");
 
@@ -107,6 +114,19 @@ export default function ProfileScreen() {
       year: "numeric",
     });
   };
+
+  const handleDeleteAllData = useCallback(async () => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
+    setIsDeleting(true);
+    try {
+      await deleteAllData();
+      setShowDeleteConfirm(false);
+    } catch {
+      Alert.alert("Error", "Something went wrong. Please try again.");
+    } finally {
+      setIsDeleting(false);
+    }
+  }, [deleteAllData]);
 
   return (
     <View style={[styles.container, { paddingTop: insets.top, backgroundColor: colors.background }]}>
@@ -234,6 +254,24 @@ export default function ProfileScreen() {
             </View>
             <ChevronRight size={20} color={colors.textMuted} />
           </Pressable>
+
+          <Pressable
+            style={[styles.menuItem, { backgroundColor: colors.surface, borderColor: colors.borderLight, marginTop: 12 }]}
+            onPress={() => setShowDeleteConfirm(true)}
+          >
+            <View style={styles.menuItemLeft}>
+              <Trash2 size={20} color={colors.error} />
+              <Text style={[styles.menuItemText, { color: colors.error }]}>Delete All My Data</Text>
+            </View>
+            <ChevronRight size={20} color={colors.error} />
+          </Pressable>
+        </View>
+
+        <View style={[styles.privacyNotice, { backgroundColor: colors.surfaceAlt, borderColor: colors.borderLight }]}>
+          <ShieldAlert size={16} color={colors.textMuted} />
+          <Text style={[styles.privacyNoticeText, { color: colors.textMuted }]}>
+            Your foot measurements are encrypted on-device. Profile data stays local and is never shared without your consent. AI chat messages are processed through a secure proxy for personalized recommendations.
+          </Text>
         </View>
       </ScrollView>
 
@@ -399,6 +437,43 @@ export default function ProfileScreen() {
               </View>
             </View>
           </ScrollView>
+        </View>
+      </Modal>
+
+      <Modal
+        visible={showDeleteConfirm}
+        animationType="fade"
+        transparent
+        onRequestClose={() => setShowDeleteConfirm(false)}
+      >
+        <View style={[styles.deleteOverlay, { backgroundColor: "rgba(0,0,0,0.6)" }]}>
+          <View style={[styles.deleteSheet, { backgroundColor: colors.surface, borderColor: colors.borderLight }]}>
+            <View style={[styles.deleteIconWrap, { backgroundColor: colors.errorLight }]}>
+              <Trash2 size={32} color={colors.error} />
+            </View>
+            <Text style={[styles.deleteTitle, { color: colors.text }]}>Delete All Data?</Text>
+            <Text style={[styles.deleteDescription, { color: colors.textMuted }]}>
+              This permanently removes your foot measurements, profile info, scan history, wishlist, preferences, and price alerts. This action cannot be undone.
+            </Text>
+            <Pressable
+              style={[styles.deleteConfirmBtn, { backgroundColor: colors.error }]}
+              onPress={handleDeleteAllData}
+              disabled={isDeleting}
+            >
+              {isDeleting ? (
+                <ActivityIndicator size="small" color="#FFFFFF" />
+              ) : (
+                <Text style={styles.deleteConfirmText}>Yes, Delete Everything</Text>
+              )}
+            </Pressable>
+            <Pressable
+              style={[styles.deleteCancelBtn, { borderColor: colors.borderLight }]}
+              onPress={() => setShowDeleteConfirm(false)}
+              disabled={isDeleting}
+            >
+              <Text style={[styles.deleteCancelText, { color: colors.textSecondary }]}>Cancel</Text>
+            </Pressable>
+          </View>
         </View>
       </Modal>
     </View>
@@ -641,5 +716,74 @@ const styles = StyleSheet.create({
   budgetSeparator: {
     fontSize: 18,
     marginTop: 20,
+  },
+  privacyNotice: {
+    flexDirection: "row",
+    alignItems: "flex-start",
+    gap: 10,
+    borderRadius: 12,
+    padding: 14,
+    marginTop: 20,
+    borderWidth: 1,
+  },
+  privacyNoticeText: {
+    flex: 1,
+    fontSize: 12,
+    lineHeight: 18,
+  },
+  deleteOverlay: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 40,
+  },
+  deleteSheet: {
+    width: "100%",
+    borderRadius: 20,
+    padding: 28,
+    alignItems: "center",
+    borderWidth: 1,
+  },
+  deleteIconWrap: {
+    width: 64,
+    height: 64,
+    borderRadius: 32,
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 16,
+  },
+  deleteTitle: {
+    fontSize: 20,
+    fontWeight: "700",
+    marginBottom: 10,
+  },
+  deleteDescription: {
+    fontSize: 14,
+    lineHeight: 20,
+    textAlign: "center",
+    marginBottom: 24,
+  },
+  deleteConfirmBtn: {
+    width: "100%",
+    paddingVertical: 16,
+    borderRadius: 14,
+    alignItems: "center",
+    marginBottom: 12,
+  },
+  deleteConfirmText: {
+    fontSize: 16,
+    fontWeight: "700",
+    color: "#FFFFFF",
+  },
+  deleteCancelBtn: {
+    width: "100%",
+    paddingVertical: 14,
+    borderRadius: 14,
+    alignItems: "center",
+    borderWidth: 1,
+  },
+  deleteCancelText: {
+    fontSize: 16,
+    fontWeight: "600",
   },
 });

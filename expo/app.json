@@ -44,7 +44,8 @@
         {
           "cameraPermission": "Allow shoeFitx to access your camera to scan your feet for accurate sizing."
         }
-      ]
+      ],
+      "expo-secure-store"
     ],
     "experiments": {
       "typedRoutes": true

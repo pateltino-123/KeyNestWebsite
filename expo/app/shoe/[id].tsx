@@ -104,7 +104,6 @@ export default function ShoeDetailScreen() {
     queryKey: ["shoe-detail", id],
     queryFn: async () => {
       if (!id) return null;
-      console.log("[ShoeDetail] Fetching product:", id);
       const product = await getProductById(id);
       if (product) {
         return mapKicksProductToShoe(product) as Shoe;
@@ -154,7 +153,6 @@ export default function ShoeDetailScreen() {
       if (supported) {
         await Linking.openURL(url);
       } else {
-        console.log("[ShoeDetail] Cannot open URL:", url);
       }
     } catch (error) {
       console.error("[ShoeDetail] Error opening URL:", error);
@@ -440,7 +438,6 @@ export default function ShoeDetailScreen() {
         reviews={shoe.reviews || []}
         shoeName={`${shoe.brand} ${shoe.name}`}
         onAddReview={(rating, comment) => {
-          console.log('Add review:', { rating, comment });
         }}
       />
 

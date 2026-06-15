@@ -118,7 +118,6 @@ function isShoeProduct(product: KicksProduct): boolean {
   
   for (const keyword of CLOTHING_KEYWORDS) {
     if (title.includes(keyword)) {
-      console.log(`[KicksDB] Filtered out clothing: ${product.title}`);
       return false;
     }
   }
@@ -138,7 +137,6 @@ function isShoeProduct(product: KicksProduct): boolean {
       title.includes("asics");
     
     if (!looksLikeShoe) {
-      console.log(`[KicksDB] Filtered out non-shoe: ${product.title}`);
       return false;
     }
   }
@@ -153,20 +151,12 @@ export async function searchProducts(query: string): Promise<KicksProduct[]> {
     const products = response.data || response.products || response.results || response || [];
     
     if (Array.isArray(products) && products.length > 0) {
-      const shoesOnly = products.filter(isShoeProduct).filter(p => {
-        const hasImage = getProductImage(p) !== null;
-        if (!hasImage) {
-          console.log(`[KicksDB] Filtered out shoe without image: ${p.title}`);
-        }
-        return hasImage;
-      });
+      const shoesOnly = products.filter(isShoeProduct).filter(p => getProductImage(p) !== null);
       const sorted = shoesOnly.sort((a, b) => getCommonShoeScore(b) - getCommonShoeScore(a));
-      console.log(`[KicksDB] Returning ${sorted.length} shoes with images`);
       return sorted.length > 0 ? sorted : [];
     }
   }
   
-  console.log(`[KicksDB] No API results for: ${query}`);
   return [];
 }
 
@@ -374,8 +364,6 @@ function getCommonShoeScore(product: KicksProduct): number {
 }
 
 export async function getHomeRecommendations(): Promise<KicksProduct[]> {
-  console.log("[KicksDB] Fetching home recommendations");
-  
   const queries = [
     "nike running shoes",
     "adidas running shoes", 
@@ -400,13 +388,10 @@ export async function getHomeRecommendations(): Promise<KicksProduct[]> {
   
   const sorted = under200.sort((a, b) => getCommonShoeScore(b) - getCommonShoeScore(a));
   
-  console.log("[KicksDB] Home recommendations:", sorted.length);
   return sorted.slice(0, 12);
 }
 
 export async function getPopularShoes(): Promise<KicksProduct[]> {
-  console.log("[KicksDB] Fetching popular shoes");
-  
   const queries = [
     "puma running shoes",
     "asics running shoes",
@@ -431,7 +416,6 @@ export async function getPopularShoes(): Promise<KicksProduct[]> {
   
   const sorted = under200.sort((a, b) => getCommonShoeScore(b) - getCommonShoeScore(a));
   
-  console.log("[KicksDB] Popular shoes:", sorted.length);
   return sorted.slice(0, 12);
 }
 

@@ -30,6 +30,7 @@ import { categories, brands, Shoe, shoes } from "@/mocks/shoes";
 import ShoeCard from "@/components/ShoeCard";
 import AnimatedListItem from "@/components/AnimatedListItem";
 import { useTheme } from "@/contexts/ThemeContext";
+import { sanitizeText } from "@/utilities/sanitize";
 
 const extractUniqueColors = (allShoes: Shoe[]): string[] => {
   const colorSet = new Set<string>();
@@ -174,7 +175,7 @@ export default function BrowseScreen() {
               placeholder="Search shoes, brands..."
               placeholderTextColor={colors.textMuted}
               value={searchQuery}
-              onChangeText={setSearchQuery}
+              onChangeText={(text) => setSearchQuery(sanitizeText(text, 200))}
               returnKeyType="search"
             />
             {searchQuery.length > 0 && (

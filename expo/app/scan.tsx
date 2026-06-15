@@ -216,8 +216,8 @@ export default function ScanScreen() {
           const deviation = Math.sqrt(tiltX * tiltX + tiltY * tiltY);
           setTiltDeg(deviation);
         });
-      } catch (e) {
-        console.log("[Scan] motion error", e);
+      } catch (_e) {
+        // Motion sensor unavailable — expected on simulators
       }
     })();
     return () => {
@@ -335,8 +335,8 @@ export default function ScanScreen() {
       if (Platform.OS !== "web" && cameraRef.current) {
         await cameraRef.current.takePictureAsync({ skipProcessing: true, quality: 0.4 });
       }
-    } catch (e) {
-      console.log("[Scan] capture error", e);
+    } catch (_e) {
+      // Capture may fail on simulators without a real camera
     }
 
     setTimeout(() => {

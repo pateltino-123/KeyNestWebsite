@@ -12,7 +12,7 @@ import {
   Animated,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { Send, ShoppingBag, Star, ExternalLink } from "lucide-react-native";
+import { Send, ShoppingBag, Star, ExternalLink, Shield } from "lucide-react-native";
 import * as Haptics from "expo-haptics";
 import { useRorkAgent, createRorkTool } from "@rork-ai/toolkit-sdk";
 import { useRouter } from "expo-router";
@@ -21,6 +21,7 @@ import { z } from "zod";
 import { useUser } from "@/contexts/UserContext";
 import { useTheme } from "@/contexts/ThemeContext";
 import { shoes, Shoe } from "@/mocks/shoes";
+import { sanitizeText } from "@/utilities/sanitize";
 
 const SALESMAN_AVATAR = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face";
 
@@ -239,7 +240,7 @@ Your sizing expertise:
   const handleSend = useCallback(async () => {
     if (!inputText.trim() || isLoading) return;
     void Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-    const text = inputText.trim();
+    const text = sanitizeText(inputText.trim());
     setInputText("");
     sendMessage(text);
     setTimeout(() => { scrollViewRef.current?.scrollToEnd({ animated: true }); }, 50);
@@ -310,6 +311,13 @@ Your sizing expertise:
           </View>
           <Text style={[styles.headerRole, { color: colors.textMuted }]}>Your Shoe Expert • 15yr experience</Text>
         </View>
+      </View>
+
+      <View style={[styles.privacyBanner, { backgroundColor: colors.surfaceAlt, borderColor: colors.borderLight }]}>
+        <Shield size={14} color={colors.textMuted} />
+        <Text style={[styles.privacyBannerText, { color: colors.textMuted }]}>
+          Messages are processed via a secure AI proxy to provide recommendations. No personal data is stored long-term.
+        </Text>
       </View>
 
       <ScrollView
@@ -683,5 +691,18 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 2,
+  },
+  privacyBanner: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+    borderBottomWidth: 1,
+  },
+  privacyBannerText: {
+    flex: 1,
+    fontSize: 11,
+    lineHeight: 15,
   },
 });

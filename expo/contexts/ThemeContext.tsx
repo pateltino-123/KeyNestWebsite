@@ -40,13 +40,11 @@ export const [ThemeProvider, useTheme] = createContextHook(() => {
     const newMode = mode === "dark" ? "light" : "dark";
     setMode(newMode);
     saveTheme(newMode);
-    console.log("[Theme] Toggled to:", newMode);
   }, [mode, saveTheme]);
 
   const setTheme = useCallback((newMode: ThemeMode) => {
     setMode(newMode);
     saveTheme(newMode);
-    console.log("[Theme] Set to:", newMode);
   }, [saveTheme]);
 
   const colors: ThemeColors = useMemo(() => {
