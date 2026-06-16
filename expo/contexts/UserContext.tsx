@@ -102,6 +102,8 @@ export const [UserProvider, useUser] = createContextHook(() => {
       ]);
       return { profile: prof, measurements: meas };
     },
+    staleTime: Infinity,
+    retry: 1,
   });
 
   useEffect(() => {
@@ -118,6 +120,8 @@ export const [UserProvider, useUser] = createContextHook(() => {
     queryFn: async () => {
       return (await loadNonSensitiveState<NonSensitiveState>()) ?? defaultNonSensitive;
     },
+    staleTime: Infinity,
+    retry: 1,
   });
 
   useEffect(() => {
@@ -309,7 +313,9 @@ export const [UserProvider, useUser] = createContextHook(() => {
   }, [queryClient]);
 
   const isLoading =
-    secureDataQuery.isLoading || nonSensitiveQuery.isLoading;
+    secureDataQuery.isLoading ||
+    nonSensitiveQuery.isLoading ||
+    (secureDataQuery.isPending && nonSensitiveQuery.isPending);
 
   return {
     profile,

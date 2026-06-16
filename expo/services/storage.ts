@@ -8,39 +8,63 @@ const SECURE_PROFILE_KEY = "solefit_profile";
 // ── Secure Store (encrypted — for biometric-adjacent data) ──
 
 export async function saveSecureMeasurements(measurements: object): Promise<void> {
-  await SecureStore.setItemAsync(SECURE_MEASUREMENTS_KEY, JSON.stringify(measurements));
+  try {
+    await SecureStore.setItemAsync(SECURE_MEASUREMENTS_KEY, JSON.stringify(measurements));
+  } catch {
+    // SecureStore unavailable — data not persisted
+  }
 }
 
 export async function loadSecureMeasurements<T>(): Promise<T | null> {
-  const raw = await SecureStore.getItemAsync(SECURE_MEASUREMENTS_KEY);
-  if (!raw) return null;
   try {
-    return JSON.parse(raw) as T;
+    const raw = await SecureStore.getItemAsync(SECURE_MEASUREMENTS_KEY);
+    if (!raw) return null;
+    try {
+      return JSON.parse(raw) as T;
+    } catch {
+      return null;
+    }
   } catch {
     return null;
   }
 }
 
 export async function deleteSecureMeasurements(): Promise<void> {
-  await SecureStore.deleteItemAsync(SECURE_MEASUREMENTS_KEY);
+  try {
+    await SecureStore.deleteItemAsync(SECURE_MEASUREMENTS_KEY);
+  } catch {
+    // SecureStore unavailable — nothing to delete
+  }
 }
 
 export async function saveSecureProfile(profile: object): Promise<void> {
-  await SecureStore.setItemAsync(SECURE_PROFILE_KEY, JSON.stringify(profile));
+  try {
+    await SecureStore.setItemAsync(SECURE_PROFILE_KEY, JSON.stringify(profile));
+  } catch {
+    // SecureStore unavailable — data not persisted
+  }
 }
 
 export async function loadSecureProfile<T>(): Promise<T | null> {
-  const raw = await SecureStore.getItemAsync(SECURE_PROFILE_KEY);
-  if (!raw) return null;
   try {
-    return JSON.parse(raw) as T;
+    const raw = await SecureStore.getItemAsync(SECURE_PROFILE_KEY);
+    if (!raw) return null;
+    try {
+      return JSON.parse(raw) as T;
+    } catch {
+      return null;
+    }
   } catch {
     return null;
   }
 }
 
 export async function deleteSecureProfile(): Promise<void> {
-  await SecureStore.deleteItemAsync(SECURE_PROFILE_KEY);
+  try {
+    await SecureStore.deleteItemAsync(SECURE_PROFILE_KEY);
+  } catch {
+    // SecureStore unavailable — nothing to delete
+  }
 }
 
 // ── Async Storage (non-sensitive preferences / wishlist) ──

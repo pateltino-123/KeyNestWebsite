@@ -84,7 +84,7 @@ export default function WishlistScreen() {
         <Text style={[styles.title, { color: colors.primary }]}>Wishlist</Text>
         <Pressable
           style={[styles.askButton, { backgroundColor: colors.accent }]}
-          onPress={() => router.push("/assistant")}
+          onPress={() => router.push("/(tabs)/assistant" as never)}
         >
           <MessageCircle size={18} color={colors.white} />
           <Text style={[styles.askButtonText, { color: colors.white }]}>Ask Assistant</Text>
