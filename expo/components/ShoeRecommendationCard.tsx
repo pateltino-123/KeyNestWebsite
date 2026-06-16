@@ -21,7 +21,7 @@ export default React.memo(function ShoeRecommendationCard({ shoe }: ShoeRecommen
   const router = useRouter();
 
   const handlePress = () => {
-    void Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    void Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
     router.push(`/shoe/${shoe.id}`);
   };
 

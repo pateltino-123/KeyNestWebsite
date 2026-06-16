@@ -23,7 +23,7 @@ export default function RetailerComparison({ retailers }: RetailerComparisonProp
   );
 
   const handleOpenLink = useCallback(async (url: string) => {
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
     try {
       await Linking.openURL(url);
     } catch (error) {

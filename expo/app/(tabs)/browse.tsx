@@ -191,7 +191,7 @@ export default function BrowseScreen() {
               activeFiltersCount > 0 && { backgroundColor: colors.primary, borderColor: colors.primary },
             ]}
             onPress={() => {
-              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
               setShowFilters(true);
             }}
           >

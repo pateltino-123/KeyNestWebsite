@@ -59,7 +59,7 @@ export default function WishlistScreen() {
 
   const handleStatusChange = useCallback(
     (shoeId: string, status: "saved" | "purchased" | "didnt_fit") => {
-      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
       updateWishlistStatus(shoeId, status);
     },
     [updateWishlistStatus]

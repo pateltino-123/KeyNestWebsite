@@ -56,7 +56,7 @@ export default function HomeScreen() {
   }, [popularError]);
 
   const handleScanPress = () => {
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium).catch(() => {});
     router.push("/scan" as never);
   };
 

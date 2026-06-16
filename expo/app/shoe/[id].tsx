@@ -128,7 +128,7 @@ export default function ShoeDetailScreen() {
 
   const handleWishlistToggle = useCallback(() => {
     if (!shoe) return;
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium).catch(() => {});
     if (isWishlisted) {
       removeFromWishlist(shoe.id);
     } else {
@@ -137,17 +137,17 @@ export default function ShoeDetailScreen() {
   }, [isWishlisted, shoe, addToWishlist, removeFromWishlist]);
 
   const handleAskAssistant = useCallback(() => {
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
     router.push("/(tabs)/assistant" as never);
   }, []);
 
   const handleBuyPress = useCallback(() => {
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium).catch(() => {});
     setShowBuyModal(true);
   }, []);
 
   const handleOpenLink = useCallback(async (url: string) => {
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
     try {
       const supported = await Linking.canOpenURL(url);
       if (supported) {
@@ -247,7 +247,7 @@ export default function ShoeDetailScreen() {
           <Text style={[styles.name, { color: colors.text }]}>{shoe.name}</Text>
 
           <Pressable style={styles.ratingRow} onPress={() => {
-            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
             setShowReviews(true);
           }}>
             <View style={[styles.ratingBadge, { backgroundColor: colors.surfaceAlt }]}>
@@ -331,7 +331,7 @@ export default function ShoeDetailScreen() {
                 <Pressable
                   style={[styles.alertBtn, { backgroundColor: existingAlert?.isActive ? `${colors.warning}20` : colors.surfaceAlt }]}
                   onPress={() => {
-                    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
                     setShowPriceAlert(true);
                   }}
                 >
@@ -503,7 +503,7 @@ export default function ShoeDetailScreen() {
         <Pressable
           style={[styles.priceAlertButton, { backgroundColor: colors.surfaceAlt }]}
           onPress={() => {
-            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
             setShowPriceAlert(true);
           }}
         >

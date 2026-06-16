@@ -15,8 +15,12 @@ export const [ThemeProvider, useTheme] = createContextHook(() => {
   const themeQuery = useQuery({
     queryKey: ["theme"],
     queryFn: async () => {
-      const stored = await AsyncStorage.getItem(THEME_STORAGE_KEY);
-      return (stored as ThemeMode) || "dark";
+      try {
+        const stored = await AsyncStorage.getItem(THEME_STORAGE_KEY);
+        return (stored as ThemeMode) || "dark";
+      } catch {
+        return "dark" as ThemeMode;
+      }
     },
   });
 
@@ -28,7 +32,11 @@ export const [ThemeProvider, useTheme] = createContextHook(() => {
 
   const { mutate: saveTheme } = useMutation({
     mutationFn: async (newMode: ThemeMode) => {
-      await AsyncStorage.setItem(THEME_STORAGE_KEY, newMode);
+      try {
+        await AsyncStorage.setItem(THEME_STORAGE_KEY, newMode);
+      } catch {
+        // Storage write failed — theme won't persist
+      }
       return newMode;
     },
     onSuccess: () => {

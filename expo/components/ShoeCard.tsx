@@ -32,12 +32,12 @@ export default function ShoeCard({ shoe, variant = "default", showSizingAlert = 
   const scaleAnim = React.useRef(new Animated.Value(1)).current;
 
   const handlePress = useCallback(() => {
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
     router.push(`/shoe/${shoe.id}` as never);
   }, [shoe.id]);
 
   const handleWishlistToggle = useCallback(() => {
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium).catch(() => {});
     if (isWishlisted) {
       removeFromWishlist(shoe.id);
     } else {

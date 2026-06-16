@@ -46,13 +46,13 @@ export default function PriceAlertModal({
   const handleSave = useCallback(() => {
     const price = parseFloat(targetPrice);
     if (isNaN(price) || price <= 0) return;
-    Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+    Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success).catch(() => {});
     setPriceAlert(shoeId, price);
     onClose();
   }, [targetPrice, shoeId, setPriceAlert, onClose]);
 
   const handleRemove = useCallback(() => {
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
     removePriceAlert(shoeId);
     onClose();
   }, [shoeId, removePriceAlert, onClose]);

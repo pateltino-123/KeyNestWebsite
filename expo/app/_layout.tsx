@@ -7,8 +7,9 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 import { useTheme, ThemeProvider } from "@/contexts/ThemeContext";
 import { UserProvider } from "@/contexts/UserContext";
+import ErrorBoundary from "@/components/ErrorBoundary";
 
-SplashScreen.preventAutoHideAsync();
+SplashScreen.preventAutoHideAsync().catch(() => {});
 
 const queryClient = new QueryClient();
 
@@ -49,11 +50,13 @@ function RootLayoutNav() {
 
 function AppContent() {
   return (
-    <ThemeProvider>
-      <UserProvider>
-        <RootLayoutNav />
-      </UserProvider>
-    </ThemeProvider>
+    <ErrorBoundary>
+      <ThemeProvider>
+        <UserProvider>
+          <RootLayoutNav />
+        </UserProvider>
+      </ThemeProvider>
+    </ErrorBoundary>
   );
 }
 

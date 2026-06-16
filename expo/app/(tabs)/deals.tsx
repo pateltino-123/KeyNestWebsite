@@ -108,7 +108,7 @@ export default function DealsScreen() {
               filter === opt.value && { backgroundColor: colors.primary, borderColor: colors.primary },
             ]}
             onPress={() => {
-              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
               setFilter(opt.value);
             }}
           >
@@ -230,7 +230,7 @@ function HotDealCard({ shoe, dealScore, currentLowest, retailPrice, priceChange,
     <Animated.View style={[styles.hotDealCard, { transform: [{ scale: scaleAnim }], backgroundColor: colors.surface }]}>
       <Pressable
         onPress={() => {
-          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
           router.push(`/shoe/${shoe.id}` as never);
         }}
         onPressIn={() => Animated.spring(scaleAnim, { toValue: 0.96, useNativeDriver: true }).start()}
@@ -297,7 +297,7 @@ function DealListItem({ shoe, deal, alert, colors }: DealListItemProps) {
       <Pressable
         style={styles.dealItemPressable}
         onPress={() => {
-          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
           router.push(`/shoe/${shoe.id}` as never);
         }}
         onPressIn={() => Animated.spring(scaleAnim, { toValue: 0.98, useNativeDriver: true }).start()}

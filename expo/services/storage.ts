@@ -70,21 +70,33 @@ export async function deleteSecureProfile(): Promise<void> {
 // ── Async Storage (non-sensitive preferences / wishlist) ──
 
 export async function saveNonSensitiveState(data: object): Promise<void> {
-  await AsyncStorage.setItem(ASYNC_KEY, JSON.stringify(data));
+  try {
+    await AsyncStorage.setItem(ASYNC_KEY, JSON.stringify(data));
+  } catch {
+    // AsyncStorage write failed — non-sensitive data not persisted
+  }
 }
 
 export async function loadNonSensitiveState<T>(): Promise<T | null> {
-  const raw = await AsyncStorage.getItem(ASYNC_KEY);
-  if (!raw) return null;
   try {
-    return JSON.parse(raw) as T;
+    const raw = await AsyncStorage.getItem(ASYNC_KEY);
+    if (!raw) return null;
+    try {
+      return JSON.parse(raw) as T;
+    } catch {
+      return null;
+    }
   } catch {
     return null;
   }
 }
 
 export async function deleteNonSensitiveState(): Promise<void> {
-  await AsyncStorage.removeItem(ASYNC_KEY);
+  try {
+    await AsyncStorage.removeItem(ASYNC_KEY);
+  } catch {
+    // AsyncStorage removal failed — nothing to delete
+  }
 }
 
 // ── Full data wipe ──

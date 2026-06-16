@@ -58,7 +58,7 @@ export default function ProfileScreen() {
   const [editEmail, setEditEmail] = useState(profile?.email || "");
 
   const handleSaveProfile = useCallback(() => {
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
     setProfile({
       name: editName,
       email: editEmail,
@@ -68,7 +68,7 @@ export default function ProfileScreen() {
 
   const toggleBrand = useCallback(
     (brand: string) => {
-      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
       const current = preferences.preferredBrands;
       if (current.includes(brand)) {
         setPreferences({
@@ -85,7 +85,7 @@ export default function ProfileScreen() {
 
   const toggleStyle = useCallback(
     (style: string) => {
-      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
       const current = preferences.stylePreferences;
       if (current.includes(style)) {
         setPreferences({
@@ -102,7 +102,7 @@ export default function ProfileScreen() {
 
   const setSizeSystem = useCallback(
     (system: "US" | "UK" | "EU") => {
-      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
       setPreferences({ sizeSystem: system });
     },
     [setPreferences]
@@ -118,7 +118,7 @@ export default function ProfileScreen() {
   };
 
   const handleDeleteAllData = useCallback(async () => {
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy).catch(() => {});
     setIsDeleting(true);
     try {
       await deleteAllData();

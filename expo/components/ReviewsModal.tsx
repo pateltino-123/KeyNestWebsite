@@ -41,12 +41,12 @@ export default function ReviewsModal({
       setComment("");
       setRating(5);
       setShowAddReview(false);
-      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success).catch(() => {});
     }
   }, [rating, comment, onAddReview]);
 
   const handleStarPress = useCallback((value: number) => {
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
     setRating(value);
   }, []);
 
