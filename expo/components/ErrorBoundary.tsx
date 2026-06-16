@@ -17,13 +17,18 @@ export default class ErrorBoundary extends Component<Props, State> {
     this.state = { hasError: false, error: null };
   }
 
-  static getDerivedStateFromError(error: Error): State {
-    return { hasError: true, error };
+  static getDerivedStateFromError(error: unknown): State {
+    const normalized: Error = error instanceof Error ? error : new Error(String(error ?? "Unknown error"));
+    return { hasError: true, error: normalized };
   }
 
-  componentDidCatch(error: Error) {
+  componentDidCatch(error: unknown, errorInfo: React.ErrorInfo) {
     if (__DEV__) {
-      console.error("[ErrorBoundary] Caught:", error.message || String(error));
+      const msg = error instanceof Error ? error.message : String(error ?? "");
+      console.error("[ErrorBoundary] Caught:", msg);
+      if (errorInfo.componentStack) {
+        console.error("[ErrorBoundary] Stack:", errorInfo.componentStack.slice(0, 500));
+      }
     }
   }
 

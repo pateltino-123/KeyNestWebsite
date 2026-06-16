@@ -1,10 +1,16 @@
 import { Tabs } from "expo-router";
 import { Home, Search, Heart, MessageCircle, User, TrendingDown } from "lucide-react-native";
-import React from "react";
+import React, { Suspense } from "react";
 import { View, StyleSheet, Platform } from "react-native";
-import { BlurView } from "expo-blur";
 
 import { useTheme } from "@/contexts/ThemeContext";
+
+const BlurView = React.lazy(() =>
+  import("expo-blur").then(
+    (mod) => ({ default: mod.BlurView as React.ComponentType<any> }),
+    () => ({ default: (() => null) as React.ComponentType<any> }),
+  ),
+);
 
 export default function TabLayout() {
   const { colors, isDark } = useTheme();
@@ -31,11 +37,13 @@ export default function TabLayout() {
         },
         tabBarBackground: () =>
           Platform.OS === "ios" ? (
-            <BlurView
-              intensity={80}
-              tint={isDark ? "dark" : "light"}
-              style={StyleSheet.absoluteFill}
-            />
+            <Suspense fallback={null}>
+              <BlurView
+                intensity={80}
+                tint={isDark ? "dark" : "light"}
+                style={StyleSheet.absoluteFill}
+              />
+            </Suspense>
           ) : null,
         tabBarLabelStyle: {
           fontSize: 11,
