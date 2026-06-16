@@ -27,6 +27,8 @@ import {
   Sun,
   Trash2,
   ShieldAlert,
+  FileText,
+  Shield,
 } from "lucide-react-native";
 import * as Haptics from "expo-haptics";
 
@@ -251,6 +253,28 @@ export default function ProfileScreen() {
             <View style={styles.menuItemLeft}>
               <Settings size={20} color={colors.textSecondary} />
               <Text style={[styles.menuItemText, { color: colors.text }]}>Preferences</Text>
+            </View>
+            <ChevronRight size={20} color={colors.textMuted} />
+          </Pressable>
+
+          <Pressable
+            style={[styles.menuItem, { backgroundColor: colors.surface, borderColor: colors.borderLight, marginTop: 12 }]}
+            onPress={() => router.push("/legal/privacy" as never)}
+          >
+            <View style={styles.menuItemLeft}>
+              <Shield size={20} color={colors.textSecondary} />
+              <Text style={[styles.menuItemText, { color: colors.text }]}>Privacy Policy</Text>
+            </View>
+            <ChevronRight size={20} color={colors.textMuted} />
+          </Pressable>
+
+          <Pressable
+            style={[styles.menuItem, { backgroundColor: colors.surface, borderColor: colors.borderLight, marginTop: 12 }]}
+            onPress={() => router.push("/legal/terms" as never)}
+          >
+            <View style={styles.menuItemLeft}>
+              <FileText size={20} color={colors.textSecondary} />
+              <Text style={[styles.menuItemText, { color: colors.text }]}>Terms of Service</Text>
             </View>
             <ChevronRight size={20} color={colors.textMuted} />
           </Pressable>
