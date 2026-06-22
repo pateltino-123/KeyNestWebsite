@@ -229,7 +229,7 @@ function Section({
 
 function Bold({ children }: { children: React.ReactNode }) {
   return (
-    <Text style={{ fontWeight: "700" as const, color: "#FFFFFF" }}>
+    <Text style={{ fontWeight: "700" as const }}>
       {children}
     </Text>
   );
