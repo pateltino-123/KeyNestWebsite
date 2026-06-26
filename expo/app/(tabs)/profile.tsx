@@ -29,11 +29,16 @@ import {
   ShieldAlert,
   FileText,
   Shield,
+  Camera,
+  LogOut,
+  LogIn,
 } from "lucide-react-native";
 import * as Haptics from "expo-haptics";
+import * as ImagePicker from "expo-image-picker";
 
 import { useUser } from "@/contexts/UserContext";
 import { useTheme } from "@/contexts/ThemeContext";
+import { useAuth } from "@/contexts/AuthContext";
 import { brands, categories } from "@/mocks/shoes";
 import MeasurementDisplay from "@/components/MeasurementDisplay";
 
@@ -49,6 +54,7 @@ export default function ProfileScreen() {
     deleteAllData,
   } = useUser();
   const { colors, isDark, toggleTheme } = useTheme();
+  const { isAuthed, displayName, email: authEmail, signOut } = useAuth();
 
   const [showEditProfile, setShowEditProfile] = useState(false);
   const [showPreferences, setShowPreferences] = useState(false);
@@ -57,14 +63,64 @@ export default function ProfileScreen() {
   const [editName, setEditName] = useState(profile?.name || "");
   const [editEmail, setEditEmail] = useState(profile?.email || "");
 
+  const shownName = profile?.name || displayName || "Set up your profile";
+  const shownEmail = profile?.email || authEmail || "Tap to add your details";
+
   const handleSaveProfile = useCallback(() => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
     setProfile({
       name: editName,
       email: editEmail,
+      avatar: profile?.avatar,
     });
     setShowEditProfile(false);
-  }, [editName, editEmail, setProfile]);
+  }, [editName, editEmail, profile?.avatar, setProfile]);
+
+  const handlePickAvatar = useCallback(async () => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
+    const permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (!permission.granted) {
+      Alert.alert(
+        "Photo access needed",
+        "Allow photo access in Settings to choose a profile picture.",
+      );
+      return;
+    }
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ["images"],
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 0.6,
+    });
+    if (!result.canceled && result.assets[0]?.uri) {
+      setProfile({
+        name: profile?.name || displayName || "",
+        email: profile?.email || authEmail || "",
+        avatar: result.assets[0].uri,
+      });
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success).catch(() => {});
+    }
+  }, [profile?.name, profile?.email, displayName, authEmail, setProfile]);
+
+  const handleAuthAction = useCallback(() => {
+    if (isAuthed) {
+      Alert.alert("Log out", "Are you sure you want to log out?", [
+        { text: "Cancel", style: "cancel" },
+        {
+          text: "Log out",
+          style: "destructive",
+          onPress: () => {
+            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium).catch(() => {});
+            void signOut();
+          },
+        },
+      ]);
+    } else {
+      // Guest → drop guest mode and send them to the login screen.
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
+      void signOut();
+    }
+  }, [isAuthed, signOut]);
 
   const toggleBrand = useCallback(
     (brand: string) => {
@@ -137,7 +193,7 @@ export default function ProfileScreen() {
         contentContainerStyle={styles.scrollContent}
       >
         <View style={styles.profileHeader}>
-          <View style={styles.avatarContainer}>
+          <Pressable style={styles.avatarContainer} onPress={handlePickAvatar}>
             {profile?.avatar ? (
               <Image
                 source={{ uri: profile.avatar }}
@@ -149,12 +205,15 @@ export default function ProfileScreen() {
                 <User size={40} color={colors.textMuted} />
               </View>
             )}
-          </View>
+            <View style={[styles.avatarBadge, { backgroundColor: colors.primary, borderColor: colors.background }]}>
+              <Camera size={15} color="#FFFFFF" />
+            </View>
+          </Pressable>
           <Text style={[styles.profileName, { color: colors.text }]}>
-            {profile?.name || "Set up your profile"}
+            {shownName}
           </Text>
           <Text style={[styles.profileEmail, { color: colors.textMuted }]}>
-            {profile?.email || "Tap to add your details"}
+            {shownEmail}
           </Text>
           <Pressable
             style={[styles.editProfileButton, { backgroundColor: colors.surfaceAlt }]}
@@ -288,6 +347,23 @@ export default function ProfileScreen() {
               <Text style={[styles.menuItemText, { color: colors.error }]}>Delete All My Data</Text>
             </View>
             <ChevronRight size={20} color={colors.error} />
+          </Pressable>
+
+          <Pressable
+            style={[styles.menuItem, { backgroundColor: colors.surface, borderColor: colors.borderLight, marginTop: 12 }]}
+            onPress={handleAuthAction}
+          >
+            <View style={styles.menuItemLeft}>
+              {isAuthed ? (
+                <LogOut size={20} color={colors.textSecondary} />
+              ) : (
+                <LogIn size={20} color={colors.primary} />
+              )}
+              <Text style={[styles.menuItemText, { color: isAuthed ? colors.text : colors.primary }]}>
+                {isAuthed ? "Log Out" : "Sign In or Create Account"}
+              </Text>
+            </View>
+            <ChevronRight size={20} color={colors.textMuted} />
           </Pressable>
         </View>
 
@@ -518,6 +594,17 @@ const styles = StyleSheet.create({
   },
   avatarContainer: {
     marginBottom: 16,
+  },
+  avatarBadge: {
+    position: "absolute",
+    bottom: 0,
+    right: 0,
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    borderWidth: 2,
+    justifyContent: "center",
+    alignItems: "center",
   },
   avatar: {
     width: 100,

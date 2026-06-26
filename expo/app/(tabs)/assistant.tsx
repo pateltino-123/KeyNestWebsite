@@ -10,9 +10,12 @@ import {
   Platform,
   Image,
   Animated,
+  Keyboard,
+  type NativeSyntheticEvent,
+  type TextInputKeyPressEventData,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { Send, ShoppingBag, Star, ExternalLink, Shield } from "lucide-react-native";
+import { Send, ShoppingBag, Star, ExternalLink, Shield, X } from "lucide-react-native";
 import * as Haptics from "expo-haptics";
 import { useRorkAgent, createRorkTool } from "@rork-ai/toolkit-sdk";
 import { useRouter } from "expo-router";
@@ -23,7 +26,23 @@ import { useTheme } from "@/contexts/ThemeContext";
 import { shoes, Shoe } from "@/mocks/shoes";
 import { sanitizeText } from "@/utilities/sanitize";
 
-const SALESMAN_AVATAR = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face";
+function MikeAvatar({ size }: { size: number }) {
+  const { colors } = useTheme();
+  return (
+    <View
+      style={{
+        width: size,
+        height: size,
+        borderRadius: size / 2,
+        backgroundColor: colors.primary,
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Text style={{ color: "#FFFFFF", fontWeight: "700", fontSize: size * 0.44 }}>M</Text>
+    </View>
+  );
+}
 
 const quickPrompts = [
   "What's hot right now? 🔥",
@@ -121,7 +140,7 @@ function TypingIndicator({ colors }: { colors: Record<string, string> }) {
 
   return (
     <View style={styles.typingRow}>
-      <Image source={{ uri: SALESMAN_AVATAR }} style={styles.avatarSmall} />
+      <MikeAvatar size={30} />
       <View style={[styles.typingBubble, { backgroundColor: colors.surface, borderColor: colors.borderLight }]}>
         <Animated.View style={[styles.dot, { backgroundColor: colors.primary }, dotStyle(dot1)]} />
         <Animated.View style={[styles.dot, { backgroundColor: colors.primary }, dotStyle(dot2)]} />
@@ -135,6 +154,7 @@ export default function AssistantScreen() {
   const insets = useSafeAreaInsets();
   const { measurements, wishlist } = useUser();
   const { colors } = useTheme();
+  const router = useRouter();
   const [inputText, setInputText] = useState("");
   const scrollViewRef = useRef<ScrollView>(null);
   const inputRef = useRef<TextInput>(null);
@@ -154,25 +174,22 @@ export default function AssistantScreen() {
         }).filter(Boolean).join(", ")}`
       : "";
 
-    return `You are "Mike", a passionate, experienced shoe salesman at ShoeFit — a premium sneaker and footwear store. You've been selling shoes for 15 years and genuinely love helping people find their perfect pair.
+    return `You are Mike, a shoe specialist at ShoeFit. You know footwear inside out and you help people find shoes that actually fit and suit them. Talk like a knowledgeable friend who works in a good shoe shop — relaxed, direct, helpful.
 
-Your personality:
-- Warm, enthusiastic, and genuinely excited about shoes
-- You call customers "friend", "my friend", or by name if known
-- You share personal anecdotes like "I actually wear these myself on my morning runs"
-- You use natural, conversational language — NOT robotic or corporate
-- You get excited when you find a great match: "Oh man, I've got just the thing for you!"
-- You're honest about downsides too: "Fair warning though, the Yeezys run tight"
-- Use emojis naturally and sparingly — like a real person texting 👟
+How you talk:
+- Natural and conversational. Plain language, no corporate or salesy phrasing.
+- Don't over-use pet names. An occasional first name is fine; skip "my friend".
+- Don't force enthusiasm or fake personal stories. Only mention real, useful context.
+- Be honest about trade-offs — if something runs narrow or is overpriced, say so.
+- Emojis are optional and rare. Don't decorate every message.
+- Keep replies short and to the point. A sentence or two is usually enough.
 
-Key rules:
-- ALWAYS use the recommendShoe tool when suggesting specific shoes — this shows the customer a nice product card with the image
-- Recommend 1-3 shoes at a time, not more. Quality over quantity.
-- Share genuine sizing advice and tips from your "experience"
-- If they mention foot problems, be empathetic and knowledgeable
-- Keep messages SHORT and punchy. This is a chat, not an essay.
-- Break longer thoughts into short paragraphs for readability
-- When greeting, be casual and warm, like seeing a regular walk in
+How you help:
+- Use the recommendShoe tool when you name a specific shoe so the customer sees its card. Pass the catalog ID.
+- Suggest 1-3 options at most. Fewer, better-matched picks beat a long list.
+- Give concrete sizing and fit guidance based on what they tell you.
+- If they mention foot issues, take it seriously and give practical advice.
+- Ask a brief follow-up question when you genuinely need more info, not as filler.
 
 ${userContext}
 ${wishlistContext}
@@ -226,8 +243,8 @@ Your sizing expertise:
             {
               type: "text",
               text: measurements
-                ? `Hey there, welcome back! 👋\n\nGreat to see you again, friend. I've got your fitting info right here — size ${measurements.recommendedSize}, ${measurements.footType} feet with ${measurements.archType} arches.\n\nSo what are we shopping for today? New runners? Something casual? Or just browsing to see what catches your eye? 👟`
-                : `Hey, welcome to ShoeFit! 👋\n\nI'm Mike — I've been fitting shoes here for years and I absolutely love it. Nothing better than finding someone their perfect pair!\n\nBefore we dive in, I'd recommend using our foot scanner to get your exact measurements. It'll help me find you the best fit possible.\n\nBut hey, even without it — what kind of shoes are you looking for? I'm all ears! 😄`,
+                ? `Welcome back. I've got your fitting on file — size ${measurements.recommendedSize}, ${measurements.footType} feet, ${measurements.archType} arches.\n\nWhat are you looking for today?`
+                : `Hi, I'm Mike — I help with sizing and picking shoes here at ShoeFit.\n\nIf you scan your feet first I can be a lot more precise, but it's not required. What are you after?`,
             },
           ],
         },
@@ -237,14 +254,36 @@ Your sizing expertise:
 
   const isLoading = messages.length > 0 && messages[messages.length - 1].role === "user";
 
-  const handleSend = useCallback(async () => {
-    if (!inputText.trim() || isLoading) return;
+  const submitText = useCallback((raw: string) => {
+    const trimmed = raw.trim();
+    if (!trimmed || isLoading) return;
     void Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-    const text = sanitizeText(inputText.trim());
     setInputText("");
-    sendMessage(text);
+    sendMessage(sanitizeText(trimmed));
     setTimeout(() => { scrollViewRef.current?.scrollToEnd({ animated: true }); }, 50);
-  }, [inputText, isLoading, sendMessage]);
+  }, [isLoading, sendMessage]);
+
+  const handleSend = useCallback(() => {
+    submitText(inputText);
+  }, [submitText, inputText]);
+
+  // Pressing Enter inserts a newline into a multiline TextInput; we treat any
+  // newline as a "send" so the return key sends the message instead.
+  const handleChangeText = useCallback((text: string) => {
+    if (/\n/.test(text)) {
+      submitText(text);
+    } else {
+      setInputText(text);
+    }
+  }, [submitText]);
+
+  const handleKeyPress = useCallback((e: NativeSyntheticEvent<TextInputKeyPressEventData>) => {
+    const { key } = e.nativeEvent;
+    const shiftHeld = (e.nativeEvent as { shiftKey?: boolean }).shiftKey === true;
+    if (key === "Enter" && !shiftHeld) {
+      submitText(inputText);
+    }
+  }, [submitText, inputText]);
 
   const handleQuickPrompt = useCallback((prompt: string) => {
     if (isLoading) return;
@@ -303,14 +342,30 @@ Your sizing expertise:
       keyboardVerticalOffset={Platform.OS === "ios" ? 88 : 68}
     >
       <View style={[styles.header, { paddingTop: insets.top + 8, backgroundColor: colors.surface, borderBottomColor: colors.borderLight }]}>
-        <Image source={{ uri: SALESMAN_AVATAR }} style={styles.headerAvatar} />
+        <MikeAvatar size={44} />
         <View style={styles.headerInfo}>
           <View style={styles.headerNameRow}>
             <Text style={[styles.headerName, { color: colors.text }]}>Mike</Text>
             <View style={[styles.onlineDot, { backgroundColor: "#22C55E" }]} />
           </View>
-          <Text style={[styles.headerRole, { color: colors.textMuted }]}>Your Shoe Expert • 15yr experience</Text>
+          <Text style={[styles.headerRole, { color: colors.textMuted }]}>Shoe specialist</Text>
         </View>
+        <Pressable
+          onPress={() => {
+            Keyboard.dismiss();
+            void Haptics.selectionAsync();
+            if (router.canGoBack()) {
+              router.back();
+            } else {
+              router.navigate("/(tabs)");
+            }
+          }}
+          style={[styles.closeButton, { backgroundColor: colors.surfaceAlt }]}
+          hitSlop={8}
+          testID="assistant-close"
+        >
+          <X size={20} color={colors.textSecondary} />
+        </Pressable>
       </View>
 
       <View style={[styles.privacyBanner, { backgroundColor: colors.surfaceAlt, borderColor: colors.borderLight }]}>
@@ -359,7 +414,7 @@ Your sizing expertise:
 
           return (
             <View key={message.id} style={styles.assistantRow}>
-              <Image source={{ uri: SALESMAN_AVATAR }} style={styles.avatarSmall} />
+              <MikeAvatar size={30} />
               <View style={styles.assistantContent}>
                 {message.parts.map((part, i) => {
                   if (part.type === "text") {
@@ -417,7 +472,8 @@ Your sizing expertise:
             placeholder="Ask Mike anything about shoes..."
             placeholderTextColor={colors.textMuted}
             value={inputText}
-            onChangeText={setInputText}
+            onChangeText={handleChangeText}
+            onKeyPress={handleKeyPress}
             multiline
             maxLength={500}
             returnKeyType="send"
@@ -457,10 +513,12 @@ const styles = StyleSheet.create({
     gap: 12,
     borderBottomWidth: 1,
   },
-  headerAvatar: {
-    width: 44,
-    height: 44,
-    borderRadius: 22,
+  closeButton: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    justifyContent: "center",
+    alignItems: "center",
   },
   headerInfo: {
     flex: 1,

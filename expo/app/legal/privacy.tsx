@@ -108,7 +108,7 @@ export default function PrivacyPolicyScreen() {
           permanently. They are discarded immediately after measurements are
           extracted.
           {"\n"}• AI chat messages are transmitted through a secure proxy
-          (Rork AI Toolkit) for processing. Messages are not stored on our
+          (our secure AI proxy) for processing. Messages are not stored on our
           servers after the conversation ends.
           {"\n"}• We do not maintain cloud backups of your personal data.
           {"\n"}• You can delete all your data at any time from the Profile tab
@@ -122,11 +122,11 @@ export default function PrivacyPolicyScreen() {
           or view shoe details, your search queries are sent to the kicks.dev API
           to retrieve shoe listings and pricing. No personal data is included in
           these requests.
-          {"\n"}• <Bold>Rork AI Toolkit:</Bold> Chat messages to the AI
-          assistant are processed through Rork's secure AI proxy. Messages
+          {"\n"}• <Bold>AI Assistant:</Bold> Chat messages to the AI
+          assistant are processed through a secure AI proxy. Messages
           include your foot measurements and shoe catalog context to provide
-          relevant recommendations. Rork does not use your data for model
-          training.
+          relevant recommendations. The AI provider does not use your data for
+          model training.
           {"\n"}• <Bold>Legal obligations:</Bold> We may disclose data if
           required by law, court order, or to protect the rights and safety of
           our users.
@@ -200,7 +200,7 @@ export default function PrivacyPolicyScreen() {
 
         <View style={[styles.footer, { borderTopColor: colors.borderLight }]}>
           <Text style={[styles.footerText, { color: colors.textMuted }]}>
-            shoeFitx is a product of Rork. All rights reserved.
+            shoeFitx is a product of ShoeFitX. All rights reserved.
           </Text>
         </View>
       </ScrollView>

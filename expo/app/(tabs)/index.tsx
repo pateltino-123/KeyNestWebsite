@@ -28,18 +28,6 @@ export default function HomeScreen() {
   const { measurements, profile } = useUser();
   const { colors } = useTheme();
   const scanButtonScale = React.useRef(new Animated.Value(1)).current;
-  const glowOpacity = React.useRef(new Animated.Value(0.3)).current;
-
-  React.useEffect(() => {
-    const pulse = Animated.loop(
-      Animated.sequence([
-        Animated.timing(glowOpacity, { toValue: 0.6, duration: 1500, useNativeDriver: true }),
-        Animated.timing(glowOpacity, { toValue: 0.3, duration: 1500, useNativeDriver: true }),
-      ])
-    );
-    pulse.start();
-    return () => pulse.stop();
-  }, [glowOpacity]);
 
   const recommendedShoes = useRecommendedShoes(shoes);
 
@@ -97,7 +85,6 @@ export default function HomeScreen() {
         </View>
 
         <Animated.View style={{ transform: [{ scale: scanButtonScale }] }}>
-          <Animated.View style={[styles.scanButtonGlow, { opacity: glowOpacity, backgroundColor: colors.primary }]} />
           <Pressable
             style={[styles.scanButton, { backgroundColor: colors.primary }]}
             onPress={handleScanPress}

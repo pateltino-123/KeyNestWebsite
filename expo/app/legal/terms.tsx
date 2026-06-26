@@ -125,7 +125,7 @@ export default function TermsOfServiceScreen() {
           you to third-party websites (StockX, GOAT, Flight Club). We do not
           control these websites and are not responsible for their content,
           privacy practices, or transactions.
-          {"\n"}• <Bold>Rork AI Toolkit:</Bold> Processes AI assistant
+          {"\n"}• <Bold>AI Assistant SDK:</Bold> Processes AI assistant
           messages. See our Privacy Policy for details on how your data is
           handled.
           {"\n\n"}

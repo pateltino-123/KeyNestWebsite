@@ -23,14 +23,11 @@ import {
   RefreshCw,
   Info,
   ScanLine,
-  Sparkles,
   Crosshair,
 } from "lucide-react-native";
 import * as Haptics from "expo-haptics";
 import { CameraView, useCameraPermissions } from "expo-camera";
-import { LinearGradient } from "expo-linear-gradient";
 import { DeviceMotion, DeviceMotionMeasurement } from "expo-sensors";
-import * as Device from "expo-device";
 
 import Colors from "@/constants/colors";
 import { useUser, FootMeasurements } from "@/contexts/UserContext";
@@ -59,43 +56,23 @@ interface CaptureAngle {
 const ANGLES: CaptureAngle[] = [
   {
     id: "top",
-    label: "Top View",
-    hint: "Hold phone above foot, looking straight down",
+    label: "Top view",
+    hint: "Hold the phone above your foot, looking straight down",
     requiresLevel: true,
   },
   {
     id: "inside",
-    label: "Inside View",
+    label: "Inside view",
     hint: "Capture the inner arch from the side",
     requiresLevel: false,
   },
   {
-    id: "outside",
-    label: "Outside View",
-    hint: "Capture the outer side of your foot",
-    requiresLevel: false,
-  },
-  {
     id: "heel",
-    label: "Heel View",
+    label: "Heel view",
     hint: "Capture from behind the heel, level with the floor",
     requiresLevel: false,
   },
 ];
-
-/**
- * Detect whether the current iPhone likely has TrueDepth front camera or
- * LiDAR rear sensor. These devices give us depth data we can fuse with
- * photos for sub-millimeter accuracy.
- */
-function detectProDepthDevice(): boolean {
-  if (Platform.OS !== "ios") return false;
-  const name = (Device.modelName ?? "").toLowerCase();
-  if (name.includes("pro")) return true;
-  // Face ID devices (X and later non-SE) also have TrueDepth
-  const proxyModel = (Device.modelId ?? "").toLowerCase();
-  return proxyModel.includes("iphone1") && !proxyModel.includes("se");
-}
 
 const LEVEL_TOLERANCE_DEG = 8;
 
@@ -122,11 +99,8 @@ export default function ScanScreen() {
   const [calibPoints, setCalibPoints] = useState<{ x: number; y: number }[]>([]);
   const [pxPerCm, setPxPerCm] = useState<number | null>(null);
   const [cameraLayout, setCameraLayout] = useState<{ w: number; h: number }>({ w: 0, h: 0 });
-  const hasProDepth = useMemo<boolean>(() => detectProDepthDevice(), []);
 
   const progressAnim = useRef(new Animated.Value(0)).current;
-  const pulseAnim = useRef(new Animated.Value(1)).current;
-  const ringAnim = useRef(new Animated.Value(0)).current;
   const flashAnim = useRef(new Animated.Value(0)).current;
   const cameraRef = useRef<CameraView>(null);
 
@@ -141,56 +115,21 @@ export default function ScanScreen() {
   const totalSteps = tasks.length;
 
   useEffect(() => {
-    Animated.loop(
-      Animated.sequence([
-        Animated.timing(pulseAnim, {
-          toValue: 1.06,
-          duration: 1100,
-          useNativeDriver: true,
-          easing: Easing.inOut(Easing.ease),
-        }),
-        Animated.timing(pulseAnim, {
-          toValue: 1,
-          duration: 1100,
-          useNativeDriver: true,
-          easing: Easing.inOut(Easing.ease),
-        }),
-      ])
-    ).start();
-  }, [pulseAnim]);
-
-  useEffect(() => {
-    if (step === "capture") {
-      Animated.loop(
-        Animated.timing(ringAnim, {
-          toValue: 1,
-          duration: 2000,
-          useNativeDriver: true,
-          easing: Easing.linear,
-        })
-      ).start();
-    } else {
-      ringAnim.stopAnimation();
-      ringAnim.setValue(0);
-    }
-  }, [step, ringAnim]);
-
-  useEffect(() => {
     if (step === "processing") {
       progressAnim.setValue(0);
       Animated.timing(progressAnim, {
         toValue: 1,
-        duration: 2800,
+        duration: 2400,
         useNativeDriver: false,
         easing: Easing.inOut(Easing.cubic),
       }).start(() => {
-        const generated = generateMeasurements(usingRuler, mode, hasProDepth, pxPerCm != null);
+        const generated = generateMeasurements(usingRuler, mode, pxPerCm != null);
         setLocalMeasurements(generated);
         Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success).catch(() => {});
         setStep("results");
       });
     }
-  }, [step, progressAnim, usingRuler, mode, hasProDepth, pxPerCm]);
+  }, [step, progressAnim, usingRuler, mode, pxPerCm]);
 
   // Auto-level guidance via gyroscope — only active during top-down captures
   useEffect(() => {
@@ -229,7 +168,6 @@ export default function ScanScreen() {
   const generateMeasurements = (
     withRuler: boolean,
     scanMode: ScanMode,
-    proDepth: boolean,
     calibrated: boolean
   ): FootMeasurements => {
     const baseLength = 25 + Math.random() * 4;
@@ -247,7 +185,6 @@ export default function ScanScreen() {
     // Variance shrinks as more accuracy boosters are active.
     let variance = withRuler ? 0.1 : 0.4;
     if (calibrated) variance *= 0.5;
-    if (proDepth) variance *= 0.4;
     const leftLength = Math.round(baseLength * 10) / 10;
     const leftWidth = Math.round(baseWidth * 10) / 10;
     const rightLength =
@@ -435,27 +372,18 @@ export default function ScanScreen() {
   const renderIntro = () => (
     <View style={styles.stepContainer}>
       <View style={styles.introContent}>
-        <Animated.View
-          style={[styles.introIconContainer, { transform: [{ scale: pulseAnim }] }]}
-        >
-          <LinearGradient
-            colors={[Colors.primary, Colors.accent]}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 1 }}
-            style={styles.introIconGradient}
-          >
-            <Footprints size={56} color={Colors.white} />
-          </LinearGradient>
-        </Animated.View>
+        <View style={styles.introIconContainer}>
+          <Footprints size={52} color={Colors.white} />
+        </View>
         <Text style={styles.introTitle}>Foot Scan</Text>
         <Text style={styles.introSubtitle}>
-          A guided multi-angle scan for your perfect fit
+          A few quick photos to estimate your size and fit
         </Text>
 
         <View style={styles.instructionsList}>
           {[
-            { icon: ScanLine, text: "Capture 3 angles per foot — like Face ID" },
-            { icon: Ruler, text: "Place a ruler beside your foot for max accuracy" },
+            { icon: ScanLine, text: "Three angles per foot — top, inside, and heel" },
+            { icon: Ruler, text: "Place a ruler beside your foot for better accuracy" },
             { icon: Footprints, text: "Stand on a flat, well-lit surface, bare feet" },
           ].map((it, idx) => {
             const Icon = it.icon;
@@ -594,10 +522,6 @@ export default function ScanScreen() {
 
   const renderCapture = () => {
     if (!currentTask) return null;
-    const ringRotate = ringAnim.interpolate({
-      inputRange: [0, 1],
-      outputRange: ["0deg", "360deg"],
-    });
     const requiresLevel = currentTask.angle.requiresLevel;
     const isLevel = !requiresLevel || tiltDeg <= LEVEL_TOLERANCE_DEG || Platform.OS === "web";
     // Tilt is a soft hint only — never block capture, since sensors can be noisy or unavailable.
@@ -613,12 +537,6 @@ export default function ScanScreen() {
           <Text style={styles.captureCount}>
             Step {taskIndex + 1} of {totalSteps}
           </Text>
-          {hasProDepth && (
-            <View style={styles.proBadge}>
-              <Sparkles size={11} color={Colors.primary} />
-              <Text style={styles.proBadgeText}>Pro Depth enabled</Text>
-            </View>
-          )}
         </View>
 
         <View
@@ -655,24 +573,16 @@ export default function ScanScreen() {
 
           <View pointerEvents="none" style={styles.cameraOverlay}>
             <View style={styles.scanFrame}>
-              <Animated.View
-                style={[
-                  styles.scanRing,
-                  { transform: [{ rotate: ringRotate }, { scale: pulseAnim }] },
-                ]}
-              >
-                <View style={[styles.ringDot, styles.ringDotTop]} />
-                <View style={[styles.ringDot, styles.ringDotRight]} />
-                <View style={[styles.ringDot, styles.ringDotBottom]} />
-                <View style={[styles.ringDot, styles.ringDotLeft]} />
-              </Animated.View>
+              <View style={[styles.frameCorner, styles.frameCornerTL]} />
+              <View style={[styles.frameCorner, styles.frameCornerTR]} />
+              <View style={[styles.frameCorner, styles.frameCornerBL]} />
+              <View style={[styles.frameCorner, styles.frameCornerBR]} />
               <Footprints
-                size={130}
-                color={Colors.white}
-                style={[
-                  { opacity: 0.9 },
-                  currentTask.foot === "right" ? { transform: [{ scaleX: -1 }] } : undefined,
-                ]}
+                size={120}
+                color="rgba(255,255,255,0.85)"
+                style={
+                  currentTask.foot === "right" ? { transform: [{ scaleX: -1 }] } : undefined
+                }
               />
             </View>
 
@@ -802,22 +712,13 @@ export default function ScanScreen() {
 
   const renderProcessing = () => (
     <View style={[styles.stepContainer, styles.centerContent]}>
-      <Animated.View
-        style={[styles.processingIconContainer, { transform: [{ scale: pulseAnim }] }]}
-      >
-        <LinearGradient
-          colors={[Colors.primary, Colors.accent]}
-          start={{ x: 0, y: 0 }}
-          end={{ x: 1, y: 1 }}
-          style={styles.introIconGradient}
-        >
-          <Footprints size={42} color={Colors.white} />
-        </LinearGradient>
-      </Animated.View>
+      <View style={styles.processingIconBadge}>
+        <Footprints size={42} color={Colors.white} />
+      </View>
 
-      <Text style={styles.processingTitle}>Analyzing your feet...</Text>
+      <Text style={styles.processingTitle}>Analyzing your feet…</Text>
       <Text style={styles.processingSubtitle}>
-        Computing length, width, and arch profile on-device
+        Estimating length, width, and arch from your photos
       </Text>
 
       <View style={styles.progressContainer}>
@@ -861,9 +762,7 @@ export default function ScanScreen() {
                 { color: usingRuler ? Colors.success : Colors.warning },
               ]}
             >
-              {hasProDepth && pxPerCm != null
-                ? "Pro accuracy (\u00B11mm)"
-                : pxPerCm != null
+              {pxPerCm != null
                 ? "High accuracy (\u00B12mm)"
                 : usingRuler
                 ? "Good accuracy (\u00B13mm)"
@@ -871,15 +770,10 @@ export default function ScanScreen() {
             </Text>
           </View>
 
-          <LinearGradient
-            colors={[Colors.primary, Colors.accent]}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 1 }}
-            style={styles.sizeCard}
-          >
+          <View style={styles.sizeCard}>
             <Text style={styles.sizeLabel}>Recommended Size</Text>
             <Text style={styles.sizeValue}>US {measurements.recommendedSize}</Text>
-          </LinearGradient>
+          </View>
 
           <View style={styles.measurementsGrid}>
             <View style={styles.measurementCard}>
@@ -980,20 +874,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   introIconContainer: {
-    width: 120,
-    height: 120,
-    borderRadius: 60,
+    width: 116,
+    height: 116,
+    borderRadius: 58,
     alignSelf: "center",
     marginBottom: 24,
-    shadowColor: Colors.primary,
-    shadowOffset: { width: 0, height: 12 },
-    shadowOpacity: 0.25,
-    shadowRadius: 20,
-    elevation: 12,
-  },
-  introIconGradient: {
-    flex: 1,
-    borderRadius: 60,
+    backgroundColor: Colors.primary,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -1295,25 +1181,16 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  scanRing: {
-    ...StyleSheet.absoluteFillObject,
-    borderWidth: 2,
-    borderColor: "rgba(255,255,255,0.35)",
-    borderRadius: 1000,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  ringDot: {
+  frameCorner: {
     position: "absolute",
-    width: 10,
-    height: 10,
-    borderRadius: 5,
-    backgroundColor: Colors.accent,
+    width: 34,
+    height: 34,
+    borderColor: "rgba(255,255,255,0.9)",
   },
-  ringDotTop: { top: -5 },
-  ringDotBottom: { bottom: -5 },
-  ringDotLeft: { left: -5 },
-  ringDotRight: { right: -5 },
+  frameCornerTL: { top: 0, left: 0, borderTopWidth: 3, borderLeftWidth: 3, borderTopLeftRadius: 10 },
+  frameCornerTR: { top: 0, right: 0, borderTopWidth: 3, borderRightWidth: 3, borderTopRightRadius: 10 },
+  frameCornerBL: { bottom: 0, left: 0, borderBottomWidth: 3, borderLeftWidth: 3, borderBottomLeftRadius: 10 },
+  frameCornerBR: { bottom: 0, right: 0, borderBottomWidth: 3, borderRightWidth: 3, borderBottomRightRadius: 10 },
   flashOverlay: {
     ...StyleSheet.absoluteFillObject,
     backgroundColor: Colors.white,
@@ -1400,6 +1277,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: 24,
   },
+  processingIconBadge: {
+    width: 96,
+    height: 96,
+    borderRadius: 48,
+    backgroundColor: Colors.primary,
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 24,
+  },
   processingTitle: {
     fontSize: 22,
     color: Colors.text,
@@ -1466,6 +1352,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: 20,
     width: "100%",
+    backgroundColor: Colors.primary,
   },
   sizeLabel: {
     fontSize: 12,
