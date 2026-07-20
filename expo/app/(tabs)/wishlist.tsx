@@ -14,6 +14,7 @@ import {
   Check,
   X,
   ChevronDown,
+  Bell,
 } from "lucide-react-native";
 import * as Haptics from "expo-haptics";
 
@@ -21,18 +22,26 @@ import { useUser, useWishlistedShoes } from "@/contexts/UserContext";
 import { useTheme } from "@/contexts/ThemeContext";
 import { shoes } from "@/mocks/shoes";
 import ShoeCard from "@/components/ShoeCard";
+import { generateDealInfo } from "@/mocks/priceData";
+import PriceAlertModal from "@/components/PriceAlertModal";
 
 type SortOption = "date" | "price" | "brand";
 type FilterOption = "all" | "saved" | "purchased" | "didnt_fit";
 
 export default function WishlistScreen() {
   const insets = useSafeAreaInsets();
-  const { updateWishlistStatus } = useUser();
+  const { updateWishlistStatus, getPriceAlert } = useUser();
   const { colors } = useTheme();
   const wishlistedItems = useWishlistedShoes(shoes);
   const [sortBy, setSortBy] = useState<SortOption>("date");
   const [filterBy, setFilterBy] = useState<FilterOption>("all");
   const [showSortMenu, setShowSortMenu] = useState(false);
+  const [selectedAlertShoe, setSelectedAlertShoe] = useState<{ id: string; name: string; dealInfo: any } | null>(null);
+
+  const handlePriceAlertPress = useCallback((id: string, name: string, dealInfo: any) => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
+    setSelectedAlertShoe({ id, name, dealInfo });
+  }, []);
 
   const filteredAndSorted = useMemo(() => {
     let items = [...wishlistedItems];
@@ -186,72 +195,117 @@ export default function WishlistScreen() {
           </View>
         ) : (
           <View style={styles.list}>
-            {filteredAndSorted.map((item) => (
-              <View key={item.shoeId} style={styles.wishlistItem}>
-                {item.shoe && (
-                  <>
-                    <ShoeCard shoe={item.shoe} variant="horizontal" />
-                    <View style={styles.statusButtons}>
+            {filteredAndSorted.map((item) => {
+              if (!item.shoe) return null;
+              const dealInfo = generateDealInfo(item.shoeId, item.shoe.price);
+              const priceAlert = getPriceAlert(item.shoeId);
+              const targetReached = priceAlert && dealInfo.currentLowest <= priceAlert.targetPrice;
+
+              return (
+                <View key={item.shoeId} style={styles.wishlistItem}>
+                  <ShoeCard shoe={item.shoe} variant="horizontal" />
+                  
+                  <View style={styles.alertRow}>
+                    {priceAlert ? (
                       <Pressable
                         style={[
-                          styles.statusButton,
-                          { borderColor: colors.success },
-                          item.status === "purchased" && { backgroundColor: colors.success, borderColor: colors.success },
+                          styles.alertBadge,
+                          {
+                            backgroundColor: targetReached ? `${colors.success}15` : `${colors.accent}15`,
+                            borderColor: targetReached ? colors.success : colors.accent,
+                          },
                         ]}
-                        onPress={() => handleStatusChange(item.shoeId, "purchased")}
+                        onPress={() => handlePriceAlertPress(item.shoeId, item.shoe!.name, dealInfo)}
                       >
-                        <Check
-                          size={14}
-                          color={
-                            item.status === "purchased"
-                              ? colors.white
-                              : colors.success
-                          }
-                        />
-                        <Text
-                          style={[
-                            styles.statusButtonText,
-                            { color: colors.success },
-                            item.status === "purchased" && { color: colors.white },
-                          ]}
-                        >
-                          Purchased
+                        <Bell size={14} color={targetReached ? colors.success : colors.accent} />
+                        <Text style={[styles.alertBadgeText, { color: targetReached ? colors.success : colors.accent }]}>
+                          {targetReached
+                            ? `🔥 Target Reached! Now $${dealInfo.currentLowest} (Target: $${priceAlert.targetPrice})`
+                            : `🔔 Alert: Target $${priceAlert.targetPrice} (Lowest: $${dealInfo.currentLowest})`}
                         </Text>
                       </Pressable>
+                    ) : (
                       <Pressable
-                        style={[
-                          styles.statusButton,
-                          { borderColor: colors.error },
-                          item.status === "didnt_fit" && { backgroundColor: colors.error, borderColor: colors.error },
-                        ]}
-                        onPress={() => handleStatusChange(item.shoeId, "didnt_fit")}
+                        style={[styles.addAlertButton, { borderColor: colors.borderLight, backgroundColor: colors.surface }]}
+                        onPress={() => handlePriceAlertPress(item.shoeId, item.shoe!.name, dealInfo)}
                       >
-                        <X
-                          size={14}
-                          color={
-                            item.status === "didnt_fit"
-                              ? colors.white
-                              : colors.error
-                          }
-                        />
-                        <Text
-                          style={[
-                            styles.statusButtonText,
-                            { color: colors.error },
-                            item.status === "didnt_fit" && { color: colors.white },
-                          ]}
-                        >
-                          Did not Fit
+                        <Bell size={14} color={colors.textSecondary} />
+                        <Text style={[styles.addAlertText, { color: colors.textSecondary }]}>
+                          Set Price Alert
                         </Text>
                       </Pressable>
-                    </View>
-                  </>
-                )}
-              </View>
-            ))}
+                    )}
+                  </View>
+
+                  <View style={styles.statusButtons}>
+                    <Pressable
+                      style={[
+                        styles.statusButton,
+                        { borderColor: colors.success },
+                        item.status === "purchased" && { backgroundColor: colors.success, borderColor: colors.success },
+                      ]}
+                      onPress={() => handleStatusChange(item.shoeId, "purchased")}
+                    >
+                      <Check
+                        size={14}
+                        color={
+                          item.status === "purchased"
+                            ? colors.white
+                            : colors.success
+                        }
+                      />
+                      <Text
+                        style={[
+                          styles.statusButtonText,
+                          { color: colors.success },
+                          item.status === "purchased" && { color: colors.white },
+                        ]}
+                      >
+                        Purchased
+                      </Text>
+                    </Pressable>
+                    <Pressable
+                      style={[
+                        styles.statusButton,
+                        { borderColor: colors.error },
+                        item.status === "didnt_fit" && { backgroundColor: colors.error, borderColor: colors.error },
+                      ]}
+                      onPress={() => handleStatusChange(item.shoeId, "didnt_fit")}
+                    >
+                      <X
+                        size={14}
+                        color={
+                          item.status === "didnt_fit"
+                            ? colors.white
+                            : colors.error
+                        }
+                      />
+                      <Text
+                        style={[
+                          styles.statusButtonText,
+                          { color: colors.error },
+                          item.status === "didnt_fit" && { color: colors.white },
+                        ]}
+                      >
+                        Did not Fit
+                      </Text>
+                    </Pressable>
+                  </View>
+                </View>
+              );
+            })}
           </View>
         )}
       </ScrollView>
+      {selectedAlertShoe && (
+        <PriceAlertModal
+          visible={true}
+          onClose={() => setSelectedAlertShoe(null)}
+          shoeId={selectedAlertShoe.id}
+          shoeName={selectedAlertShoe.name}
+          dealInfo={selectedAlertShoe.dealInfo}
+        />
+      )}
     </View>
   );
 }
@@ -383,6 +437,36 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   statusButtonText: {
+    fontSize: 12,
+    fontWeight: "600" as const,
+  },
+  alertRow: {
+    paddingLeft: 4,
+  },
+  alertBadge: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    borderRadius: 8,
+    borderWidth: 1,
+  },
+  alertBadgeText: {
+    fontSize: 12,
+    fontWeight: "600" as const,
+  },
+  addAlertButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 6,
+    paddingVertical: 10,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderStyle: "dashed" as const,
+  },
+  addAlertText: {
     fontSize: 12,
     fontWeight: "600" as const,
   },

@@ -4,10 +4,10 @@ import {
   Text,
   StyleSheet,
   Pressable,
-  Linking,
 } from "react-native";
 import { ExternalLink, Check, X as XIcon, ShoppingBag } from "lucide-react-native";
 import * as Haptics from "expo-haptics";
+import * as WebBrowser from "expo-web-browser";
 import { RetailerPrice } from "@/mocks/priceData";
 import { useTheme } from "@/contexts/ThemeContext";
 
@@ -25,7 +25,7 @@ export default function RetailerComparison({ retailers }: RetailerComparisonProp
   const handleOpenLink = useCallback(async (url: string) => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
     try {
-      await Linking.openURL(url);
+      await WebBrowser.openBrowserAsync(url);
     } catch (error) {
       console.error("[RetailerComparison] Error opening URL:", error);
     }

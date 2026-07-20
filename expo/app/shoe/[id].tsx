@@ -8,8 +8,8 @@ import {
   Dimensions,
   ActivityIndicator,
   Modal,
-  Linking,
 } from "react-native";
+import * as WebBrowser from "expo-web-browser";
 import { useLocalSearchParams, router } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Image } from "expo-image";
@@ -149,11 +149,7 @@ export default function ShoeDetailScreen() {
   const handleOpenLink = useCallback(async (url: string) => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
     try {
-      const supported = await Linking.canOpenURL(url);
-      if (supported) {
-        await Linking.openURL(url);
-      } else {
-      }
+      await WebBrowser.openBrowserAsync(url);
     } catch (error) {
       console.error("[ShoeDetail] Error opening URL:", error);
     }
