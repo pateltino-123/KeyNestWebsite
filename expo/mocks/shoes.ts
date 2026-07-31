@@ -1,3 +1,5 @@
+import Constants from "expo-constants";
+
 export interface Review {
   id: string;
   userId: string;
@@ -38,7 +40,7 @@ export interface Shoe {
 // + Medical shoes kept as separate protected category
 // ============================================================================
 
-export const shoes: Shoe[] = [
+const rawShoes: Shoe[] = [
   // ── NIKE (IDs 1–22) ─────────────────────────────────────────────────────
   {
     id: "1",
@@ -2981,6 +2983,25 @@ export const shoes: Shoe[] = [
     ],
   },
 ];
+
+// Helper to resolve 127.0.0.1 image URLs to the correct dynamic host IP or public fallback
+const resolveImageUrl = (url: string): string => {
+  if (url.startsWith("http://127.0.0.1:8081") || url.startsWith("http://localhost:8081")) {
+    const hostUri = Constants.expoConfig?.hostUri; // e.g. "192.168.1.100:8081"
+    if (hostUri) {
+      const ip = hostUri.split(":")[0];
+      return url.replace("127.0.0.1", ip);
+    }
+    // If not running in local dev/Metro context, point to the GitHub raw file CDN as a fallback API
+    return url.replace("http://127.0.0.1:8081/assets", "https://raw.githubusercontent.com/nextgenFoundr/shoefitx/main/expo/assets");
+  }
+  return url;
+};
+
+export const shoes: Shoe[] = rawShoes.map(shoe => ({
+  ...shoe,
+  images: shoe.images.map(resolveImageUrl)
+}));
 
 export const categories = [
   { id: "running", name: "Running", icon: "Footprints" },
