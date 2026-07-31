@@ -34,6 +34,7 @@ import { useUser } from "@/contexts/UserContext";
 import ReviewsModal from "@/components/ReviewsModal";
 import ImagePlaceholder from "@/components/ImagePlaceholder";
 import { getProductById, mapKicksProductToShoe } from "@/services/kicksApi";
+import { fetchSneakerDbImage } from "@/services/sneakerDbApi";
 import { useTheme } from "@/contexts/ThemeContext";
 import { generateDealInfo } from "@/mocks/priceData";
 import DealScoreBadge from "@/components/DealScoreBadge";
@@ -114,7 +115,28 @@ export default function ShoeDetailScreen() {
     staleTime: 1000 * 60 * 10,
   });
 
-  const shoe = cachedShoe || mockShoe || apiShoe;
+  const rawShoe = cachedShoe || mockShoe || apiShoe;
+
+  const { data: sneakerDbImage } = useQuery({
+    queryKey: ["sneaker-db-image", rawShoe?.brand, rawShoe?.name, (rawShoe as any)?.sku],
+    queryFn: async () => {
+      if (!rawShoe) return null;
+      return await fetchSneakerDbImage(rawShoe.brand, rawShoe.name, (rawShoe as any).sku);
+    },
+    enabled: !!rawShoe,
+    staleTime: 1000 * 60 * 60 * 24, // cache for 24 hours
+  });
+
+  const shoe = useMemo(() => {
+    if (!rawShoe) return null;
+    if (sneakerDbImage) {
+      return {
+        ...rawShoe,
+        images: [sneakerDbImage, ...rawShoe.images.filter(img => img !== sneakerDbImage)],
+      };
+    }
+    return rawShoe;
+  }, [rawShoe, sneakerDbImage]);
   const isWishlisted = shoe ? isInWishlist(shoe.id) : false;
   const brandTip = shoe ? brandSizingTips.find((t) => t.brand === shoe.brand) : null;
   const buyLinks = shoe ? generateBuyLinks(shoe) : [];
@@ -215,7 +237,7 @@ export default function ShoeDetailScreen() {
             <Image
               source={{ uri: imageUri }}
               style={[styles.mainImage, { backgroundColor: colors.surfaceAlt }]}
-              contentFit="cover"
+              contentFit="contain"
               transition={300}
               onError={() => setImageError(true)}
             />
@@ -545,6 +567,7 @@ const styles = StyleSheet.create({
   mainImage: {
     width: SCREEN_WIDTH,
     height: SCREEN_WIDTH * 0.85,
+    padding: 16,
   },
   headerButton: {
     position: "absolute",

@@ -39,6 +39,8 @@ import * as ImagePicker from "expo-image-picker";
 import { useUser } from "@/contexts/UserContext";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useAuth } from "@/contexts/AuthContext";
+import { useFocusEffect } from "@react-navigation/native";
+import { getApiUsage } from "@/services/sneakerDbApi";
 import { brands, categories } from "@/mocks/shoes";
 import MeasurementDisplay from "@/components/MeasurementDisplay";
 
@@ -65,6 +67,14 @@ export default function ProfileScreen() {
 
   const shownName = profile?.name || displayName || "Set up your profile";
   const shownEmail = profile?.email || authEmail || "Tap to add your details";
+
+  const [apiUsage, setApiUsage] = useState<any>(null);
+
+  useFocusEffect(
+    useCallback(() => {
+      getApiUsage().then(setApiUsage);
+    }, [])
+  );
 
   const handleSaveProfile = useCallback(() => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
@@ -281,6 +291,36 @@ export default function ProfileScreen() {
                   </Text>
                 </View>
               ))}
+            </View>
+          </View>
+        )}
+
+        {apiUsage && (
+          <View style={[styles.usageCard, { backgroundColor: colors.surface, borderColor: colors.borderLight }]}>
+            <View style={styles.usageHeader}>
+              <Shield size={18} color={colors.accent} />
+              <Text style={[styles.usageTitle, { color: colors.text }]}>RapidAPI SneakerDB Usage</Text>
+            </View>
+            <View style={styles.usageStats}>
+              <View style={[styles.usageBarContainer, { backgroundColor: colors.surfaceAlt }]}>
+                <View 
+                  style={[
+                    styles.usageBar, 
+                    { 
+                      width: `${Math.min(100, (apiUsage.count / apiUsage.threshold) * 100)}%`, 
+                      backgroundColor: apiUsage.isFrozen ? colors.error : colors.accent 
+                    }
+                  ]} 
+                />
+              </View>
+              <View style={styles.usageLabels}>
+                <Text style={[styles.usageCount, { color: colors.textSecondary }]}>
+                  {apiUsage.count} / {apiUsage.threshold} requests (Safety Cap: {apiUsage.limit})
+                </Text>
+                <Text style={[styles.usageStatus, { color: apiUsage.isFrozen ? colors.error : colors.success }]}>
+                  {apiUsage.isFrozen ? "Frozen" : "Active"}
+                </Text>
+              </View>
             </View>
           </View>
         )}
@@ -896,5 +936,47 @@ const styles = StyleSheet.create({
   deleteCancelText: {
     fontSize: 16,
     fontWeight: "600",
+  },
+  usageCard: {
+    borderRadius: 16,
+    borderWidth: 1,
+    padding: 16,
+    marginBottom: 24,
+  },
+  usageHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+    marginBottom: 12,
+  },
+  usageTitle: {
+    fontSize: 15,
+    fontWeight: "700",
+  },
+  usageStats: {
+    gap: 8,
+  },
+  usageBarContainer: {
+    height: 8,
+    borderRadius: 4,
+    overflow: "hidden",
+  },
+  usageBar: {
+    height: "100%",
+    borderRadius: 4,
+  },
+  usageLabels: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  usageCount: {
+    fontSize: 12,
+    fontWeight: "500",
+  },
+  usageStatus: {
+    fontSize: 11,
+    fontWeight: "700",
+    textTransform: "uppercase",
   },
 });
