@@ -93,7 +93,7 @@ export default function ShoeCard({ shoe, variant = "default", showSizingAlert = 
           ) : (
             <Image
               source={{ uri: imageUri }}
-              style={[styles.horizontalImage, { backgroundColor: colors.surfaceAlt }]}
+              style={[styles.horizontalImage]}
               contentFit="contain"
               transition={200}
               onError={() => setImageError(true)}
@@ -137,7 +137,7 @@ export default function ShoeCard({ shoe, variant = "default", showSizingAlert = 
           ) : (
             <Image
               source={{ uri: imageUri }}
-              style={[styles.compactImage, { backgroundColor: colors.surfaceAlt }]}
+              style={[styles.compactImage]}
               contentFit="contain"
               transition={200}
               onError={() => setImageError(true)}
@@ -166,7 +166,7 @@ export default function ShoeCard({ shoe, variant = "default", showSizingAlert = 
           ) : (
             <Image
               source={{ uri: imageUri }}
-              style={[styles.image, { backgroundColor: colors.surfaceAlt }]}
+              style={[styles.image]}
               contentFit="contain"
               transition={200}
               onError={() => setImageError(true)}
@@ -216,7 +216,6 @@ const styles = StyleSheet.create({
   image: {
     width: "100%",
     height: 160,
-    padding: 12,
   },
   wishlistButtonAbsolute: {
     position: "absolute",
@@ -291,7 +290,6 @@ const styles = StyleSheet.create({
   horizontalImage: {
     width: 100,
     height: 100,
-    padding: 8,
   },
   horizontalContent: {
     flex: 1,
@@ -318,7 +316,6 @@ const styles = StyleSheet.create({
   compactImage: {
     width: 140,
     height: 100,
-    padding: 6,
   },
   compactContent: {
     padding: 10,

@@ -236,7 +236,7 @@ export default function ShoeDetailScreen() {
           ) : (
             <Image
               source={{ uri: imageUri }}
-              style={[styles.mainImage, { backgroundColor: colors.surfaceAlt }]}
+              style={[styles.mainImage]}
               contentFit="contain"
               transition={300}
               onError={() => setImageError(true)}
@@ -567,7 +567,6 @@ const styles = StyleSheet.create({
   mainImage: {
     width: SCREEN_WIDTH,
     height: SCREEN_WIDTH * 0.85,
-    padding: 16,
   },
   headerButton: {
     position: "absolute",
