@@ -228,7 +228,10 @@ export default function ShoeDetailScreen() {
     <View style={[styles.container, { backgroundColor: colors.background }]}>
       <ScrollView
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ paddingBottom: insets.bottom + 100 }}
+        contentContainerStyle={{ 
+          paddingTop: insets.top,
+          paddingBottom: insets.bottom + 100 
+        }}
       >
         <View style={styles.imageContainer}>
           {showPlaceholder ? (
@@ -243,13 +246,13 @@ export default function ShoeDetailScreen() {
             />
           )}
           <Pressable
-            style={[styles.headerButton, { top: insets.top + 10, left: 16, backgroundColor: colors.surface }]}
+            style={[styles.headerButton, { top: 10, left: 16, backgroundColor: colors.surface }]}
             onPress={() => router.back()}
           >
             <ChevronLeft size={24} color={colors.text} />
           </Pressable>
           <Pressable
-            style={[styles.headerButton, { top: insets.top + 10, right: 16, backgroundColor: colors.surface }]}
+            style={[styles.headerButton, { top: 10, right: 16, backgroundColor: colors.surface }]}
             onPress={handleWishlistToggle}
           >
             <Heart
@@ -429,9 +432,9 @@ export default function ShoeDetailScreen() {
           <View style={styles.section}>
             <Text style={[styles.sectionTitle, { color: colors.text }]}>Details</Text>
             <View style={styles.detailsGrid}>
-              <View style={[styles.detailItem, { borderBottomColor: colors.borderLight }]}>
-                <Text style={[styles.detailLabel, { color: colors.textMuted }]}>Materials</Text>
-                <Text style={[styles.detailValue, { color: colors.text }]}>{shoe.materials.join(", ")}</Text>
+              <View style={[styles.materialsItem, { borderBottomColor: colors.borderLight }]}>
+                <Text style={[styles.detailLabel, { color: colors.textMuted }]}>Materials:</Text>
+                <Text style={[styles.materialsValue, { color: colors.text }]}>{shoe.materials.join("  •  ")}</Text>
               </View>
               <View style={[styles.detailItem, { borderBottomColor: colors.borderLight }]}>
                 <Text style={[styles.detailLabel, { color: colors.textMuted }]}>Width Fit</Text>
@@ -715,6 +718,11 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     borderBottomWidth: 1,
   },
+  materialsItem: {
+    paddingVertical: 12,
+    borderBottomWidth: 1,
+    gap: 6,
+  },
   detailLabel: {
     fontSize: 14,
   },
@@ -722,6 +730,11 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: "500" as const,
     textTransform: "capitalize",
+  },
+  materialsValue: {
+    fontSize: 14,
+    fontWeight: "500" as const,
+    lineHeight: 20,
   },
   bottomBar: {
     position: "absolute",
