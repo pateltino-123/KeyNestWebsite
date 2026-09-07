@@ -442,7 +442,7 @@ export default function ScanScreen() {
             </View>
             <View style={styles.choiceCardText}>
               <Text style={styles.choiceCardTitle}>One foot</Text>
-              <Text style={styles.choiceCardDesc}>Faster · we'll mirror the result</Text>
+              <Text style={styles.choiceCardDesc}>Faster · {"we'll"} mirror the result</Text>
             </View>
           </View>
           <ChevronRight size={20} color={Colors.textMuted} />
@@ -487,7 +487,7 @@ export default function ScanScreen() {
             </View>
             <View style={styles.choiceCardText}>
               <Text style={styles.choiceCardTitle}>Skip — no ruler</Text>
-              <Text style={styles.choiceCardDesc}>We'll estimate using device sensors</Text>
+              <Text style={styles.choiceCardDesc}>{"We'll"} estimate using device sensors</Text>
             </View>
           </View>
           <ChevronRight size={20} color={Colors.textMuted} />

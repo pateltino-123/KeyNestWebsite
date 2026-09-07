@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "shoeFitx",
-    "slug": "shoefitx",
+    "name": "KeyNest Realty Property Management",
+    "slug": "keynest-realty",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "shoefitx",
+    "scheme": "keynest",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "splash": {

@@ -17,22 +17,18 @@ const queryClient = new QueryClient();
 const AUTH_ROUTES = ["login", "signup"];
 
 function useAuthGate() {
-  const { isAuthed, isGuest, initializing } = useAuth();
+  // Public website: allow all visitors to browse pages without login gating
+  const { isAuthed, initializing } = useAuth();
   const segments = useSegments();
   const router = useRouter();
 
   useEffect(() => {
     if (initializing) return;
-
     const inAuthRoute = AUTH_ROUTES.includes(segments[0] ?? "");
-    const signedIn = isAuthed || isGuest;
-
-    if (!signedIn && !inAuthRoute) {
-      router.replace("/login" as never);
-    } else if (signedIn && inAuthRoute) {
-      router.replace("/(tabs)" as never);
+    if (isAuthed && inAuthRoute) {
+      router.replace("/" as never);
     }
-  }, [isAuthed, isGuest, initializing, segments, router]);
+  }, [isAuthed, initializing, segments, router]);
 }
 
 function RootLayoutNav() {
@@ -52,30 +48,22 @@ function RootLayoutNav() {
       <StatusBar style={isDark ? "light" : "dark"} />
       <Stack
         screenOptions={{
-          headerBackTitle: "Back",
-          headerStyle: { backgroundColor: colors.background },
-          headerTintColor: colors.primary,
+          headerShown: false,
           contentStyle: { backgroundColor: colors.background },
         }}
       >
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="login" options={{ headerShown: false, gestureEnabled: false }} />
+        <Stack.Screen name="index" options={{ headerShown: false }} />
+        <Stack.Screen name="about" options={{ headerShown: false }} />
+        <Stack.Screen name="services" options={{ headerShown: false }} />
+        <Stack.Screen name="owners" options={{ headerShown: false }} />
+        <Stack.Screen name="tenants" options={{ headerShown: false }} />
+        <Stack.Screen name="rentals" options={{ headerShown: false }} />
+        <Stack.Screen name="pricing" options={{ headerShown: false }} />
+        <Stack.Screen name="why-keynest" options={{ headerShown: false }} />
+        <Stack.Screen name="contact" options={{ headerShown: false }} />
+        <Stack.Screen name="compliance" options={{ headerShown: false }} />
+        <Stack.Screen name="login" options={{ headerShown: false }} />
         <Stack.Screen name="signup" options={{ headerShown: false }} />
-        <Stack.Screen
-          name="scan"
-          options={{
-            presentation: "fullScreenModal",
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name="shoe/[id]"
-          options={{
-            headerShown: true,
-            headerTitle: "",
-            headerTransparent: true,
-          }}
-        />
       </Stack>
     </>
   );
