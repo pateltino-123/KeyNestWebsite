@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   useWindowDimensions,
 } from "react-native";
+import { useRouter } from "expo-router";
 import {
   ShieldCheck,
   CheckCircle2,
@@ -24,9 +25,10 @@ import WebsiteLayout, { useWebsiteModals } from "@/components/keynest/WebsiteLay
 import { SERVICE_LIFECYCLE } from "@/constants/keynestData";
 
 export default function ServicesPage() {
+  const router = useRouter();
   const { width } = useWindowDimensions();
   const isDesktop = width >= 1024;
-  const { openRentalAnalysis, openConsultation } = useWebsiteModals();
+  const { openConsultation } = useWebsiteModals();
   const [activeStage, setActiveStage] = useState(1);
 
   const stageIcons = [Camera, Search, FileCheck, FileSignature, CreditCard, Wrench, ClipboardList];
@@ -57,7 +59,7 @@ export default function ServicesPage() {
             </View>
             <TouchableOpacity
               style={styles.analysisBtnTop}
-              onPress={() => openRentalAnalysis()}
+              onPress={() => router.push("/rentals")}
             >
               <Text style={styles.analysisBtnTopText}>Get a Free Rental Analysis</Text>
               <ArrowRight size={14} color="#FFFFFF" />
@@ -158,7 +160,7 @@ export default function ServicesPage() {
                     <View style={styles.stageActionRow}>
                       <TouchableOpacity
                         style={styles.stageCtaBtn}
-                        onPress={() => openRentalAnalysis()}
+                        onPress={() => router.push("/rentals")}
                       >
                         <Text style={styles.stageCtaBtnText}>Request Review for This Stage</Text>
                         <ArrowRight size={14} color="#FFFFFF" />
@@ -192,7 +194,7 @@ export default function ServicesPage() {
             <View style={styles.bottomBannerButtons}>
               <TouchableOpacity
                 style={styles.bottomPrimaryBtn}
-                onPress={() => openRentalAnalysis()}
+                onPress={() => router.push("/rentals")}
               >
                 <Text style={styles.bottomPrimaryBtnText}>Get a Free Rental Analysis</Text>
               </TouchableOpacity>
