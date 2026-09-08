@@ -41,7 +41,7 @@ export default function Footer() {
         <View style={styles.innerContainer}>
           <View style={styles.brokerageBannerContent}>
             <View style={styles.brokerageIconBox}>
-              <ShieldCheck size={20} color="#38BDF8" />
+              <ShieldCheck size={20} color="#5A8EB9" />
             </View>
             <View style={{ flex: 1 }}>
               <Text style={styles.brokerageBannerTitle}>
@@ -68,7 +68,7 @@ export default function Footer() {
             <View style={[styles.col, { width: isDesktop ? "32%" : isTablet ? "48%" : "100%" }]}>
               <View style={styles.footerLogoRow}>
                 <View style={styles.footerLogoMark}>
-                  <Key size={20} color="#FFFFFF" />
+                  <Key size={18} color="#FFFFFF" />
                 </View>
                 <View>
                   <Text style={styles.footerLogoTitle}>KeyNest Realty</Text>
@@ -81,19 +81,19 @@ export default function Footer() {
 
               <View style={styles.contactList}>
                 <View style={styles.contactItem}>
-                  <MapPin size={16} color="#60A5FA" style={styles.contactIcon} />
+                  <MapPin size={15} color="#5A8EB9" style={styles.contactIcon} />
                   <Text style={styles.contactText}>{KEYNEST_INFO.officeAddress}</Text>
                 </View>
                 <View style={styles.contactItem}>
-                  <Phone size={16} color="#60A5FA" style={styles.contactIcon} />
+                  <Phone size={15} color="#5A8EB9" style={styles.contactIcon} />
                   <Text style={styles.contactText}>Office: {KEYNEST_INFO.phone}</Text>
                 </View>
                 <View style={styles.contactItem}>
-                  <Mail size={16} color="#60A5FA" style={styles.contactIcon} />
+                  <Mail size={15} color="#5A8EB9" style={styles.contactIcon} />
                   <Text style={styles.contactText}>{KEYNEST_INFO.email}</Text>
                 </View>
                 <View style={styles.contactItem}>
-                  <Clock size={16} color="#60A5FA" style={styles.contactIcon} />
+                  <Clock size={15} color="#5A8EB9" style={styles.contactIcon} />
                   <Text style={styles.contactText}>{KEYNEST_INFO.hours}</Text>
                 </View>
               </View>
@@ -128,9 +128,6 @@ export default function Footer() {
             <View style={[styles.col, { width: isDesktop ? "22%" : isTablet ? "48%" : "100%" }]}>
               <Text style={styles.colTitle}>Tenants & Service Areas</Text>
               <View style={styles.linkList}>
-                <TouchableOpacity onPress={() => navigateTo("/rentals")}>
-                  <Text style={styles.footerLink}>Available Rentals</Text>
-                </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigateTo("/tenants")}>
                   <Text style={styles.footerLink}>Tenant Portal & Rent Pay</Text>
                 </TouchableOpacity>
@@ -154,7 +151,7 @@ export default function Footer() {
               <Text style={styles.colTitle}>Brokerage & Leadership</Text>
               <View style={styles.leadershipCard}>
                 <View style={styles.leadHeader}>
-                  <Building size={16} color="#60A5FA" />
+                  <Building size={16} color="#5A8EB9" />
                   <Text style={styles.leadBrokerName}>Fair Deal Realty Inc.</Text>
                 </View>
                 <Text style={styles.leadSub}>Sponsoring Texas Brokerage</Text>
@@ -171,7 +168,7 @@ export default function Footer() {
                   onPress={() => openUrl(KEYNEST_INFO.trecIabsUrl)}
                 >
                   <Text style={styles.trecBtnText}>TREC IABS Form</Text>
-                  <ExternalLink size={12} color="#93C5FD" />
+                  <ExternalLink size={12} color="#5A8EB9" />
                 </TouchableOpacity>
 
                 <TouchableOpacity
@@ -179,7 +176,7 @@ export default function Footer() {
                   onPress={() => openUrl(KEYNEST_INFO.trecConsumerNoticeUrl)}
                 >
                   <Text style={styles.trecBtnText}>Consumer Protection Notice</Text>
-                  <ExternalLink size={12} color="#93C5FD" />
+                  <ExternalLink size={12} color="#5A8EB9" />
                 </TouchableOpacity>
               </View>
             </View>
@@ -219,9 +216,9 @@ export default function Footer() {
 
 const styles = StyleSheet.create({
   footerContainer: {
-    backgroundColor: "#0B1120",
+    backgroundColor: "#1A1D21",
     borderTopWidth: 1,
-    borderTopColor: "#1E293B",
+    borderTopColor: "#2A2F37",
   },
   innerContainer: {
     maxWidth: 1240,
@@ -230,10 +227,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   brokerageBanner: {
-    backgroundColor: "#0F172A",
-    paddingVertical: 16,
+    backgroundColor: "#22262C",
+    paddingVertical: 14,
     borderBottomWidth: 1,
-    borderBottomColor: "#1E293B",
+    borderBottomColor: "#2F3540",
   },
   brokerageBannerContent: {
     flexDirection: "row",
@@ -241,26 +238,26 @@ const styles = StyleSheet.create({
     gap: 14,
   },
   brokerageIconBox: {
-    width: 38,
-    height: 38,
-    borderRadius: 10,
-    backgroundColor: "#1E293B",
+    width: 36,
+    height: 36,
+    borderRadius: 8,
+    backgroundColor: "#2A303A",
     justifyContent: "center",
     alignItems: "center",
   },
   brokerageBannerTitle: {
-    color: "#FFFFFF",
-    fontSize: 15,
+    color: "#F5F3EF",
+    fontSize: 14.5,
     fontWeight: "700",
     letterSpacing: 0.2,
   },
   brokerageBannerSubtitle: {
-    color: "#94A3B8",
+    color: "#9EA6B2",
     fontSize: 12.5,
     marginTop: 2,
   },
   mainFooter: {
-    paddingVertical: 56,
+    paddingVertical: 52,
   },
   footerColumns: {
     gap: 32,
@@ -273,33 +270,33 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 10,
-    marginBottom: 16,
+    marginBottom: 14,
   },
   footerLogoMark: {
-    width: 38,
-    height: 38,
-    borderRadius: 10,
-    backgroundColor: "#2563EB",
+    width: 36,
+    height: 36,
+    borderRadius: 8,
+    backgroundColor: "#3B6E99",
     justifyContent: "center",
     alignItems: "center",
   },
   footerLogoTitle: {
-    fontSize: 20,
+    fontSize: 19,
     fontWeight: "800",
-    color: "#FFFFFF",
+    color: "#F5F3EF",
     letterSpacing: -0.3,
   },
   footerLogoSub: {
-    fontSize: 11.5,
-    color: "#60A5FA",
+    fontSize: 11,
+    color: "#7AA9D0",
     fontWeight: "600",
     marginTop: -2,
   },
   companyBio: {
-    color: "#94A3B8",
-    fontSize: 13.5,
-    lineHeight: 21,
-    marginBottom: 20,
+    color: "#A2AAB5",
+    fontSize: 13,
+    lineHeight: 20,
+    marginBottom: 18,
   },
   contactList: {
     gap: 10,
@@ -313,32 +310,32 @@ const styles = StyleSheet.create({
     marginTop: 2,
   },
   contactText: {
-    color: "#CBD5E1",
+    color: "#CBD2DC",
     fontSize: 13,
-    lineHeight: 19,
+    lineHeight: 18,
     flex: 1,
   },
   colTitle: {
-    fontSize: 15,
+    fontSize: 14.5,
     fontWeight: "700",
-    color: "#FFFFFF",
-    marginBottom: 18,
+    color: "#F5F3EF",
+    marginBottom: 16,
     letterSpacing: 0.3,
   },
   linkList: {
-    gap: 11,
+    gap: 10,
   },
   footerLink: {
-    color: "#94A3B8",
+    color: "#A2AAB5",
     fontSize: 13.5,
     paddingVertical: 2,
   },
   leadershipCard: {
-    backgroundColor: "#111827",
-    padding: 16,
-    borderRadius: 12,
+    backgroundColor: "#22262C",
+    padding: 15,
+    borderRadius: 10,
     borderWidth: 1,
-    borderColor: "#1E293B",
+    borderColor: "#2F3540",
   },
   leadHeader: {
     flexDirection: "row",
@@ -346,33 +343,33 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   leadBrokerName: {
-    color: "#FFFFFF",
-    fontSize: 14,
+    color: "#F5F3EF",
+    fontSize: 13.5,
     fontWeight: "700",
   },
   leadSub: {
-    color: "#60A5FA",
-    fontSize: 11.5,
+    color: "#7AA9D0",
+    fontSize: 11,
     marginTop: 2,
   },
   leadDivider: {
     height: 1,
-    backgroundColor: "#1E293B",
+    backgroundColor: "#2F3540",
     marginVertical: 10,
   },
   leadLabel: {
-    color: "#94A3B8",
-    fontSize: 11.5,
+    color: "#8C95A2",
+    fontSize: 11,
     marginBottom: 4,
   },
   leadManagerName: {
-    color: "#E2E8F0",
+    color: "#E2E7ED",
     fontSize: 12.5,
     fontWeight: "600",
     lineHeight: 18,
   },
   leadAddress: {
-    color: "#64748B",
+    color: "#737B85",
     fontSize: 11,
     marginTop: 8,
     lineHeight: 15,
@@ -385,23 +382,23 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    backgroundColor: "#1E293B",
+    backgroundColor: "#22262C",
     paddingVertical: 8,
     paddingHorizontal: 12,
-    borderRadius: 8,
+    borderRadius: 7,
     borderWidth: 1,
-    borderColor: "#334155",
+    borderColor: "#303742",
   },
   trecBtnText: {
-    color: "#93C5FD",
+    color: "#7AA9D0",
     fontSize: 12,
     fontWeight: "600",
   },
   bottomLegalBar: {
-    backgroundColor: "#070A11",
-    paddingVertical: 20,
+    backgroundColor: "#141619",
+    paddingVertical: 18,
     borderTopWidth: 1,
-    borderTopColor: "#111827",
+    borderTopColor: "#22262C",
   },
   bottomBarRow: {
     justifyContent: "space-between",
@@ -412,9 +409,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   bottomLegalNotice: {
-    color: "#64748B",
-    fontSize: 12,
-    lineHeight: 18,
+    color: "#737B85",
+    fontSize: 11.5,
+    lineHeight: 17,
   },
   bottomBarRight: {
     flexDirection: "row",
@@ -423,7 +420,7 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   bottomLink: {
-    color: "#94A3B8",
+    color: "#8C95A2",
     fontSize: 12,
     fontWeight: "500",
   },

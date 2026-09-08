@@ -69,7 +69,7 @@ export default function ContactPage() {
       <View style={styles.headerHero}>
         <View style={styles.innerContainer}>
           <View style={styles.badgePill}>
-            <ShieldCheck size={14} color="#38BDF8" />
+            <ShieldCheck size={14} color="#3B6E99" />
             <Text style={styles.badgePillText}>Under the Brokerage of Fair Deal Realty Inc.</Text>
           </View>
           <Text style={styles.pageTitle}>Service Territory & Contact</Text>
@@ -90,7 +90,7 @@ export default function ContactPage() {
           >
             <View style={styles.officeBarItem}>
               <View style={styles.iconCircle}>
-                <Building size={20} color="#2563EB" />
+                <Building size={20} color="#3B6E99" />
               </View>
               <View>
                 <Text style={styles.officeItemLabel}>Corporate Headquarters</Text>
@@ -101,7 +101,7 @@ export default function ContactPage() {
 
             <View style={styles.officeBarItem}>
               <View style={styles.iconCircle}>
-                <Phone size={20} color="#2563EB" />
+                <Phone size={20} color="#3B6E99" />
               </View>
               <View>
                 <Text style={styles.officeItemLabel}>Direct Phone Lines</Text>
@@ -114,7 +114,7 @@ export default function ContactPage() {
 
             <View style={styles.officeBarItem}>
               <View style={styles.iconCircle}>
-                <Mail size={20} color="#2563EB" />
+                <Mail size={20} color="#3B6E99" />
               </View>
               <View>
                 <Text style={styles.officeItemLabel}>Email Inquiries</Text>
@@ -153,7 +153,7 @@ export default function ContactPage() {
                   style={[styles.cityTabBtn, isActive && styles.cityTabBtnActive]}
                   onPress={() => setActiveCityId(city.id)}
                 >
-                  <MapPin size={14} color={isActive ? "#FFFFFF" : "#2563EB"} />
+                  <MapPin size={14} color={isActive ? "#FFFFFF" : "#3B6E99"} />
                   <Text style={[styles.cityTabText, isActive && styles.cityTabTextActive]}>
                     {city.name}
                   </Text>
@@ -355,14 +355,14 @@ export default function ContactPage() {
                         style={styles.actionBtn}
                         onPress={() => callPhone(KEYNEST_INFO.phone)}
                       >
-                        <Phone size={13} color="#2563EB" />
+                        <Phone size={13} color="#3B6E99" />
                         <Text style={styles.actionBtnText}>Call Office</Text>
                       </TouchableOpacity>
                       <TouchableOpacity
                         style={styles.actionBtn}
                         onPress={() => emailAddress(KEYNEST_INFO.email)}
                       >
-                        <Mail size={13} color="#2563EB" />
+                        <Mail size={13} color="#3B6E99" />
                         <Text style={styles.actionBtnText}>Email Direct</Text>
                       </TouchableOpacity>
                     </View>
@@ -370,7 +370,7 @@ export default function ContactPage() {
                 ))}
 
                 <View style={styles.trecNoteCard}>
-                  <ShieldCheck size={16} color="#2563EB" />
+                  <ShieldCheck size={16} color="#3B6E99" />
                   <Text style={styles.trecNoteText}>
                     Texas Real Estate Commission Consumer Notice: Real estate licensees are required to provide the TREC Information About Brokerage Services (IABS) to all prospective clients.
                   </Text>
@@ -386,10 +386,10 @@ export default function ContactPage() {
 
 const styles = StyleSheet.create({
   headerHero: {
-    backgroundColor: "#0B1120",
+    backgroundColor: "#FDFBF7",
     paddingVertical: 72,
     borderBottomWidth: 1,
-    borderBottomColor: "#1E293B",
+    borderBottomColor: "#E8E2D5",
   },
   innerContainer: {
     maxWidth: 1240,
@@ -402,29 +402,29 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-    backgroundColor: "#1E293B",
+    backgroundColor: "#EBF2F7",
     paddingVertical: 6,
     paddingHorizontal: 12,
     borderRadius: 20,
     borderWidth: 1,
-    borderColor: "#334155",
+    borderColor: "#C8D9E8",
     marginBottom: 16,
   },
   badgePillText: {
-    color: "#E2E8F0",
+    color: "#2E567A",
     fontSize: 12.5,
     fontWeight: "600",
   },
   pageTitle: {
     fontSize: 40,
     fontWeight: "900",
-    color: "#FFFFFF",
+    color: "#22252A",
     letterSpacing: -1,
     marginBottom: 12,
   },
   pageSubtitle: {
     fontSize: 16.5,
-    color: "#94A3B8",
+    color: "#4A515A",
     maxWidth: 760,
     lineHeight: 25,
   },
@@ -432,7 +432,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFFFF",
     paddingVertical: 28,
     borderBottomWidth: 1,
-    borderBottomColor: "#E2E8F0",
+    borderBottomColor: "#E8E2D5",
   },
   officeBarRow: {
     justifyContent: "space-between",
@@ -448,33 +448,33 @@ const styles = StyleSheet.create({
     width: 44,
     height: 44,
     borderRadius: 10,
-    backgroundColor: "#EFF6FF",
+    backgroundColor: "#EBF2F7",
     justifyContent: "center",
     alignItems: "center",
   },
   officeItemLabel: {
     fontSize: 12,
     fontWeight: "700",
-    color: "#64748B",
+    color: "#737B85",
   },
   officeItemVal: {
     fontSize: 14,
     fontWeight: "700",
-    color: "#0F172A",
+    color: "#22252A",
   },
   officePhoneLink: {
     fontSize: 15,
     fontWeight: "800",
-    color: "#2563EB",
+    color: "#3B6E99",
   },
   officeEmailLink: {
     fontSize: 14,
     fontWeight: "700",
-    color: "#2563EB",
+    color: "#3B6E99",
   },
   officeItemSub: {
     fontSize: 11.5,
-    color: "#94A3B8",
+    color: "#737B85",
     marginTop: 2,
   },
   sectionWhite: {
@@ -482,7 +482,7 @@ const styles = StyleSheet.create({
     paddingVertical: 72,
   },
   sectionAlt: {
-    backgroundColor: "#F8FAFC",
+    backgroundColor: "#F7F3EB",
     paddingVertical: 72,
   },
   sectionHeaderCentered: {
@@ -493,21 +493,21 @@ const styles = StyleSheet.create({
   sectionOverline: {
     fontSize: 12,
     fontWeight: "800",
-    color: "#2563EB",
+    color: "#3B6E99",
     letterSpacing: 1.2,
     marginBottom: 8,
   },
   sectionTitle: {
     fontSize: 32,
     fontWeight: "800",
-    color: "#0F172A",
+    color: "#22252A",
     letterSpacing: -0.5,
     textAlign: "center",
     marginBottom: 12,
   },
   sectionSubtitle: {
     fontSize: 16,
-    color: "#64748B",
+    color: "#4A515A",
     maxWidth: 720,
     textAlign: "center",
     lineHeight: 24,
@@ -525,29 +525,29 @@ const styles = StyleSheet.create({
     paddingVertical: 9,
     paddingHorizontal: 16,
     borderRadius: 8,
-    backgroundColor: "#F8FAFC",
+    backgroundColor: "#FAF7F0",
     borderWidth: 1,
-    borderColor: "#E2E8F0",
+    borderColor: "#E8E2D5",
   },
   cityTabBtnActive: {
-    backgroundColor: "#2563EB",
-    borderColor: "#2563EB",
+    backgroundColor: "#3B6E99",
+    borderColor: "#3B6E99",
   },
   cityTabText: {
     fontSize: 13.5,
     fontWeight: "600",
-    color: "#334155",
+    color: "#4A515A",
   },
   cityTabTextActive: {
     color: "#FFFFFF",
     fontWeight: "700",
   },
   citySpotlightCard: {
-    backgroundColor: "#F8FAFC",
+    backgroundColor: "#FAF7F0",
     borderRadius: 16,
     padding: 32,
     borderWidth: 1,
-    borderColor: "#E2E8F0",
+    borderColor: "#E8E2D5",
     gap: 20,
     marginTop: 12,
   },
@@ -559,11 +559,11 @@ const styles = StyleSheet.create({
   spotlightCityName: {
     fontSize: 26,
     fontWeight: "900",
-    color: "#0F172A",
+    color: "#22252A",
   },
   spotlightTagline: {
     fontSize: 14,
-    color: "#64748B",
+    color: "#4A515A",
     marginTop: 2,
   },
   activeBadge: {
@@ -573,7 +573,7 @@ const styles = StyleSheet.create({
     borderRadius: 6,
   },
   activeBadgeText: {
-    color: "#065F46",
+    color: "#166534",
     fontSize: 11,
     fontWeight: "800",
   },
@@ -586,38 +586,38 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     padding: 16,
     borderWidth: 1,
-    borderColor: "#E2E8F0",
+    borderColor: "#E8E2D5",
     gap: 4,
   },
   statLabel: {
     fontSize: 12,
-    color: "#64748B",
+    color: "#737B85",
   },
   statVal: {
     fontSize: 20,
     fontWeight: "800",
-    color: "#0F172A",
+    color: "#22252A",
   },
   statSub: {
     fontSize: 11.5,
-    color: "#94A3B8",
+    color: "#737B85",
   },
   cityContextWrap: {
     backgroundColor: "#FFFFFF",
     borderRadius: 12,
     padding: 18,
     borderWidth: 1,
-    borderColor: "#E2E8F0",
+    borderColor: "#E8E2D5",
     gap: 6,
   },
   cityContextHeading: {
     fontSize: 14,
     fontWeight: "800",
-    color: "#0F172A",
+    color: "#22252A",
   },
   cityContextText: {
     fontSize: 13.5,
-    color: "#475569",
+    color: "#4A515A",
     lineHeight: 21,
   },
   zipCodesRow: {
@@ -627,11 +627,11 @@ const styles = StyleSheet.create({
   zipCodesLabel: {
     fontSize: 13,
     fontWeight: "700",
-    color: "#0F172A",
+    color: "#22252A",
   },
   zipCodesList: {
     fontSize: 13,
-    color: "#64748B",
+    color: "#737B85",
   },
   contactRow: {
     justifyContent: "space-between",
@@ -646,9 +646,9 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     padding: 32,
     borderWidth: 1,
-    borderColor: "#E2E8F0",
+    borderColor: "#E8E2D5",
     gap: 16,
-    shadowColor: "#0F172A",
+    shadowColor: "#22252A",
     shadowOpacity: 0.04,
     shadowRadius: 12,
     elevation: 2,
@@ -656,11 +656,11 @@ const styles = StyleSheet.create({
   formTitle: {
     fontSize: 22,
     fontWeight: "800",
-    color: "#0F172A",
+    color: "#22252A",
   },
   formSub: {
     fontSize: 13.5,
-    color: "#64748B",
+    color: "#4A515A",
     marginTop: -8,
   },
   formBody: {
@@ -676,17 +676,17 @@ const styles = StyleSheet.create({
   inputLabel: {
     fontSize: 13,
     fontWeight: "600",
-    color: "#334155",
+    color: "#22252A",
   },
   inputField: {
-    backgroundColor: "#F8FAFC",
+    backgroundColor: "#FAF7F0",
     borderWidth: 1,
-    borderColor: "#CBD5E1",
+    borderColor: "#E8E2D5",
     borderRadius: 8,
     paddingVertical: 10,
     paddingHorizontal: 14,
     fontSize: 14,
-    color: "#0F172A",
+    color: "#22252A",
   },
   roleChipsRow: {
     flexDirection: "row",
@@ -697,18 +697,18 @@ const styles = StyleSheet.create({
     paddingVertical: 6,
     paddingHorizontal: 12,
     borderRadius: 6,
-    backgroundColor: "#F1F5F9",
+    backgroundColor: "#FAF7F0",
     borderWidth: 1,
-    borderColor: "#E2E8F0",
+    borderColor: "#E8E2D5",
   },
   roleChipActive: {
-    backgroundColor: "#2563EB",
-    borderColor: "#2563EB",
+    backgroundColor: "#3B6E99",
+    borderColor: "#3B6E99",
   },
   roleChipText: {
     fontSize: 12,
     fontWeight: "600",
-    color: "#475569",
+    color: "#4A515A",
   },
   roleChipTextActive: {
     color: "#FFFFFF",
@@ -718,7 +718,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     gap: 8,
-    backgroundColor: "#2563EB",
+    backgroundColor: "#3B6E99",
     paddingVertical: 14,
     borderRadius: 8,
     marginTop: 6,
@@ -736,17 +736,17 @@ const styles = StyleSheet.create({
   successFormTitle: {
     fontSize: 20,
     fontWeight: "800",
-    color: "#0F172A",
+    color: "#22252A",
   },
   successFormSub: {
     fontSize: 13.5,
-    color: "#64748B",
+    color: "#4A515A",
     textAlign: "center",
     lineHeight: 20,
     maxWidth: 400,
   },
   resetFormBtn: {
-    backgroundColor: "#0F172A",
+    backgroundColor: "#22252A",
     paddingVertical: 10,
     paddingHorizontal: 18,
     borderRadius: 8,
@@ -766,41 +766,41 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     padding: 28,
     borderWidth: 1,
-    borderColor: "#E2E8F0",
+    borderColor: "#E8E2D5",
     gap: 16,
   },
   sidebarTitle: {
     fontSize: 18,
     fontWeight: "800",
-    color: "#0F172A",
+    color: "#22252A",
   },
   sidebarSub: {
     fontSize: 13,
-    color: "#64748B",
+    color: "#4A515A",
     lineHeight: 19,
     marginTop: -6,
   },
   managerCard: {
-    backgroundColor: "#F8FAFC",
+    backgroundColor: "#FAF7F0",
     borderRadius: 12,
     padding: 16,
     borderWidth: 1,
-    borderColor: "#E2E8F0",
+    borderColor: "#E8E2D5",
     gap: 4,
   },
   managerName: {
     fontSize: 16,
     fontWeight: "800",
-    color: "#0F172A",
+    color: "#22252A",
   },
   managerRole: {
     fontSize: 12.5,
     fontWeight: "700",
-    color: "#2563EB",
+    color: "#3B6E99",
   },
   managerBroker: {
     fontSize: 11.5,
-    color: "#64748B",
+    color: "#737B85",
   },
   managerActions: {
     flexDirection: "row",
@@ -811,31 +811,31 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 6,
-    backgroundColor: "#EFF6FF",
+    backgroundColor: "#EBF2F7",
     paddingVertical: 6,
     paddingHorizontal: 12,
     borderRadius: 6,
     borderWidth: 1,
-    borderColor: "#BFDBFE",
+    borderColor: "#C8D9E8",
   },
   actionBtnText: {
     fontSize: 12,
     fontWeight: "700",
-    color: "#1E40AF",
+    color: "#2E567A",
   },
   trecNoteCard: {
-    backgroundColor: "#EFF6FF",
+    backgroundColor: "#EBF2F7",
     borderRadius: 10,
     padding: 14,
     flexDirection: "row",
     alignItems: "flex-start",
     gap: 10,
     borderWidth: 1,
-    borderColor: "#BFDBFE",
+    borderColor: "#C8D9E8",
   },
   trecNoteText: {
     fontSize: 11.5,
-    color: "#1E40AF",
+    color: "#2E567A",
     lineHeight: 16,
     flex: 1,
   },

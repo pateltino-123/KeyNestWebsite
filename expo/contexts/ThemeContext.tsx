@@ -10,16 +10,16 @@ const THEME_STORAGE_KEY = "shoefit_theme";
 
 export const [ThemeProvider, useTheme] = createContextHook(() => {
   const queryClient = useQueryClient();
-  const [mode, setMode] = useState<ThemeMode>("dark");
+  const [mode, setMode] = useState<ThemeMode>("light");
 
   const themeQuery = useQuery({
     queryKey: ["theme"],
     queryFn: async () => {
       try {
         const stored = await AsyncStorage.getItem(THEME_STORAGE_KEY);
-        return (stored as ThemeMode) || "dark";
+        return (stored as ThemeMode) || "light";
       } catch {
-        return "dark" as ThemeMode;
+        return "light" as ThemeMode;
       }
     },
   });

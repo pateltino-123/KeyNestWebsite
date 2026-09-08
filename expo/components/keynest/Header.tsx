@@ -13,7 +13,6 @@ import {
   Home,
   Layers,
   Award,
-  Search,
   DollarSign,
   MapPin,
   Info,
@@ -51,7 +50,6 @@ export default function Header({
     { label: "Home", href: "/", icon: Home },
     { label: "Services", href: "/services", icon: Layers },
     { label: "Why KeyNest", href: "/why-keynest", icon: Award },
-    { label: "Available Rentals", href: "/rentals", icon: Search },
     { label: "Pricing", href: "/pricing", icon: DollarSign },
     { label: "Service Areas", href: "/contact", icon: MapPin },
     { label: "About", href: "/about", icon: Info },
@@ -71,14 +69,14 @@ export default function Header({
       <View style={styles.topBanner}>
         <View style={styles.topBannerContent}>
           <View style={styles.topBannerLeft}>
-            <ShieldCheck size={14} color="#38BDF8" />
+            <ShieldCheck size={14} color="#3B6E99" />
             <Text style={styles.topBannerText}>
               <Text style={styles.boldText}>KeyNest Realty</Text> • Under the Brokerage of{" "}
               <Text style={styles.boldText}>Fair Deal Realty Inc.</Text> • TREC Licensed
             </Text>
           </View>
           <View style={styles.topBannerRight}>
-            <Phone size={13} color="#93C5FD" />
+            <Phone size={13} color="#3B6E99" />
             <Text style={styles.topBannerPhone}>Office: {KEYNEST_INFO.phone}</Text>
             <View style={styles.topBannerDivider} />
             <TouchableOpacity
@@ -148,9 +146,9 @@ export default function Header({
                   onPress={() => setPortalDropdownOpen(!portalDropdownOpen)}
                   accessibilityRole="button"
                 >
-                  <Key size={14} color="#2563EB" />
+                  <Key size={14} color="#3B6E99" />
                   <Text style={styles.portalButtonText}>Client Portals</Text>
-                  <ChevronDown size={14} color="#64748B" />
+                  <ChevronDown size={14} color="#737B85" />
                 </TouchableOpacity>
 
                 {portalDropdownOpen && (
@@ -167,7 +165,7 @@ export default function Header({
                       }}
                     >
                       <View style={styles.dropdownItemIconCircle}>
-                        <Key size={14} color="#2563EB" />
+                        <Key size={14} color="#3B6E99" />
                       </View>
                       <View style={{ flex: 1 }}>
                         <Text style={styles.dropdownItemTitle}>Owner Portal</Text>
@@ -187,7 +185,7 @@ export default function Header({
                       }}
                     >
                       <View style={styles.dropdownItemIconCircle}>
-                        <Users size={14} color="#2563EB" />
+                        <Users size={14} color="#3B6E99" />
                       </View>
                       <View style={{ flex: 1 }}>
                         <Text style={styles.dropdownItemTitle}>Resident Portal</Text>
@@ -223,7 +221,7 @@ export default function Header({
                 accessibilityLabel="Open navigation menu"
                 accessibilityRole="button"
               >
-                <Menu size={24} color="#0F172A" />
+                <Menu size={24} color="#22252A" />
               </TouchableOpacity>
             )}
           </View>
@@ -272,7 +270,7 @@ export default function Header({
                       style={[styles.mobileNavItem, isActive && styles.mobileNavItemActive]}
                       onPress={() => navigateTo(item.href)}
                     >
-                      <Icon size={18} color={isActive ? "#2563EB" : "#64748B"} />
+                      <Icon size={18} color={isActive ? "#3B6E99" : "#737B85"} />
                       <Text style={[styles.mobileNavText, isActive && styles.mobileNavTextActive]}>
                         {item.label}
                       </Text>
@@ -294,7 +292,7 @@ export default function Header({
                     }
                   }}
                 >
-                  <Key size={16} color="#2563EB" />
+                  <Key size={16} color="#3B6E99" />
                   <Text style={styles.mobilePortalBtnText}>AppFolio Owner Portal</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
@@ -308,7 +306,7 @@ export default function Header({
                     }
                   }}
                 >
-                  <Users size={16} color="#2563EB" />
+                  <Users size={16} color="#3B6E99" />
                   <Text style={styles.mobilePortalBtnText}>AppFolio Resident Portal</Text>
                 </TouchableOpacity>
               </View>
@@ -362,15 +360,15 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: "#FFFFFF",
     borderBottomWidth: 1,
-    borderBottomColor: "#E2E8F0",
+    borderBottomColor: "#E8E2D5",
     zIndex: 100,
   },
   topBanner: {
-    backgroundColor: "#0B1120",
+    backgroundColor: "#F7F3EB",
     paddingVertical: 8,
     paddingHorizontal: 16,
     borderBottomWidth: 1,
-    borderBottomColor: "#1E293B",
+    borderBottomColor: "#E8E2D5",
   },
   topBannerContent: {
     maxWidth: 1240,
@@ -393,25 +391,25 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   topBannerText: {
-    color: "#94A3B8",
+    color: "#4A515A",
     fontSize: 12,
   },
   boldText: {
     fontWeight: "700",
-    color: "#FFFFFF",
+    color: "#22252A",
   },
   topBannerPhone: {
-    color: "#93C5FD",
+    color: "#3B6E99",
     fontSize: 12,
     fontWeight: "600",
   },
   topBannerDivider: {
     width: 1,
     height: 12,
-    backgroundColor: "#334155",
+    backgroundColor: "#E8E2D5",
   },
   topBannerLink: {
-    color: "#38BDF8",
+    color: "#3B6E99",
     fontSize: 12,
     fontWeight: "600",
     textDecorationLine: "underline",
@@ -435,16 +433,16 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   logoMark: {
-    width: 40,
-    height: 40,
-    borderRadius: 10,
-    backgroundColor: "#2563EB",
+    width: 38,
+    height: 38,
+    borderRadius: 9,
+    backgroundColor: "#3B6E99",
     justifyContent: "center",
     alignItems: "center",
-    shadowColor: "#2563EB",
-    shadowOpacity: 0.25,
-    shadowRadius: 8,
-    elevation: 3,
+    shadowColor: "#3B6E99",
+    shadowOpacity: 0.15,
+    shadowRadius: 6,
+    elevation: 2,
   },
   logoTitleRow: {
     flexDirection: "row",
@@ -452,43 +450,43 @@ const styles = StyleSheet.create({
     gap: 4,
   },
   logoTextMain: {
-    fontSize: 22,
-    fontWeight: "900",
-    color: "#0F172A",
-    letterSpacing: -0.5,
+    fontSize: 21,
+    fontWeight: "800",
+    color: "#22252A",
+    letterSpacing: -0.4,
   },
   logoTextSub: {
-    fontSize: 21,
+    fontSize: 20,
     fontWeight: "700",
-    color: "#2563EB",
-    letterSpacing: -0.5,
+    color: "#3B6E99",
+    letterSpacing: -0.4,
   },
   logoBrokerSub: {
     fontSize: 11,
-    color: "#64748B",
+    color: "#737B85",
     fontWeight: "500",
     marginTop: -2,
   },
   desktopNavItems: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 6,
+    gap: 4,
   },
   navItem: {
     paddingVertical: 6,
     paddingHorizontal: 11,
-    borderRadius: 8,
+    borderRadius: 6,
   },
   navItemActive: {
-    backgroundColor: "#EFF6FF",
+    backgroundColor: "#EBF2F7",
   },
   navItemText: {
     fontSize: 13.5,
     fontWeight: "600",
-    color: "#334155",
+    color: "#4A515A",
   },
   navItemTextActive: {
-    color: "#2563EB",
+    color: "#3B6E99",
     fontWeight: "700",
   },
   actionButtonsContainer: {
@@ -505,16 +503,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 6,
     paddingVertical: 8,
-    paddingHorizontal: 14,
-    borderRadius: 8,
+    paddingHorizontal: 13,
+    borderRadius: 7,
     borderWidth: 1,
-    borderColor: "#CBD5E1",
-    backgroundColor: "#F8FAFC",
+    borderColor: "#E8E2D5",
+    backgroundColor: "#FDFBF7",
   },
   portalButtonText: {
     fontSize: 13,
     fontWeight: "600",
-    color: "#0F172A",
+    color: "#22252A",
   },
   dropdownMenu: {
     position: "absolute",
@@ -522,14 +520,14 @@ const styles = StyleSheet.create({
     right: 0,
     width: 250,
     backgroundColor: "#FFFFFF",
-    borderRadius: 12,
+    borderRadius: 10,
     borderWidth: 1,
-    borderColor: "#E2E8F0",
+    borderColor: "#E8E2D5",
     padding: 6,
-    shadowColor: "#0F172A",
-    shadowOpacity: 0.12,
-    shadowRadius: 16,
-    elevation: 8,
+    shadowColor: "#22252A",
+    shadowOpacity: 0.08,
+    shadowRadius: 14,
+    elevation: 6,
     zIndex: 200,
   },
   dropdownItem: {
@@ -538,41 +536,41 @@ const styles = StyleSheet.create({
     gap: 10,
     paddingVertical: 10,
     paddingHorizontal: 12,
-    borderRadius: 8,
+    borderRadius: 7,
   },
   dropdownItemIconCircle: {
     width: 30,
     height: 30,
-    borderRadius: 8,
-    backgroundColor: "#EFF6FF",
+    borderRadius: 7,
+    backgroundColor: "#EBF2F7",
     justifyContent: "center",
     alignItems: "center",
   },
   dropdownItemTitle: {
     fontSize: 13,
     fontWeight: "700",
-    color: "#0F172A",
+    color: "#22252A",
   },
   dropdownItemSub: {
     fontSize: 11,
-    color: "#64748B",
+    color: "#737B85",
     marginTop: 1,
   },
   dropdownDivider: {
     height: 1,
-    backgroundColor: "#F1F5F9",
+    backgroundColor: "#F7F3EB",
     marginVertical: 4,
   },
   primaryCtaButton: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#2563EB",
+    backgroundColor: "#3B6E99",
     paddingVertical: 9,
     paddingHorizontal: 16,
-    borderRadius: 8,
-    shadowColor: "#2563EB",
-    shadowOpacity: 0.25,
-    shadowRadius: 8,
+    borderRadius: 7,
+    shadowColor: "#3B6E99",
+    shadowOpacity: 0.18,
+    shadowRadius: 6,
     elevation: 2,
   },
   primaryCtaText: {
@@ -582,24 +580,24 @@ const styles = StyleSheet.create({
   },
   mobileMenuToggle: {
     padding: 8,
-    borderRadius: 8,
-    backgroundColor: "#F1F5F9",
+    borderRadius: 7,
+    backgroundColor: "#F7F3EB",
   },
   mobileDrawerOverlay: {
     flex: 1,
-    backgroundColor: "rgba(15, 23, 42, 0.6)",
+    backgroundColor: "rgba(34, 37, 42, 0.5)",
     flexDirection: "row",
     justifyContent: "flex-end",
   },
   mobileDrawerContent: {
     width: "82%",
     maxWidth: 380,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#FDFBF7",
     height: "100%",
-    shadowColor: "#000",
-    shadowOpacity: 0.2,
+    shadowColor: "#22252A",
+    shadowOpacity: 0.15,
     shadowRadius: 12,
-    elevation: 10,
+    elevation: 8,
   },
   mobileDrawerHeader: {
     flexDirection: "row",
@@ -607,28 +605,29 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 16,
     borderBottomWidth: 1,
-    borderBottomColor: "#E2E8F0",
+    borderBottomColor: "#E8E2D5",
+    backgroundColor: "#FFFFFF",
   },
   logoMarkSmall: {
     width: 32,
     height: 32,
     borderRadius: 8,
-    backgroundColor: "#2563EB",
+    backgroundColor: "#3B6E99",
     justifyContent: "center",
     alignItems: "center",
   },
   logoTextMainSmall: {
     fontSize: 16,
     fontWeight: "800",
-    color: "#0F172A",
+    color: "#22252A",
   },
   logoBrokerSubSmall: {
     fontSize: 10,
-    color: "#64748B",
+    color: "#737B85",
   },
   closeDrawerBtn: {
     padding: 6,
-    borderRadius: 8,
+    borderRadius: 6,
   },
   mobileLinksScroll: {
     flex: 1,
@@ -641,20 +640,20 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 12,
-    paddingVertical: 12,
+    paddingVertical: 11,
     paddingHorizontal: 12,
-    borderRadius: 8,
+    borderRadius: 7,
   },
   mobileNavItemActive: {
-    backgroundColor: "#EFF6FF",
+    backgroundColor: "#EBF2F7",
   },
   mobileNavText: {
-    fontSize: 15,
-    color: "#334155",
+    fontSize: 14.5,
+    color: "#4A515A",
     fontWeight: "500",
   },
   mobileNavTextActive: {
-    color: "#2563EB",
+    color: "#3B6E99",
     fontWeight: "700",
   },
   mobilePortalSection: {
@@ -662,12 +661,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingTop: 16,
     borderTopWidth: 1,
-    borderTopColor: "#F1F5F9",
+    borderTopColor: "#E8E2D5",
   },
   mobileSectionHeader: {
     fontSize: 11,
     fontWeight: "700",
-    color: "#94A3B8",
+    color: "#737B85",
     letterSpacing: 0.8,
     marginBottom: 10,
   },
@@ -677,25 +676,25 @@ const styles = StyleSheet.create({
     gap: 10,
     paddingVertical: 11,
     paddingHorizontal: 12,
-    backgroundColor: "#F8FAFC",
-    borderRadius: 8,
+    backgroundColor: "#FFFFFF",
+    borderRadius: 7,
     borderWidth: 1,
-    borderColor: "#E2E8F0",
+    borderColor: "#E8E2D5",
     marginBottom: 8,
   },
   mobilePortalBtnText: {
     fontSize: 13.5,
     fontWeight: "600",
-    color: "#0F172A",
+    color: "#22252A",
   },
   mobileCtaSection: {
     padding: 16,
     gap: 10,
   },
   mobilePrimaryCta: {
-    backgroundColor: "#2563EB",
-    paddingVertical: 13,
-    borderRadius: 8,
+    backgroundColor: "#3B6E99",
+    paddingVertical: 12,
+    borderRadius: 7,
     alignItems: "center",
   },
   mobilePrimaryCtaText: {
@@ -706,13 +705,13 @@ const styles = StyleSheet.create({
   mobileSecondaryCta: {
     backgroundColor: "#FFFFFF",
     borderWidth: 1,
-    borderColor: "#CBD5E1",
+    borderColor: "#E8E2D5",
     paddingVertical: 12,
-    borderRadius: 8,
+    borderRadius: 7,
     alignItems: "center",
   },
   mobileSecondaryCtaText: {
-    color: "#0F172A",
+    color: "#22252A",
     fontSize: 14,
     fontWeight: "600",
   },
@@ -720,12 +719,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingTop: 16,
     borderTopWidth: 1,
-    borderTopColor: "#F1F5F9",
+    borderTopColor: "#E8E2D5",
     gap: 4,
   },
   mobileComplianceText: {
     fontSize: 11,
-    color: "#94A3B8",
+    color: "#737B85",
     lineHeight: 16,
   },
 });

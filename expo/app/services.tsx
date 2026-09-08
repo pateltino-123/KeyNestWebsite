@@ -37,7 +37,7 @@ export default function ServicesPage() {
       <View style={styles.headerHero}>
         <View style={styles.innerContainer}>
           <View style={styles.badgePill}>
-            <ShieldCheck size={14} color="#38BDF8" />
+            <ShieldCheck size={14} color="#3B6E99" />
             <Text style={styles.badgePillText}>Under the Brokerage of Fair Deal Realty Inc.</Text>
           </View>
           <Text style={styles.pageTitle}>Full Management Lifecycle</Text>
@@ -120,14 +120,14 @@ export default function ServicesPage() {
                       <Text style={styles.stageNumberBadgeText}>STAGE {stage.stageNumber}</Text>
                     </View>
                     <View style={styles.slaBadge}>
-                      <Clock size={12} color="#2563EB" />
-                      <Text style={styles.slaBadgeText}>{stage.sla}</Text>
+                      <Clock size={12} color="#3B6E99" />
+                      <Text style={styles.slaBadgeText}>Standard SLA: {stage.sla}</Text>
                     </View>
                   </View>
 
                   <View style={styles.stageTitleRow}>
                     <View style={styles.iconCircle}>
-                      <Icon size={22} color="#2563EB" />
+                      <Icon size={22} color="#3B6E99" />
                     </View>
                     <View style={{ flex: 1 }}>
                       <Text style={styles.stageMainTitle}>{stage.title}</Text>
@@ -167,7 +167,7 @@ export default function ServicesPage() {
                         style={styles.stageSecondaryBtn}
                         onPress={openConsultation}
                       >
-                        <Calendar size={14} color="#0F172A" />
+                        <Calendar size={14} color="#22252A" />
                         <Text style={styles.stageSecondaryBtnText}>Ask Questions</Text>
                       </TouchableOpacity>
                     </View>
@@ -212,10 +212,10 @@ export default function ServicesPage() {
 
 const styles = StyleSheet.create({
   headerHero: {
-    backgroundColor: "#0B1120",
-    paddingVertical: 72,
+    backgroundColor: "#FDFBF7",
+    paddingVertical: 64,
     borderBottomWidth: 1,
-    borderBottomColor: "#1E293B",
+    borderBottomColor: "#E8E2D5",
   },
   innerContainer: {
     maxWidth: 1240,
@@ -228,64 +228,64 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-    backgroundColor: "#1E293B",
+    backgroundColor: "#F7F3EB",
     paddingVertical: 6,
     paddingHorizontal: 12,
     borderRadius: 20,
     borderWidth: 1,
-    borderColor: "#334155",
+    borderColor: "#E8E2D5",
     marginBottom: 16,
   },
   badgePillText: {
-    color: "#E2E8F0",
+    color: "#4A515A",
     fontSize: 12.5,
     fontWeight: "600",
   },
   pageTitle: {
-    fontSize: 40,
+    fontSize: 38,
     fontWeight: "900",
-    color: "#FFFFFF",
+    color: "#22252A",
     letterSpacing: -1,
     marginBottom: 12,
   },
   pageSubtitle: {
-    fontSize: 16.5,
-    color: "#94A3B8",
+    fontSize: 16,
+    color: "#4A515A",
     maxWidth: 760,
     lineHeight: 25,
   },
   sectionWhite: {
-    backgroundColor: "#FFFFFF",
-    paddingVertical: 72,
+    backgroundColor: "#F7F3EB",
+    paddingVertical: 64,
   },
   sectionIntroRow: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "flex-end",
-    marginBottom: 36,
+    marginBottom: 32,
     flexWrap: "wrap",
     gap: 16,
   },
   sectionOverline: {
     fontSize: 12,
     fontWeight: "800",
-    color: "#2563EB",
+    color: "#3B6E99",
     letterSpacing: 1,
     marginBottom: 6,
   },
   sectionHeading: {
     fontSize: 28,
     fontWeight: "800",
-    color: "#0F172A",
+    color: "#22252A",
   },
   analysisBtnTop: {
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-    backgroundColor: "#2563EB",
-    paddingVertical: 11,
+    backgroundColor: "#3B6E99",
+    paddingVertical: 10,
     paddingHorizontal: 18,
-    borderRadius: 8,
+    borderRadius: 7,
   },
   analysisBtnTopText: {
     color: "#FFFFFF",
@@ -293,9 +293,9 @@ const styles = StyleSheet.create({
     fontWeight: "700",
   },
   stageTabsContainer: {
-    marginBottom: 36,
+    marginBottom: 32,
     borderBottomWidth: 1,
-    borderBottomColor: "#E2E8F0",
+    borderBottomColor: "#E8E2D5",
     paddingBottom: 12,
   },
   stageTabsRow: {
@@ -309,30 +309,33 @@ const styles = StyleSheet.create({
     gap: 8,
     paddingVertical: 8,
     paddingHorizontal: 14,
-    borderRadius: 8,
-    backgroundColor: "#F8FAFC",
+    borderRadius: 7,
+    backgroundColor: "#FFFFFF",
     borderWidth: 1,
-    borderColor: "#E2E8F0",
+    borderColor: "#E8E2D5",
   },
   stageTabItemActive: {
-    backgroundColor: "#EFF6FF",
-    borderColor: "#2563EB",
+    backgroundColor: "#EBF2F7",
+    borderColor: "#3B6E99",
   },
   tabNumberCircle: {
     width: 22,
     height: 22,
     borderRadius: 11,
-    backgroundColor: "#E2E8F0",
+    backgroundColor: "#FAF7F0",
+    borderWidth: 1,
+    borderColor: "#E8E2D5",
     justifyContent: "center",
     alignItems: "center",
   },
   tabNumberCircleActive: {
-    backgroundColor: "#2563EB",
+    backgroundColor: "#3B6E99",
+    borderColor: "#3B6E99",
   },
   tabNumberText: {
     fontSize: 11,
     fontWeight: "800",
-    color: "#475569",
+    color: "#737B85",
   },
   tabNumberTextActive: {
     color: "#FFFFFF",
@@ -340,30 +343,30 @@ const styles = StyleSheet.create({
   tabLabel: {
     fontSize: 13,
     fontWeight: "600",
-    color: "#475569",
+    color: "#4A515A",
   },
   tabLabelActive: {
-    color: "#2563EB",
+    color: "#3B6E99",
     fontWeight: "700",
   },
   stagesList: {
-    gap: 24,
+    gap: 20,
   },
   lifecycleCard: {
     backgroundColor: "#FFFFFF",
-    borderRadius: 14,
+    borderRadius: 12,
     borderWidth: 1,
-    borderColor: "#E2E8F0",
+    borderColor: "#E8E2D5",
     padding: 24,
     gap: 16,
   },
   lifecycleCardHighlighted: {
-    borderColor: "#2563EB",
-    borderWidth: 2,
-    shadowColor: "#2563EB",
-    shadowOpacity: 0.1,
-    shadowRadius: 16,
-    elevation: 4,
+    borderColor: "#3B6E99",
+    borderWidth: 1.5,
+    shadowColor: "#3B6E99",
+    shadowOpacity: 0.08,
+    shadowRadius: 12,
+    elevation: 3,
   },
   cardHeaderRow: {
     flexDirection: "row",
@@ -371,7 +374,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   stageNumberBadge: {
-    backgroundColor: "#0F172A",
+    backgroundColor: "#22252A",
     paddingVertical: 4,
     paddingHorizontal: 10,
     borderRadius: 6,
@@ -386,7 +389,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 6,
-    backgroundColor: "#EFF6FF",
+    backgroundColor: "#EBF2F7",
     paddingVertical: 4,
     paddingHorizontal: 10,
     borderRadius: 6,
@@ -394,7 +397,7 @@ const styles = StyleSheet.create({
   slaBadgeText: {
     fontSize: 12,
     fontWeight: "700",
-    color: "#2563EB",
+    color: "#3B6E99",
   },
   stageTitleRow: {
     flexDirection: "row",
@@ -402,21 +405,21 @@ const styles = StyleSheet.create({
     gap: 14,
   },
   iconCircle: {
-    width: 44,
-    height: 44,
-    borderRadius: 10,
-    backgroundColor: "#EFF6FF",
+    width: 42,
+    height: 42,
+    borderRadius: 8,
+    backgroundColor: "#EBF2F7",
     justifyContent: "center",
     alignItems: "center",
   },
   stageMainTitle: {
-    fontSize: 19,
+    fontSize: 18.5,
     fontWeight: "800",
-    color: "#0F172A",
+    color: "#22252A",
   },
   stageAudience: {
     fontSize: 12.5,
-    color: "#64748B",
+    color: "#737B85",
     marginTop: 2,
   },
   twoColDetails: {
@@ -424,36 +427,36 @@ const styles = StyleSheet.create({
     gap: 16,
   },
   detailBoxLeft: {
-    backgroundColor: "#F8FAFC",
-    borderRadius: 10,
+    backgroundColor: "#FAF7F0",
+    borderRadius: 8,
     padding: 16,
     gap: 6,
     borderWidth: 1,
-    borderColor: "#E2E8F0",
+    borderColor: "#E8E2D5",
   },
   detailBoxRight: {
-    backgroundColor: "#EFF6FF",
-    borderRadius: 10,
+    backgroundColor: "#EBF2F7",
+    borderRadius: 8,
     padding: 16,
     gap: 6,
     borderWidth: 1,
-    borderColor: "#BFDBFE",
+    borderColor: "#C8D9E8",
   },
   detailLabel: {
     fontSize: 11,
     fontWeight: "800",
-    color: "#475569",
+    color: "#4A515A",
     letterSpacing: 0.6,
   },
   detailLabelBlue: {
     fontSize: 11,
     fontWeight: "800",
-    color: "#1E40AF",
+    color: "#2E567A",
     letterSpacing: 0.6,
   },
   detailText: {
     fontSize: 13.5,
-    color: "#334155",
+    color: "#22252A",
     lineHeight: 20,
   },
   stageActionRow: {
@@ -465,10 +468,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 6,
-    backgroundColor: "#2563EB",
+    backgroundColor: "#3B6E99",
     paddingVertical: 10,
     paddingHorizontal: 16,
-    borderRadius: 8,
+    borderRadius: 7,
   },
   stageCtaBtnText: {
     color: "#FFFFFF",
@@ -479,19 +482,21 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 6,
-    backgroundColor: "#F1F5F9",
+    backgroundColor: "#FFFFFF",
+    borderWidth: 1,
+    borderColor: "#E8E2D5",
     paddingVertical: 10,
     paddingHorizontal: 14,
-    borderRadius: 8,
+    borderRadius: 7,
   },
   stageSecondaryBtnText: {
-    color: "#0F172A",
+    color: "#22252A",
     fontSize: 13,
     fontWeight: "600",
   },
   bottomBanner: {
-    backgroundColor: "#0B1120",
-    paddingVertical: 60,
+    backgroundColor: "#22252A",
+    paddingVertical: 56,
   },
   bottomBannerRow: {
     justifyContent: "space-between",
@@ -501,12 +506,12 @@ const styles = StyleSheet.create({
   bottomBannerTitle: {
     fontSize: 26,
     fontWeight: "800",
-    color: "#FFFFFF",
+    color: "#F5F3EF",
     marginBottom: 6,
   },
   bottomBannerSub: {
     fontSize: 15,
-    color: "#94A3B8",
+    color: "#A2AAB5",
   },
   bottomBannerButtons: {
     flexDirection: "row",
@@ -514,10 +519,10 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   bottomPrimaryBtn: {
-    backgroundColor: "#2563EB",
+    backgroundColor: "#3B6E99",
     paddingVertical: 13,
     paddingHorizontal: 20,
-    borderRadius: 8,
+    borderRadius: 7,
   },
   bottomPrimaryBtnText: {
     color: "#FFFFFF",
@@ -527,13 +532,13 @@ const styles = StyleSheet.create({
   bottomSecondaryBtn: {
     backgroundColor: "transparent",
     borderWidth: 1,
-    borderColor: "#334155",
+    borderColor: "#4A515A",
     paddingVertical: 13,
     paddingHorizontal: 18,
-    borderRadius: 8,
+    borderRadius: 7,
   },
   bottomSecondaryBtnText: {
-    color: "#E2E8F0",
+    color: "#F5F3EF",
     fontSize: 14,
     fontWeight: "600",
   },

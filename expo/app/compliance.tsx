@@ -29,7 +29,7 @@ export default function CompliancePage() {
       <View style={styles.headerHero}>
         <View style={styles.innerContainer}>
           <View style={styles.badgePill}>
-            <ShieldCheck size={14} color="#38BDF8" />
+            <ShieldCheck size={14} color="#3B6E99" />
             <Text style={styles.badgePillText}>Texas Real Estate Commission (TREC) Regulatory Notices</Text>
           </View>
           <Text style={styles.pageTitle}>Regulatory Compliance & Broker Disclosures</Text>
@@ -45,7 +45,7 @@ export default function CompliancePage() {
             {/* 1. Broker Identification & Relationship */}
             <View style={styles.complianceCard}>
               <View style={styles.cardHeader}>
-                <Building size={22} color="#2563EB" />
+                <Building size={22} color="#3B6E99" />
                 <Text style={styles.cardHeading}>Brokerage Identification & Operating Entity</Text>
               </View>
               <Text style={styles.bodyParagraph}>
@@ -65,7 +65,7 @@ export default function CompliancePage() {
             {/* 2. Mandatory TREC Notices */}
             <View style={styles.complianceCard}>
               <View style={styles.cardHeader}>
-                <FileText size={22} color="#2563EB" />
+                <FileText size={22} color="#3B6E99" />
                 <Text style={styles.cardHeading}>Texas Real Estate Commission (TREC) Mandatory Notices</Text>
               </View>
               <Text style={styles.bodyParagraph}>
@@ -81,7 +81,7 @@ export default function CompliancePage() {
                     <Text style={styles.trecBtnTitle}>TREC Information About Brokerage Services (IABS)</Text>
                     <Text style={styles.trecBtnSub}>Learn about the different types of brokerage representation and consumer duties.</Text>
                   </View>
-                  <ExternalLink size={16} color="#2563EB" />
+                  <ExternalLink size={16} color="#3B6E99" />
                 </TouchableOpacity>
 
                 <TouchableOpacity
@@ -92,7 +92,7 @@ export default function CompliancePage() {
                     <Text style={styles.trecBtnTitle}>TREC Consumer Protection Notice</Text>
                     <Text style={styles.trecBtnSub}>Official TREC notice regarding broker licensing, recovery funds, and filing complaints.</Text>
                   </View>
-                  <ExternalLink size={16} color="#2563EB" />
+                  <ExternalLink size={16} color="#3B6E99" />
                 </TouchableOpacity>
               </View>
             </View>
@@ -100,7 +100,7 @@ export default function CompliancePage() {
             {/* 3. Fair Housing Policy */}
             <View style={styles.complianceCard}>
               <View style={styles.cardHeader}>
-                <Scale size={22} color="#2563EB" />
+                <Scale size={22} color="#3B6E99" />
                 <Text style={styles.cardHeading}>Equal Housing Opportunity & Fair Housing Statement</Text>
               </View>
               <Text style={styles.bodyParagraph}>
@@ -109,7 +109,7 @@ export default function CompliancePage() {
               <View style={styles.protectedClassesRow}>
                 {["Race", "Color", "National Origin", "Religion", "Sex", "Familial Status", "Disability"].map((cls) => (
                   <View key={cls} style={styles.classPill}>
-                    <CheckCircle2 size={13} color="#2563EB" />
+                    <CheckCircle2 size={13} color="#3B6E99" />
                     <Text style={styles.classPillText}>{cls}</Text>
                   </View>
                 ))}
@@ -119,7 +119,7 @@ export default function CompliancePage() {
             {/* 4. Security Deposit Trust Accounts */}
             <View style={styles.complianceCard}>
               <View style={styles.cardHeader}>
-                <Lock size={22} color="#2563EB" />
+                <Lock size={22} color="#3B6E99" />
                 <Text style={styles.cardHeading}>Security Deposit & Trust Escrow Accounting</Text>
               </View>
               <Text style={styles.bodyParagraph}>
@@ -135,10 +135,10 @@ export default function CompliancePage() {
 
 const styles = StyleSheet.create({
   headerHero: {
-    backgroundColor: "#0B1120",
+    backgroundColor: "#FDFBF7",
     paddingVertical: 72,
     borderBottomWidth: 1,
-    borderBottomColor: "#1E293B",
+    borderBottomColor: "#E8E2D5",
   },
   innerContainer: {
     maxWidth: 1240,
@@ -151,29 +151,29 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-    backgroundColor: "#1E293B",
+    backgroundColor: "#EBF2F7",
     paddingVertical: 6,
     paddingHorizontal: 12,
     borderRadius: 20,
     borderWidth: 1,
-    borderColor: "#334155",
+    borderColor: "#C8D9E8",
     marginBottom: 16,
   },
   badgePillText: {
-    color: "#E2E8F0",
+    color: "#2E567A",
     fontSize: 12.5,
     fontWeight: "600",
   },
   pageTitle: {
     fontSize: 38,
     fontWeight: "900",
-    color: "#FFFFFF",
+    color: "#22252A",
     letterSpacing: -1,
     marginBottom: 12,
   },
   pageSubtitle: {
     fontSize: 16.5,
-    color: "#94A3B8",
+    color: "#4A515A",
     maxWidth: 760,
     lineHeight: 25,
   },
@@ -188,10 +188,10 @@ const styles = StyleSheet.create({
     gap: 24,
   },
   complianceCard: {
-    backgroundColor: "#F8FAFC",
+    backgroundColor: "#FAF7F0",
     borderRadius: 14,
     borderWidth: 1,
-    borderColor: "#E2E8F0",
+    borderColor: "#E8E2D5",
     padding: 28,
     gap: 14,
   },
@@ -204,11 +204,11 @@ const styles = StyleSheet.create({
   cardHeading: {
     fontSize: 18,
     fontWeight: "800",
-    color: "#0F172A",
+    color: "#22252A",
   },
   bodyParagraph: {
     fontSize: 14,
-    color: "#475569",
+    color: "#4A515A",
     lineHeight: 22,
   },
   infoGrid: {
@@ -216,12 +216,12 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 16,
     borderWidth: 1,
-    borderColor: "#E2E8F0",
+    borderColor: "#E8E2D5",
     gap: 8,
   },
   infoLine: {
     fontSize: 13,
-    color: "#334155",
+    color: "#4A515A",
     fontWeight: "500",
   },
   trecButtonsGroup: {
@@ -236,17 +236,17 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 16,
     borderWidth: 1,
-    borderColor: "#CBD5E1",
+    borderColor: "#E8E2D5",
     gap: 14,
   },
   trecBtnTitle: {
     fontSize: 14.5,
     fontWeight: "700",
-    color: "#0F172A",
+    color: "#22252A",
   },
   trecBtnSub: {
     fontSize: 12,
-    color: "#64748B",
+    color: "#737B85",
     marginTop: 2,
   },
   protectedClassesRow: {
@@ -259,16 +259,16 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 6,
-    backgroundColor: "#EFF6FF",
+    backgroundColor: "#EBF2F7",
     paddingVertical: 6,
     paddingHorizontal: 10,
     borderRadius: 6,
     borderWidth: 1,
-    borderColor: "#BFDBFE",
+    borderColor: "#C8D9E8",
   },
   classPillText: {
     fontSize: 12,
     fontWeight: "600",
-    color: "#1E40AF",
+    color: "#2E567A",
   },
 });

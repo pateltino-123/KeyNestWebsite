@@ -97,7 +97,7 @@ export default function WhyKeyNestPage() {
       <View style={styles.headerHero}>
         <View style={styles.innerContainer}>
           <View style={styles.badgePill}>
-            <ShieldCheck size={14} color="#38BDF8" />
+            <ShieldCheck size={14} color="#3B6E99" />
             <Text style={styles.badgePillText}>Under the Brokerage of Fair Deal Realty Inc.</Text>
           </View>
           <Text style={styles.pageTitle}>Why Owners Choose KeyNest</Text>
@@ -135,7 +135,7 @@ export default function WhyKeyNestPage() {
                   ]}
                 >
                   <View style={styles.pillarIconBox}>
-                    <Icon size={22} color="#2563EB" />
+                    <Icon size={22} color="#3B6E99" />
                   </View>
                   <Text style={styles.pillarTitle}>{pil.title}</Text>
                   <Text style={styles.pillarDesc}>{pil.desc}</Text>
@@ -245,7 +245,7 @@ export default function WhyKeyNestPage() {
               <ArrowRight size={16} color="#FFFFFF" />
             </TouchableOpacity>
             <TouchableOpacity style={styles.secondaryCtaBtn} onPress={openConsultation}>
-              <Calendar size={16} color="#0F172A" />
+              <Calendar size={16} color="#22252A" />
               <Text style={styles.secondaryCtaText}>Schedule Consultation</Text>
             </TouchableOpacity>
           </View>
@@ -257,10 +257,10 @@ export default function WhyKeyNestPage() {
 
 const styles = StyleSheet.create({
   headerHero: {
-    backgroundColor: "#0B1120",
+    backgroundColor: "#FDFBF7",
     paddingVertical: 72,
     borderBottomWidth: 1,
-    borderBottomColor: "#1E293B",
+    borderBottomColor: "#E8E2D5",
   },
   innerContainer: {
     maxWidth: 1240,
@@ -273,29 +273,29 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-    backgroundColor: "#1E293B",
+    backgroundColor: "#EBF2F7",
     paddingVertical: 6,
     paddingHorizontal: 12,
     borderRadius: 20,
     borderWidth: 1,
-    borderColor: "#334155",
+    borderColor: "#C8D9E8",
     marginBottom: 16,
   },
   badgePillText: {
-    color: "#E2E8F0",
+    color: "#2E567A",
     fontSize: 12.5,
     fontWeight: "600",
   },
   pageTitle: {
     fontSize: 40,
     fontWeight: "900",
-    color: "#FFFFFF",
+    color: "#22252A",
     letterSpacing: -1,
     marginBottom: 12,
   },
   pageSubtitle: {
     fontSize: 16.5,
-    color: "#94A3B8",
+    color: "#4A515A",
     maxWidth: 760,
     lineHeight: 25,
   },
@@ -304,7 +304,7 @@ const styles = StyleSheet.create({
     paddingVertical: 72,
   },
   sectionAlt: {
-    backgroundColor: "#F8FAFC",
+    backgroundColor: "#F7F3EB",
     paddingVertical: 72,
   },
   sectionHeaderCentered: {
@@ -315,21 +315,21 @@ const styles = StyleSheet.create({
   sectionOverline: {
     fontSize: 12,
     fontWeight: "800",
-    color: "#2563EB",
+    color: "#3B6E99",
     letterSpacing: 1.2,
     marginBottom: 8,
   },
   sectionTitle: {
     fontSize: 32,
     fontWeight: "800",
-    color: "#0F172A",
+    color: "#22252A",
     letterSpacing: -0.5,
     textAlign: "center",
     marginBottom: 12,
   },
   sectionSubtitle: {
     fontSize: 16,
-    color: "#64748B",
+    color: "#4A515A",
     maxWidth: 720,
     textAlign: "center",
     lineHeight: 24,
@@ -343,9 +343,9 @@ const styles = StyleSheet.create({
     borderRadius: 14,
     padding: 26,
     borderWidth: 1,
-    borderColor: "#E2E8F0",
+    borderColor: "#E8E2D5",
     gap: 12,
-    shadowColor: "#0F172A",
+    shadowColor: "#22252A",
     shadowOpacity: 0.04,
     shadowRadius: 12,
     elevation: 2,
@@ -354,40 +354,40 @@ const styles = StyleSheet.create({
     width: 44,
     height: 44,
     borderRadius: 10,
-    backgroundColor: "#EFF6FF",
+    backgroundColor: "#EBF2F7",
     justifyContent: "center",
     alignItems: "center",
   },
   pillarTitle: {
     fontSize: 18,
     fontWeight: "800",
-    color: "#0F172A",
+    color: "#22252A",
   },
   pillarDesc: {
     fontSize: 14,
-    color: "#475569",
+    color: "#4A515A",
     lineHeight: 21,
   },
   tableWrapper: {
     backgroundColor: "#FFFFFF",
     borderRadius: 14,
     borderWidth: 1,
-    borderColor: "#E2E8F0",
+    borderColor: "#E8E2D5",
     overflow: "hidden",
   },
   tableRow: {
     padding: 20,
     borderBottomWidth: 1,
-    borderBottomColor: "#F1F5F9",
+    borderBottomColor: "#E8E2D5",
     gap: 12,
   },
   tableRowAlt: {
-    backgroundColor: "#F8FAFC",
+    backgroundColor: "#FAF7F0",
   },
   tableFeatureCol: {
     fontSize: 16,
     fontWeight: "800",
-    color: "#0F172A",
+    color: "#22252A",
   },
   tableColGroup: {
     gap: 12,
@@ -398,32 +398,32 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     padding: 12,
     borderWidth: 1,
-    borderColor: "#E2E8F0",
+    borderColor: "#E8E2D5",
     gap: 4,
   },
   tableColKeynest: {
-    backgroundColor: "#EFF6FF",
-    borderColor: "#BFDBFE",
+    backgroundColor: "#EBF2F7",
+    borderColor: "#C8D9E8",
   },
   colLabel: {
     fontSize: 11,
     fontWeight: "800",
-    color: "#64748B",
+    color: "#737B85",
   },
   colLabelKeynest: {
     fontSize: 11,
     fontWeight: "800",
-    color: "#1E40AF",
+    color: "#2E567A",
   },
   colValText: {
     fontSize: 13,
-    color: "#475569",
+    color: "#4A515A",
     lineHeight: 18,
   },
   colValTextKeynest: {
     fontSize: 13,
     fontWeight: "700",
-    color: "#1D4ED8",
+    color: "#2E567A",
     lineHeight: 18,
   },
   guaranteesGrid: {
@@ -432,10 +432,10 @@ const styles = StyleSheet.create({
   },
   guaranteeCard: {
     flex: 1,
-    backgroundColor: "#F8FAFC",
+    backgroundColor: "#FAF7F0",
     borderRadius: 14,
     borderWidth: 1,
-    borderColor: "#E2E8F0",
+    borderColor: "#E8E2D5",
     padding: 24,
     gap: 10,
   },
@@ -443,7 +443,7 @@ const styles = StyleSheet.create({
     width: 32,
     height: 32,
     borderRadius: 16,
-    backgroundColor: "#2563EB",
+    backgroundColor: "#3B6E99",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -455,11 +455,11 @@ const styles = StyleSheet.create({
   guaranteeTitle: {
     fontSize: 17,
     fontWeight: "800",
-    color: "#0F172A",
+    color: "#22252A",
   },
   guaranteeDesc: {
     fontSize: 13.5,
-    color: "#475569",
+    color: "#4A515A",
     lineHeight: 20,
   },
   ctaBottomRow: {
@@ -472,7 +472,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-    backgroundColor: "#2563EB",
+    backgroundColor: "#3B6E99",
     paddingVertical: 14,
     paddingHorizontal: 24,
     borderRadius: 8,
@@ -486,15 +486,15 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-    backgroundColor: "#F1F5F9",
+    backgroundColor: "#FFFFFF",
     borderWidth: 1,
-    borderColor: "#CBD5E1",
+    borderColor: "#E8E2D5",
     paddingVertical: 14,
     paddingHorizontal: 22,
     borderRadius: 8,
   },
   secondaryCtaText: {
-    color: "#0F172A",
+    color: "#22252A",
     fontSize: 15,
     fontWeight: "700",
   },

@@ -67,7 +67,7 @@ export default function OwnersPage() {
       <View style={styles.headerHero}>
         <View style={styles.innerContainer}>
           <View style={styles.badgePill}>
-            <ShieldCheck size={14} color="#38BDF8" />
+            <ShieldCheck size={14} color="#3B6E99" />
             <Text style={styles.badgePillText}>Under the Brokerage of Fair Deal Realty Inc.</Text>
           </View>
           <Text style={styles.pageTitle}>Property Owner Center</Text>
@@ -83,7 +83,7 @@ export default function OwnersPage() {
           <View style={[styles.portalBox, { flexDirection: isDesktop ? "row" : "column" }]}>
             <View style={{ flex: 1, gap: 10 }}>
               <View style={styles.portalTag}>
-                <Lock size={12} color="#2563EB" />
+                <Lock size={12} color="#3B6E99" />
                 <Text style={styles.portalTagText}>APPFOLIO OWNER PORTAL</Text>
               </View>
               <Text style={styles.portalTitle}>Real-Time Owner Accounting & Documents</Text>
@@ -376,7 +376,7 @@ export default function OwnersPage() {
             </View>
 
             <View style={[styles.timelineCard, styles.timelineCardHighlight]}>
-              <View style={[styles.timelineDateBadge, { backgroundColor: "#2563EB" }]}>
+              <View style={[styles.timelineDateBadge, { backgroundColor: "#3B6E99" }]}>
                 <Text style={[styles.timelineDateText, { color: "#FFFFFF" }]}>10TH OF MONTH</Text>
               </View>
               <Text style={styles.timelineCardTitle}>Owner ACH Direct Deposit</Text>
@@ -403,10 +403,10 @@ export default function OwnersPage() {
 
 const styles = StyleSheet.create({
   headerHero: {
-    backgroundColor: "#0B1120",
+    backgroundColor: "#FDFBF7",
     paddingVertical: 72,
     borderBottomWidth: 1,
-    borderBottomColor: "#1E293B",
+    borderBottomColor: "#E8E2D5",
   },
   innerContainer: {
     maxWidth: 1240,
@@ -419,34 +419,34 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-    backgroundColor: "#1E293B",
+    backgroundColor: "#EBF2F7",
     paddingVertical: 6,
     paddingHorizontal: 12,
     borderRadius: 20,
     borderWidth: 1,
-    borderColor: "#334155",
+    borderColor: "#C8D9E8",
     marginBottom: 16,
   },
   badgePillText: {
-    color: "#E2E8F0",
+    color: "#2E567A",
     fontSize: 12.5,
     fontWeight: "600",
   },
   pageTitle: {
     fontSize: 40,
     fontWeight: "900",
-    color: "#FFFFFF",
+    color: "#22252A",
     letterSpacing: -1,
     marginBottom: 12,
   },
   pageSubtitle: {
     fontSize: 16.5,
-    color: "#94A3B8",
+    color: "#4A515A",
     maxWidth: 760,
     lineHeight: 25,
   },
   sectionLight: {
-    backgroundColor: "#F8FAFC",
+    backgroundColor: "#F7F3EB",
     paddingVertical: 64,
   },
   sectionWhite: {
@@ -457,12 +457,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFFFF",
     borderRadius: 16,
     borderWidth: 1,
-    borderColor: "#E2E8F0",
+    borderColor: "#E8E2D5",
     padding: 32,
     justifyContent: "space-between",
     alignItems: "center",
     gap: 24,
-    shadowColor: "#0F172A",
+    shadowColor: "#22252A",
     shadowOpacity: 0.05,
     shadowRadius: 16,
     elevation: 3,
@@ -472,7 +472,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 6,
-    backgroundColor: "#EFF6FF",
+    backgroundColor: "#EBF2F7",
     paddingVertical: 4,
     paddingHorizontal: 10,
     borderRadius: 6,
@@ -480,17 +480,17 @@ const styles = StyleSheet.create({
   portalTagText: {
     fontSize: 11,
     fontWeight: "800",
-    color: "#2563EB",
+    color: "#2E567A",
     letterSpacing: 0.8,
   },
   portalTitle: {
     fontSize: 22,
     fontWeight: "800",
-    color: "#0F172A",
+    color: "#22252A",
   },
   portalDesc: {
     fontSize: 14,
-    color: "#475569",
+    color: "#4A515A",
     lineHeight: 22,
   },
   portalPillsRow: {
@@ -502,7 +502,7 @@ const styles = StyleSheet.create({
   portalPill: {
     fontSize: 12.5,
     fontWeight: "600",
-    color: "#2563EB",
+    color: "#3B6E99",
   },
   portalActionCol: {
     alignItems: "center",
@@ -512,11 +512,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-    backgroundColor: "#2563EB",
+    backgroundColor: "#3B6E99",
     paddingVertical: 14,
     paddingHorizontal: 24,
     borderRadius: 10,
-    shadowColor: "#2563EB",
+    shadowColor: "#3B6E99",
     shadowOpacity: 0.25,
     shadowRadius: 8,
     elevation: 3,
@@ -528,7 +528,7 @@ const styles = StyleSheet.create({
   },
   portalHelpText: {
     fontSize: 11.5,
-    color: "#64748B",
+    color: "#737B85",
     textAlign: "center",
   },
   intakeWrapper: {
@@ -544,19 +544,19 @@ const styles = StyleSheet.create({
   intakeOverline: {
     fontSize: 12,
     fontWeight: "800",
-    color: "#2563EB",
+    color: "#3B6E99",
     letterSpacing: 1,
     marginBottom: 6,
   },
   intakeTitle: {
     fontSize: 28,
     fontWeight: "800",
-    color: "#0F172A",
+    color: "#22252A",
     marginBottom: 8,
   },
   intakeSubtitle: {
     fontSize: 15,
-    color: "#64748B",
+    color: "#737B85",
     textAlign: "center",
   },
   stepProgressRow: {
@@ -573,42 +573,42 @@ const styles = StyleSheet.create({
     width: 32,
     height: 32,
     borderRadius: 16,
-    backgroundColor: "#F1F5F9",
+    backgroundColor: "#FAF7F0",
     borderWidth: 1,
-    borderColor: "#CBD5E1",
+    borderColor: "#E8E2D5",
     justifyContent: "center",
     alignItems: "center",
   },
   stepCircleActive: {
-    backgroundColor: "#2563EB",
-    borderColor: "#2563EB",
+    backgroundColor: "#3B6E99",
+    borderColor: "#3B6E99",
   },
   stepCircleCompleted: {
-    backgroundColor: "#10B981",
-    borderColor: "#10B981",
+    backgroundColor: "#166534",
+    borderColor: "#166534",
   },
   stepCircleText: {
     fontSize: 13,
     fontWeight: "700",
-    color: "#64748B",
+    color: "#737B85",
   },
   stepCircleTextActive: {
     color: "#FFFFFF",
   },
   stepLabel: {
     fontSize: 12,
-    color: "#64748B",
+    color: "#737B85",
     fontWeight: "500",
   },
   stepLabelActive: {
-    color: "#0F172A",
+    color: "#22252A",
     fontWeight: "700",
   },
   intakeFormCard: {
-    backgroundColor: "#F8FAFC",
+    backgroundColor: "#FAF7F0",
     borderRadius: 14,
     borderWidth: 1,
-    borderColor: "#E2E8F0",
+    borderColor: "#E8E2D5",
     padding: 28,
     gap: 20,
   },
@@ -618,7 +618,7 @@ const styles = StyleSheet.create({
   stepHeading: {
     fontSize: 16,
     fontWeight: "800",
-    color: "#0F172A",
+    color: "#22252A",
   },
   inputGroup: {
     gap: 6,
@@ -630,17 +630,17 @@ const styles = StyleSheet.create({
   inputLabel: {
     fontSize: 13,
     fontWeight: "600",
-    color: "#334155",
+    color: "#22252A",
   },
   inputField: {
     backgroundColor: "#FFFFFF",
     borderWidth: 1,
-    borderColor: "#CBD5E1",
+    borderColor: "#E8E2D5",
     borderRadius: 8,
     paddingVertical: 10,
     paddingHorizontal: 14,
     fontSize: 14,
-    color: "#0F172A",
+    color: "#22252A",
   },
   chipsRow: {
     flexDirection: "row",
@@ -653,16 +653,16 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     backgroundColor: "#FFFFFF",
     borderWidth: 1,
-    borderColor: "#CBD5E1",
+    borderColor: "#E8E2D5",
   },
   chipActive: {
-    backgroundColor: "#2563EB",
-    borderColor: "#2563EB",
+    backgroundColor: "#3B6E99",
+    borderColor: "#3B6E99",
   },
   chipText: {
     fontSize: 12.5,
     fontWeight: "600",
-    color: "#475569",
+    color: "#4A515A",
   },
   chipTextActive: {
     color: "#FFFFFF",
@@ -673,7 +673,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingTop: 12,
     borderTopWidth: 1,
-    borderTopColor: "#E2E8F0",
+    borderTopColor: "#E8E2D5",
   },
   backBtn: {
     flexDirection: "row",
@@ -685,10 +685,10 @@ const styles = StyleSheet.create({
   backBtnText: {
     fontSize: 14,
     fontWeight: "600",
-    color: "#475569",
+    color: "#4A515A",
   },
   nextBtn: {
-    backgroundColor: "#2563EB",
+    backgroundColor: "#3B6E99",
     paddingVertical: 12,
     paddingHorizontal: 22,
     borderRadius: 8,
@@ -699,10 +699,10 @@ const styles = StyleSheet.create({
     fontWeight: "700",
   },
   intakeSuccessCard: {
-    backgroundColor: "#F8FAFC",
+    backgroundColor: "#FAF7F0",
     borderRadius: 14,
     borderWidth: 1,
-    borderColor: "#E2E8F0",
+    borderColor: "#E8E2D5",
     padding: 36,
     alignItems: "center",
     gap: 12,
@@ -718,17 +718,17 @@ const styles = StyleSheet.create({
   intakeSuccessTitle: {
     fontSize: 22,
     fontWeight: "800",
-    color: "#0F172A",
+    color: "#22252A",
   },
   intakeSuccessSub: {
     fontSize: 14,
-    color: "#64748B",
+    color: "#4A515A",
     textAlign: "center",
     lineHeight: 22,
     maxWidth: 500,
   },
   resetIntakeBtn: {
-    backgroundColor: "#0F172A",
+    backgroundColor: "#22252A",
     paddingVertical: 12,
     paddingHorizontal: 20,
     borderRadius: 8,
@@ -753,17 +753,17 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     padding: 20,
     borderWidth: 1,
-    borderColor: "#E2E8F0",
+    borderColor: "#E8E2D5",
     gap: 8,
   },
   timelineCardHighlight: {
-    borderColor: "#2563EB",
+    borderColor: "#3B6E99",
     borderWidth: 2,
-    backgroundColor: "#EFF6FF",
+    backgroundColor: "#EBF2F7",
   },
   timelineDateBadge: {
     alignSelf: "flex-start",
-    backgroundColor: "#F1F5F9",
+    backgroundColor: "#FAF7F0",
     paddingVertical: 3,
     paddingHorizontal: 8,
     borderRadius: 4,
@@ -771,17 +771,17 @@ const styles = StyleSheet.create({
   timelineDateText: {
     fontSize: 10.5,
     fontWeight: "800",
-    color: "#475569",
+    color: "#4A515A",
     letterSpacing: 0.5,
   },
   timelineCardTitle: {
     fontSize: 16,
     fontWeight: "700",
-    color: "#0F172A",
+    color: "#22252A",
   },
   timelineCardDesc: {
     fontSize: 13,
-    color: "#64748B",
+    color: "#4A515A",
     lineHeight: 19,
   },
 });

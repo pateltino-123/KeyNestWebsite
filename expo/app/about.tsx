@@ -59,7 +59,7 @@ export default function AboutPage() {
       <View style={styles.headerHero}>
         <View style={styles.innerContainer}>
           <View style={styles.badgePill}>
-            <ShieldCheck size={14} color="#38BDF8" />
+            <ShieldCheck size={14} color="#3B6E99" />
             <Text style={styles.badgePillText}>Under the Brokerage of Fair Deal Realty Inc.</Text>
           </View>
           <Text style={styles.pageTitle}>About KeyNest Realty</Text>
@@ -87,19 +87,19 @@ export default function AboutPage() {
 
               <View style={styles.missionPoints}>
                 <View style={styles.missionPointItem}>
-                  <CheckCircle2 size={18} color="#2563EB" />
+                  <CheckCircle2 size={18} color="#3B6E99" />
                   <Text style={styles.missionPointText}>
                     Direct access to authorized local managers (Dinesh Donthula & Purvang Patel)
                   </Text>
                 </View>
                 <View style={styles.missionPointItem}>
-                  <CheckCircle2 size={18} color="#2563EB" />
+                  <CheckCircle2 size={18} color="#3B6E99" />
                   <Text style={styles.missionPointText}>
                     100% fiduciary trust accounting under broker Fair Deal Realty Inc.
                   </Text>
                 </View>
                 <View style={styles.missionPointItem}>
-                  <CheckCircle2 size={18} color="#2563EB" />
+                  <CheckCircle2 size={18} color="#3B6E99" />
                   <Text style={styles.missionPointText}>
                     Zero fee markups on maintenance invoices passed through at exact cost
                   </Text>
@@ -110,7 +110,7 @@ export default function AboutPage() {
             <View style={[styles.splitColRight, { width: isDesktop ? "44%" : "100%" }]}>
               <View style={styles.brokerageCard}>
                 <View style={styles.brokerageCardBadge}>
-                  <Building size={16} color="#2563EB" />
+                  <Building size={16} color="#3B6E99" />
                   <Text style={styles.brokerageCardBadgeText}>SPONSORING BROKERAGE</Text>
                 </View>
                 <Text style={styles.brokerageCardName}>Fair Deal Realty Inc.</Text>
@@ -173,7 +173,7 @@ export default function AboutPage() {
                   ]}
                 >
                   <View style={styles.valueIconBox}>
-                    <Icon size={24} color="#2563EB" />
+                    <Icon size={24} color="#3B6E99" />
                   </View>
                   <View style={{ flex: 1, gap: 6 }}>
                     <Text style={styles.valueTitle}>{val.title}</Text>
@@ -206,7 +206,7 @@ export default function AboutPage() {
             {KEYNEST_INFO.authorizedManagers.map((leader, idx) => (
               <View key={idx} style={styles.leaderCard}>
                 <View style={styles.leaderAvatarCircle}>
-                  <Users size={32} color="#2563EB" />
+                  <Users size={32} color="#3B6E99" />
                 </View>
                 <Text style={styles.leaderName}>{leader.name}</Text>
                 <Text style={styles.leaderRole}>{leader.title}</Text>
@@ -214,11 +214,11 @@ export default function AboutPage() {
 
                 <View style={styles.leaderContactRow}>
                   <View style={styles.leaderContactItem}>
-                    <Phone size={14} color="#2563EB" />
+                    <Phone size={14} color="#3B6E99" />
                     <Text style={styles.leaderContactText}>{KEYNEST_INFO.phone}</Text>
                   </View>
                   <View style={styles.leaderContactItem}>
-                    <Mail size={14} color="#2563EB" />
+                    <Mail size={14} color="#3B6E99" />
                     <Text style={styles.leaderContactText}>{KEYNEST_INFO.email}</Text>
                   </View>
                 </View>
@@ -233,7 +233,7 @@ export default function AboutPage() {
             </TouchableOpacity>
             <TouchableOpacity style={styles.aboutSecondaryBtn} onPress={() => openRentalAnalysis()}>
               <Text style={styles.aboutSecondaryBtnText}>Request Free Rental Analysis</Text>
-              <ArrowRight size={16} color="#0F172A" />
+              <ArrowRight size={16} color="#22252A" />
             </TouchableOpacity>
           </View>
         </View>
@@ -244,10 +244,10 @@ export default function AboutPage() {
 
 const styles = StyleSheet.create({
   headerHero: {
-    backgroundColor: "#0B1120",
+    backgroundColor: "#FDFBF7",
     paddingVertical: 72,
     borderBottomWidth: 1,
-    borderBottomColor: "#1E293B",
+    borderBottomColor: "#E8E2D5",
   },
   innerContainer: {
     maxWidth: 1240,
@@ -260,29 +260,29 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-    backgroundColor: "#1E293B",
+    backgroundColor: "#EBF2F7",
     paddingVertical: 6,
     paddingHorizontal: 12,
     borderRadius: 20,
     borderWidth: 1,
-    borderColor: "#334155",
+    borderColor: "#C8D9E8",
     marginBottom: 16,
   },
   badgePillText: {
-    color: "#E2E8F0",
+    color: "#2E567A",
     fontSize: 12.5,
     fontWeight: "600",
   },
   pageTitle: {
     fontSize: 40,
     fontWeight: "900",
-    color: "#FFFFFF",
+    color: "#22252A",
     letterSpacing: -1,
     marginBottom: 12,
   },
   pageSubtitle: {
     fontSize: 16.5,
-    color: "#94A3B8",
+    color: "#4A515A",
     maxWidth: 760,
     lineHeight: 25,
   },
@@ -291,7 +291,7 @@ const styles = StyleSheet.create({
     paddingVertical: 72,
   },
   sectionAlt: {
-    backgroundColor: "#F8FAFC",
+    backgroundColor: "#F7F3EB",
     paddingVertical: 72,
   },
   splitRow: {
@@ -305,19 +305,19 @@ const styles = StyleSheet.create({
   sectionOverline: {
     fontSize: 12,
     fontWeight: "800",
-    color: "#2563EB",
+    color: "#3B6E99",
     letterSpacing: 1.2,
     marginBottom: 6,
   },
   sectionHeading: {
     fontSize: 30,
     fontWeight: "800",
-    color: "#0F172A",
+    color: "#22252A",
     lineHeight: 38,
   },
   bodyText: {
     fontSize: 15,
-    color: "#475569",
+    color: "#4A515A",
     lineHeight: 24,
   },
   missionPoints: {
@@ -331,7 +331,7 @@ const styles = StyleSheet.create({
   },
   missionPointText: {
     fontSize: 14,
-    color: "#1E293B",
+    color: "#22252A",
     fontWeight: "600",
   },
   splitColRight: {
@@ -339,10 +339,10 @@ const styles = StyleSheet.create({
   },
   brokerageCard: {
     width: "100%",
-    backgroundColor: "#F8FAFC",
+    backgroundColor: "#FAF7F0",
     borderRadius: 16,
     borderWidth: 1,
-    borderColor: "#E2E8F0",
+    borderColor: "#E8E2D5",
     padding: 28,
     gap: 14,
   },
@@ -351,7 +351,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 6,
-    backgroundColor: "#EFF6FF",
+    backgroundColor: "#EBF2F7",
     paddingVertical: 4,
     paddingHorizontal: 10,
     borderRadius: 6,
@@ -359,17 +359,17 @@ const styles = StyleSheet.create({
   brokerageCardBadgeText: {
     fontSize: 11,
     fontWeight: "800",
-    color: "#2563EB",
+    color: "#2E567A",
     letterSpacing: 0.8,
   },
   brokerageCardName: {
     fontSize: 22,
     fontWeight: "800",
-    color: "#0F172A",
+    color: "#22252A",
   },
   brokerageCardText: {
     fontSize: 13.5,
-    color: "#475569",
+    color: "#4A515A",
     lineHeight: 20,
   },
   brokerDetailsList: {
@@ -378,7 +378,7 @@ const styles = StyleSheet.create({
     padding: 14,
     gap: 8,
     borderWidth: 1,
-    borderColor: "#CBD5E1",
+    borderColor: "#E8E2D5",
   },
   brokerDetailItem: {
     gap: 2,
@@ -386,12 +386,12 @@ const styles = StyleSheet.create({
   detailTitle: {
     fontSize: 11.5,
     fontWeight: "700",
-    color: "#64748B",
+    color: "#737B85",
   },
   detailVal: {
     fontSize: 13,
     fontWeight: "600",
-    color: "#0F172A",
+    color: "#22252A",
   },
   trecNavBtn: {
     alignSelf: "flex-start",
@@ -400,7 +400,7 @@ const styles = StyleSheet.create({
   trecNavBtnText: {
     fontSize: 13,
     fontWeight: "700",
-    color: "#2563EB",
+    color: "#3B6E99",
   },
   sectionHeaderCentered: {
     alignItems: "center",
@@ -410,14 +410,14 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 32,
     fontWeight: "800",
-    color: "#0F172A",
+    color: "#22252A",
     letterSpacing: -0.5,
     textAlign: "center",
     marginBottom: 12,
   },
   sectionSubtitle: {
     fontSize: 16,
-    color: "#64748B",
+    color: "#4A515A",
     maxWidth: 720,
     textAlign: "center",
     lineHeight: 24,
@@ -431,7 +431,7 @@ const styles = StyleSheet.create({
     borderRadius: 14,
     padding: 24,
     borderWidth: 1,
-    borderColor: "#E2E8F0",
+    borderColor: "#E8E2D5",
     flexDirection: "row",
     alignItems: "flex-start",
     gap: 16,
@@ -440,18 +440,18 @@ const styles = StyleSheet.create({
     width: 48,
     height: 48,
     borderRadius: 12,
-    backgroundColor: "#EFF6FF",
+    backgroundColor: "#EBF2F7",
     justifyContent: "center",
     alignItems: "center",
   },
   valueTitle: {
     fontSize: 17,
     fontWeight: "800",
-    color: "#0F172A",
+    color: "#22252A",
   },
   valueDesc: {
     fontSize: 13.5,
-    color: "#475569",
+    color: "#4A515A",
     lineHeight: 20,
   },
   leadershipGrid: {
@@ -460,11 +460,11 @@ const styles = StyleSheet.create({
   },
   leaderCard: {
     flex: 1,
-    backgroundColor: "#F8FAFC",
+    backgroundColor: "#FAF7F0",
     borderRadius: 16,
     padding: 28,
     borderWidth: 1,
-    borderColor: "#E2E8F0",
+    borderColor: "#E8E2D5",
     alignItems: "center",
     textAlign: "center",
     gap: 10,
@@ -473,7 +473,7 @@ const styles = StyleSheet.create({
     width: 68,
     height: 68,
     borderRadius: 34,
-    backgroundColor: "#EFF6FF",
+    backgroundColor: "#EBF2F7",
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 6,
@@ -481,16 +481,16 @@ const styles = StyleSheet.create({
   leaderName: {
     fontSize: 20,
     fontWeight: "800",
-    color: "#0F172A",
+    color: "#22252A",
   },
   leaderRole: {
     fontSize: 13,
     fontWeight: "700",
-    color: "#2563EB",
+    color: "#3B6E99",
   },
   leaderBio: {
     fontSize: 13.5,
-    color: "#475569",
+    color: "#4A515A",
     lineHeight: 21,
     textAlign: "center",
   },
@@ -506,7 +506,7 @@ const styles = StyleSheet.create({
   },
   leaderContactText: {
     fontSize: 12.5,
-    color: "#475569",
+    color: "#4A515A",
     fontWeight: "600",
   },
   aboutCtaRow: {
@@ -520,7 +520,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-    backgroundColor: "#2563EB",
+    backgroundColor: "#3B6E99",
     paddingVertical: 14,
     paddingHorizontal: 22,
     borderRadius: 8,
@@ -534,15 +534,15 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-    backgroundColor: "#F1F5F9",
+    backgroundColor: "#FFFFFF",
     borderWidth: 1,
-    borderColor: "#CBD5E1",
+    borderColor: "#E8E2D5",
     paddingVertical: 14,
     paddingHorizontal: 20,
     borderRadius: 8,
   },
   aboutSecondaryBtnText: {
-    color: "#0F172A",
+    color: "#22252A",
     fontSize: 14.5,
     fontWeight: "700",
   },

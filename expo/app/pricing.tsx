@@ -49,7 +49,7 @@ export default function PricingPage() {
       <View style={styles.headerHero}>
         <View style={styles.innerContainer}>
           <View style={styles.badgePill}>
-            <ShieldCheck size={14} color="#38BDF8" />
+            <ShieldCheck size={14} color="#3B6E99" />
             <Text style={styles.badgePillText}>Under the Brokerage of Fair Deal Realty Inc.</Text>
           </View>
           <Text style={styles.pageTitle}>Simple, Transparent Pricing</Text>
@@ -102,7 +102,7 @@ export default function PricingPage() {
                 <View style={styles.planFeaturesList}>
                   {plan.features.map((feat, idx) => (
                     <View key={idx} style={styles.planFeatureRow}>
-                      <CheckCircle2 size={16} color="#2563EB" style={{ marginTop: 2 }} />
+                      <CheckCircle2 size={16} color="#3B6E99" style={{ marginTop: 2 }} />
                       <Text style={styles.planFeatureText}>{feat}</Text>
                     </View>
                   ))}
@@ -136,7 +136,7 @@ export default function PricingPage() {
           <View style={styles.calculatorWrapper}>
             <View style={styles.calcTitleRow}>
               <View style={styles.calcIconBadge}>
-                <DollarSign size={20} color="#2563EB" />
+                <DollarSign size={20} color="#3B6E99" />
               </View>
               <View>
                 <Text style={styles.calcHeading}>Interactive Fee Comparison Tool</Text>
@@ -282,9 +282,9 @@ export default function PricingPage() {
                       <Text style={styles.addonCost}>{fee.fee}</Text>
                     </View>
                     {isExpanded ? (
-                      <ChevronUp size={20} color="#2563EB" />
+                      <ChevronUp size={20} color="#3B6E99" />
                     ) : (
-                      <ChevronDown size={20} color="#64748B" />
+                      <ChevronDown size={20} color="#737B85" />
                     )}
                   </TouchableOpacity>
                   {isExpanded && (
@@ -304,10 +304,10 @@ export default function PricingPage() {
 
 const styles = StyleSheet.create({
   headerHero: {
-    backgroundColor: "#0B1120",
+    backgroundColor: "#FDFBF7",
     paddingVertical: 72,
     borderBottomWidth: 1,
-    borderBottomColor: "#1E293B",
+    borderBottomColor: "#E8E2D5",
   },
   innerContainer: {
     maxWidth: 1240,
@@ -320,29 +320,29 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-    backgroundColor: "#1E293B",
+    backgroundColor: "#EBF2F7",
     paddingVertical: 6,
     paddingHorizontal: 12,
     borderRadius: 20,
     borderWidth: 1,
-    borderColor: "#334155",
+    borderColor: "#C8D9E8",
     marginBottom: 16,
   },
   badgePillText: {
-    color: "#E2E8F0",
+    color: "#2E567A",
     fontSize: 12.5,
     fontWeight: "600",
   },
   pageTitle: {
     fontSize: 40,
     fontWeight: "900",
-    color: "#FFFFFF",
+    color: "#22252A",
     letterSpacing: -1,
     marginBottom: 12,
   },
   pageSubtitle: {
     fontSize: 16.5,
-    color: "#94A3B8",
+    color: "#4A515A",
     maxWidth: 760,
     lineHeight: 25,
   },
@@ -351,7 +351,7 @@ const styles = StyleSheet.create({
     paddingVertical: 72,
   },
   sectionAlt: {
-    backgroundColor: "#F8FAFC",
+    backgroundColor: "#F7F3EB",
     paddingVertical: 72,
   },
   sectionHeaderCentered: {
@@ -362,21 +362,21 @@ const styles = StyleSheet.create({
   sectionOverline: {
     fontSize: 12,
     fontWeight: "800",
-    color: "#2563EB",
+    color: "#3B6E99",
     letterSpacing: 1.2,
     marginBottom: 8,
   },
   sectionTitle: {
     fontSize: 32,
     fontWeight: "800",
-    color: "#0F172A",
+    color: "#22252A",
     letterSpacing: -0.5,
     textAlign: "center",
     marginBottom: 12,
   },
   sectionSubtitle: {
     fontSize: 16,
-    color: "#64748B",
+    color: "#4A515A",
     maxWidth: 720,
     textAlign: "center",
     lineHeight: 24,
@@ -389,25 +389,25 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFFFF",
     borderRadius: 16,
     borderWidth: 1,
-    borderColor: "#E2E8F0",
+    borderColor: "#E8E2D5",
     padding: 28,
     gap: 12,
-    shadowColor: "#0F172A",
+    shadowColor: "#22252A",
     shadowOpacity: 0.04,
     shadowRadius: 12,
     elevation: 2,
   },
   planCardHighlighted: {
-    borderColor: "#2563EB",
+    borderColor: "#3B6E99",
     borderWidth: 2,
-    shadowColor: "#2563EB",
+    shadowColor: "#3B6E99",
     shadowOpacity: 0.12,
     shadowRadius: 20,
     elevation: 6,
   },
   planBadgeWrap: {
     alignSelf: "flex-start",
-    backgroundColor: "#2563EB",
+    backgroundColor: "#3B6E99",
     paddingVertical: 4,
     paddingHorizontal: 10,
     borderRadius: 6,
@@ -421,26 +421,26 @@ const styles = StyleSheet.create({
   planName: {
     fontSize: 22,
     fontWeight: "800",
-    color: "#0F172A",
+    color: "#22252A",
   },
   planRate: {
     fontSize: 26,
     fontWeight: "900",
-    color: "#2563EB",
+    color: "#3B6E99",
   },
   planVacancy: {
     fontSize: 13,
-    color: "#10B981",
+    color: "#166534",
     fontWeight: "700",
   },
   planDivider: {
     height: 1,
-    backgroundColor: "#E2E8F0",
+    backgroundColor: "#E8E2D5",
     marginVertical: 4,
   },
   planSummary: {
     fontSize: 13.5,
-    color: "#475569",
+    color: "#4A515A",
     lineHeight: 20,
   },
   planFeaturesList: {
@@ -454,25 +454,25 @@ const styles = StyleSheet.create({
   },
   planFeatureText: {
     fontSize: 13,
-    color: "#334155",
+    color: "#4A515A",
     lineHeight: 18,
     flex: 1,
   },
   planCtaBtn: {
-    backgroundColor: "#F8FAFC",
+    backgroundColor: "#FAF7F0",
     borderWidth: 1,
-    borderColor: "#CBD5E1",
+    borderColor: "#E8E2D5",
     paddingVertical: 13,
     borderRadius: 8,
     alignItems: "center",
     marginTop: 8,
   },
   planCtaBtnHighlighted: {
-    backgroundColor: "#2563EB",
-    borderColor: "#2563EB",
+    backgroundColor: "#3B6E99",
+    borderColor: "#3B6E99",
   },
   planCtaBtnText: {
-    color: "#0F172A",
+    color: "#22252A",
     fontSize: 14,
     fontWeight: "700",
   },
@@ -484,9 +484,9 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     padding: 32,
     borderWidth: 1,
-    borderColor: "#E2E8F0",
+    borderColor: "#E8E2D5",
     gap: 24,
-    shadowColor: "#0F172A",
+    shadowColor: "#22252A",
     shadowOpacity: 0.05,
     shadowRadius: 16,
     elevation: 3,
@@ -500,60 +500,60 @@ const styles = StyleSheet.create({
     width: 44,
     height: 44,
     borderRadius: 10,
-    backgroundColor: "#EFF6FF",
+    backgroundColor: "#EBF2F7",
     justifyContent: "center",
     alignItems: "center",
   },
   calcHeading: {
     fontSize: 20,
     fontWeight: "800",
-    color: "#0F172A",
+    color: "#22252A",
   },
   calcSub: {
     fontSize: 13.5,
-    color: "#64748B",
+    color: "#737B85",
   },
   calcInputRow: {
     flexDirection: "row",
     alignItems: "center",
     flexWrap: "wrap",
     gap: 16,
-    backgroundColor: "#F8FAFC",
+    backgroundColor: "#FAF7F0",
     padding: 16,
     borderRadius: 12,
     borderWidth: 1,
-    borderColor: "#E2E8F0",
+    borderColor: "#E8E2D5",
   },
   calcInputLabel: {
     fontSize: 14,
     fontWeight: "700",
-    color: "#0F172A",
+    color: "#22252A",
   },
   inputWithPrefix: {
     flexDirection: "row",
     alignItems: "center",
     backgroundColor: "#FFFFFF",
     borderWidth: 1,
-    borderColor: "#CBD5E1",
+    borderColor: "#E8E2D5",
     borderRadius: 8,
     paddingHorizontal: 12,
   },
   currencyPrefix: {
     fontSize: 16,
     fontWeight: "700",
-    color: "#64748B",
+    color: "#737B85",
     marginRight: 4,
   },
   calcInputField: {
     fontSize: 16,
     fontWeight: "800",
-    color: "#0F172A",
+    color: "#22252A",
     paddingVertical: 8,
     width: 90,
   },
   currencySuffix: {
     fontSize: 13,
-    color: "#64748B",
+    color: "#737B85",
   },
   quickRentPills: {
     flexDirection: "row",
@@ -565,16 +565,16 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     backgroundColor: "#FFFFFF",
     borderWidth: 1,
-    borderColor: "#CBD5E1",
+    borderColor: "#E8E2D5",
   },
   quickRentBtnActive: {
-    backgroundColor: "#2563EB",
-    borderColor: "#2563EB",
+    backgroundColor: "#3B6E99",
+    borderColor: "#3B6E99",
   },
   quickRentText: {
     fontSize: 12,
     fontWeight: "600",
-    color: "#475569",
+    color: "#4A515A",
   },
   quickRentTextActive: {
     color: "#FFFFFF",
@@ -584,20 +584,20 @@ const styles = StyleSheet.create({
   },
   compareCard: {
     flex: 1,
-    backgroundColor: "#F8FAFC",
+    backgroundColor: "#FAF7F0",
     borderRadius: 12,
     padding: 20,
     borderWidth: 1,
-    borderColor: "#E2E8F0",
+    borderColor: "#E8E2D5",
     gap: 10,
   },
   compareCardHighlighted: {
-    backgroundColor: "#EFF6FF",
-    borderColor: "#BFDBFE",
+    backgroundColor: "#EBF2F7",
+    borderColor: "#C8D9E8",
   },
   compareBadge: {
     alignSelf: "flex-start",
-    backgroundColor: "#2563EB",
+    backgroundColor: "#3B6E99",
     paddingVertical: 2,
     paddingHorizontal: 6,
     borderRadius: 4,
@@ -610,16 +610,16 @@ const styles = StyleSheet.create({
   compareTitle: {
     fontSize: 17,
     fontWeight: "800",
-    color: "#0F172A",
+    color: "#22252A",
   },
   compareRateText: {
     fontSize: 13,
-    color: "#2563EB",
+    color: "#3B6E99",
     fontWeight: "600",
   },
   compareDivider: {
     height: 1,
-    backgroundColor: "#CBD5E1",
+    backgroundColor: "#E8E2D5",
     marginVertical: 4,
   },
   compareMetricRow: {
@@ -628,26 +628,26 @@ const styles = StyleSheet.create({
   },
   compareMetricLabel: {
     fontSize: 13,
-    color: "#64748B",
+    color: "#737B85",
   },
   compareMetricVal: {
     fontSize: 13,
     fontWeight: "700",
-    color: "#0F172A",
+    color: "#22252A",
   },
   compareNetVal: {
     fontSize: 16,
     fontWeight: "800",
-    color: "#2563EB",
+    color: "#3B6E99",
   },
   compareAnnualVal: {
     fontSize: 14,
     fontWeight: "700",
-    color: "#10B981",
+    color: "#166534",
   },
   compareNote: {
     fontSize: 11.5,
-    color: "#64748B",
+    color: "#737B85",
     marginTop: 4,
   },
   calcActionRow: {
@@ -657,7 +657,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-    backgroundColor: "#2563EB",
+    backgroundColor: "#3B6E99",
     paddingVertical: 14,
     paddingHorizontal: 24,
     borderRadius: 8,
@@ -674,10 +674,10 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   addonItem: {
-    backgroundColor: "#F8FAFC",
+    backgroundColor: "#FAF7F0",
     borderRadius: 12,
     borderWidth: 1,
-    borderColor: "#E2E8F0",
+    borderColor: "#E8E2D5",
     overflow: "hidden",
   },
   addonHeader: {
@@ -689,12 +689,12 @@ const styles = StyleSheet.create({
   addonName: {
     fontSize: 15,
     fontWeight: "700",
-    color: "#0F172A",
+    color: "#22252A",
   },
   addonCost: {
     fontSize: 13,
     fontWeight: "700",
-    color: "#2563EB",
+    color: "#3B6E99",
     marginTop: 2,
   },
   addonBody: {
@@ -703,7 +703,7 @@ const styles = StyleSheet.create({
   },
   addonDesc: {
     fontSize: 13.5,
-    color: "#475569",
+    color: "#4A515A",
     lineHeight: 20,
   },
 });

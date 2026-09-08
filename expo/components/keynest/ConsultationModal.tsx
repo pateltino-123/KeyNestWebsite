@@ -57,7 +57,7 @@ export default function ConsultationModal({ visible, onClose }: ConsultationModa
           <View style={styles.modalHeader}>
             <View style={styles.headerTitleRow}>
               <View style={styles.iconCircle}>
-                <Calendar size={20} color="#2563EB" />
+                <Calendar size={20} color="#3B6E99" />
               </View>
               <View>
                 <Text style={styles.modalTitle}>Schedule a Consultation</Text>
@@ -67,7 +67,7 @@ export default function ConsultationModal({ visible, onClose }: ConsultationModa
               </View>
             </View>
             <TouchableOpacity onPress={onClose} style={styles.closeBtn} accessibilityLabel="Close modal">
-              <X size={20} color="#64748B" />
+              <X size={20} color="#737B85" />
             </TouchableOpacity>
           </View>
 
@@ -75,7 +75,7 @@ export default function ConsultationModal({ visible, onClose }: ConsultationModa
             {!submitted ? (
               <View style={styles.formContainer}>
                 <View style={styles.brokerNotice}>
-                  <ShieldCheck size={16} color="#2563EB" />
+                  <ShieldCheck size={16} color="#3B6E99" />
                   <Text style={styles.brokerNoticeText}>
                     Authorized Managers: Dinesh Donthula & Purvang Patel • Fair Deal Realty Inc.
                   </Text>
@@ -287,8 +287,8 @@ const styles = StyleSheet.create({
     paddingVertical: 18,
     paddingHorizontal: 24,
     borderBottomWidth: 1,
-    borderBottomColor: "#E2E8F0",
-    backgroundColor: "#F8FAFC",
+    borderBottomColor: "#E8E2D5",
+    backgroundColor: "#F7F3EB",
   },
   headerTitleRow: {
     flexDirection: "row",
@@ -299,24 +299,24 @@ const styles = StyleSheet.create({
   iconCircle: {
     width: 38,
     height: 38,
-    borderRadius: 10,
-    backgroundColor: "#EFF6FF",
+    borderRadius: 8,
+    backgroundColor: "#EBF2F7",
     justifyContent: "center",
     alignItems: "center",
   },
   modalTitle: {
     fontSize: 18,
     fontWeight: "800",
-    color: "#0F172A",
+    color: "#22252A",
   },
   modalSubtitle: {
     fontSize: 12,
-    color: "#64748B",
+    color: "#737B85",
     marginTop: 1,
   },
   closeBtn: {
     padding: 6,
-    borderRadius: 8,
+    borderRadius: 6,
   },
   modalScroll: {
     flexGrow: 0,
@@ -328,15 +328,15 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-    backgroundColor: "#EFF6FF",
+    backgroundColor: "#EBF2F7",
     padding: 10,
     borderRadius: 8,
     borderWidth: 1,
-    borderColor: "#BFDBFE",
+    borderColor: "#C8D9E8",
   },
   brokerNoticeText: {
     fontSize: 12,
-    color: "#1E40AF",
+    color: "#2E567A",
     fontWeight: "600",
     flex: 1,
   },
@@ -350,17 +350,17 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 13,
     fontWeight: "600",
-    color: "#1E293B",
+    color: "#22252A",
   },
   input: {
-    backgroundColor: "#F8FAFC",
+    backgroundColor: "#FAF7F0",
     borderWidth: 1,
-    borderColor: "#CBD5E1",
+    borderColor: "#E8E2D5",
     borderRadius: 8,
     paddingVertical: 10,
     paddingHorizontal: 14,
     fontSize: 14,
-    color: "#0F172A",
+    color: "#22252A",
   },
   pillsRow: {
     flexDirection: "row",
@@ -370,19 +370,19 @@ const styles = StyleSheet.create({
   pill: {
     paddingVertical: 7,
     paddingHorizontal: 12,
-    borderRadius: 8,
-    backgroundColor: "#F1F5F9",
+    borderRadius: 6,
+    backgroundColor: "#F7F3EB",
     borderWidth: 1,
-    borderColor: "#E2E8F0",
+    borderColor: "#E8E2D5",
   },
   pillActive: {
-    backgroundColor: "#2563EB",
-    borderColor: "#2563EB",
+    backgroundColor: "#3B6E99",
+    borderColor: "#3B6E99",
   },
   pillText: {
     fontSize: 12.5,
     fontWeight: "600",
-    color: "#475569",
+    color: "#4A515A",
   },
   pillTextActive: {
     color: "#FFFFFF",
@@ -392,18 +392,18 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     gap: 8,
-    backgroundColor: "#2563EB",
-    paddingVertical: 14,
-    borderRadius: 10,
+    backgroundColor: "#3B6E99",
+    paddingVertical: 13,
+    borderRadius: 8,
     marginTop: 8,
-    shadowColor: "#2563EB",
-    shadowOpacity: 0.25,
-    shadowRadius: 10,
-    elevation: 3,
+    shadowColor: "#3B6E99",
+    shadowOpacity: 0.18,
+    shadowRadius: 6,
+    elevation: 2,
   },
   submitBtnText: {
     color: "#FFFFFF",
-    fontSize: 15,
+    fontSize: 14.5,
     fontWeight: "700",
   },
   successContainer: {
@@ -412,32 +412,32 @@ const styles = StyleSheet.create({
     gap: 14,
   },
   successIconCircle: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    backgroundColor: "#D1FAE5",
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    backgroundColor: "#EBF5F0",
     justifyContent: "center",
     alignItems: "center",
   },
   successTitle: {
     fontSize: 20,
     fontWeight: "800",
-    color: "#0F172A",
+    color: "#22252A",
     textAlign: "center",
   },
   successSub: {
     fontSize: 13.5,
-    color: "#64748B",
+    color: "#737B85",
     textAlign: "center",
     lineHeight: 20,
   },
   summaryCard: {
     width: "100%",
-    backgroundColor: "#F8FAFC",
-    borderRadius: 10,
+    backgroundColor: "#FAF7F0",
+    borderRadius: 8,
     padding: 14,
     borderWidth: 1,
-    borderColor: "#E2E8F0",
+    borderColor: "#E8E2D5",
     gap: 8,
   },
   summaryRow: {
@@ -446,18 +446,18 @@ const styles = StyleSheet.create({
   },
   summaryLabel: {
     fontSize: 12.5,
-    color: "#64748B",
+    color: "#737B85",
   },
   summaryValue: {
     fontSize: 12.5,
     fontWeight: "700",
-    color: "#0F172A",
+    color: "#22252A",
   },
   doneBtn: {
     width: "100%",
-    backgroundColor: "#0F172A",
+    backgroundColor: "#22252A",
     paddingVertical: 12,
-    borderRadius: 8,
+    borderRadius: 7,
     alignItems: "center",
     marginTop: 8,
   },

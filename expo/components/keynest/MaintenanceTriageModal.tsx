@@ -77,7 +77,7 @@ export default function MaintenanceTriageModal({
           <View style={styles.modalHeader}>
             <View style={styles.headerTitleRow}>
               <View style={styles.iconCircle}>
-                <Wrench size={20} color="#2563EB" />
+                <Wrench size={20} color="#3B6E99" />
               </View>
               <View>
                 <Text style={styles.modalTitle}>Maintenance & Repair Triage</Text>
@@ -87,7 +87,7 @@ export default function MaintenanceTriageModal({
               </View>
             </View>
             <TouchableOpacity onPress={handleClose} style={styles.closeBtn} accessibilityLabel="Close modal">
-              <X size={20} color="#64748B" />
+              <X size={20} color="#737B85" />
             </TouchableOpacity>
           </View>
 
@@ -364,8 +364,8 @@ const styles = StyleSheet.create({
     paddingVertical: 18,
     paddingHorizontal: 24,
     borderBottomWidth: 1,
-    borderBottomColor: "#E2E8F0",
-    backgroundColor: "#F8FAFC",
+    borderBottomColor: "#E8E2D5",
+    backgroundColor: "#F7F3EB",
   },
   headerTitleRow: {
     flexDirection: "row",
@@ -376,24 +376,24 @@ const styles = StyleSheet.create({
   iconCircle: {
     width: 38,
     height: 38,
-    borderRadius: 10,
-    backgroundColor: "#EFF6FF",
+    borderRadius: 8,
+    backgroundColor: "#EBF2F7",
     justifyContent: "center",
     alignItems: "center",
   },
   modalTitle: {
     fontSize: 17,
     fontWeight: "800",
-    color: "#0F172A",
+    color: "#22252A",
   },
   modalSubtitle: {
     fontSize: 12,
-    color: "#64748B",
+    color: "#737B85",
     marginTop: 1,
   },
   closeBtn: {
     padding: 6,
-    borderRadius: 8,
+    borderRadius: 6,
   },
   modalScroll: {
     flexGrow: 0,
@@ -404,11 +404,11 @@ const styles = StyleSheet.create({
   promptTitle: {
     fontSize: 17,
     fontWeight: "800",
-    color: "#0F172A",
+    color: "#22252A",
   },
   promptSub: {
     fontSize: 13,
-    color: "#64748B",
+    color: "#737B85",
     lineHeight: 19,
     marginBottom: 4,
   },
@@ -416,7 +416,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     gap: 14,
     padding: 16,
-    borderRadius: 12,
+    borderRadius: 10,
     borderWidth: 1.5,
   },
   severityEmergency: {
@@ -428,13 +428,13 @@ const styles = StyleSheet.create({
     borderColor: "#FDE68A",
   },
   severityRoutine: {
-    backgroundColor: "#F8FAFC",
-    borderColor: "#E2E8F0",
+    backgroundColor: "#FAF7F0",
+    borderColor: "#E8E2D5",
   },
   severityIconCircleRed: {
     width: 42,
     height: 42,
-    borderRadius: 10,
+    borderRadius: 8,
     backgroundColor: "#FEE2E2",
     justifyContent: "center",
     alignItems: "center",
@@ -442,7 +442,7 @@ const styles = StyleSheet.create({
   severityIconCircleAmber: {
     width: 42,
     height: 42,
-    borderRadius: 10,
+    borderRadius: 8,
     backgroundColor: "#FEF3C7",
     justifyContent: "center",
     alignItems: "center",
@@ -450,8 +450,8 @@ const styles = StyleSheet.create({
   severityIconCircleBlue: {
     width: 42,
     height: 42,
-    borderRadius: 10,
-    backgroundColor: "#EFF6FF",
+    borderRadius: 8,
+    backgroundColor: "#EBF2F7",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -485,7 +485,7 @@ const styles = StyleSheet.create({
   },
   severityBadgeBlue: {
     alignSelf: "flex-start",
-    backgroundColor: "#2563EB",
+    backgroundColor: "#3B6E99",
     paddingVertical: 2,
     paddingHorizontal: 8,
     borderRadius: 4,
@@ -500,12 +500,12 @@ const styles = StyleSheet.create({
   severityTitle: {
     fontSize: 14,
     fontWeight: "700",
-    color: "#0F172A",
+    color: "#22252A",
     lineHeight: 20,
   },
   severityDesc: {
     fontSize: 12,
-    color: "#64748B",
+    color: "#737B85",
     marginTop: 4,
     lineHeight: 17,
   },
@@ -514,7 +514,7 @@ const styles = StyleSheet.create({
     paddingVertical: 6,
   },
   directPortalLinkText: {
-    color: "#2563EB",
+    color: "#3B6E99",
     fontSize: 13,
     fontWeight: "600",
     textDecorationLine: "underline",
@@ -522,7 +522,7 @@ const styles = StyleSheet.create({
   emergencyWarningBanner: {
     alignItems: "center",
     backgroundColor: "#FEF2F2",
-    borderRadius: 12,
+    borderRadius: 10,
     padding: 18,
     gap: 8,
     borderWidth: 1,
@@ -540,28 +540,28 @@ const styles = StyleSheet.create({
     lineHeight: 19,
   },
   emergencyActionCard: {
-    backgroundColor: "#F8FAFC",
-    borderRadius: 12,
+    backgroundColor: "#FAF7F0",
+    borderRadius: 10,
     padding: 20,
     alignItems: "center",
     gap: 8,
     borderWidth: 1,
-    borderColor: "#E2E8F0",
+    borderColor: "#E8E2D5",
   },
   emergencyActionLabel: {
     fontSize: 11,
     fontWeight: "800",
-    color: "#64748B",
+    color: "#737B85",
     letterSpacing: 0.8,
   },
   emergencyPhoneNumber: {
     fontSize: 26,
     fontWeight: "900",
-    color: "#0F172A",
+    color: "#22252A",
   },
   emergencyActionSub: {
     fontSize: 12,
-    color: "#64748B",
+    color: "#737B85",
     textAlign: "center",
   },
   callNowBtn: {
@@ -584,7 +584,7 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
   },
   backLinkText: {
-    color: "#64748B",
+    color: "#737B85",
     fontSize: 13,
     fontWeight: "600",
   },
@@ -592,18 +592,18 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: "#EFF6FF",
+    backgroundColor: "#EBF2F7",
     padding: 12,
     borderRadius: 8,
     borderWidth: 1,
-    borderColor: "#BFDBFE",
+    borderColor: "#C8D9E8",
   },
   selectedUrgencyBannerText: {
     fontSize: 13,
-    color: "#1E40AF",
+    color: "#2E567A",
   },
   changeUrgencyLink: {
-    color: "#2563EB",
+    color: "#3B6E99",
     fontSize: 13,
     fontWeight: "700",
     textDecorationLine: "underline",
@@ -618,35 +618,35 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 13,
     fontWeight: "600",
-    color: "#1E293B",
+    color: "#22252A",
   },
   input: {
-    backgroundColor: "#F8FAFC",
+    backgroundColor: "#FAF7F0",
     borderWidth: 1,
-    borderColor: "#CBD5E1",
+    borderColor: "#E8E2D5",
     borderRadius: 8,
     paddingVertical: 10,
     paddingHorizontal: 14,
     fontSize: 14,
-    color: "#0F172A",
+    color: "#22252A",
   },
   submitBtn: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
     gap: 8,
-    backgroundColor: "#2563EB",
-    paddingVertical: 14,
-    borderRadius: 10,
+    backgroundColor: "#3B6E99",
+    paddingVertical: 13,
+    borderRadius: 8,
     marginTop: 8,
-    shadowColor: "#2563EB",
-    shadowOpacity: 0.25,
-    shadowRadius: 10,
-    elevation: 3,
+    shadowColor: "#3B6E99",
+    shadowOpacity: 0.18,
+    shadowRadius: 6,
+    elevation: 2,
   },
   submitBtnText: {
     color: "#FFFFFF",
-    fontSize: 15,
+    fontSize: 14.5,
     fontWeight: "700",
   },
   successWrap: {
@@ -655,32 +655,32 @@ const styles = StyleSheet.create({
     gap: 14,
   },
   successIconCircle: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    backgroundColor: "#D1FAE5",
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    backgroundColor: "#EBF5F0",
     justifyContent: "center",
     alignItems: "center",
   },
   successTitle: {
     fontSize: 20,
     fontWeight: "800",
-    color: "#0F172A",
+    color: "#22252A",
     textAlign: "center",
   },
   successSub: {
     fontSize: 13.5,
-    color: "#64748B",
+    color: "#737B85",
     textAlign: "center",
     lineHeight: 20,
   },
   ticketDetailsCard: {
     width: "100%",
-    backgroundColor: "#F8FAFC",
-    borderRadius: 10,
+    backgroundColor: "#FAF7F0",
+    borderRadius: 8,
     padding: 14,
     borderWidth: 1,
-    borderColor: "#E2E8F0",
+    borderColor: "#E8E2D5",
     gap: 8,
   },
   ticketRow: {
@@ -689,18 +689,18 @@ const styles = StyleSheet.create({
   },
   ticketLabel: {
     fontSize: 12.5,
-    color: "#64748B",
+    color: "#737B85",
   },
   ticketVal: {
     fontSize: 12.5,
     fontWeight: "700",
-    color: "#0F172A",
+    color: "#22252A",
   },
   doneBtn: {
     width: "100%",
-    backgroundColor: "#0F172A",
+    backgroundColor: "#22252A",
     paddingVertical: 12,
-    borderRadius: 8,
+    borderRadius: 7,
     alignItems: "center",
     marginTop: 8,
   },

@@ -94,7 +94,7 @@ export default function RentalAnalysisModal({
           <View style={styles.modalHeader}>
             <View style={styles.headerTitleRow}>
               <View style={styles.iconCircle}>
-                <Calculator size={20} color="#2563EB" />
+                <Calculator size={20} color="#3B6E99" />
               </View>
               <View>
                 <Text style={styles.modalTitle}>Free Rental Analysis</Text>
@@ -104,7 +104,7 @@ export default function RentalAnalysisModal({
               </View>
             </View>
             <TouchableOpacity onPress={onClose} style={styles.closeBtn} accessibilityLabel="Close modal">
-              <X size={20} color="#64748B" />
+              <X size={20} color="#737B85" />
             </TouchableOpacity>
           </View>
 
@@ -112,7 +112,7 @@ export default function RentalAnalysisModal({
             {!submitted ? (
               <View style={styles.formContainer}>
                 <View style={styles.routingNoticeBox}>
-                  <ShieldCheck size={16} color="#2563EB" />
+                  <ShieldCheck size={16} color="#3B6E99" />
                   <Text style={styles.routingNoticeText}>
                     Directly routed to Dinesh Donthula & Purvang Patel (Fair Deal Realty Inc.)
                   </Text>
@@ -335,8 +335,8 @@ const styles = StyleSheet.create({
     paddingVertical: 18,
     paddingHorizontal: 24,
     borderBottomWidth: 1,
-    borderBottomColor: "#E2E8F0",
-    backgroundColor: "#F8FAFC",
+    borderBottomColor: "#E8E2D5",
+    backgroundColor: "#F7F3EB",
   },
   headerTitleRow: {
     flexDirection: "row",
@@ -347,24 +347,24 @@ const styles = StyleSheet.create({
   iconCircle: {
     width: 38,
     height: 38,
-    borderRadius: 10,
-    backgroundColor: "#EFF6FF",
+    borderRadius: 8,
+    backgroundColor: "#EBF2F7",
     justifyContent: "center",
     alignItems: "center",
   },
   modalTitle: {
     fontSize: 18,
     fontWeight: "800",
-    color: "#0F172A",
+    color: "#22252A",
   },
   modalSubtitle: {
     fontSize: 12,
-    color: "#64748B",
+    color: "#737B85",
     marginTop: 1,
   },
   closeBtn: {
     padding: 6,
-    borderRadius: 8,
+    borderRadius: 6,
   },
   modalScroll: {
     flexGrow: 0,
@@ -376,22 +376,22 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-    backgroundColor: "#EFF6FF",
+    backgroundColor: "#EBF2F7",
     padding: 10,
     borderRadius: 8,
     borderWidth: 1,
-    borderColor: "#BFDBFE",
+    borderColor: "#C8D9E8",
   },
   routingNoticeText: {
     fontSize: 12,
-    color: "#1E40AF",
+    color: "#2E567A",
     fontWeight: "600",
     flex: 1,
   },
   sectionHeading: {
     fontSize: 11.5,
     fontWeight: "800",
-    color: "#475569",
+    color: "#4A515A",
     letterSpacing: 0.8,
   },
   inputGroup: {
@@ -404,17 +404,17 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 13,
     fontWeight: "600",
-    color: "#1E293B",
+    color: "#22252A",
   },
   input: {
-    backgroundColor: "#F8FAFC",
+    backgroundColor: "#FAF7F0",
     borderWidth: 1,
-    borderColor: "#CBD5E1",
+    borderColor: "#E8E2D5",
     borderRadius: 8,
     paddingVertical: 10,
     paddingHorizontal: 14,
     fontSize: 14,
-    color: "#0F172A",
+    color: "#22252A",
   },
   cityPillsRow: {
     flexDirection: "row",
@@ -424,19 +424,19 @@ const styles = StyleSheet.create({
   pill: {
     paddingVertical: 6,
     paddingHorizontal: 12,
-    borderRadius: 8,
-    backgroundColor: "#F1F5F9",
+    borderRadius: 6,
+    backgroundColor: "#F7F3EB",
     borderWidth: 1,
-    borderColor: "#E2E8F0",
+    borderColor: "#E8E2D5",
   },
   pillActive: {
-    backgroundColor: "#2563EB",
-    borderColor: "#2563EB",
+    backgroundColor: "#3B6E99",
+    borderColor: "#3B6E99",
   },
   pillText: {
     fontSize: 12.5,
     fontWeight: "600",
-    color: "#475569",
+    color: "#4A515A",
   },
   pillTextActive: {
     color: "#FFFFFF",
@@ -449,19 +449,19 @@ const styles = StyleSheet.create({
   miniPill: {
     paddingVertical: 8,
     paddingHorizontal: 14,
-    borderRadius: 8,
-    backgroundColor: "#F1F5F9",
+    borderRadius: 6,
+    backgroundColor: "#F7F3EB",
     borderWidth: 1,
-    borderColor: "#E2E8F0",
+    borderColor: "#E8E2D5",
   },
   miniPillActive: {
-    backgroundColor: "#2563EB",
-    borderColor: "#2563EB",
+    backgroundColor: "#3B6E99",
+    borderColor: "#3B6E99",
   },
   miniPillText: {
     fontSize: 13,
     fontWeight: "600",
-    color: "#475569",
+    color: "#4A515A",
   },
   miniPillTextActive: {
     color: "#FFFFFF",
@@ -471,18 +471,18 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     gap: 8,
-    backgroundColor: "#2563EB",
-    paddingVertical: 14,
-    borderRadius: 10,
+    backgroundColor: "#3B6E99",
+    paddingVertical: 13,
+    borderRadius: 8,
     marginTop: 10,
-    shadowColor: "#2563EB",
-    shadowOpacity: 0.25,
-    shadowRadius: 10,
-    elevation: 3,
+    shadowColor: "#3B6E99",
+    shadowOpacity: 0.18,
+    shadowRadius: 6,
+    elevation: 2,
   },
   submitBtnText: {
     color: "#FFFFFF",
-    fontSize: 15,
+    fontSize: 14.5,
     fontWeight: "700",
   },
   resultsContainer: {
@@ -491,31 +491,31 @@ const styles = StyleSheet.create({
     gap: 16,
   },
   successIconCircle: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    backgroundColor: "#D1FAE5",
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    backgroundColor: "#EBF5F0",
     justifyContent: "center",
     alignItems: "center",
   },
   resultsTitle: {
     fontSize: 20,
     fontWeight: "800",
-    color: "#0F172A",
+    color: "#22252A",
     textAlign: "center",
   },
   resultsSubtitle: {
     fontSize: 13.5,
-    color: "#64748B",
+    color: "#737B85",
     textAlign: "center",
     lineHeight: 20,
   },
   estimateBox: {
     width: "100%",
-    backgroundColor: "#F8FAFC",
-    borderWidth: 2,
-    borderColor: "#2563EB",
-    borderRadius: 12,
+    backgroundColor: "#FAF7F0",
+    borderWidth: 1.5,
+    borderColor: "#3B6E99",
+    borderRadius: 10,
     padding: 20,
     alignItems: "center",
     gap: 6,
@@ -523,64 +523,66 @@ const styles = StyleSheet.create({
   estimateLabel: {
     fontSize: 11,
     fontWeight: "800",
-    color: "#2563EB",
+    color: "#3B6E99",
     letterSpacing: 1,
   },
   estimateValue: {
-    fontSize: 30,
+    fontSize: 28,
     fontWeight: "900",
-    color: "#0F172A",
+    color: "#22252A",
   },
   estimatePerMonth: {
-    fontSize: 16,
+    fontSize: 15,
     fontWeight: "600",
-    color: "#64748B",
+    color: "#737B85",
   },
   estimateRangeNote: {
     fontSize: 12,
-    color: "#64748B",
+    color: "#737B85",
     fontWeight: "500",
   },
   feeBreakdownBox: {
     width: "100%",
-    backgroundColor: "#EFF6FF",
-    borderRadius: 10,
+    backgroundColor: "#EBF2F7",
+    borderRadius: 8,
     padding: 14,
     alignItems: "center",
     borderWidth: 1,
-    borderColor: "#BFDBFE",
+    borderColor: "#C8D9E8",
     gap: 4,
   },
   feeBreakdownTitle: {
     fontSize: 12,
-    color: "#1E40AF",
+    color: "#2E567A",
     fontWeight: "600",
   },
   feeBreakdownAmount: {
     fontSize: 22,
     fontWeight: "800",
-    color: "#1D4ED8",
+    color: "#234461",
   },
   feeBreakdownNote: {
     fontSize: 11.5,
-    color: "#3B82F6",
+    color: "#3B6E99",
     fontWeight: "500",
   },
   managerFollowupBox: {
     width: "100%",
-    backgroundColor: "#F1F5F9",
+    backgroundColor: "#F7F3EB",
     padding: 14,
-    borderRadius: 10,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: "#E8E2D5",
     gap: 4,
   },
   managerFollowupTitle: {
     fontSize: 13,
     fontWeight: "700",
-    color: "#0F172A",
+    color: "#22252A",
   },
   managerFollowupText: {
     fontSize: 12,
-    color: "#475569",
+    color: "#4A515A",
     lineHeight: 18,
   },
   resultActions: {
@@ -588,9 +590,9 @@ const styles = StyleSheet.create({
     marginTop: 6,
   },
   doneBtn: {
-    backgroundColor: "#0F172A",
+    backgroundColor: "#22252A",
     paddingVertical: 12,
-    borderRadius: 8,
+    borderRadius: 7,
     alignItems: "center",
   },
   doneBtnText: {

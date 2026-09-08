@@ -7,7 +7,6 @@ import {
   useWindowDimensions,
   Linking,
 } from "react-native";
-import { useRouter } from "expo-router";
 import {
   ShieldCheck,
   CreditCard,
@@ -27,7 +26,6 @@ import {
 } from "@/constants/keynestData";
 
 export default function TenantsPage() {
-  const router = useRouter();
   const { width } = useWindowDimensions();
   const isDesktop = width >= 1024;
   const isTablet = width >= 640 && width < 1024;
@@ -47,7 +45,7 @@ export default function TenantsPage() {
       <View style={styles.headerHero}>
         <View style={styles.innerContainer}>
           <View style={styles.badgePill}>
-            <ShieldCheck size={14} color="#38BDF8" />
+            <ShieldCheck size={14} color="#3B6E99" />
             <Text style={styles.badgePillText}>Under the Brokerage of Fair Deal Realty Inc.</Text>
           </View>
           <Text style={styles.pageTitle}>Tenant & Resident Center</Text>
@@ -63,7 +61,7 @@ export default function TenantsPage() {
           <View style={[styles.portalBox, { flexDirection: isDesktop ? "row" : "column" }]}>
             <View style={{ flex: 1, gap: 10 }}>
               <View style={styles.portalTag}>
-                <CreditCard size={12} color="#2563EB" />
+                <CreditCard size={12} color="#3B6E99" />
                 <Text style={styles.portalTagText}>APPFOLIO RESIDENT PORTAL</Text>
               </View>
               <Text style={styles.portalTitle}>Manage Your Rent & Lease Online</Text>
@@ -87,10 +85,10 @@ export default function TenantsPage() {
                 <ExternalLink size={16} color="#FFFFFF" />
               </TouchableOpacity>
               <TouchableOpacity
-                style={styles.viewRentalsBtn}
-                onPress={() => router.push("/rentals" as never)}
+                style={styles.triageSecondaryBtn}
+                onPress={openMaintenanceTriage}
               >
-                <Text style={styles.viewRentalsBtnText}>Browse Available Rentals →</Text>
+                <Text style={styles.triageSecondaryBtnText}>Submit Maintenance Request →</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -146,7 +144,7 @@ export default function TenantsPage() {
                 <Text style={styles.stepTitle}>{st.title}</Text>
                 <Text style={styles.stepDesc}>{st.description}</Text>
                 <View style={styles.stepTimeRow}>
-                  <Clock size={12} color="#2563EB" />
+                  <Clock size={12} color="#3B6E99" />
                   <Text style={styles.stepTimeText}>{st.channel}</Text>
                 </View>
               </View>
@@ -177,7 +175,7 @@ export default function TenantsPage() {
             {RENTAL_CRITERIA_POINTS.map((crit, idx) => (
               <View key={idx} style={styles.criteriaItem}>
                 <View style={styles.criteriaCheckCircle}>
-                  <CheckCircle2 size={16} color="#2563EB" />
+                  <CheckCircle2 size={16} color="#3B6E99" />
                 </View>
                 <View style={{ flex: 1 }}>
                   <Text style={styles.criteriaItemTitle}>{crit.title}</Text>
@@ -188,7 +186,7 @@ export default function TenantsPage() {
           </View>
 
           <View style={styles.fairHousingBox}>
-            <Scale size={20} color="#2563EB" />
+            <Scale size={20} color="#3B6E99" />
             <Text style={styles.fairHousingText}>
               Equal Housing Opportunity: KeyNest Realty and Fair Deal Realty Inc. strictly prohibit discrimination based on race, color, religion, sex, disability, familial status, or national origin.
             </Text>
@@ -201,10 +199,10 @@ export default function TenantsPage() {
 
 const styles = StyleSheet.create({
   headerHero: {
-    backgroundColor: "#0B1120",
+    backgroundColor: "#FDFBF7",
     paddingVertical: 72,
     borderBottomWidth: 1,
-    borderBottomColor: "#1E293B",
+    borderBottomColor: "#E8E2D5",
   },
   innerContainer: {
     maxWidth: 1240,
@@ -217,34 +215,34 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-    backgroundColor: "#1E293B",
+    backgroundColor: "#EBF2F7",
     paddingVertical: 6,
     paddingHorizontal: 12,
     borderRadius: 20,
     borderWidth: 1,
-    borderColor: "#334155",
+    borderColor: "#C8D9E8",
     marginBottom: 16,
   },
   badgePillText: {
-    color: "#E2E8F0",
+    color: "#2E567A",
     fontSize: 12.5,
     fontWeight: "600",
   },
   pageTitle: {
     fontSize: 40,
     fontWeight: "900",
-    color: "#FFFFFF",
+    color: "#22252A",
     letterSpacing: -1,
     marginBottom: 12,
   },
   pageSubtitle: {
     fontSize: 16.5,
-    color: "#94A3B8",
+    color: "#4A515A",
     maxWidth: 760,
     lineHeight: 25,
   },
   sectionLight: {
-    backgroundColor: "#F8FAFC",
+    backgroundColor: "#F7F3EB",
     paddingVertical: 64,
   },
   sectionWhite: {
@@ -255,12 +253,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFFFF",
     borderRadius: 16,
     borderWidth: 1,
-    borderColor: "#E2E8F0",
+    borderColor: "#E8E2D5",
     padding: 32,
     justifyContent: "space-between",
     alignItems: "center",
     gap: 24,
-    shadowColor: "#0F172A",
+    shadowColor: "#22252A",
     shadowOpacity: 0.05,
     shadowRadius: 16,
     elevation: 3,
@@ -270,7 +268,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 6,
-    backgroundColor: "#EFF6FF",
+    backgroundColor: "#EBF2F7",
     paddingVertical: 4,
     paddingHorizontal: 10,
     borderRadius: 6,
@@ -278,17 +276,17 @@ const styles = StyleSheet.create({
   portalTagText: {
     fontSize: 11,
     fontWeight: "800",
-    color: "#2563EB",
+    color: "#2E567A",
     letterSpacing: 0.8,
   },
   portalTitle: {
     fontSize: 22,
     fontWeight: "800",
-    color: "#0F172A",
+    color: "#22252A",
   },
   portalDesc: {
     fontSize: 14,
-    color: "#475569",
+    color: "#4A515A",
     lineHeight: 22,
   },
   portalPillsRow: {
@@ -300,7 +298,7 @@ const styles = StyleSheet.create({
   portalPill: {
     fontSize: 12.5,
     fontWeight: "600",
-    color: "#2563EB",
+    color: "#3B6E99",
   },
   portalActionCol: {
     alignItems: "center",
@@ -310,11 +308,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-    backgroundColor: "#2563EB",
+    backgroundColor: "#3B6E99",
     paddingVertical: 14,
     paddingHorizontal: 24,
     borderRadius: 10,
-    shadowColor: "#2563EB",
+    shadowColor: "#3B6E99",
     shadowOpacity: 0.25,
     shadowRadius: 8,
     elevation: 3,
@@ -324,11 +322,11 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: "700",
   },
-  viewRentalsBtn: {
+  triageSecondaryBtn: {
     paddingVertical: 6,
   },
-  viewRentalsBtnText: {
-    color: "#2563EB",
+  triageSecondaryBtnText: {
+    color: "#3B6E99",
     fontSize: 13,
     fontWeight: "700",
   },
@@ -340,21 +338,21 @@ const styles = StyleSheet.create({
   sectionOverline: {
     fontSize: 12,
     fontWeight: "800",
-    color: "#2563EB",
+    color: "#3B6E99",
     letterSpacing: 1.2,
     marginBottom: 8,
   },
   sectionTitle: {
     fontSize: 32,
     fontWeight: "800",
-    color: "#0F172A",
+    color: "#22252A",
     letterSpacing: -0.5,
     textAlign: "center",
     marginBottom: 12,
   },
   sectionSubtitle: {
     fontSize: 16,
-    color: "#64748B",
+    color: "#4A515A",
     maxWidth: 720,
     textAlign: "center",
     lineHeight: 24,
@@ -412,12 +410,12 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     padding: 20,
     borderWidth: 1,
-    borderColor: "#E2E8F0",
+    borderColor: "#E8E2D5",
     gap: 8,
   },
   stepNumPill: {
     alignSelf: "flex-start",
-    backgroundColor: "#F1F5F9",
+    backgroundColor: "#FAF7F0",
     paddingVertical: 3,
     paddingHorizontal: 8,
     borderRadius: 4,
@@ -425,16 +423,16 @@ const styles = StyleSheet.create({
   stepNumText: {
     fontSize: 10.5,
     fontWeight: "800",
-    color: "#475569",
+    color: "#737B85",
   },
   stepTitle: {
     fontSize: 16,
     fontWeight: "700",
-    color: "#0F172A",
+    color: "#22252A",
   },
   stepDesc: {
     fontSize: 13,
-    color: "#64748B",
+    color: "#4A515A",
     lineHeight: 19,
     flex: 1,
   },
@@ -447,7 +445,7 @@ const styles = StyleSheet.create({
   stepTimeText: {
     fontSize: 12,
     fontWeight: "600",
-    color: "#2563EB",
+    color: "#3B6E99",
   },
   triageActionWrap: {
     marginTop: 36,
@@ -457,7 +455,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-    backgroundColor: "#2563EB",
+    backgroundColor: "#3B6E99",
     paddingVertical: 14,
     paddingHorizontal: 24,
     borderRadius: 8,
@@ -481,13 +479,13 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     gap: 14,
     borderWidth: 1,
-    borderColor: "#E2E8F0",
+    borderColor: "#E8E2D5",
   },
   criteriaCheckCircle: {
     width: 28,
     height: 28,
     borderRadius: 14,
-    backgroundColor: "#EFF6FF",
+    backgroundColor: "#EBF2F7",
     justifyContent: "center",
     alignItems: "center",
     marginTop: 2,
@@ -495,12 +493,12 @@ const styles = StyleSheet.create({
   criteriaItemTitle: {
     fontSize: 15,
     fontWeight: "700",
-    color: "#0F172A",
+    color: "#22252A",
     marginBottom: 4,
   },
   criteriaItemDetail: {
     fontSize: 13.5,
-    color: "#475569",
+    color: "#4A515A",
     lineHeight: 20,
   },
   fairHousingBox: {
@@ -508,18 +506,18 @@ const styles = StyleSheet.create({
     width: "100%",
     marginHorizontal: "auto",
     marginTop: 24,
-    backgroundColor: "#EFF6FF",
+    backgroundColor: "#EBF2F7",
     borderRadius: 10,
     padding: 16,
     flexDirection: "row",
     alignItems: "center",
     gap: 12,
     borderWidth: 1,
-    borderColor: "#BFDBFE",
+    borderColor: "#C8D9E8",
   },
   fairHousingText: {
     fontSize: 12.5,
-    color: "#1E40AF",
+    color: "#2E567A",
     lineHeight: 18,
     flex: 1,
   },
