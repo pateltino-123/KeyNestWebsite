@@ -42,8 +42,8 @@ export default function Header({
   const router = useRouter();
   const pathname = usePathname();
   const { width } = useWindowDimensions();
-  const isDesktop = width >= 1024;
-  const isTablet = width >= 768 && width < 1024;
+  const isDesktop = width >= 1080;
+  const isTablet = width >= 768 && width < 1080;
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [portalDropdownOpen, setPortalDropdownOpen] = useState(false);
 
@@ -71,14 +71,14 @@ export default function Header({
       <View style={styles.topBanner}>
         <View style={styles.topBannerContent}>
           <View style={styles.topBannerLeft}>
-            <ShieldCheck size={14} color="#10B981" />
+            <ShieldCheck size={14} color="#38BDF8" />
             <Text style={styles.topBannerText}>
               <Text style={styles.boldText}>KeyNest Realty</Text> • Under the Brokerage of{" "}
               <Text style={styles.boldText}>Fair Deal Realty Inc.</Text> • TREC Licensed
             </Text>
           </View>
           <View style={styles.topBannerRight}>
-            <Phone size={13} color="#D1FAE5" />
+            <Phone size={13} color="#93C5FD" />
             <Text style={styles.topBannerPhone}>Office: {KEYNEST_INFO.phone}</Text>
             <View style={styles.topBannerDivider} />
             <TouchableOpacity
@@ -148,9 +148,9 @@ export default function Header({
                   onPress={() => setPortalDropdownOpen(!portalDropdownOpen)}
                   accessibilityRole="button"
                 >
-                  <Key size={15} color="#1B4D3E" />
-                  <Text style={styles.portalButtonText}>Portals</Text>
-                  <ChevronDown size={14} color="#1B4D3E" />
+                  <Key size={14} color="#2563EB" />
+                  <Text style={styles.portalButtonText}>Client Portals</Text>
+                  <ChevronDown size={14} color="#64748B" />
                 </TouchableOpacity>
 
                 {portalDropdownOpen && (
@@ -166,8 +166,13 @@ export default function Header({
                         }
                       }}
                     >
-                      <Text style={styles.dropdownItemTitle}>Owner Portal</Text>
-                      <Text style={styles.dropdownItemSub}>Statements, distributions, tax 1099</Text>
+                      <View style={styles.dropdownItemIconCircle}>
+                        <Key size={14} color="#2563EB" />
+                      </View>
+                      <View style={{ flex: 1 }}>
+                        <Text style={styles.dropdownItemTitle}>Owner Portal</Text>
+                        <Text style={styles.dropdownItemSub}>Statements, distributions, tax 1099</Text>
+                      </View>
                     </TouchableOpacity>
                     <View style={styles.dropdownDivider} />
                     <TouchableOpacity
@@ -181,8 +186,13 @@ export default function Header({
                         }
                       }}
                     >
-                      <Text style={styles.dropdownItemTitle}>Tenant Portal</Text>
-                      <Text style={styles.dropdownItemSub}>Pay rent, view ledger, maintenance</Text>
+                      <View style={styles.dropdownItemIconCircle}>
+                        <Users size={14} color="#2563EB" />
+                      </View>
+                      <View style={{ flex: 1 }}>
+                        <Text style={styles.dropdownItemTitle}>Resident Portal</Text>
+                        <Text style={styles.dropdownItemSub}>Pay rent, view ledger, maintenance</Text>
+                      </View>
                     </TouchableOpacity>
                   </View>
                 )}
@@ -213,7 +223,7 @@ export default function Header({
                 accessibilityLabel="Open navigation menu"
                 accessibilityRole="button"
               >
-                <Menu size={24} color="#164E3A" />
+                <Menu size={24} color="#0F172A" />
               </TouchableOpacity>
             )}
           </View>
@@ -240,11 +250,11 @@ export default function Header({
                 </View>
               </View>
               <TouchableOpacity
+                style={styles.closeDrawerBtn}
                 onPress={() => setMobileMenuOpen(false)}
-                style={styles.mobileDrawerCloseBtn}
                 accessibilityLabel="Close navigation menu"
               >
-                <X size={24} color="#1F2937" />
+                <X size={22} color="#475569" />
               </TouchableOpacity>
             </View>
 
@@ -262,7 +272,7 @@ export default function Header({
                       style={[styles.mobileNavItem, isActive && styles.mobileNavItemActive]}
                       onPress={() => navigateTo(item.href)}
                     >
-                      <Icon size={18} color={isActive ? "#1B4D3E" : "#4B5563"} />
+                      <Icon size={18} color={isActive ? "#2563EB" : "#64748B"} />
                       <Text style={[styles.mobileNavText, isActive && styles.mobileNavTextActive]}>
                         {item.label}
                       </Text>
@@ -284,7 +294,7 @@ export default function Header({
                     }
                   }}
                 >
-                  <Key size={16} color="#1B4D3E" />
+                  <Key size={16} color="#2563EB" />
                   <Text style={styles.mobilePortalBtnText}>AppFolio Owner Portal</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
@@ -298,8 +308,8 @@ export default function Header({
                     }
                   }}
                 >
-                  <Users size={16} color="#1B4D3E" />
-                  <Text style={styles.mobilePortalBtnText}>AppFolio Tenant Portal</Text>
+                  <Users size={16} color="#2563EB" />
+                  <Text style={styles.mobilePortalBtnText}>AppFolio Resident Portal</Text>
                 </TouchableOpacity>
               </View>
 
@@ -352,13 +362,15 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: "#FFFFFF",
     borderBottomWidth: 1,
-    borderBottomColor: "#E5E7EB",
+    borderBottomColor: "#E2E8F0",
     zIndex: 100,
   },
   topBanner: {
-    backgroundColor: "#113A2F",
-    paddingVertical: 7,
+    backgroundColor: "#0B1120",
+    paddingVertical: 8,
     paddingHorizontal: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: "#1E293B",
   },
   topBannerContent: {
     maxWidth: 1240,
@@ -381,7 +393,7 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   topBannerText: {
-    color: "#E6F4EA",
+    color: "#94A3B8",
     fontSize: 12,
   },
   boldText: {
@@ -389,25 +401,25 @@ const styles = StyleSheet.create({
     color: "#FFFFFF",
   },
   topBannerPhone: {
-    color: "#D1FAE5",
+    color: "#93C5FD",
     fontSize: 12,
-    fontWeight: "500",
+    fontWeight: "600",
   },
   topBannerDivider: {
     width: 1,
     height: 12,
-    backgroundColor: "#1E5642",
+    backgroundColor: "#334155",
   },
   topBannerLink: {
-    color: "#34D399",
+    color: "#38BDF8",
     fontSize: 12,
     fontWeight: "600",
     textDecorationLine: "underline",
   },
   mainNav: {
     backgroundColor: "#FFFFFF",
-    paddingVertical: 12,
-    paddingHorizontal: 16,
+    paddingVertical: 14,
+    paddingHorizontal: 20,
   },
   navContainer: {
     maxWidth: 1240,
@@ -420,19 +432,19 @@ const styles = StyleSheet.create({
   logoContainer: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 10,
+    gap: 12,
   },
   logoMark: {
-    width: 38,
-    height: 38,
-    borderRadius: 8,
-    backgroundColor: "#164E3A",
+    width: 40,
+    height: 40,
+    borderRadius: 10,
+    backgroundColor: "#2563EB",
     justifyContent: "center",
     alignItems: "center",
-    shadowColor: "#000",
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 2,
+    shadowColor: "#2563EB",
+    shadowOpacity: 0.25,
+    shadowRadius: 8,
+    elevation: 3,
   },
   logoTitleRow: {
     flexDirection: "row",
@@ -440,43 +452,43 @@ const styles = StyleSheet.create({
     gap: 4,
   },
   logoTextMain: {
-    fontSize: 21,
-    fontWeight: "800",
-    color: "#164E3A",
+    fontSize: 22,
+    fontWeight: "900",
+    color: "#0F172A",
     letterSpacing: -0.5,
   },
   logoTextSub: {
-    fontSize: 20,
-    fontWeight: "600",
-    color: "#059669",
-    letterSpacing: -0.3,
+    fontSize: 21,
+    fontWeight: "700",
+    color: "#2563EB",
+    letterSpacing: -0.5,
   },
   logoBrokerSub: {
-    fontSize: 10.5,
+    fontSize: 11,
+    color: "#64748B",
     fontWeight: "500",
-    color: "#6B7280",
     marginTop: -2,
   },
   desktopNavItems: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 4,
+    gap: 6,
   },
   navItem: {
-    paddingVertical: 8,
-    paddingHorizontal: 10,
-    borderRadius: 6,
+    paddingVertical: 6,
+    paddingHorizontal: 11,
+    borderRadius: 8,
   },
   navItemActive: {
-    backgroundColor: "#ECFDF5",
+    backgroundColor: "#EFF6FF",
   },
   navItemText: {
-    fontSize: 14,
-    fontWeight: "500",
-    color: "#374151",
+    fontSize: 13.5,
+    fontWeight: "600",
+    color: "#334155",
   },
   navItemTextActive: {
-    color: "#164E3A",
+    color: "#2563EB",
     fontWeight: "700",
   },
   actionButtonsContainer: {
@@ -486,128 +498,144 @@ const styles = StyleSheet.create({
   },
   dropdownRelative: {
     position: "relative",
+    zIndex: 110,
   },
   portalButton: {
     flexDirection: "row",
     alignItems: "center",
     gap: 6,
     paddingVertical: 8,
-    paddingHorizontal: 12,
-    borderRadius: 6,
+    paddingHorizontal: 14,
+    borderRadius: 8,
     borderWidth: 1,
-    borderColor: "#D1D5DB",
-    backgroundColor: "#F9FAFB",
+    borderColor: "#CBD5E1",
+    backgroundColor: "#F8FAFC",
   },
   portalButtonText: {
     fontSize: 13,
     fontWeight: "600",
-    color: "#1F2937",
+    color: "#0F172A",
   },
   dropdownMenu: {
     position: "absolute",
-    top: 40,
+    top: 42,
     right: 0,
-    width: 220,
+    width: 250,
     backgroundColor: "#FFFFFF",
-    borderRadius: 8,
-    paddingVertical: 8,
+    borderRadius: 12,
     borderWidth: 1,
-    borderColor: "#E5E7EB",
-    shadowColor: "#000",
-    shadowOpacity: 0.15,
-    shadowRadius: 10,
-    shadowOffset: { width: 0, height: 4 },
-    elevation: 6,
+    borderColor: "#E2E8F0",
+    padding: 6,
+    shadowColor: "#0F172A",
+    shadowOpacity: 0.12,
+    shadowRadius: 16,
+    elevation: 8,
     zIndex: 200,
   },
   dropdownItem: {
-    paddingVertical: 8,
-    paddingHorizontal: 14,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+    borderRadius: 8,
+  },
+  dropdownItemIconCircle: {
+    width: 30,
+    height: 30,
+    borderRadius: 8,
+    backgroundColor: "#EFF6FF",
+    justifyContent: "center",
+    alignItems: "center",
   },
   dropdownItemTitle: {
     fontSize: 13,
     fontWeight: "700",
-    color: "#111827",
+    color: "#0F172A",
   },
   dropdownItemSub: {
     fontSize: 11,
-    color: "#6B7280",
-    marginTop: 2,
+    color: "#64748B",
+    marginTop: 1,
   },
   dropdownDivider: {
     height: 1,
-    backgroundColor: "#F3F4F6",
+    backgroundColor: "#F1F5F9",
     marginVertical: 4,
   },
   primaryCtaButton: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#164E3A",
+    backgroundColor: "#2563EB",
     paddingVertical: 9,
     paddingHorizontal: 16,
-    borderRadius: 7,
-    shadowColor: "#164E3A",
+    borderRadius: 8,
+    shadowColor: "#2563EB",
     shadowOpacity: 0.25,
-    shadowRadius: 5,
-    elevation: 3,
+    shadowRadius: 8,
+    elevation: 2,
   },
   primaryCtaText: {
     color: "#FFFFFF",
-    fontSize: 13,
+    fontSize: 13.5,
     fontWeight: "700",
   },
   mobileMenuToggle: {
     padding: 8,
-    borderRadius: 6,
-    backgroundColor: "#F3F4F6",
+    borderRadius: 8,
+    backgroundColor: "#F1F5F9",
   },
   mobileDrawerOverlay: {
     flex: 1,
-    backgroundColor: "rgba(0,0,0,0.5)",
+    backgroundColor: "rgba(15, 23, 42, 0.6)",
     flexDirection: "row",
     justifyContent: "flex-end",
   },
   mobileDrawerContent: {
     width: "82%",
-    maxWidth: 340,
+    maxWidth: 380,
     backgroundColor: "#FFFFFF",
     height: "100%",
-    paddingTop: 20,
-    paddingHorizontal: 20,
+    shadowColor: "#000",
+    shadowOpacity: 0.2,
+    shadowRadius: 12,
+    elevation: 10,
   },
   mobileDrawerHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingBottom: 16,
+    padding: 16,
     borderBottomWidth: 1,
-    borderBottomColor: "#E5E7EB",
+    borderBottomColor: "#E2E8F0",
   },
   logoMarkSmall: {
     width: 32,
     height: 32,
-    borderRadius: 6,
-    backgroundColor: "#164E3A",
+    borderRadius: 8,
+    backgroundColor: "#2563EB",
     justifyContent: "center",
     alignItems: "center",
   },
   logoTextMainSmall: {
-    fontSize: 17,
+    fontSize: 16,
     fontWeight: "800",
-    color: "#164E3A",
+    color: "#0F172A",
   },
   logoBrokerSubSmall: {
-    fontSize: 9.5,
-    color: "#6B7280",
+    fontSize: 10,
+    color: "#64748B",
   },
-  mobileDrawerCloseBtn: {
+  closeDrawerBtn: {
     padding: 6,
+    borderRadius: 8,
   },
   mobileLinksScroll: {
-    marginTop: 12,
+    flex: 1,
   },
   mobileLinksList: {
-    gap: 4,
+    paddingVertical: 12,
+    paddingHorizontal: 16,
   },
   mobileNavItem: {
     flexDirection: "row",
@@ -618,52 +646,55 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   mobileNavItemActive: {
-    backgroundColor: "#ECFDF5",
+    backgroundColor: "#EFF6FF",
   },
   mobileNavText: {
     fontSize: 15,
+    color: "#334155",
     fontWeight: "500",
-    color: "#374151",
   },
   mobileNavTextActive: {
-    color: "#164E3A",
+    color: "#2563EB",
     fontWeight: "700",
   },
   mobilePortalSection: {
-    marginTop: 20,
+    marginTop: 10,
+    paddingHorizontal: 16,
     paddingTop: 16,
     borderTopWidth: 1,
-    borderTopColor: "#E5E7EB",
+    borderTopColor: "#F1F5F9",
   },
   mobileSectionHeader: {
     fontSize: 11,
     fontWeight: "700",
-    color: "#9CA3AF",
+    color: "#94A3B8",
     letterSpacing: 0.8,
-    marginBottom: 8,
+    marginBottom: 10,
   },
   mobilePortalBtn: {
     flexDirection: "row",
     alignItems: "center",
     gap: 10,
-    paddingVertical: 10,
+    paddingVertical: 11,
     paddingHorizontal: 12,
-    backgroundColor: "#F3F4F6",
+    backgroundColor: "#F8FAFC",
     borderRadius: 8,
+    borderWidth: 1,
+    borderColor: "#E2E8F0",
     marginBottom: 8,
   },
   mobilePortalBtnText: {
-    fontSize: 13,
+    fontSize: 13.5,
     fontWeight: "600",
-    color: "#1F2937",
+    color: "#0F172A",
   },
   mobileCtaSection: {
-    marginTop: 16,
+    padding: 16,
     gap: 10,
   },
   mobilePrimaryCta: {
-    backgroundColor: "#164E3A",
-    paddingVertical: 12,
+    backgroundColor: "#2563EB",
+    paddingVertical: 13,
     borderRadius: 8,
     alignItems: "center",
   },
@@ -673,26 +704,28 @@ const styles = StyleSheet.create({
     fontWeight: "700",
   },
   mobileSecondaryCta: {
+    backgroundColor: "#FFFFFF",
     borderWidth: 1,
-    borderColor: "#164E3A",
-    paddingVertical: 11,
+    borderColor: "#CBD5E1",
+    paddingVertical: 12,
     borderRadius: 8,
     alignItems: "center",
   },
   mobileSecondaryCtaText: {
-    color: "#164E3A",
+    color: "#0F172A",
     fontSize: 14,
     fontWeight: "600",
   },
   mobileFooterCompliance: {
-    marginTop: 30,
+    paddingHorizontal: 16,
     paddingTop: 16,
     borderTopWidth: 1,
-    borderTopColor: "#E5E7EB",
+    borderTopColor: "#F1F5F9",
+    gap: 4,
   },
   mobileComplianceText: {
     fontSize: 11,
-    color: "#6B7280",
+    color: "#94A3B8",
     lineHeight: 16,
   },
 });

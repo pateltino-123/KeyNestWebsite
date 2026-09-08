@@ -4,15 +4,24 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
+  useWindowDimensions,
 } from "react-native";
 import {
   ShieldCheck,
   Calendar,
   Award,
+  ArrowRight,
+  Target,
+  Wrench,
+  Users,
+  Building,
 } from "lucide-react-native";
 import WebsiteLayout, { useWebsiteModals } from "@/components/keynest/WebsiteLayout";
 
 export default function WhyKeyNestPage() {
+  const { width } = useWindowDimensions();
+  const isDesktop = width >= 1024;
+  const isTablet = width >= 640 && width < 1024;
   const { openConsultation, openRentalAnalysis } = useWebsiteModals();
 
   const comparisonRows = [
@@ -26,7 +35,7 @@ export default function WhyKeyNestPage() {
       feature: "Maintenance Coordination & Markups",
       self: "You search Angie/Yelp with unvetted pricing",
       mega: "10%–20% hidden markup added to third-party invoices",
-      keynest: "0% markup passed through at exact cost with photo proof",
+      keynest: "0% markup passed through at exact invoiced cost",
     },
     {
       feature: "Tenant Screening Standard",
@@ -54,23 +63,51 @@ export default function WhyKeyNestPage() {
     },
   ];
 
+  const pillars = [
+    {
+      title: "Single Point of Decision-Making",
+      desc: "You have direct access to Dinesh Donthula and Purvang Patel. No junior account reps, no frustrating call center ticket queues.",
+      icon: Users,
+    },
+    {
+      title: "Zero Hidden Maintenance Markups",
+      desc: "Every repair invoice is uploaded unedited to your AppFolio ledger at exact cost. We never take kickbacks from contractors.",
+      icon: Wrench,
+    },
+    {
+      title: "Objective Fair Housing Screening",
+      desc: "Clear published guidelines protecting your investment while upholding the law. 3x income ratio, full credit history, and nationwide criminal checks.",
+      icon: Target,
+    },
+    {
+      title: "AppFolio Financial Precision",
+      desc: "Bank-grade portal with direct ACH disbursements around the 10th of every month and automated year-end 1099 tax packages.",
+      icon: Award,
+    },
+    {
+      title: "Active Texas Broker Supervision",
+      desc: "Operating strictly under Fair Deal Realty Inc., maintaining broker trust accounts and TREC standardized agreements.",
+      icon: Building,
+    },
+  ];
+
   return (
     <WebsiteLayout>
       {/* Hero Header */}
       <View style={styles.headerHero}>
         <View style={styles.innerContainer}>
           <View style={styles.badgePill}>
-            <ShieldCheck size={14} color="#10B981" />
+            <ShieldCheck size={14} color="#38BDF8" />
             <Text style={styles.badgePillText}>Under the Brokerage of Fair Deal Realty Inc.</Text>
           </View>
           <Text style={styles.pageTitle}>Why Owners Choose KeyNest</Text>
           <Text style={styles.pageSubtitle}>
-            Proven operational discipline over unverified marketing hype. Built by investors, for North Texas rental owners.
+            Proven operational discipline over unverified marketing hype. Built by local investors, for North Texas rental owners.
           </Text>
         </View>
       </View>
 
-      {/* 1. The 5 Core Pillars (Slide 5 requirements) */}
+      {/* 1. The 5 Core Pillars */}
       <View style={styles.sectionWhite}>
         <View style={styles.innerContainer}>
           <View style={styles.sectionHeaderCentered}>
@@ -81,112 +118,136 @@ export default function WhyKeyNestPage() {
             </Text>
           </View>
 
-          <View style={styles.pillarsGrid}>
-            <View style={styles.pillarCard}>
-              <View style={styles.pillarNumberBadge}>
-                <Text style={styles.pillarNumberText}>1</Text>
-              </View>
-              <Text style={styles.pillarTitle}>Single Point of Owner Communication</Text>
-              <Text style={styles.pillarDesc}>
-                You deal directly with our authorized managers—Dinesh Donthula and Purvang Patel. No automated phone trees, no junior ticket-loggers, and no passing the buck.
-              </Text>
-            </View>
-
-            <View style={styles.pillarCard}>
-              <View style={styles.pillarNumberBadge}>
-                <Text style={styles.pillarNumberText}>2</Text>
-              </View>
-              <Text style={styles.pillarTitle}>Documented Operating Workflows</Text>
-              <Text style={styles.pillarDesc}>
-                We follow our documented 7-stage lifecycle and 6-step maintenance escalation rules. Every inspection, turnaround, and vendor dispatch adheres to defined standards.
-              </Text>
-            </View>
-
-            <View style={styles.pillarCard}>
-              <View style={styles.pillarNumberBadge}>
-                <Text style={styles.pillarNumberText}>3</Text>
-              </View>
-              <Text style={styles.pillarTitle}>AppFolio Modern Portals & Reporting</Text>
-              <Text style={styles.pillarDesc}>
-                Real-time visibility into income, itemized expenses, work order photo proof, digital leases, and direct monthly ACH distributions straight to your bank account.
-              </Text>
-            </View>
-
-            <View style={styles.pillarCard}>
-              <View style={styles.pillarNumberBadge}>
-                <Text style={styles.pillarNumberText}>4</Text>
-              </View>
-              <Text style={styles.pillarTitle}>Vetted Local Contractor Network</Text>
-              <Text style={styles.pillarDesc}>
-                We coordinate with thoroughly vetted, licensed, and insured North Texas trades. We charge 0% maintenance markup, passing contractor savings directly to owners.
-              </Text>
-            </View>
-
-            <View style={styles.pillarCard}>
-              <View style={styles.pillarNumberBadge}>
-                <Text style={styles.pillarNumberText}>5</Text>
-              </View>
-              <Text style={styles.pillarTitle}>Broker-Supervised Compliance</Text>
-              <Text style={styles.pillarDesc}>
-                Under Fair Deal Realty Inc., your leases, trust-account procedures, and advertising are strictly compliant with Texas Real Estate Commission (TREC) laws.
-              </Text>
-            </View>
+          <View
+            style={[
+              styles.pillarsGrid,
+              { flexDirection: isDesktop ? "row" : isTablet ? "row" : "column", flexWrap: "wrap" },
+            ]}
+          >
+            {pillars.map((pil, idx) => {
+              const Icon = pil.icon;
+              return (
+                <View
+                  key={idx}
+                  style={[
+                    styles.pillarCard,
+                    { width: isDesktop ? "31.5%" : isTablet ? "48%" : "100%" },
+                  ]}
+                >
+                  <View style={styles.pillarIconBox}>
+                    <Icon size={22} color="#2563EB" />
+                  </View>
+                  <Text style={styles.pillarTitle}>{pil.title}</Text>
+                  <Text style={styles.pillarDesc}>{pil.desc}</Text>
+                </View>
+              );
+            })}
           </View>
         </View>
       </View>
 
-      {/* 2. Side-by-Side Comparison Matrix */}
-      <View style={styles.sectionLight}>
+      {/* 2. Detailed 3-Way Comparison Table */}
+      <View style={styles.sectionAlt}>
         <View style={styles.innerContainer}>
           <View style={styles.sectionHeaderCentered}>
-            <Text style={styles.sectionOverline}>COMPARE YOUR OPTIONS</Text>
-            <Text style={styles.sectionTitle}>Self-Managing vs. Mega-Franchise vs. KeyNest</Text>
+            <Text style={styles.sectionOverline}>THE HONEST COMPARISON</Text>
+            <Text style={styles.sectionTitle}>KeyNest vs. Alternatives</Text>
             <Text style={styles.sectionSubtitle}>
-              See how our transparent local boutique model protects your time, sanity, and cash flow.
+              See how our transparent local model stacks up against self-management and corporate mega-franchises.
             </Text>
           </View>
 
-          <View style={styles.comparisonTable}>
-            <View style={styles.tableHead}>
-              <Text style={[styles.headCell, { width: "28%" }]}>FEATURE / POLICY</Text>
-              <Text style={[styles.headCell, { width: "24%" }]}>DIY SELF-MANAGEMENT</Text>
-              <Text style={[styles.headCell, { width: "24%" }]}>MEGA-FRANCHISE</Text>
-              <Text style={[styles.headCellHighlight, { width: "24%" }]}>KEYNEST REALTY</Text>
-            </View>
-
-            {comparisonRows.map((row, i) => (
-              <View key={i} style={[styles.tableRow, i % 2 === 1 && styles.tableRowAlt]}>
-                <Text style={[styles.featureCell, { width: "28%" }]}>{row.feature}</Text>
-                <Text style={[styles.cellText, { width: "24%" }]}>{row.self}</Text>
-                <Text style={[styles.cellText, { width: "24%" }]}>{row.mega}</Text>
-                <Text style={[styles.cellTextHighlight, { width: "24%" }]}>{row.keynest}</Text>
+          <View style={styles.tableWrapper}>
+            {comparisonRows.map((row, idx) => (
+              <View key={idx} style={[styles.tableRow, idx % 2 === 0 && styles.tableRowAlt]}>
+                <Text style={styles.tableFeatureCol}>{row.feature}</Text>
+                <View style={[styles.tableColGroup, { flexDirection: isDesktop ? "row" : "column" }]}>
+                  <View style={styles.tableCol}>
+                    <Text style={styles.colLabel}>Self-Management</Text>
+                    <Text style={styles.colValText}>{row.self}</Text>
+                  </View>
+                  <View style={styles.tableCol}>
+                    <Text style={styles.colLabel}>Mega-Franchise</Text>
+                    <Text style={styles.colValText}>{row.mega}</Text>
+                  </View>
+                  <View style={[styles.tableCol, styles.tableColKeynest]}>
+                    <Text style={styles.colLabelKeynest}>KeyNest Realty</Text>
+                    <Text style={styles.colValTextKeynest}>{row.keynest}</Text>
+                  </View>
+                </View>
               </View>
             ))}
           </View>
         </View>
       </View>
 
-      {/* 3. Operational Sign-Off CTA Banner */}
+      {/* 3. Four Core Owner Guarantees */}
       <View style={styles.sectionWhite}>
         <View style={styles.innerContainer}>
-          <View style={styles.consultationCalloutCard}>
-            <Award size={36} color="#164E3A" />
-            <Text style={styles.calloutTitle}>Ready for Transparent Management You Can Rely On?</Text>
-            <Text style={styles.calloutText}>
-              Book a direct consultation with Dinesh Donthula or Purvang Patel. We will review your {"property's"} specific numbers, discuss local HOA considerations, and walk you through our onboarding timeline.
+          <View style={styles.sectionHeaderCentered}>
+            <Text style={styles.sectionOverline}>PEACE OF MIND</Text>
+            <Text style={styles.sectionTitle}>KeyNest Four-Point Owner Guarantees</Text>
+            <Text style={styles.sectionSubtitle}>
+              Specific commitments backed by clear operational policies.
             </Text>
-            <View style={styles.calloutBtnRow}>
-              <TouchableOpacity style={styles.calloutPrimaryBtn} onPress={openConsultation}>
-                <Calendar size={18} color="#FFFFFF" />
-                <Text style={styles.calloutPrimaryBtnText}>Schedule a Consultation</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.calloutSecondaryBtn}
-                onPress={() => openRentalAnalysis()}
-              >
-                <Text style={styles.calloutSecondaryBtnText}>Get Free Rental Analysis</Text>
-              </TouchableOpacity>
+          </View>
+
+          <View
+            style={[
+              styles.guaranteesGrid,
+              { flexDirection: isDesktop ? "row" : "column" },
+            ]}
+          >
+            <View style={styles.guaranteeCard}>
+              <View style={styles.guaranteeNumber}>
+                <Text style={styles.guaranteeNumText}>1</Text>
+              </View>
+              <Text style={styles.guaranteeTitle}>21-Day Placement Commitment</Text>
+              <Text style={styles.guaranteeDesc}>
+                If we do not procure a qualified applicant within 21 days of active marketing at agreed pricing, your first month{"'"}s management fee is free.
+              </Text>
             </View>
+
+            <View style={styles.guaranteeCard}>
+              <View style={styles.guaranteeNumber}>
+                <Text style={styles.guaranteeNumText}>2</Text>
+              </View>
+              <Text style={styles.guaranteeTitle}>Eviction Shield Protection</Text>
+              <Text style={styles.guaranteeDesc}>
+                If a tenant placed under our published criteria defaults within the first 6 months, we replace them for $0 additional leasing fee.
+              </Text>
+            </View>
+
+            <View style={styles.guaranteeCard}>
+              <View style={styles.guaranteeNumber}>
+                <Text style={styles.guaranteeNumText}>3</Text>
+              </View>
+              <Text style={styles.guaranteeTitle}>0% Maintenance Markup</Text>
+              <Text style={styles.guaranteeDesc}>
+                Every invoice from third-party plumbers, HVAC techs, and handymen is passed through to you at exact dollar cost.
+              </Text>
+            </View>
+
+            <View style={styles.guaranteeCard}>
+              <View style={styles.guaranteeNumber}>
+                <Text style={styles.guaranteeNumText}>4</Text>
+              </View>
+              <Text style={styles.guaranteeTitle}>$0 Vacancy Charge Policy</Text>
+              <Text style={styles.guaranteeDesc}>
+                Zero monthly management fees are assessed when your home is between tenancies. Our revenue is 100% tied to collected rent.
+              </Text>
+            </View>
+          </View>
+
+          <View style={styles.ctaBottomRow}>
+            <TouchableOpacity style={styles.primaryCtaBtn} onPress={() => openRentalAnalysis()}>
+              <Text style={styles.primaryCtaText}>Get a Free Rental Analysis</Text>
+              <ArrowRight size={16} color="#FFFFFF" />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.secondaryCtaBtn} onPress={openConsultation}>
+              <Calendar size={16} color="#0F172A" />
+              <Text style={styles.secondaryCtaText}>Schedule Consultation</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </View>
@@ -196,239 +257,245 @@ export default function WhyKeyNestPage() {
 
 const styles = StyleSheet.create({
   headerHero: {
-    backgroundColor: "#164E3A",
-    paddingVertical: 52,
+    backgroundColor: "#0B1120",
+    paddingVertical: 72,
     borderBottomWidth: 1,
-    borderBottomColor: "#1D644B",
+    borderBottomColor: "#1E293B",
   },
   innerContainer: {
     maxWidth: 1240,
     width: "100%",
     marginHorizontal: "auto",
-    paddingHorizontal: 16,
+    paddingHorizontal: 20,
   },
   badgePill: {
     alignSelf: "flex-start",
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-    backgroundColor: "#103C2D",
+    backgroundColor: "#1E293B",
     paddingVertical: 6,
     paddingHorizontal: 12,
     borderRadius: 20,
     borderWidth: 1,
-    borderColor: "#1E5642",
-    marginBottom: 12,
+    borderColor: "#334155",
+    marginBottom: 16,
   },
   badgePillText: {
-    color: "#D1FAE5",
+    color: "#E2E8F0",
     fontSize: 12.5,
     fontWeight: "600",
   },
   pageTitle: {
-    fontSize: 36,
+    fontSize: 40,
     fontWeight: "900",
     color: "#FFFFFF",
-    letterSpacing: -0.5,
-    marginBottom: 10,
+    letterSpacing: -1,
+    marginBottom: 12,
   },
   pageSubtitle: {
-    fontSize: 16,
-    color: "#D1D5DB",
-    lineHeight: 24,
-    maxWidth: 720,
+    fontSize: 16.5,
+    color: "#94A3B8",
+    maxWidth: 760,
+    lineHeight: 25,
   },
   sectionWhite: {
     backgroundColor: "#FFFFFF",
-    paddingVertical: 64,
+    paddingVertical: 72,
   },
-  sectionLight: {
-    backgroundColor: "#F8FAF9",
-    paddingVertical: 64,
+  sectionAlt: {
+    backgroundColor: "#F8FAFC",
+    paddingVertical: 72,
   },
   sectionHeaderCentered: {
     alignItems: "center",
+    marginBottom: 48,
     textAlign: "center",
-    marginBottom: 40,
-    gap: 8,
   },
   sectionOverline: {
     fontSize: 12,
     fontWeight: "800",
-    color: "#059669",
-    letterSpacing: 1,
+    color: "#2563EB",
+    letterSpacing: 1.2,
+    marginBottom: 8,
   },
   sectionTitle: {
-    fontSize: 30,
+    fontSize: 32,
     fontWeight: "800",
-    color: "#0F261E",
+    color: "#0F172A",
     letterSpacing: -0.5,
+    textAlign: "center",
+    marginBottom: 12,
   },
   sectionSubtitle: {
-    fontSize: 15,
-    color: "#4B5563",
-    maxWidth: 680,
+    fontSize: 16,
+    color: "#64748B",
+    maxWidth: 720,
     textAlign: "center",
-    lineHeight: 22,
+    lineHeight: 24,
   },
   pillarsGrid: {
-    gap: 16,
-    maxWidth: 900,
-    marginHorizontal: "auto",
-    width: "100%",
+    gap: 24,
+    justifyContent: "space-between",
   },
   pillarCard: {
-    flexDirection: "row",
     backgroundColor: "#FFFFFF",
-    borderRadius: 10,
+    borderRadius: 14,
+    padding: 26,
     borderWidth: 1,
-    borderColor: "#E5E7EB",
-    padding: 20,
-    gap: 16,
-    alignItems: "flex-start",
-  },
-  pillarNumberBadge: {
-    width: 36,
-    height: 36,
-    borderRadius: 18,
-    backgroundColor: "#164E3A",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  pillarNumberText: {
-    fontSize: 16,
-    fontWeight: "800",
-    color: "#FFFFFF",
-  },
-  pillarTitle: {
-    fontSize: 17,
-    fontWeight: "800",
-    color: "#111827",
-    marginBottom: 4,
-  },
-  pillarDesc: {
-    fontSize: 13.5,
-    color: "#4B5563",
-    lineHeight: 20,
-    flex: 1,
-  },
-  comparisonTable: {
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
-    borderRadius: 10,
-    overflow: "hidden",
-    backgroundColor: "#FFFFFF",
-    shadowColor: "#000",
+    borderColor: "#E2E8F0",
+    gap: 12,
+    shadowColor: "#0F172A",
     shadowOpacity: 0.04,
-    shadowRadius: 8,
+    shadowRadius: 12,
     elevation: 2,
   },
-  tableHead: {
-    flexDirection: "row",
-    backgroundColor: "#1F2937",
-    paddingVertical: 14,
-    paddingHorizontal: 16,
+  pillarIconBox: {
+    width: 44,
+    height: 44,
+    borderRadius: 10,
+    backgroundColor: "#EFF6FF",
+    justifyContent: "center",
+    alignItems: "center",
   },
-  headCell: {
-    color: "#E5E7EB",
-    fontSize: 11,
+  pillarTitle: {
+    fontSize: 18,
     fontWeight: "800",
-    letterSpacing: 0.6,
+    color: "#0F172A",
   },
-  headCellHighlight: {
-    color: "#34D399",
-    fontSize: 11,
-    fontWeight: "800",
-    letterSpacing: 0.6,
+  pillarDesc: {
+    fontSize: 14,
+    color: "#475569",
+    lineHeight: 21,
+  },
+  tableWrapper: {
+    backgroundColor: "#FFFFFF",
+    borderRadius: 14,
+    borderWidth: 1,
+    borderColor: "#E2E8F0",
+    overflow: "hidden",
   },
   tableRow: {
-    flexDirection: "row",
-    paddingVertical: 16,
-    paddingHorizontal: 16,
-    borderTopWidth: 1,
-    borderTopColor: "#F3F4F6",
-    alignItems: "flex-start",
+    padding: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: "#F1F5F9",
+    gap: 12,
   },
   tableRowAlt: {
-    backgroundColor: "#F9FAFB",
+    backgroundColor: "#F8FAFC",
   },
-  featureCell: {
+  tableFeatureCol: {
+    fontSize: 16,
+    fontWeight: "800",
+    color: "#0F172A",
+  },
+  tableColGroup: {
+    gap: 12,
+  },
+  tableCol: {
+    flex: 1,
+    backgroundColor: "#FFFFFF",
+    borderRadius: 8,
+    padding: 12,
+    borderWidth: 1,
+    borderColor: "#E2E8F0",
+    gap: 4,
+  },
+  tableColKeynest: {
+    backgroundColor: "#EFF6FF",
+    borderColor: "#BFDBFE",
+  },
+  colLabel: {
+    fontSize: 11,
+    fontWeight: "800",
+    color: "#64748B",
+  },
+  colLabelKeynest: {
+    fontSize: 11,
+    fontWeight: "800",
+    color: "#1E40AF",
+  },
+  colValText: {
+    fontSize: 13,
+    color: "#475569",
+    lineHeight: 18,
+  },
+  colValTextKeynest: {
     fontSize: 13,
     fontWeight: "700",
-    color: "#111827",
-    paddingRight: 10,
+    color: "#1D4ED8",
+    lineHeight: 18,
   },
-  cellText: {
-    fontSize: 12,
-    color: "#6B7280",
-    lineHeight: 17,
-    paddingRight: 10,
+  guaranteesGrid: {
+    gap: 20,
+    marginBottom: 40,
   },
-  cellTextHighlight: {
-    fontSize: 12.5,
-    fontWeight: "600",
-    color: "#166534",
-    lineHeight: 17,
-    paddingRight: 10,
-  },
-  consultationCalloutCard: {
-    backgroundColor: "#ECFDF5",
-    borderRadius: 12,
+  guaranteeCard: {
+    flex: 1,
+    backgroundColor: "#F8FAFC",
+    borderRadius: 14,
     borderWidth: 1,
-    borderColor: "#A7F3D0",
-    padding: 36,
-    alignItems: "center",
-    textAlign: "center",
-    gap: 12,
-    maxWidth: 800,
-    marginHorizontal: "auto",
-    width: "100%",
+    borderColor: "#E2E8F0",
+    padding: 24,
+    gap: 10,
   },
-  calloutTitle: {
-    fontSize: 24,
-    fontWeight: "800",
-    color: "#0F261E",
-    textAlign: "center",
-  },
-  calloutText: {
-    fontSize: 14.5,
-    color: "#065F46",
-    textAlign: "center",
-    lineHeight: 22,
-    maxWidth: 620,
-  },
-  calloutBtnRow: {
-    flexDirection: "row",
-    flexWrap: "wrap",
+  guaranteeNumber: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    backgroundColor: "#2563EB",
     justifyContent: "center",
-    gap: 12,
-    marginTop: 8,
+    alignItems: "center",
   },
-  calloutPrimaryBtn: {
+  guaranteeNumText: {
+    color: "#FFFFFF",
+    fontSize: 15,
+    fontWeight: "800",
+  },
+  guaranteeTitle: {
+    fontSize: 17,
+    fontWeight: "800",
+    color: "#0F172A",
+  },
+  guaranteeDesc: {
+    fontSize: 13.5,
+    color: "#475569",
+    lineHeight: 20,
+  },
+  ctaBottomRow: {
+    flexDirection: "row",
+    justifyContent: "center",
+    flexWrap: "wrap",
+    gap: 14,
+  },
+  primaryCtaBtn: {
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-    backgroundColor: "#164E3A",
-    paddingVertical: 13,
+    backgroundColor: "#2563EB",
+    paddingVertical: 14,
+    paddingHorizontal: 24,
+    borderRadius: 8,
+  },
+  primaryCtaText: {
+    color: "#FFFFFF",
+    fontSize: 15,
+    fontWeight: "700",
+  },
+  secondaryCtaBtn: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+    backgroundColor: "#F1F5F9",
+    borderWidth: 1,
+    borderColor: "#CBD5E1",
+    paddingVertical: 14,
     paddingHorizontal: 22,
     borderRadius: 8,
   },
-  calloutPrimaryBtnText: {
-    color: "#FFFFFF",
-    fontSize: 14,
-    fontWeight: "700",
-  },
-  calloutSecondaryBtn: {
-    backgroundColor: "#FFFFFF",
-    borderWidth: 1,
-    borderColor: "#164E3A",
-    paddingVertical: 12,
-    paddingHorizontal: 20,
-    borderRadius: 8,
-  },
-  calloutSecondaryBtnText: {
-    color: "#164E3A",
-    fontSize: 14,
+  secondaryCtaText: {
+    color: "#0F172A",
+    fontSize: 15,
     fontWeight: "700",
   },
 });

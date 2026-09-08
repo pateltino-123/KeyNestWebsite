@@ -15,8 +15,10 @@ import {
   Compass,
   CheckCircle2,
   Calendar,
-  Award,
   Layers,
+  ArrowRight,
+  Phone,
+  Mail,
 } from "lucide-react-native";
 import WebsiteLayout, { useWebsiteModals } from "@/components/keynest/WebsiteLayout";
 import { KEYNEST_INFO } from "@/constants/keynestData";
@@ -46,7 +48,7 @@ export default function AboutPage() {
     },
     {
       title: "Deep Local North Texas Knowledge",
-      desc: "Hyper-focused on The Colony, Frisco, Plano, McKinney, Allen, Prosper, and Celina. We know local HOA rules, municipal rental licenses, and true market comps.",
+      desc: "Hyper-focused on The Colony, Frisco, Plano, McKinney, Allen, Prosper, and Carrollton. We know local HOA rules, municipal rental licenses, and true market comps.",
       icon: Compass,
     },
   ];
@@ -57,7 +59,7 @@ export default function AboutPage() {
       <View style={styles.headerHero}>
         <View style={styles.innerContainer}>
           <View style={styles.badgePill}>
-            <ShieldCheck size={14} color="#10B981" />
+            <ShieldCheck size={14} color="#38BDF8" />
             <Text style={styles.badgePillText}>Under the Brokerage of Fair Deal Realty Inc.</Text>
           </View>
           <Text style={styles.pageTitle}>About KeyNest Realty</Text>
@@ -80,48 +82,62 @@ export default function AboutPage() {
                 Property management in North Texas often suffers from two extremes: disorganized DIY landlord stress or impersonal mega-franchises where owners are treated like account numbers.
               </Text>
               <Text style={styles.bodyText}>
-                KeyNest was established by DoubleDee LLC under the active brokerage oversight of Fair Deal Realty Inc. to bridge this gap. Our mission is to simplify landlording by pairing responsive local managers with enterprise-grade AppFolio technology and rigorous Texas Real Estate Commission compliance.
+                KeyNest was founded to deliver the best of both worlds: dedicated local leadership with personal accountability, combined with the rigorous technology and financial controls of AppFolio and Texas Real Estate Commission (TREC) broker supervision.
               </Text>
 
-              <View style={styles.missionPillarsBox}>
-                <View style={styles.pillarItem}>
-                  <Text style={styles.pillarLabel}>COMMUNICATION</Text>
-                  <Text style={styles.pillarSub}>Single point of contact for every rental owner</Text>
+              <View style={styles.missionPoints}>
+                <View style={styles.missionPointItem}>
+                  <CheckCircle2 size={18} color="#2563EB" />
+                  <Text style={styles.missionPointText}>
+                    Direct access to authorized local managers (Dinesh Donthula & Purvang Patel)
+                  </Text>
                 </View>
-                <View style={styles.pillarItem}>
-                  <Text style={styles.pillarLabel}>PROCESS</Text>
-                  <Text style={styles.pillarSub}>Documented 7-stage lifecycle & 6-step triage</Text>
+                <View style={styles.missionPointItem}>
+                  <CheckCircle2 size={18} color="#2563EB" />
+                  <Text style={styles.missionPointText}>
+                    100% fiduciary trust accounting under broker Fair Deal Realty Inc.
+                  </Text>
                 </View>
-                <View style={styles.pillarItem}>
-                  <Text style={styles.pillarLabel}>TECHNOLOGY</Text>
-                  <Text style={styles.pillarSub}>AppFolio real-time ledger & automated ACH</Text>
+                <View style={styles.missionPointItem}>
+                  <CheckCircle2 size={18} color="#2563EB" />
+                  <Text style={styles.missionPointText}>
+                    Zero fee markups on maintenance invoices passed through at exact cost
+                  </Text>
                 </View>
               </View>
             </View>
 
             <View style={[styles.splitColRight, { width: isDesktop ? "44%" : "100%" }]}>
-              <View style={styles.brokerageOversightCard}>
-                <View style={styles.brokerageCardTop}>
-                  <Building size={24} color="#164E3A" />
-                  <Text style={styles.brokerageCardTopTitle}>Broker-Controlled Operating Model</Text>
+              <View style={styles.brokerageCard}>
+                <View style={styles.brokerageCardBadge}>
+                  <Building size={16} color="#2563EB" />
+                  <Text style={styles.brokerageCardBadgeText}>SPONSORING BROKERAGE</Text>
                 </View>
+                <Text style={styles.brokerageCardName}>Fair Deal Realty Inc.</Text>
                 <Text style={styles.brokerageCardText}>
-                  Texas law demands strict fiduciary supervision over residential leasing, advertising, and trust accounting. KeyNest operates under the active oversight of <Text style={{ fontWeight: "700" }}>Fair Deal Realty Inc.</Text>
+                  KeyNest Realty operates as a specialized property management division under the active supervision of Texas licensed broker Fair Deal Realty Inc.
                 </Text>
 
-                <View style={styles.brokerResponsibilitiesList}>
-                  <Text style={styles.respItem}>• Sponsoring broker TREC supervision & transaction review</Text>
-                  <Text style={styles.respItem}>• Broker-supervised trust accounts for tenant security deposits</Text>
-                  <Text style={styles.respItem}>• Texas REALTORS® standard residential leases & addenda</Text>
-                  <Text style={styles.respItem}>• Advertising and fair housing compliance review</Text>
-                  <Text style={styles.respItem}>• Central Office: 4815 State Hwy 121, Suite 2, The Colony, TX</Text>
+                <View style={styles.brokerDetailsList}>
+                  <View style={styles.brokerDetailItem}>
+                    <Text style={styles.detailTitle}>Corporate Office:</Text>
+                    <Text style={styles.detailVal}>{KEYNEST_INFO.officeAddress}</Text>
+                  </View>
+                  <View style={styles.brokerDetailItem}>
+                    <Text style={styles.detailTitle}>Direct Phone:</Text>
+                    <Text style={styles.detailVal}>{KEYNEST_INFO.phone}</Text>
+                  </View>
+                  <View style={styles.brokerDetailItem}>
+                    <Text style={styles.detailTitle}>Operating Hours:</Text>
+                    <Text style={styles.detailVal}>{KEYNEST_INFO.hours}</Text>
+                  </View>
                 </View>
 
                 <TouchableOpacity
-                  style={styles.iabsLinkBtn}
+                  style={styles.trecNavBtn}
                   onPress={() => router.push("/compliance" as never)}
                 >
-                  <Text style={styles.iabsLinkBtnText}>View TREC Information About Brokerage Services (IABS) →</Text>
+                  <Text style={styles.trecNavBtnText}>View Required TREC Consumer Notices →</Text>
                 </TouchableOpacity>
               </View>
             </View>
@@ -129,71 +145,14 @@ export default function AboutPage() {
         </View>
       </View>
 
-      {/* 2. Controlled Pilot Story (Slide 5 & 16 requirement) */}
-      <View style={styles.sectionLight}>
-        <View style={styles.innerContainer}>
-          <View style={styles.pilotStoryCard}>
-            <View style={styles.pilotBadge}>
-              <Award size={16} color="#059669" />
-              <Text style={styles.pilotBadgeText}>VALIDATED BEFORE SCALE</Text>
-            </View>
-            <Text style={styles.pilotHeading}>
-              Validated Through a Controlled Pilot Before Accepting Outside Owners
-            </Text>
-            <Text style={styles.pilotDescription}>
-              Unlike firms that launch prematurely and practice on client assets, KeyNest spent months running selected properties through a rigorous internal pilot. We tested vendor dispatch times, refined our 6-step maintenance escalation rules, configured seamless AppFolio owner distributions, and secured Fair Deal Realty broker sign-off.
-            </Text>
-            <Text style={styles.pilotReadinessText}>
-              Today, KeyNest is fully operational, thoroughly staffed, and open to outside owners across our 7 core North Texas cities.
-            </Text>
-          </View>
-        </View>
-      </View>
-
-      {/* 3. Leadership Bios (Slide 5 requirement) */}
-      <View style={styles.sectionWhite}>
-        <View style={styles.innerContainer}>
-          <View style={styles.sectionHeaderCentered}>
-            <Text style={styles.sectionOverline}>APPROVED LEADERSHIP</Text>
-            <Text style={styles.sectionTitle}>Meet the Authorized Managers</Text>
-            <Text style={styles.sectionSubtitle}>
-              Experienced North Texas real estate professionals directly accountable for your property’s performance.
-            </Text>
-          </View>
-
-          <View
-            style={[
-              styles.leadershipGrid,
-              { flexDirection: isDesktop ? "row" : "column" },
-            ]}
-          >
-            {KEYNEST_INFO.authorizedManagers.map((mgr, index) => (
-              <View key={index} style={[styles.leaderCard, { width: isDesktop ? "48.5%" : "100%" }]}>
-                <View style={styles.leaderAvatar}>
-                  <Users size={32} color="#164E3A" />
-                </View>
-                <Text style={styles.leaderName}>{mgr.name}</Text>
-                <Text style={styles.leaderTitle}>{mgr.title}</Text>
-                <Text style={styles.leaderBrokerNote}>Authorized Manager | Under Fair Deal Realty Inc.</Text>
-                <Text style={styles.leaderBio}>{mgr.bio}</Text>
-
-                <View style={styles.leaderContactRow}>
-                  <Text style={styles.leaderContactItem}>Office: {KEYNEST_INFO.officeAddress}</Text>
-                </View>
-              </View>
-            ))}
-          </View>
-        </View>
-      </View>
-
-      {/* 4. Core Values (Slide 5 requirement) */}
-      <View style={styles.sectionLight}>
+      {/* 2. Four Core Values */}
+      <View style={styles.sectionAlt}>
         <View style={styles.innerContainer}>
           <View style={styles.sectionHeaderCentered}>
             <Text style={styles.sectionOverline}>OUR STANDARDS</Text>
-            <Text style={styles.sectionTitle}>Four Pillars of KeyNest Service</Text>
+            <Text style={styles.sectionTitle}>What Defines the KeyNest Experience</Text>
             <Text style={styles.sectionSubtitle}>
-              We hold ourselves to measurable operational principles on every property we manage.
+              Four core principles that guide our interactions with rental owners, residents, and trade contractors every single day.
             </Text>
           </View>
 
@@ -210,14 +169,16 @@ export default function AboutPage() {
                   key={idx}
                   style={[
                     styles.valueCard,
-                    { width: isDesktop ? "48.5%" : isTablet ? "48%" : "100%" },
+                    { width: isDesktop ? "48.5%" : "100%" },
                   ]}
                 >
                   <View style={styles.valueIconBox}>
-                    <Icon size={22} color="#164E3A" />
+                    <Icon size={24} color="#2563EB" />
                   </View>
-                  <Text style={styles.valueTitle}>{val.title}</Text>
-                  <Text style={styles.valueDesc}>{val.desc}</Text>
+                  <View style={{ flex: 1, gap: 6 }}>
+                    <Text style={styles.valueTitle}>{val.title}</Text>
+                    <Text style={styles.valueDesc}>{val.desc}</Text>
+                  </View>
                 </View>
               );
             })}
@@ -225,28 +186,55 @@ export default function AboutPage() {
         </View>
       </View>
 
-      {/* 5. Schedule Consultation CTA */}
-      <View style={styles.ctaSection}>
+      {/* 3. Leadership Profiles */}
+      <View style={styles.sectionWhite}>
         <View style={styles.innerContainer}>
-          <View style={styles.ctaCard}>
-            <Text style={styles.ctaOverline}>DISCUSS YOUR PROPERTY</Text>
-            <Text style={styles.ctaTitle}>Ready for Transparent North Texas Property Management?</Text>
-            <Text style={styles.ctaSubtitle}>
-              Schedule a 1-on-1 consultation with Dinesh Donthula or Purvang Patel to review your rental property, discuss realistic rental rates, or transition from another management company.
+          <View style={styles.sectionHeaderCentered}>
+            <Text style={styles.sectionOverline}>MANAGEMENT LEADERSHIP</Text>
+            <Text style={styles.sectionTitle}>Meet Your Local Decision-Makers</Text>
+            <Text style={styles.sectionSubtitle}>
+              When you partner with KeyNest, you work directly with our authorized management leadership.
             </Text>
+          </View>
 
-            <View style={styles.ctaButtonsGroup}>
-              <TouchableOpacity style={styles.primaryCtaBtn} onPress={openConsultation}>
-                <Calendar size={18} color="#FFFFFF" />
-                <Text style={styles.primaryCtaBtnText}>Schedule Consultation</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.secondaryCtaBtn}
-                onPress={() => openRentalAnalysis()}
-              >
-                <Text style={styles.secondaryCtaBtnText}>Request Free Rental Analysis</Text>
-              </TouchableOpacity>
-            </View>
+          <View
+            style={[
+              styles.leadershipGrid,
+              { flexDirection: isDesktop ? "row" : "column" },
+            ]}
+          >
+            {KEYNEST_INFO.authorizedManagers.map((leader, idx) => (
+              <View key={idx} style={styles.leaderCard}>
+                <View style={styles.leaderAvatarCircle}>
+                  <Users size={32} color="#2563EB" />
+                </View>
+                <Text style={styles.leaderName}>{leader.name}</Text>
+                <Text style={styles.leaderRole}>{leader.title}</Text>
+                <Text style={styles.leaderBio}>{leader.bio}</Text>
+
+                <View style={styles.leaderContactRow}>
+                  <View style={styles.leaderContactItem}>
+                    <Phone size={14} color="#2563EB" />
+                    <Text style={styles.leaderContactText}>{KEYNEST_INFO.phone}</Text>
+                  </View>
+                  <View style={styles.leaderContactItem}>
+                    <Mail size={14} color="#2563EB" />
+                    <Text style={styles.leaderContactText}>{KEYNEST_INFO.email}</Text>
+                  </View>
+                </View>
+              </View>
+            ))}
+          </View>
+
+          <View style={styles.aboutCtaRow}>
+            <TouchableOpacity style={styles.aboutPrimaryBtn} onPress={openConsultation}>
+              <Calendar size={16} color="#FFFFFF" />
+              <Text style={styles.aboutPrimaryBtnText}>Schedule a Call with Dinesh & Purvang</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.aboutSecondaryBtn} onPress={() => openRentalAnalysis()}>
+              <Text style={styles.aboutSecondaryBtnText}>Request Free Rental Analysis</Text>
+              <ArrowRight size={16} color="#0F172A" />
+            </TouchableOpacity>
           </View>
         </View>
       </View>
@@ -256,60 +244,60 @@ export default function AboutPage() {
 
 const styles = StyleSheet.create({
   headerHero: {
-    backgroundColor: "#164E3A",
-    paddingVertical: 52,
+    backgroundColor: "#0B1120",
+    paddingVertical: 72,
     borderBottomWidth: 1,
-    borderBottomColor: "#1D644B",
+    borderBottomColor: "#1E293B",
   },
   innerContainer: {
     maxWidth: 1240,
     width: "100%",
     marginHorizontal: "auto",
-    paddingHorizontal: 16,
+    paddingHorizontal: 20,
   },
   badgePill: {
     alignSelf: "flex-start",
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-    backgroundColor: "#103C2D",
+    backgroundColor: "#1E293B",
     paddingVertical: 6,
     paddingHorizontal: 12,
     borderRadius: 20,
     borderWidth: 1,
-    borderColor: "#1E5642",
-    marginBottom: 12,
+    borderColor: "#334155",
+    marginBottom: 16,
   },
   badgePillText: {
-    color: "#D1FAE5",
+    color: "#E2E8F0",
     fontSize: 12.5,
     fontWeight: "600",
   },
   pageTitle: {
-    fontSize: 36,
+    fontSize: 40,
     fontWeight: "900",
     color: "#FFFFFF",
-    letterSpacing: -0.5,
-    marginBottom: 10,
+    letterSpacing: -1,
+    marginBottom: 12,
   },
   pageSubtitle: {
-    fontSize: 16,
-    color: "#D1D5DB",
-    lineHeight: 24,
-    maxWidth: 720,
+    fontSize: 16.5,
+    color: "#94A3B8",
+    maxWidth: 760,
+    lineHeight: 25,
   },
   sectionWhite: {
     backgroundColor: "#FFFFFF",
-    paddingVertical: 64,
+    paddingVertical: 72,
   },
-  sectionLight: {
-    backgroundColor: "#F8FAF9",
-    paddingVertical: 64,
+  sectionAlt: {
+    backgroundColor: "#F8FAFC",
+    paddingVertical: 72,
   },
   splitRow: {
     justifyContent: "space-between",
-    alignItems: "flex-start",
-    gap: 36,
+    alignItems: "center",
+    gap: 40,
   },
   splitColLeft: {
     gap: 16,
@@ -317,296 +305,245 @@ const styles = StyleSheet.create({
   sectionOverline: {
     fontSize: 12,
     fontWeight: "800",
-    color: "#059669",
-    letterSpacing: 1,
+    color: "#2563EB",
+    letterSpacing: 1.2,
+    marginBottom: 6,
   },
   sectionHeading: {
-    fontSize: 28,
+    fontSize: 30,
     fontWeight: "800",
-    color: "#0F261E",
-    letterSpacing: -0.5,
-    lineHeight: 36,
+    color: "#0F172A",
+    lineHeight: 38,
   },
   bodyText: {
-    fontSize: 14.5,
-    color: "#4B5563",
-    lineHeight: 22,
+    fontSize: 15,
+    color: "#475569",
+    lineHeight: 24,
   },
-  missionPillarsBox: {
-    backgroundColor: "#F0FDF4",
-    borderRadius: 8,
-    padding: 16,
-    borderWidth: 1,
-    borderColor: "#BBF7D0",
+  missionPoints: {
     gap: 12,
-    marginTop: 6,
+    marginTop: 8,
   },
-  pillarItem: {
-    gap: 2,
-  },
-  pillarLabel: {
-    fontSize: 11,
-    fontWeight: "800",
-    color: "#059669",
-    letterSpacing: 0.8,
-  },
-  pillarSub: {
-    fontSize: 13,
-    color: "#166534",
-    fontWeight: "500",
-  },
-  splitColRight: {},
-  brokerageOversightCard: {
-    backgroundColor: "#FFFFFF",
-    borderRadius: 10,
-    borderWidth: 1.5,
-    borderColor: "#164E3A",
-    padding: 24,
-    gap: 14,
-    shadowColor: "#000",
-    shadowOpacity: 0.05,
-    shadowRadius: 10,
-    elevation: 3,
-  },
-  brokerageCardTop: {
+  missionPointItem: {
     flexDirection: "row",
     alignItems: "center",
     gap: 10,
   },
-  brokerageCardTopTitle: {
-    fontSize: 17,
-    fontWeight: "800",
-    color: "#164E3A",
-    flex: 1,
+  missionPointText: {
+    fontSize: 14,
+    color: "#1E293B",
+    fontWeight: "600",
   },
-  brokerageCardText: {
-    fontSize: 13.5,
-    color: "#4B5563",
-    lineHeight: 20,
+  splitColRight: {
+    alignItems: "center",
   },
-  brokerResponsibilitiesList: {
-    backgroundColor: "#F9FAFB",
-    padding: 14,
-    borderRadius: 8,
+  brokerageCard: {
+    width: "100%",
+    backgroundColor: "#F8FAFC",
+    borderRadius: 16,
     borderWidth: 1,
-    borderColor: "#E5E7EB",
-    gap: 8,
-  },
-  respItem: {
-    fontSize: 12.5,
-    color: "#374151",
-    lineHeight: 18,
-  },
-  iabsLinkBtn: {
-    marginTop: 4,
-  },
-  iabsLinkBtnText: {
-    fontSize: 12.5,
-    fontWeight: "700",
-    color: "#164E3A",
-    textDecorationLine: "underline",
-  },
-  pilotStoryCard: {
-    backgroundColor: "#FFFFFF",
-    borderRadius: 12,
-    padding: 32,
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
+    borderColor: "#E2E8F0",
+    padding: 28,
     gap: 14,
   },
-  pilotBadge: {
+  brokerageCardBadge: {
     alignSelf: "flex-start",
     flexDirection: "row",
     alignItems: "center",
     gap: 6,
-    backgroundColor: "#ECFDF5",
-    paddingVertical: 5,
+    backgroundColor: "#EFF6FF",
+    paddingVertical: 4,
     paddingHorizontal: 10,
     borderRadius: 6,
-    borderWidth: 1,
-    borderColor: "#A7F3D0",
   },
-  pilotBadgeText: {
+  brokerageCardBadgeText: {
     fontSize: 11,
     fontWeight: "800",
-    color: "#065F46",
-    letterSpacing: 0.6,
+    color: "#2563EB",
+    letterSpacing: 0.8,
   },
-  pilotHeading: {
+  brokerageCardName: {
     fontSize: 22,
     fontWeight: "800",
-    color: "#111827",
+    color: "#0F172A",
   },
-  pilotDescription: {
-    fontSize: 14.5,
-    color: "#4B5563",
-    lineHeight: 22,
+  brokerageCardText: {
+    fontSize: 13.5,
+    color: "#475569",
+    lineHeight: 20,
   },
-  pilotReadinessText: {
-    fontSize: 14,
+  brokerDetailsList: {
+    backgroundColor: "#FFFFFF",
+    borderRadius: 10,
+    padding: 14,
+    gap: 8,
+    borderWidth: 1,
+    borderColor: "#CBD5E1",
+  },
+  brokerDetailItem: {
+    gap: 2,
+  },
+  detailTitle: {
+    fontSize: 11.5,
+    fontWeight: "700",
+    color: "#64748B",
+  },
+  detailVal: {
+    fontSize: 13,
     fontWeight: "600",
-    color: "#164E3A",
-    lineHeight: 21,
+    color: "#0F172A",
+  },
+  trecNavBtn: {
+    alignSelf: "flex-start",
+    paddingVertical: 4,
+  },
+  trecNavBtnText: {
+    fontSize: 13,
+    fontWeight: "700",
+    color: "#2563EB",
   },
   sectionHeaderCentered: {
     alignItems: "center",
+    marginBottom: 48,
     textAlign: "center",
-    marginBottom: 40,
-    gap: 8,
   },
   sectionTitle: {
-    fontSize: 30,
+    fontSize: 32,
     fontWeight: "800",
-    color: "#0F261E",
+    color: "#0F172A",
     letterSpacing: -0.5,
+    textAlign: "center",
+    marginBottom: 12,
   },
   sectionSubtitle: {
-    fontSize: 15,
-    color: "#4B5563",
-    maxWidth: 680,
+    fontSize: 16,
+    color: "#64748B",
+    maxWidth: 720,
     textAlign: "center",
-    lineHeight: 22,
-  },
-  leadershipGrid: {
-    justifyContent: "space-between",
-    gap: 24,
-  },
-  leaderCard: {
-    backgroundColor: "#FFFFFF",
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
-    padding: 24,
-    gap: 8,
-  },
-  leaderAvatar: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    backgroundColor: "#D1FAE5",
-    justifyContent: "center",
-    alignItems: "center",
-    marginBottom: 8,
-  },
-  leaderName: {
-    fontSize: 20,
-    fontWeight: "800",
-    color: "#111827",
-  },
-  leaderTitle: {
-    fontSize: 14,
-    fontWeight: "700",
-    color: "#059669",
-  },
-  leaderBrokerNote: {
-    fontSize: 12,
-    color: "#6B7280",
-    fontStyle: "italic",
-  },
-  leaderBio: {
-    fontSize: 13.5,
-    color: "#4B5563",
-    lineHeight: 21,
-    marginTop: 6,
-  },
-  leaderContactRow: {
-    borderTopWidth: 1,
-    borderTopColor: "#F3F4F6",
-    paddingTop: 10,
-    marginTop: 8,
-  },
-  leaderContactItem: {
-    fontSize: 12,
-    color: "#6B7280",
+    lineHeight: 24,
   },
   valuesGrid: {
+    gap: 24,
     justifyContent: "space-between",
-    gap: 20,
   },
   valueCard: {
     backgroundColor: "#FFFFFF",
-    borderRadius: 8,
+    borderRadius: 14,
+    padding: 24,
     borderWidth: 1,
-    borderColor: "#E5E7EB",
-    padding: 22,
-    gap: 10,
+    borderColor: "#E2E8F0",
+    flexDirection: "row",
+    alignItems: "flex-start",
+    gap: 16,
   },
   valueIconBox: {
-    width: 44,
-    height: 44,
-    borderRadius: 8,
-    backgroundColor: "#ECFDF5",
+    width: 48,
+    height: 48,
+    borderRadius: 12,
+    backgroundColor: "#EFF6FF",
     justifyContent: "center",
     alignItems: "center",
   },
   valueTitle: {
     fontSize: 17,
-    fontWeight: "700",
-    color: "#111827",
+    fontWeight: "800",
+    color: "#0F172A",
   },
   valueDesc: {
     fontSize: 13.5,
-    color: "#4B5563",
+    color: "#475569",
     lineHeight: 20,
   },
-  ctaSection: {
-    backgroundColor: "#164E3A",
-    paddingVertical: 56,
+  leadershipGrid: {
+    gap: 24,
+    justifyContent: "center",
   },
-  ctaCard: {
+  leaderCard: {
+    flex: 1,
+    backgroundColor: "#F8FAFC",
+    borderRadius: 16,
+    padding: 28,
+    borderWidth: 1,
+    borderColor: "#E2E8F0",
     alignItems: "center",
     textAlign: "center",
-    gap: 12,
+    gap: 10,
   },
-  ctaOverline: {
-    fontSize: 11.5,
-    fontWeight: "800",
-    color: "#34D399",
-    letterSpacing: 1,
-  },
-  ctaTitle: {
-    fontSize: 28,
-    fontWeight: "800",
-    color: "#FFFFFF",
-    textAlign: "center",
-  },
-  ctaSubtitle: {
-    fontSize: 15,
-    color: "#D1D5DB",
-    textAlign: "center",
-    maxWidth: 680,
-    lineHeight: 22,
-  },
-  ctaButtonsGroup: {
-    flexDirection: "row",
-    flexWrap: "wrap",
+  leaderAvatarCircle: {
+    width: 68,
+    height: 68,
+    borderRadius: 34,
+    backgroundColor: "#EFF6FF",
     justifyContent: "center",
-    gap: 14,
-    marginTop: 10,
+    alignItems: "center",
+    marginBottom: 6,
   },
-  primaryCtaBtn: {
+  leaderName: {
+    fontSize: 20,
+    fontWeight: "800",
+    color: "#0F172A",
+  },
+  leaderRole: {
+    fontSize: 13,
+    fontWeight: "700",
+    color: "#2563EB",
+  },
+  leaderBio: {
+    fontSize: 13.5,
+    color: "#475569",
+    lineHeight: 21,
+    textAlign: "center",
+  },
+  leaderContactRow: {
+    flexDirection: "row",
+    gap: 16,
+    marginTop: 8,
+  },
+  leaderContactItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+  },
+  leaderContactText: {
+    fontSize: 12.5,
+    color: "#475569",
+    fontWeight: "600",
+  },
+  aboutCtaRow: {
+    flexDirection: "row",
+    justifyContent: "center",
+    flexWrap: "wrap",
+    gap: 14,
+    marginTop: 48,
+  },
+  aboutPrimaryBtn: {
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-    backgroundColor: "#059669",
-    paddingVertical: 13,
+    backgroundColor: "#2563EB",
+    paddingVertical: 14,
     paddingHorizontal: 22,
     borderRadius: 8,
   },
-  primaryCtaBtnText: {
+  aboutPrimaryBtnText: {
     color: "#FFFFFF",
     fontSize: 14.5,
     fontWeight: "700",
   },
-  secondaryCtaBtn: {
-    backgroundColor: "#FFFFFF",
-    paddingVertical: 13,
+  aboutSecondaryBtn: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+    backgroundColor: "#F1F5F9",
+    borderWidth: 1,
+    borderColor: "#CBD5E1",
+    paddingVertical: 14,
     paddingHorizontal: 20,
     borderRadius: 8,
   },
-  secondaryCtaBtnText: {
-    color: "#164E3A",
-    fontSize: 14,
+  aboutSecondaryBtnText: {
+    color: "#0F172A",
+    fontSize: 14.5,
     fontWeight: "700",
   },
 });

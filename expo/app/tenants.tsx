@@ -15,9 +15,9 @@ import {
   ExternalLink,
   AlertTriangle,
   PhoneCall,
-  Lock,
-  ArrowRight,
   Scale,
+  CheckCircle2,
+  Clock,
 } from "lucide-react-native";
 import WebsiteLayout, { useWebsiteModals } from "@/components/keynest/WebsiteLayout";
 import {
@@ -30,6 +30,7 @@ export default function TenantsPage() {
   const router = useRouter();
   const { width } = useWindowDimensions();
   const isDesktop = width >= 1024;
+  const isTablet = width >= 640 && width < 1024;
   const { openMaintenanceTriage } = useWebsiteModals();
 
   const openResidentPortal = () => {
@@ -46,7 +47,7 @@ export default function TenantsPage() {
       <View style={styles.headerHero}>
         <View style={styles.innerContainer}>
           <View style={styles.badgePill}>
-            <ShieldCheck size={14} color="#10B981" />
+            <ShieldCheck size={14} color="#38BDF8" />
             <Text style={styles.badgePillText}>Under the Brokerage of Fair Deal Realty Inc.</Text>
           </View>
           <Text style={styles.pageTitle}>Tenant & Resident Center</Text>
@@ -56,13 +57,13 @@ export default function TenantsPage() {
         </View>
       </View>
 
-      {/* 1. AppFolio Resident Portal Quick Actions Banner */}
+      {/* 1. AppFolio Resident Portal Banner */}
       <View style={styles.sectionLight}>
         <View style={styles.innerContainer}>
           <View style={[styles.portalBox, { flexDirection: isDesktop ? "row" : "column" }]}>
             <View style={{ flex: 1, gap: 10 }}>
               <View style={styles.portalTag}>
-                <CreditCard size={12} color="#059669" />
+                <CreditCard size={12} color="#2563EB" />
                 <Text style={styles.portalTagText}>APPFOLIO RESIDENT PORTAL</Text>
               </View>
               <Text style={styles.portalTitle}>Manage Your Rent & Lease Online</Text>
@@ -78,120 +79,119 @@ export default function TenantsPage() {
 
             <View style={styles.portalActionCol}>
               <TouchableOpacity
-                style={styles.openPortalPrimaryBtn}
+                style={styles.portalPayBtn}
                 onPress={openResidentPortal}
                 activeOpacity={0.85}
               >
-                <Text style={styles.openPortalPrimaryText}>Log In to AppFolio Resident Portal</Text>
+                <Text style={styles.portalPayBtnText}>Pay Rent Online (AppFolio)</Text>
                 <ExternalLink size={16} color="#FFFFFF" />
               </TouchableOpacity>
               <TouchableOpacity
-                style={styles.browseRentalsSecondaryBtn}
+                style={styles.viewRentalsBtn}
                 onPress={() => router.push("/rentals" as never)}
               >
-                <Text style={styles.browseRentalsSecondaryText}>Looking for a Home? Search Rentals →</Text>
+                <Text style={styles.viewRentalsBtnText}>Browse Available Rentals →</Text>
               </TouchableOpacity>
             </View>
           </View>
         </View>
       </View>
 
-      {/* 2. 6-Step Maintenance Escalation Workflow (Slide 7) */}
+      {/* 2. Maintenance Escalation & 24/7 Triage */}
       <View style={styles.sectionWhite}>
         <View style={styles.innerContainer}>
           <View style={styles.sectionHeaderCentered}>
-            <Text style={styles.sectionOverline}>STANDARDIZED OPERATIONAL PROCESS</Text>
-            <Text style={styles.sectionTitle}>6-Step Maintenance Escalation Rules</Text>
+            <Text style={styles.sectionOverline}>RAPID REPAIR DISPATCH</Text>
+            <Text style={styles.sectionTitle}>Six-Step Maintenance Escalation</Text>
             <Text style={styles.sectionSubtitle}>
-              Every repair request follows a defined workflow to ensure rapid triage, verified spending limits, and quality craftsmanship.
+              Documented protocol for diagnosing, authorizing, and completing repairs through licensed and insured North Texas technicians.
             </Text>
           </View>
 
-          {/* Emergency Alert Hotline Callout */}
-          <View style={styles.emergencyHotlineBanner}>
-            <View style={styles.hotlineLeft}>
+          {/* Emergency Hotline Alert Box */}
+          <View style={styles.emergencyBox}>
+            <View style={styles.emergencyIconCircle}>
               <AlertTriangle size={24} color="#DC2626" />
-              <View style={{ flex: 1 }}>
-                <Text style={styles.hotlineTitle}>Experiencing an Emergency Maintenance Issue?</Text>
-                <Text style={styles.hotlineSub}>
-                  Active flooding, smell of gas, loss of heat during freeze warnings (&lt;32°F), or electrical hazards.
-                </Text>
-              </View>
             </View>
-            <TouchableOpacity style={styles.callHotlineBtn} onPress={callEmergency}>
+            <View style={{ flex: 1, gap: 4 }}>
+              <Text style={styles.emergencyBoxTitle}>Experiencing an Emergency?</Text>
+              <Text style={styles.emergencyBoxText}>
+                For fire or gas leaks, evacuate and dial 911. For active burst pipes, main water shutoff, or complete AC loss in extreme heat (&gt;90°F), call our dedicated 24/7 emergency dispatch line.
+              </Text>
+            </View>
+            <TouchableOpacity style={styles.emergencyCallBtn} onPress={callEmergency}>
               <PhoneCall size={16} color="#FFFFFF" />
-              <Text style={styles.callHotlineBtnText}>Call Dispatch: {KEYNEST_INFO.emergencyPhone}</Text>
+              <Text style={styles.emergencyCallText}>{KEYNEST_INFO.emergencyPhone}</Text>
             </TouchableOpacity>
           </View>
 
-          {/* The 6 Steps Visual */}
-          <View style={styles.stepsGrid}>
-            {MAINTENANCE_STEPS.map((s) => (
-              <View key={s.step} style={styles.stepCard}>
-                <View style={styles.stepHeader}>
-                  <View style={styles.stepNumberBadge}>
-                    <Text style={styles.stepNumberText}>{s.step}</Text>
-                  </View>
-                  <Text style={styles.stepChannelTag}>{s.channel}</Text>
+          {/* 6 Step Cards */}
+          <View
+            style={[
+              styles.stepsGrid,
+              { flexDirection: isDesktop ? "row" : isTablet ? "row" : "column", flexWrap: "wrap" },
+            ]}
+          >
+            {MAINTENANCE_STEPS.map((st) => (
+              <View
+                key={st.step}
+                style={[
+                  styles.stepCard,
+                  { width: isDesktop ? "31.5%" : isTablet ? "48%" : "100%" },
+                ]}
+              >
+                <View style={styles.stepNumPill}>
+                  <Text style={styles.stepNumText}>STEP {st.step}</Text>
                 </View>
-                <Text style={styles.stepTitle}>{s.title}</Text>
-                <Text style={styles.stepDesc}>{s.description}</Text>
+                <Text style={styles.stepTitle}>{st.title}</Text>
+                <Text style={styles.stepDesc}>{st.description}</Text>
+                <View style={styles.stepTimeRow}>
+                  <Clock size={12} color="#2563EB" />
+                  <Text style={styles.stepTimeText}>{st.channel}</Text>
+                </View>
               </View>
             ))}
           </View>
 
-          <View style={styles.triageActionRow}>
-            <TouchableOpacity
-              style={styles.launchTriageWizardBtn}
-              onPress={openMaintenanceTriage}
-            >
-              <Wrench size={18} color="#FFFFFF" />
-              <Text style={styles.launchTriageWizardBtnText}>Open Maintenance Triage Wizard</Text>
+          <View style={styles.triageActionWrap}>
+            <TouchableOpacity style={styles.triageLaunchBtn} onPress={openMaintenanceTriage}>
+              <Wrench size={16} color="#FFFFFF" />
+              <Text style={styles.triageLaunchBtnText}>Launch Interactive Maintenance Triage Wizard</Text>
             </TouchableOpacity>
           </View>
         </View>
       </View>
 
-      {/* 3. Published Rental Selection Criteria (Fair Housing Compliant, Slide 6 & 8) */}
+      {/* 3. Published Rental Selection Criteria */}
       <View style={styles.sectionLight}>
         <View style={styles.innerContainer}>
           <View style={styles.sectionHeaderCentered}>
-            <Text style={styles.sectionOverline}>OBJECTIVE & FAIR HOUSING COMPLIANT</Text>
-            <Text style={styles.sectionTitle}>Published Rental Selection Criteria</Text>
+            <Text style={styles.sectionOverline}>TRANSPARENT & OBJECTIVE STANDARDS</Text>
+            <Text style={styles.sectionTitle}>Published Rental Criteria</Text>
             <Text style={styles.sectionSubtitle}>
-              In accordance with Texas Property Code and Fair Housing laws, our qualification criteria are published and applied consistently across all applicants.
+              Applied uniformly to all adult applicants in compliance with Texas Real Estate Commission and Federal Fair Housing mandates.
             </Text>
           </View>
 
-          <View style={styles.criteriaList}>
+          <View style={styles.criteriaGrid}>
             {RENTAL_CRITERIA_POINTS.map((crit, idx) => (
-              <View key={idx} style={styles.criteriaCard}>
-                <View style={styles.criteriaCardTop}>
-                  <Scale size={18} color="#164E3A" />
-                  <Text style={styles.criteriaTitle}>{crit.title}</Text>
+              <View key={idx} style={styles.criteriaItem}>
+                <View style={styles.criteriaCheckCircle}>
+                  <CheckCircle2 size={16} color="#2563EB" />
                 </View>
-                <Text style={styles.criteriaRequirement}>{crit.requirement}</Text>
-                <Text style={styles.criteriaDetails}>{crit.details}</Text>
+                <View style={{ flex: 1 }}>
+                  <Text style={styles.criteriaItemTitle}>{crit.title}</Text>
+                  <Text style={styles.criteriaItemDetail}>{crit.details}</Text>
+                </View>
               </View>
             ))}
           </View>
 
-          {/* Secure Application Note */}
-          <View style={styles.securityHandoffBox}>
-            <Lock size={20} color="#164E3A" />
-            <View style={{ flex: 1 }}>
-              <Text style={styles.securityHandoffTitle}>Secure Application Protocol</Text>
-              <Text style={styles.securityHandoffText}>
-                To protect your identity and private personal information, KeyNest never collects Social Security numbers, bank account logins, or credit screening data through standard public web forms. All rental applications are submitted through our encrypted AppFolio leasing platform.
-              </Text>
-            </View>
-            <TouchableOpacity
-              style={styles.browseHomesCta}
-              onPress={() => router.push("/rentals" as never)}
-            >
-              <Text style={styles.browseHomesCtaText}>View Available Homes</Text>
-              <ArrowRight size={14} color="#FFFFFF" />
-            </TouchableOpacity>
+          <View style={styles.fairHousingBox}>
+            <Scale size={20} color="#2563EB" />
+            <Text style={styles.fairHousingText}>
+              Equal Housing Opportunity: KeyNest Realty and Fair Deal Realty Inc. strictly prohibit discrimination based on race, color, religion, sex, disability, familial status, or national origin.
+            </Text>
           </View>
         </View>
       </View>
@@ -201,95 +201,95 @@ export default function TenantsPage() {
 
 const styles = StyleSheet.create({
   headerHero: {
-    backgroundColor: "#164E3A",
-    paddingVertical: 52,
+    backgroundColor: "#0B1120",
+    paddingVertical: 72,
     borderBottomWidth: 1,
-    borderBottomColor: "#1D644B",
+    borderBottomColor: "#1E293B",
   },
   innerContainer: {
     maxWidth: 1240,
     width: "100%",
     marginHorizontal: "auto",
-    paddingHorizontal: 16,
+    paddingHorizontal: 20,
   },
   badgePill: {
     alignSelf: "flex-start",
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-    backgroundColor: "#103C2D",
+    backgroundColor: "#1E293B",
     paddingVertical: 6,
     paddingHorizontal: 12,
     borderRadius: 20,
     borderWidth: 1,
-    borderColor: "#1E5642",
-    marginBottom: 12,
+    borderColor: "#334155",
+    marginBottom: 16,
   },
   badgePillText: {
-    color: "#D1FAE5",
+    color: "#E2E8F0",
     fontSize: 12.5,
     fontWeight: "600",
   },
   pageTitle: {
-    fontSize: 36,
+    fontSize: 40,
     fontWeight: "900",
     color: "#FFFFFF",
-    letterSpacing: -0.5,
-    marginBottom: 10,
+    letterSpacing: -1,
+    marginBottom: 12,
   },
   pageSubtitle: {
-    fontSize: 16,
-    color: "#D1D5DB",
-    lineHeight: 24,
-    maxWidth: 720,
+    fontSize: 16.5,
+    color: "#94A3B8",
+    maxWidth: 760,
+    lineHeight: 25,
+  },
+  sectionLight: {
+    backgroundColor: "#F8FAFC",
+    paddingVertical: 64,
   },
   sectionWhite: {
     backgroundColor: "#FFFFFF",
-    paddingVertical: 64,
-  },
-  sectionLight: {
-    backgroundColor: "#F8FAF9",
-    paddingVertical: 56,
+    paddingVertical: 72,
   },
   portalBox: {
     backgroundColor: "#FFFFFF",
-    borderRadius: 12,
-    borderWidth: 1.5,
-    borderColor: "#10B981",
-    padding: 28,
+    borderRadius: 16,
+    borderWidth: 1,
+    borderColor: "#E2E8F0",
+    padding: 32,
     justifyContent: "space-between",
     alignItems: "center",
     gap: 24,
-    shadowColor: "#059669",
-    shadowOpacity: 0.1,
-    shadowRadius: 12,
-    elevation: 4,
+    shadowColor: "#0F172A",
+    shadowOpacity: 0.05,
+    shadowRadius: 16,
+    elevation: 3,
   },
   portalTag: {
     alignSelf: "flex-start",
     flexDirection: "row",
     alignItems: "center",
     gap: 6,
-    backgroundColor: "#ECFDF5",
+    backgroundColor: "#EFF6FF",
     paddingVertical: 4,
-    paddingHorizontal: 8,
-    borderRadius: 4,
+    paddingHorizontal: 10,
+    borderRadius: 6,
   },
   portalTagText: {
-    fontSize: 10.5,
+    fontSize: 11,
     fontWeight: "800",
-    color: "#065F46",
-    letterSpacing: 0.5,
+    color: "#2563EB",
+    letterSpacing: 0.8,
   },
   portalTitle: {
     fontSize: 22,
     fontWeight: "800",
-    color: "#111827",
+    color: "#0F172A",
   },
   portalDesc: {
     fontSize: 14,
-    color: "#4B5563",
-    lineHeight: 21,
+    color: "#475569",
+    lineHeight: 22,
   },
   portalPillsRow: {
     flexDirection: "row",
@@ -298,250 +298,229 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   portalPill: {
-    fontSize: 12,
+    fontSize: 12.5,
     fontWeight: "600",
-    color: "#166534",
-    backgroundColor: "#F0FDF4",
-    paddingVertical: 4,
-    paddingHorizontal: 10,
-    borderRadius: 4,
+    color: "#2563EB",
   },
   portalActionCol: {
+    alignItems: "center",
     gap: 10,
-    minWidth: 260,
   },
-  openPortalPrimaryBtn: {
+  portalPayBtn: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
     gap: 8,
-    backgroundColor: "#164E3A",
+    backgroundColor: "#2563EB",
     paddingVertical: 14,
-    paddingHorizontal: 20,
-    borderRadius: 8,
+    paddingHorizontal: 24,
+    borderRadius: 10,
+    shadowColor: "#2563EB",
+    shadowOpacity: 0.25,
+    shadowRadius: 8,
+    elevation: 3,
   },
-  openPortalPrimaryText: {
+  portalPayBtnText: {
     color: "#FFFFFF",
-    fontSize: 14,
+    fontSize: 15,
     fontWeight: "700",
   },
-  browseRentalsSecondaryBtn: {
-    alignItems: "center",
-    paddingVertical: 8,
+  viewRentalsBtn: {
+    paddingVertical: 6,
   },
-  browseRentalsSecondaryText: {
-    color: "#164E3A",
+  viewRentalsBtnText: {
+    color: "#2563EB",
     fontSize: 13,
-    fontWeight: "600",
+    fontWeight: "700",
   },
   sectionHeaderCentered: {
     alignItems: "center",
+    marginBottom: 48,
     textAlign: "center",
-    marginBottom: 36,
-    gap: 8,
   },
   sectionOverline: {
     fontSize: 12,
     fontWeight: "800",
-    color: "#059669",
-    letterSpacing: 1,
+    color: "#2563EB",
+    letterSpacing: 1.2,
+    marginBottom: 8,
   },
   sectionTitle: {
-    fontSize: 30,
+    fontSize: 32,
     fontWeight: "800",
-    color: "#0F261E",
+    color: "#0F172A",
     letterSpacing: -0.5,
+    textAlign: "center",
+    marginBottom: 12,
   },
   sectionSubtitle: {
-    fontSize: 15,
-    color: "#4B5563",
-    maxWidth: 680,
+    fontSize: 16,
+    color: "#64748B",
+    maxWidth: 720,
     textAlign: "center",
-    lineHeight: 22,
+    lineHeight: 24,
   },
-  emergencyHotlineBanner: {
+  emergencyBox: {
     backgroundColor: "#FEF2F2",
-    borderRadius: 10,
-    borderWidth: 1.5,
-    borderColor: "#FCA5A5",
-    padding: 18,
+    borderRadius: 14,
+    borderWidth: 1,
+    borderColor: "#FECACA",
+    padding: 20,
     flexDirection: "row",
-    justifyContent: "space-between",
     alignItems: "center",
     flexWrap: "wrap",
     gap: 16,
-    marginBottom: 28,
+    marginBottom: 36,
   },
-  hotlineLeft: {
-    flexDirection: "row",
+  emergencyIconCircle: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    backgroundColor: "#FEE2E2",
+    justifyContent: "center",
     alignItems: "center",
-    gap: 14,
-    flex: 1,
-    minWidth: 280,
   },
-  hotlineTitle: {
-    fontSize: 15,
+  emergencyBoxTitle: {
+    fontSize: 16,
     fontWeight: "800",
     color: "#991B1B",
   },
-  hotlineSub: {
-    fontSize: 12.5,
-    color: "#B91C1C",
-    lineHeight: 17,
+  emergencyBoxText: {
+    fontSize: 13,
+    color: "#7F1D1D",
+    lineHeight: 19,
   },
-  callHotlineBtn: {
+  emergencyCallBtn: {
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
     backgroundColor: "#DC2626",
     paddingVertical: 10,
     paddingHorizontal: 16,
-    borderRadius: 7,
+    borderRadius: 8,
   },
-  callHotlineBtnText: {
+  emergencyCallText: {
     color: "#FFFFFF",
     fontSize: 13.5,
-    fontWeight: "700",
+    fontWeight: "800",
   },
   stepsGrid: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    gap: 16,
+    gap: 20,
     justifyContent: "space-between",
   },
   stepCard: {
     backgroundColor: "#FFFFFF",
-    borderRadius: 8,
+    borderRadius: 12,
+    padding: 20,
     borderWidth: 1,
-    borderColor: "#E5E7EB",
-    padding: 18,
-    width: "31.5%",
-    minWidth: 240,
+    borderColor: "#E2E8F0",
     gap: 8,
   },
-  stepHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+  stepNumPill: {
+    alignSelf: "flex-start",
+    backgroundColor: "#F1F5F9",
+    paddingVertical: 3,
+    paddingHorizontal: 8,
+    borderRadius: 4,
   },
-  stepNumberBadge: {
-    width: 26,
-    height: 26,
-    borderRadius: 13,
-    backgroundColor: "#164E3A",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  stepNumberText: {
-    color: "#FFFFFF",
-    fontSize: 12,
+  stepNumText: {
+    fontSize: 10.5,
     fontWeight: "800",
-  },
-  stepChannelTag: {
-    fontSize: 11,
-    color: "#059669",
-    fontWeight: "600",
+    color: "#475569",
   },
   stepTitle: {
-    fontSize: 15,
+    fontSize: 16,
     fontWeight: "700",
-    color: "#111827",
+    color: "#0F172A",
   },
   stepDesc: {
     fontSize: 13,
-    color: "#4B5563",
-    lineHeight: 18,
-  },
-  triageActionRow: {
-    alignItems: "center",
-    marginTop: 28,
-  },
-  launchTriageWizardBtn: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
-    backgroundColor: "#164E3A",
-    paddingVertical: 13,
-    paddingHorizontal: 22,
-    borderRadius: 8,
-  },
-  launchTriageWizardBtnText: {
-    color: "#FFFFFF",
-    fontSize: 14,
-    fontWeight: "700",
-  },
-  criteriaList: {
-    gap: 14,
-    maxWidth: 900,
-    marginHorizontal: "auto",
-    width: "100%",
-  },
-  criteriaCard: {
-    backgroundColor: "#FFFFFF",
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
-    padding: 18,
-    gap: 6,
-  },
-  criteriaCardTop: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
-  },
-  criteriaTitle: {
-    fontSize: 16,
-    fontWeight: "700",
-    color: "#111827",
-  },
-  criteriaRequirement: {
-    fontSize: 13.5,
-    fontWeight: "600",
-    color: "#164E3A",
+    color: "#64748B",
     lineHeight: 19,
+    flex: 1,
   },
-  criteriaDetails: {
-    fontSize: 12.5,
-    color: "#6B7280",
-    lineHeight: 18,
-  },
-  securityHandoffBox: {
+  stepTimeRow: {
     flexDirection: "row",
     alignItems: "center",
-    flexWrap: "wrap",
-    gap: 16,
-    backgroundColor: "#ECFDF5",
-    borderRadius: 10,
-    padding: 20,
-    borderWidth: 1,
-    borderColor: "#A7F3D0",
-    marginTop: 32,
+    gap: 4,
+    marginTop: 4,
+  },
+  stepTimeText: {
+    fontSize: 12,
+    fontWeight: "600",
+    color: "#2563EB",
+  },
+  triageActionWrap: {
+    marginTop: 36,
+    alignItems: "center",
+  },
+  triageLaunchBtn: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+    backgroundColor: "#2563EB",
+    paddingVertical: 14,
+    paddingHorizontal: 24,
+    borderRadius: 8,
+  },
+  triageLaunchBtnText: {
+    color: "#FFFFFF",
+    fontSize: 14.5,
+    fontWeight: "700",
+  },
+  criteriaGrid: {
     maxWidth: 900,
+    width: "100%",
     marginHorizontal: "auto",
+    gap: 14,
   },
-  securityHandoffTitle: {
-    fontSize: 14,
-    fontWeight: "800",
-    color: "#164E3A",
+  criteriaItem: {
+    backgroundColor: "#FFFFFF",
+    borderRadius: 12,
+    padding: 18,
+    flexDirection: "row",
+    alignItems: "flex-start",
+    gap: 14,
+    borderWidth: 1,
+    borderColor: "#E2E8F0",
   },
-  securityHandoffText: {
-    fontSize: 12.5,
-    color: "#065F46",
-    lineHeight: 18,
+  criteriaCheckCircle: {
+    width: 28,
+    height: 28,
+    borderRadius: 14,
+    backgroundColor: "#EFF6FF",
+    justifyContent: "center",
+    alignItems: "center",
     marginTop: 2,
   },
-  browseHomesCta: {
+  criteriaItemTitle: {
+    fontSize: 15,
+    fontWeight: "700",
+    color: "#0F172A",
+    marginBottom: 4,
+  },
+  criteriaItemDetail: {
+    fontSize: 13.5,
+    color: "#475569",
+    lineHeight: 20,
+  },
+  fairHousingBox: {
+    maxWidth: 900,
+    width: "100%",
+    marginHorizontal: "auto",
+    marginTop: 24,
+    backgroundColor: "#EFF6FF",
+    borderRadius: 10,
+    padding: 16,
     flexDirection: "row",
     alignItems: "center",
-    gap: 6,
-    backgroundColor: "#164E3A",
-    paddingVertical: 10,
-    paddingHorizontal: 16,
-    borderRadius: 7,
+    gap: 12,
+    borderWidth: 1,
+    borderColor: "#BFDBFE",
   },
-  browseHomesCtaText: {
-    color: "#FFFFFF",
-    fontSize: 13,
-    fontWeight: "700",
+  fairHousingText: {
+    fontSize: 12.5,
+    color: "#1E40AF",
+    lineHeight: 18,
+    flex: 1,
   },
 });

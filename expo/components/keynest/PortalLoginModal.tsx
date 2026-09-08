@@ -44,12 +44,12 @@ export default function PortalLoginModal({
   return (
     <Modal visible={visible} animationType="fade" transparent={true} onRequestClose={onClose}>
       <View style={styles.modalOverlay}>
-        <View style={[styles.modalCard, { maxWidth: isDesktop ? 520 : "92%" }]}>
+        <View style={[styles.modalCard, { maxWidth: isDesktop ? 540 : "92%" }]}>
           {/* Header */}
           <View style={styles.modalHeader}>
             <View style={styles.headerLeft}>
               <View style={styles.lockIconBox}>
-                <Lock size={18} color="#164E3A" />
+                <Lock size={18} color="#2563EB" />
               </View>
               <View>
                 <Text style={styles.modalTitle}>KeyNest Client Portals</Text>
@@ -57,7 +57,7 @@ export default function PortalLoginModal({
               </View>
             </View>
             <TouchableOpacity onPress={onClose} style={styles.closeBtn} accessibilityLabel="Close modal">
-              <X size={20} color="#6B7280" />
+              <X size={20} color="#64748B" />
             </TouchableOpacity>
           </View>
 
@@ -67,7 +67,7 @@ export default function PortalLoginModal({
               style={[styles.tabBtn, activeTab === "owner" && styles.tabBtnActive]}
               onPress={() => setActiveTab("owner")}
             >
-              <Key size={16} color={activeTab === "owner" ? "#164E3A" : "#6B7280"} />
+              <Key size={16} color={activeTab === "owner" ? "#2563EB" : "#64748B"} />
               <Text style={[styles.tabBtnText, activeTab === "owner" && styles.tabBtnTextActive]}>
                 Owner Portal
               </Text>
@@ -76,7 +76,7 @@ export default function PortalLoginModal({
               style={[styles.tabBtn, activeTab === "tenant" && styles.tabBtnActive]}
               onPress={() => setActiveTab("tenant")}
             >
-              <Users size={16} color={activeTab === "tenant" ? "#164E3A" : "#6B7280"} />
+              <Users size={16} color={activeTab === "tenant" ? "#2563EB" : "#64748B"} />
               <Text style={[styles.tabBtnText, activeTab === "tenant" && styles.tabBtnTextActive]}>
                 Resident Portal
               </Text>
@@ -97,75 +97,77 @@ export default function PortalLoginModal({
 
                 <View style={styles.featuresGrid}>
                   <View style={styles.featureItem}>
-                    <DollarSign size={16} color="#059669" />
-                    <Text style={styles.featureText}>Monthly ACH Distribution Records</Text>
+                    <DollarSign size={16} color="#2563EB" />
+                    <Text style={styles.featureText}>Monthly Direct ACH Cash-Flow Ledgers</Text>
                   </View>
                   <View style={styles.featureItem}>
-                    <FileText size={16} color="#059669" />
-                    <Text style={styles.featureText}>Detailed Cash Flow & Expense Ledger</Text>
+                    <FileText size={16} color="#2563EB" />
+                    <Text style={styles.featureText}>Signed Texas Leases & Inspection Reports</Text>
                   </View>
                   <View style={styles.featureItem}>
-                    <Wrench size={16} color="#059669" />
-                    <Text style={styles.featureText}>Maintenance Invoices & Photo Logs</Text>
-                  </View>
-                  <View style={styles.featureItem}>
-                    <ShieldCheck size={16} color="#059669" />
-                    <Text style={styles.featureText}>Executed Texas Leases & Addenda</Text>
+                    <Wrench size={16} color="#2563EB" />
+                    <Text style={styles.featureText}>Itemized Vendor Invoices (Zero Markup)</Text>
                   </View>
                 </View>
 
                 <TouchableOpacity
-                  style={styles.launchPortalBtn}
+                  style={styles.loginActionBtn}
                   onPress={() => openAppFolio(KEYNEST_INFO.appFolioOwnerPortalUrl)}
                 >
-                  <Text style={styles.launchPortalBtnText}>Log In to AppFolio Owner Portal</Text>
+                  <Text style={styles.loginActionText}>Launch AppFolio Owner Portal</Text>
                   <ExternalLink size={16} color="#FFFFFF" />
                 </TouchableOpacity>
+
+                <Text style={styles.helpText}>
+                  Need help logging in? Email Dinesh or Purvang at {KEYNEST_INFO.email}
+                </Text>
               </View>
             ) : (
               <View style={styles.tabContent}>
-                <View style={styles.portalBadge}>
-                  <Text style={styles.portalBadgeText}>RESIDENT & TENANT ACCESS</Text>
+                <View style={[styles.portalBadge, { backgroundColor: "#EFF6FF" }]}>
+                  <Text style={[styles.portalBadgeText, { color: "#2563EB" }]}>
+                    RESIDENT & TENANT ACCESS
+                  </Text>
                 </View>
 
-                <Text style={styles.portalHeading}>Pay Rent & Request Maintenance</Text>
+                <Text style={styles.portalHeading}>Pay Rent & Submit Service Tickets</Text>
                 <Text style={styles.portalDescription}>
-                  Pay rent online with zero-fee ACH or credit card, set up autopay reminders, view your ledger balance, and submit 24/7 maintenance requests.
+                  Set up zero-fee ACH autopay, submit routine maintenance requests with photos, review your lease agreements, and access 24/7 account history.
                 </Text>
 
                 <View style={styles.featuresGrid}>
                   <View style={styles.featureItem}>
-                    <CreditCard size={16} color="#059669" />
-                    <Text style={styles.featureText}>Instant Online Rent Payments & Autopay</Text>
+                    <CreditCard size={16} color="#2563EB" />
+                    <Text style={styles.featureText}>Fast Zero-Fee ACH Autopay & Card Options</Text>
                   </View>
                   <View style={styles.featureItem}>
-                    <Wrench size={16} color="#059669" />
-                    <Text style={styles.featureText}>Track Maintenance Tickets in Real Time</Text>
+                    <Wrench size={16} color="#2563EB" />
+                    <Text style={styles.featureText}>Submit Photos & Track Real-Time Repairs</Text>
                   </View>
                   <View style={styles.featureItem}>
-                    <FileText size={16} color="#059669" />
-                    <Text style={styles.featureText}>Access Digital Copy of Your Texas Lease</Text>
-                  </View>
-                  <View style={styles.featureItem}>
-                    <ShieldCheck size={16} color="#059669" />
-                    <Text style={styles.featureText}>256-Bit Encrypted Payment Security</Text>
+                    <FileText size={16} color="#2563EB" />
+                    <Text style={styles.featureText}>Digital Lease Records & Payment Receipts</Text>
                   </View>
                 </View>
 
                 <TouchableOpacity
-                  style={styles.launchPortalBtn}
+                  style={styles.loginActionBtn}
                   onPress={() => openAppFolio(KEYNEST_INFO.appFolioTenantPortalUrl)}
                 >
-                  <Text style={styles.launchPortalBtnText}>Log In to AppFolio Resident Portal</Text>
+                  <Text style={styles.loginActionText}>Launch AppFolio Resident Portal</Text>
                   <ExternalLink size={16} color="#FFFFFF" />
                 </TouchableOpacity>
+
+                <Text style={styles.helpText}>
+                  Experiencing an urgent repair? Call 24/7 hotline: {KEYNEST_INFO.emergencyPhone}
+                </Text>
               </View>
             )}
 
-            <View style={styles.securityFooter}>
-              <ShieldCheck size={14} color="#059669" />
-              <Text style={styles.securityText}>
-                Encrypted bank-grade authentication. Sensitive documents and payments are never processed over unencrypted web forms.
+            <View style={styles.complianceFooter}>
+              <ShieldCheck size={14} color="#64748B" />
+              <Text style={styles.complianceText}>
+                Encrypted 256-bit bank-grade transmission • Fair Deal Realty Inc.
               </Text>
             </View>
           </View>
@@ -178,7 +180,7 @@ export default function PortalLoginModal({
 const styles = StyleSheet.create({
   modalOverlay: {
     flex: 1,
-    backgroundColor: "rgba(0,0,0,0.65)",
+    backgroundColor: "rgba(15, 23, 42, 0.65)",
     justifyContent: "center",
     alignItems: "center",
     padding: 16,
@@ -186,55 +188,55 @@ const styles = StyleSheet.create({
   modalCard: {
     width: "100%",
     backgroundColor: "#FFFFFF",
-    borderRadius: 12,
+    borderRadius: 16,
     overflow: "hidden",
-    shadowColor: "#000",
+    shadowColor: "#0F172A",
     shadowOpacity: 0.25,
-    shadowRadius: 16,
-    elevation: 8,
+    shadowRadius: 24,
+    elevation: 10,
   },
   modalHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingVertical: 14,
-    paddingHorizontal: 18,
+    paddingVertical: 18,
+    paddingHorizontal: 22,
     borderBottomWidth: 1,
-    borderBottomColor: "#E5E7EB",
-    backgroundColor: "#F9FAFB",
+    borderBottomColor: "#E2E8F0",
+    backgroundColor: "#F8FAFC",
   },
   headerLeft: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 10,
+    gap: 12,
   },
   lockIconBox: {
-    width: 34,
-    height: 34,
-    borderRadius: 8,
-    backgroundColor: "#D1FAE5",
+    width: 38,
+    height: 38,
+    borderRadius: 10,
+    backgroundColor: "#EFF6FF",
     justifyContent: "center",
     alignItems: "center",
   },
   modalTitle: {
-    fontSize: 16,
+    fontSize: 17,
     fontWeight: "800",
-    color: "#164E3A",
+    color: "#0F172A",
   },
   modalSubtitle: {
-    fontSize: 11.5,
-    color: "#6B7280",
+    fontSize: 12,
+    color: "#64748B",
+    marginTop: 1,
   },
   closeBtn: {
     padding: 6,
-    borderRadius: 6,
-    backgroundColor: "#E5E7EB",
+    borderRadius: 8,
   },
   tabsRow: {
     flexDirection: "row",
     borderBottomWidth: 1,
-    borderBottomColor: "#E5E7EB",
-    backgroundColor: "#F3F4F6",
+    borderBottomColor: "#E2E8F0",
+    backgroundColor: "#F8FAFC",
   },
   tabBtn: {
     flex: 1,
@@ -242,97 +244,107 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     gap: 8,
-    paddingVertical: 12,
+    paddingVertical: 14,
+    borderBottomWidth: 2,
+    borderBottomColor: "transparent",
   },
   tabBtnActive: {
+    borderBottomColor: "#2563EB",
     backgroundColor: "#FFFFFF",
-    borderBottomWidth: 2,
-    borderBottomColor: "#164E3A",
   },
   tabBtnText: {
-    fontSize: 13.5,
+    fontSize: 14,
     fontWeight: "600",
-    color: "#6B7280",
+    color: "#64748B",
   },
   tabBtnTextActive: {
-    color: "#164E3A",
+    color: "#2563EB",
     fontWeight: "700",
   },
   contentBody: {
-    padding: 20,
-    gap: 16,
+    padding: 24,
   },
   tabContent: {
-    gap: 12,
+    gap: 14,
   },
   portalBadge: {
     alignSelf: "flex-start",
-    backgroundColor: "#ECFDF5",
-    paddingHorizontal: 8,
+    backgroundColor: "#EFF6FF",
     paddingVertical: 4,
-    borderRadius: 4,
-    borderWidth: 1,
-    borderColor: "#A7F3D0",
+    paddingHorizontal: 10,
+    borderRadius: 6,
   },
   portalBadgeText: {
-    fontSize: 10,
-    fontWeight: "700",
-    color: "#065F46",
-    letterSpacing: 0.5,
+    fontSize: 11,
+    fontWeight: "800",
+    color: "#2563EB",
+    letterSpacing: 0.8,
   },
   portalHeading: {
-    fontSize: 17,
+    fontSize: 19,
     fontWeight: "800",
-    color: "#111827",
+    color: "#0F172A",
   },
   portalDescription: {
-    fontSize: 13,
-    color: "#4B5563",
-    lineHeight: 19,
+    fontSize: 13.5,
+    color: "#475569",
+    lineHeight: 20,
   },
   featuresGrid: {
-    gap: 8,
-    marginVertical: 4,
+    backgroundColor: "#F8FAFC",
+    borderRadius: 10,
+    padding: 14,
+    gap: 10,
+    borderWidth: 1,
+    borderColor: "#E2E8F0",
   },
   featureItem: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 8,
+    gap: 10,
   },
   featureText: {
-    fontSize: 12.5,
-    color: "#374151",
+    fontSize: 13,
+    color: "#1E293B",
     fontWeight: "500",
   },
-  launchPortalBtn: {
+  loginActionBtn: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
     gap: 8,
-    backgroundColor: "#164E3A",
+    backgroundColor: "#2563EB",
     paddingVertical: 13,
     borderRadius: 8,
     marginTop: 6,
+    shadowColor: "#2563EB",
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
+    elevation: 2,
   },
-  launchPortalBtnText: {
+  loginActionText: {
     color: "#FFFFFF",
-    fontSize: 14,
+    fontSize: 14.5,
     fontWeight: "700",
   },
-  securityFooter: {
+  helpText: {
+    fontSize: 12,
+    color: "#64748B",
+    textAlign: "center",
+    lineHeight: 16,
+  },
+  complianceFooter: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 8,
-    backgroundColor: "#F9FAFB",
-    padding: 10,
-    borderRadius: 6,
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
+    justifyContent: "center",
+    gap: 6,
+    marginTop: 18,
+    paddingTop: 14,
+    borderTopWidth: 1,
+    borderTopColor: "#F1F5F9",
   },
-  securityText: {
-    fontSize: 11,
-    color: "#6B7280",
-    lineHeight: 15,
-    flex: 1,
+  complianceText: {
+    fontSize: 11.5,
+    color: "#64748B",
   },
 });

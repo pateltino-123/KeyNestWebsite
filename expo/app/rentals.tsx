@@ -12,7 +12,6 @@ import {
   Linking,
   ActivityIndicator,
 } from "react-native";
-import { useRouter } from "expo-router";
 import {
   ShieldCheck,
   Search,
@@ -20,12 +19,12 @@ import {
   Bed,
   Bath,
   Maximize2,
-  Calendar,
   ExternalLink,
   CheckCircle2,
   X,
   Check,
   Eye,
+  ArrowRight,
 } from "lucide-react-native";
 import WebsiteLayout from "@/components/keynest/WebsiteLayout";
 import {
@@ -34,7 +33,6 @@ import {
 } from "@/constants/keynestData";
 
 export default function AvailableRentalsPage() {
-  const router = useRouter();
   const { width } = useWindowDimensions();
   const isDesktop = width >= 1024;
   const isTablet = width >= 640 && width < 1024;
@@ -49,7 +47,6 @@ export default function AvailableRentalsPage() {
   const [inquiryName, setInquiryName] = useState("");
   const [inquiryEmail, setInquiryEmail] = useState("");
   const [inquiryPhone, setInquiryPhone] = useState("");
-  const [inquiryType, setInquiryType] = useState("Schedule a Showing");
   const [inquiryMessage, setInquiryMessage] = useState("");
   const [isSubmittingInquiry, setIsSubmittingInquiry] = useState(false);
   const [inquirySuccess, setInquirySuccess] = useState(false);
@@ -92,7 +89,7 @@ export default function AvailableRentalsPage() {
     setTimeout(() => {
       setIsSubmittingInquiry(false);
       setInquirySuccess(true);
-    }, 700);
+    }, 600);
   };
 
   return (
@@ -101,56 +98,50 @@ export default function AvailableRentalsPage() {
       <View style={styles.headerHero}>
         <View style={styles.innerContainer}>
           <View style={styles.badgePill}>
-            <ShieldCheck size={14} color="#10B981" />
+            <ShieldCheck size={14} color="#38BDF8" />
             <Text style={styles.badgePillText}>Under the Brokerage of Fair Deal Realty Inc.</Text>
           </View>
           <Text style={styles.pageTitle}>Available North Texas Rentals</Text>
           <Text style={styles.pageSubtitle}>
-            Browse meticulously maintained single-family homes and luxury townhomes across The Colony, Frisco, Plano, McKinney, Allen, and Prosper.
+            Browse verified single-family and townhome residences managed under high fiduciary standards across North Texas.
           </Text>
         </View>
       </View>
 
-      {/* Filter Bar Section */}
+      {/* Filter & Search Bar */}
       <View style={styles.filterSection}>
         <View style={styles.innerContainer}>
           <View style={styles.filterCard}>
-            <View style={styles.filterRow}>
-              {/* Search input */}
-              <View style={styles.searchBox}>
-                <Search size={18} color="#9CA3AF" />
+            {/* Search Input */}
+            <View style={styles.searchBarRow}>
+              <View style={styles.searchInputBox}>
+                <Search size={18} color="#64748B" />
                 <TextInput
                   style={styles.searchInput}
                   placeholder="Search by neighborhood, street, or city..."
-                  placeholderTextColor="#9CA3AF"
+                  placeholderTextColor="#94A3B8"
                   value={searchQuery}
                   onChangeText={setSearchQuery}
                 />
                 {searchQuery.length > 0 && (
                   <TouchableOpacity onPress={() => setSearchQuery("")}>
-                    <X size={16} color="#9CA3AF" />
+                    <X size={16} color="#64748B" />
                   </TouchableOpacity>
                 )}
               </View>
+            </View>
 
-              {/* City Filter Chips */}
-              <ScrollView
-                horizontal
-                showsHorizontalScrollIndicator={false}
-                contentContainerStyle={styles.cityChipsRow}
-              >
+            {/* City Pills Row */}
+            <View style={styles.filterGroup}>
+              <Text style={styles.filterGroupLabel}>City Filter:</Text>
+              <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.pillsScroll}>
                 {citiesList.map((c) => (
                   <TouchableOpacity
                     key={c}
-                    style={[styles.cityChip, selectedCity === c && styles.cityChipActive]}
+                    style={[styles.filterPill, selectedCity === c && styles.filterPillActive]}
                     onPress={() => setSelectedCity(c)}
                   >
-                    <Text
-                      style={[
-                        styles.cityChipText,
-                        selectedCity === c && styles.cityChipTextActive,
-                      ]}
-                    >
+                    <Text style={[styles.filterPillText, selectedCity === c && styles.filterPillTextActive]}>
                       {c}
                     </Text>
                   </TouchableOpacity>
@@ -158,23 +149,18 @@ export default function AvailableRentalsPage() {
               </ScrollView>
             </View>
 
-            {/* Sub-Filters: Beds & Pet-Friendly */}
-            <View style={styles.subFiltersRow}>
+            {/* Bedroom & Pet Filters */}
+            <View style={styles.secondaryFiltersRow}>
               <View style={styles.bedFiltersGroup}>
-                <Text style={styles.subFilterLabel}>Min Bedrooms:</Text>
-                {["Any", "3+", "4+", "5+"].map((b) => (
+                <Text style={styles.filterGroupLabel}>Min Beds:</Text>
+                {["Any", "3", "4", "5"].map((b) => (
                   <TouchableOpacity
                     key={b}
-                    style={[styles.bedChip, selectedBeds === b && styles.bedChipActive]}
+                    style={[styles.miniFilterPill, selectedBeds === b && styles.miniFilterPillActive]}
                     onPress={() => setSelectedBeds(b)}
                   >
-                    <Text
-                      style={[
-                        styles.bedChipText,
-                        selectedBeds === b && styles.bedChipTextActive,
-                      ]}
-                    >
-                      {b}
+                    <Text style={[styles.miniFilterPillText, selectedBeds === b && styles.miniFilterPillTextActive]}>
+                      {b === "Any" ? "Any" : `${b}+ Beds`}
                     </Text>
                   </TouchableOpacity>
                 ))}
@@ -184,11 +170,9 @@ export default function AvailableRentalsPage() {
                 style={[styles.petToggle, petFilter && styles.petToggleActive]}
                 onPress={() => setPetFilter(!petFilter)}
               >
-                <View style={[styles.checkbox, petFilter && styles.checkboxActive]}>
-                  {petFilter && <Check size={12} color="#FFFFFF" />}
-                </View>
+                <Check size={14} color={petFilter ? "#FFFFFF" : "#64748B"} />
                 <Text style={[styles.petToggleText, petFilter && styles.petToggleTextActive]}>
-                  Pet-Friendly Only
+                  Pets Allowed Only
                 </Text>
               </TouchableOpacity>
             </View>
@@ -196,16 +180,13 @@ export default function AvailableRentalsPage() {
         </View>
       </View>
 
-      {/* Rentals Grid Listing */}
-      <View style={styles.sectionWhite}>
+      {/* Property Cards Grid */}
+      <View style={styles.resultsSection}>
         <View style={styles.innerContainer}>
           <View style={styles.resultsCountRow}>
             <Text style={styles.resultsCountText}>
-              Showing <Text style={{ fontWeight: "800", color: "#164E3A" }}>{filteredProperties.length}</Text> available properties
+              Showing <Text style={{ fontWeight: "800", color: "#0F172A" }}>{filteredProperties.length}</Text> available properties
             </Text>
-            <TouchableOpacity onPress={() => router.push("/tenants" as never)}>
-              <Text style={styles.criteriaLink}>View Published Rental Criteria →</Text>
-            </TouchableOpacity>
           </View>
 
           {filteredProperties.length > 0 ? (
@@ -215,66 +196,63 @@ export default function AvailableRentalsPage() {
                 { flexDirection: isDesktop ? "row" : isTablet ? "row" : "column", flexWrap: "wrap" },
               ]}
             >
-              {filteredProperties.map((prop) => (
+              {filteredProperties.map((property) => (
                 <View
-                  key={prop.id}
+                  key={property.id}
                   style={[
                     styles.propertyCard,
                     { width: isDesktop ? "31.5%" : isTablet ? "48%" : "100%" },
                   ]}
                 >
-                  <View style={styles.cardImageWrap}>
-                    <Image source={{ uri: prop.imageUrl }} style={styles.propImage} />
+                  <View style={styles.imageWrap}>
+                    <Image source={{ uri: property.imageUrl }} style={styles.propertyImg} />
                     <View style={styles.pricePill}>
-                      <Text style={styles.pricePillText}>${prop.price.toLocaleString()} / mo</Text>
+                      <Text style={styles.pricePillText}>${property.price.toLocaleString()}/mo</Text>
                     </View>
-                    <View style={styles.typeBadge}>
-                      <Text style={styles.typeBadgeText}>{prop.propertyType}</Text>
+                    <View style={styles.statusPill}>
+                      <Text style={styles.statusPillText}>{(property.status || property.availableDate).toUpperCase()}</Text>
                     </View>
                   </View>
 
                   <View style={styles.cardContent}>
-                    <View style={styles.cityRow}>
-                      <MapPin size={13} color="#059669" />
-                      <Text style={styles.cityText}>{prop.city}, TX {prop.zip}</Text>
+                    <View style={styles.cityLocationRow}>
+                      <MapPin size={13} color="#2563EB" />
+                      <Text style={styles.cityLocationText}>{property.city}, TX {property.zip}</Text>
                     </View>
 
-                    <Text style={styles.propertyTitle}>{prop.title}</Text>
-                    <Text style={styles.propertyAddress}>{prop.address}</Text>
+                    <Text style={styles.cardPropertyTitle} numberOfLines={1}>{property.title}</Text>
+                    <Text style={styles.cardAddress} numberOfLines={1}>{property.address}</Text>
 
-                    {/* Specs */}
                     <View style={styles.specsRow}>
                       <View style={styles.specItem}>
-                        <Bed size={15} color="#4B5563" />
-                        <Text style={styles.specText}>{prop.beds} Beds</Text>
+                        <Bed size={14} color="#64748B" />
+                        <Text style={styles.specVal}>{property.beds} Beds</Text>
                       </View>
                       <View style={styles.specItem}>
-                        <Bath size={15} color="#4B5563" />
-                        <Text style={styles.specText}>{prop.baths} Baths</Text>
+                        <Bath size={14} color="#64748B" />
+                        <Text style={styles.specVal}>{property.baths} Baths</Text>
                       </View>
                       <View style={styles.specItem}>
-                        <Maximize2 size={14} color="#4B5563" />
-                        <Text style={styles.specText}>{prop.sqft.toLocaleString()} Sq Ft</Text>
+                        <Maximize2 size={14} color="#64748B" />
+                        <Text style={styles.specVal}>{property.sqft.toLocaleString()} Sq Ft</Text>
                       </View>
                     </View>
 
-                    <View style={styles.availabilityRow}>
-                      <Calendar size={13} color="#6B7280" />
-                      <Text style={styles.availText}>Available: {prop.availableDate}</Text>
-                    </View>
-
-                    <View style={styles.cardActionsRow}>
+                    <View style={styles.cardButtonsRow}>
                       <TouchableOpacity
                         style={styles.detailsBtn}
-                        onPress={() => setSelectedProperty(prop)}
+                        onPress={() => {
+                          setSelectedProperty(property);
+                          setInquirySuccess(false);
+                        }}
                       >
-                        <Eye size={14} color="#164E3A" />
+                        <Eye size={14} color="#0F172A" />
                         <Text style={styles.detailsBtnText}>View Details</Text>
                       </TouchableOpacity>
 
                       <TouchableOpacity
                         style={styles.applyBtn}
-                        onPress={() => openAppFolioApply(prop.appFolioApplyUrl)}
+                        onPress={() => openAppFolioApply(property.appFolioApplyUrl)}
                       >
                         <Text style={styles.applyBtnText}>Apply Now</Text>
                         <ExternalLink size={13} color="#FFFFFF" />
@@ -285,14 +263,11 @@ export default function AvailableRentalsPage() {
               ))}
             </View>
           ) : (
-            <View style={styles.emptyStateBox}>
-              <Search size={40} color="#9CA3AF" />
-              <Text style={styles.emptyStateTitle}>No rental properties match your search</Text>
-              <Text style={styles.emptyStateSub}>
-                Try resetting your city or bedroom filters, or contact our leasing department directly.
-              </Text>
+            <View style={styles.noResultsBox}>
+              <Text style={styles.noResultsTitle}>No properties match your current filters.</Text>
+              <Text style={styles.noResultsSub}>Try clearing search terms or selecting All Cities.</Text>
               <TouchableOpacity
-                style={styles.resetFiltersBtn}
+                style={styles.clearFiltersBtn}
                 onPress={() => {
                   setSelectedCity("All Cities");
                   setSelectedBeds("Any");
@@ -300,206 +275,155 @@ export default function AvailableRentalsPage() {
                   setSearchQuery("");
                 }}
               >
-                <Text style={styles.resetFiltersBtnText}>Reset All Filters</Text>
+                <Text style={styles.clearFiltersText}>Reset All Filters</Text>
               </TouchableOpacity>
             </View>
           )}
         </View>
       </View>
 
-      {/* Property Detail & Tenant Inquiry Modal */}
+      {/* Property Details & Tour Scheduling Modal */}
       {selectedProperty && (
         <Modal
           visible={true}
           animationType="slide"
           transparent={true}
-          onRequestClose={() => {
-            setSelectedProperty(null);
-            setInquirySuccess(false);
-          }}
+          onRequestClose={() => setSelectedProperty(null)}
         >
           <View style={styles.modalOverlay}>
-            <View style={[styles.modalCard, { maxWidth: isDesktop ? 720 : "94%" }]}>
-              {/* Modal Header */}
+            <View style={[styles.modalCard, { maxWidth: isDesktop ? 680 : "94%" }]}>
               <View style={styles.modalHeader}>
                 <View style={{ flex: 1 }}>
-                  <Text style={styles.modalPropertyTitle}>{selectedProperty.title}</Text>
-                  <Text style={styles.modalPropertyAddress}>
+                  <Text style={styles.modalPropTitle}>{selectedProperty.title}</Text>
+                  <Text style={styles.modalPropAddress}>
                     {selectedProperty.address}, {selectedProperty.city}, TX {selectedProperty.zip}
                   </Text>
                 </View>
                 <TouchableOpacity
-                  onPress={() => {
-                    setSelectedProperty(null);
-                    setInquirySuccess(false);
-                  }}
+                  onPress={() => setSelectedProperty(null)}
                   style={styles.modalCloseBtn}
                 >
-                  <X size={20} color="#6B7280" />
+                  <X size={20} color="#64748B" />
                 </TouchableOpacity>
               </View>
 
-              <ScrollView style={styles.modalScroll} contentContainerStyle={{ padding: 20, gap: 16 }}>
-                {/* Image */}
-                <Image source={{ uri: selectedProperty.imageUrl }} style={styles.modalImage} />
+              <ScrollView style={styles.modalScroll} contentContainerStyle={{ padding: 24, gap: 16 }}>
+                <Image source={{ uri: selectedProperty.imageUrl }} style={styles.modalPropImage} />
 
-                {/* Key Specs Bar */}
-                <View style={styles.modalSpecsBar}>
-                  <View style={styles.modalPriceBlock}>
-                    <Text style={styles.modalPriceValue}>${selectedProperty.price.toLocaleString()}</Text>
-                    <Text style={styles.modalPriceSub}>/ month</Text>
+                <View style={styles.modalPriceHighlight}>
+                  <View>
+                    <Text style={styles.modalPriceLabel}>Monthly Rent</Text>
+                    <Text style={styles.modalPriceVal}>${selectedProperty.price.toLocaleString()} / mo</Text>
                   </View>
-                  <View style={styles.modalDivider} />
-                  <View style={styles.modalSpecItem}>
-                    <Text style={styles.modalSpecNum}>{selectedProperty.beds}</Text>
-                    <Text style={styles.modalSpecLbl}>Beds</Text>
+                  <TouchableOpacity
+                    style={styles.modalApplyNowBtn}
+                    onPress={() => openAppFolioApply(selectedProperty.appFolioApplyUrl)}
+                  >
+                    <Text style={styles.modalApplyNowText}>Apply via AppFolio</Text>
+                    <ExternalLink size={14} color="#FFFFFF" />
+                  </TouchableOpacity>
+                </View>
+
+                <View style={styles.modalSpecsGrid}>
+                  <View style={styles.modalSpecBox}>
+                    <Text style={styles.modalSpecLabel}>Bedrooms</Text>
+                    <Text style={styles.modalSpecVal}>{selectedProperty.beds} Beds</Text>
                   </View>
-                  <View style={styles.modalSpecItem}>
-                    <Text style={styles.modalSpecNum}>{selectedProperty.baths}</Text>
-                    <Text style={styles.modalSpecLbl}>Baths</Text>
+                  <View style={styles.modalSpecBox}>
+                    <Text style={styles.modalSpecLabel}>Bathrooms</Text>
+                    <Text style={styles.modalSpecVal}>{selectedProperty.baths} Baths</Text>
                   </View>
-                  <View style={styles.modalSpecItem}>
-                    <Text style={styles.modalSpecNum}>{selectedProperty.sqft.toLocaleString()}</Text>
-                    <Text style={styles.modalSpecLbl}>Sq Ft</Text>
+                  <View style={styles.modalSpecBox}>
+                    <Text style={styles.modalSpecLabel}>Square Feet</Text>
+                    <Text style={styles.modalSpecVal}>{selectedProperty.sqft.toLocaleString()} Sq Ft</Text>
                   </View>
-                  <View style={styles.modalSpecItem}>
-                    <Text style={styles.modalSpecNum}>${selectedProperty.deposit.toLocaleString()}</Text>
-                    <Text style={styles.modalSpecLbl}>Deposit</Text>
+                  <View style={styles.modalSpecBox}>
+                    <Text style={styles.modalSpecLabel}>School District</Text>
+                    <Text style={styles.modalSpecVal}>{selectedProperty.schoolDistrict || `${selectedProperty.city} ISD`}</Text>
                   </View>
                 </View>
 
-                {/* Description */}
-                <View style={styles.modalSection}>
-                  <Text style={styles.modalSectionHeading}>Property Overview</Text>
-                  <Text style={styles.modalDescriptionText}>{selectedProperty.description}</Text>
-                </View>
-
-                {/* Features & Amenities */}
-                <View style={styles.modalSection}>
-                  <Text style={styles.modalSectionHeading}>Features & Community Amenities</Text>
-                  <View style={styles.featuresList}>
-                    {selectedProperty.features.map((feat, i) => (
-                      <View key={i} style={styles.featurePill}>
-                        <CheckCircle2 size={14} color="#059669" />
-                        <Text style={styles.featurePillText}>{feat}</Text>
+                {/* Amenities */}
+                <View style={styles.amenitiesSection}>
+                  <Text style={styles.amenitiesHeading}>Key Home Amenities</Text>
+                  <View style={styles.amenitiesGrid}>
+                    {selectedProperty.features.map((feat, idx) => (
+                      <View key={idx} style={styles.amenityItem}>
+                        <CheckCircle2 size={15} color="#2563EB" />
+                        <Text style={styles.amenityText}>{feat}</Text>
                       </View>
                     ))}
                   </View>
                 </View>
 
-                {/* Pet Policy */}
-                <View style={styles.petPolicyBox}>
-                  <Text style={styles.petPolicyHeading}>Pet Policy & Guidelines:</Text>
-                  <Text style={styles.petPolicyText}>{selectedProperty.petTerms}</Text>
-                </View>
-
-                {/* Tenant Inquiry Form (Slide 9 routing: Leasing Queue) */}
-                <View style={styles.inquiryFormCard}>
-                  <Text style={styles.inquiryCardTitle}>Inquire About This Home</Text>
-                  <Text style={styles.inquiryCardSub}>
-                    Routed directly to the KeyNest Leasing Team under Fair Deal Realty Inc.
+                {/* Tour & Inquiry Form */}
+                <View style={styles.inquiryBox}>
+                  <Text style={styles.inquiryTitle}>Schedule an Agent-Accompanied Showing</Text>
+                  <Text style={styles.inquirySub}>
+                    Directly connected to Dinesh Donthula and Purvang Patel at KeyNest Realty.
                   </Text>
 
                   {!inquirySuccess ? (
-                    <View style={styles.inquiryFields}>
-                      <View style={styles.inputRow}>
-                        <View style={[styles.inputGroup, { flex: 1 }]}>
-                          <Text style={styles.label}>Your Name *</Text>
-                          <TextInput
-                            style={styles.input}
-                            value={inquiryName}
-                            onChangeText={setInquiryName}
-                            placeholder="Full Name"
-                            placeholderTextColor="#9CA3AF"
-                          />
-                        </View>
-                        <View style={[styles.inputGroup, { flex: 1 }]}>
-                          <Text style={styles.label}>Phone Number *</Text>
-                          <TextInput
-                            style={styles.input}
-                            value={inquiryPhone}
-                            onChangeText={setInquiryPhone}
-                            placeholder="(972) 000-0000"
-                            placeholderTextColor="#9CA3AF"
-                            keyboardType="phone-pad"
-                          />
-                        </View>
-                      </View>
-
-                      <View style={styles.inputGroup}>
-                        <Text style={styles.label}>Email Address *</Text>
+                    <View style={{ gap: 10, marginTop: 10 }}>
+                      <TextInput
+                        style={styles.inquiryInput}
+                        placeholder="Your Full Name *"
+                        placeholderTextColor="#94A3B8"
+                        value={inquiryName}
+                        onChangeText={setInquiryName}
+                      />
+                      <View style={{ flexDirection: "row", gap: 10 }}>
                         <TextInput
-                          style={styles.input}
+                          style={[styles.inquiryInput, { flex: 1 }]}
+                          placeholder="Email Address *"
+                          placeholderTextColor="#94A3B8"
                           value={inquiryEmail}
                           onChangeText={setInquiryEmail}
-                          placeholder="name@domain.com"
-                          placeholderTextColor="#9CA3AF"
                           keyboardType="email-address"
                           autoCapitalize="none"
                         />
-                      </View>
-
-                      <View style={styles.inputGroup}>
-                        <Text style={styles.label}>Inquiry Type</Text>
-                        <View style={styles.chipsRow}>
-                          {["Schedule a Showing", "Application Question", "Move-In Date Question"].map((t) => (
-                            <TouchableOpacity
-                              key={t}
-                              style={[styles.chip, inquiryType === t && styles.chipActive]}
-                              onPress={() => setInquiryType(t)}
-                            >
-                              <Text style={[styles.chipText, inquiryType === t && styles.chipTextActive]}>
-                                {t}
-                              </Text>
-                            </TouchableOpacity>
-                          ))}
-                        </View>
-                      </View>
-
-                      <View style={styles.inputGroup}>
-                        <Text style={styles.label}>Message or Preferred Tour Times (Optional)</Text>
                         <TextInput
-                          style={[styles.input, styles.textArea]}
-                          multiline
-                          numberOfLines={3}
-                          value={inquiryMessage}
-                          onChangeText={setInquiryMessage}
-                          placeholder="Questions about move-in timing, schools, or showing availability..."
-                          placeholderTextColor="#9CA3AF"
+                          style={[styles.inquiryInput, { flex: 1 }]}
+                          placeholder="Phone Number *"
+                          placeholderTextColor="#94A3B8"
+                          value={inquiryPhone}
+                          onChangeText={setInquiryPhone}
+                          keyboardType="phone-pad"
                         />
                       </View>
-
+                      <TextInput
+                        style={[styles.inquiryInput, { height: 60, textAlignVertical: "top" }]}
+                        placeholder="Preferred showing date and time or questions..."
+                        placeholderTextColor="#94A3B8"
+                        value={inquiryMessage}
+                        onChangeText={setInquiryMessage}
+                        multiline
+                      />
                       <TouchableOpacity
-                        style={styles.submitInquiryBtn}
+                        style={styles.inquirySubmitBtn}
                         onPress={handleInquirySubmit}
                         disabled={isSubmittingInquiry}
                       >
                         {isSubmittingInquiry ? (
                           <ActivityIndicator color="#FFFFFF" />
                         ) : (
-                          <Text style={styles.submitInquiryBtnText}>Submit to Leasing Queue</Text>
+                          <>
+                            <Text style={styles.inquirySubmitText}>Send Tour Request</Text>
+                            <ArrowRight size={15} color="#FFFFFF" />
+                          </>
                         )}
                       </TouchableOpacity>
                     </View>
                   ) : (
                     <View style={styles.inquirySuccessBox}>
-                      <CheckCircle2 size={40} color="#10B981" />
-                      <Text style={styles.inquirySuccessTitle}>Inquiry Sent to Leasing Queue!</Text>
-                      <Text style={styles.inquirySuccessText}>
-                        Thank you, {inquiryName}. A leasing coordinator will contact you via email or phone within 4 business hours to answer your questions or confirm showing access.
+                      <CheckCircle2 size={32} color="#10B981" />
+                      <Text style={styles.inquirySuccessTitle}>Showing Request Received!</Text>
+                      <Text style={styles.inquirySuccessSub}>
+                        Thank you, {inquiryName}. An agent will contact you within 2 business hours to confirm your showing.
                       </Text>
                     </View>
                   )}
                 </View>
-
-                {/* Direct AppFolio Apply CTA */}
-                <TouchableOpacity
-                  style={styles.modalApplyPrimary}
-                  onPress={() => openAppFolioApply(selectedProperty.appFolioApplyUrl)}
-                >
-                  <Text style={styles.modalApplyPrimaryText}>Apply for This Property on AppFolio</Text>
-                  <ExternalLink size={16} color="#FFFFFF" />
-                </TouchableOpacity>
               </ScrollView>
             </View>
           </View>
@@ -511,198 +435,185 @@ export default function AvailableRentalsPage() {
 
 const styles = StyleSheet.create({
   headerHero: {
-    backgroundColor: "#164E3A",
-    paddingVertical: 52,
+    backgroundColor: "#0B1120",
+    paddingVertical: 72,
     borderBottomWidth: 1,
-    borderBottomColor: "#1D644B",
+    borderBottomColor: "#1E293B",
   },
   innerContainer: {
     maxWidth: 1240,
     width: "100%",
     marginHorizontal: "auto",
-    paddingHorizontal: 16,
+    paddingHorizontal: 20,
   },
   badgePill: {
     alignSelf: "flex-start",
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-    backgroundColor: "#103C2D",
+    backgroundColor: "#1E293B",
     paddingVertical: 6,
     paddingHorizontal: 12,
     borderRadius: 20,
     borderWidth: 1,
-    borderColor: "#1E5642",
-    marginBottom: 12,
+    borderColor: "#334155",
+    marginBottom: 16,
   },
   badgePillText: {
-    color: "#D1FAE5",
+    color: "#E2E8F0",
     fontSize: 12.5,
     fontWeight: "600",
   },
   pageTitle: {
-    fontSize: 36,
+    fontSize: 40,
     fontWeight: "900",
     color: "#FFFFFF",
-    letterSpacing: -0.5,
-    marginBottom: 10,
+    letterSpacing: -1,
+    marginBottom: 12,
   },
   pageSubtitle: {
-    fontSize: 16,
-    color: "#D1D5DB",
-    lineHeight: 24,
-    maxWidth: 720,
+    fontSize: 16.5,
+    color: "#94A3B8",
+    maxWidth: 760,
+    lineHeight: 25,
   },
   filterSection: {
-    backgroundColor: "#F8FAF9",
-    paddingVertical: 20,
+    backgroundColor: "#FFFFFF",
+    paddingVertical: 24,
     borderBottomWidth: 1,
-    borderBottomColor: "#E5E7EB",
+    borderBottomColor: "#E2E8F0",
   },
   filterCard: {
-    backgroundColor: "#FFFFFF",
-    borderRadius: 10,
+    backgroundColor: "#F8FAFC",
+    borderRadius: 14,
+    padding: 18,
     borderWidth: 1,
-    borderColor: "#E5E7EB",
-    padding: 16,
+    borderColor: "#E2E8F0",
     gap: 14,
   },
-  filterRow: {
+  searchBarRow: {
+    flexDirection: "row",
     gap: 12,
   },
-  searchBox: {
+  searchInputBox: {
+    flex: 1,
     flexDirection: "row",
     alignItems: "center",
-    borderWidth: 1,
-    borderColor: "#D1D5DB",
-    borderRadius: 8,
-    paddingHorizontal: 12,
-    paddingVertical: 8,
+    gap: 10,
     backgroundColor: "#FFFFFF",
-    gap: 8,
+    borderWidth: 1,
+    borderColor: "#CBD5E1",
+    borderRadius: 8,
+    paddingHorizontal: 14,
+    paddingVertical: 10,
   },
   searchInput: {
     flex: 1,
     fontSize: 14,
-    color: "#111827",
+    color: "#0F172A",
   },
-  cityChipsRow: {
+  filterGroup: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+  },
+  filterGroupLabel: {
+    fontSize: 13,
+    fontWeight: "700",
+    color: "#475569",
+  },
+  pillsScroll: {
     flexDirection: "row",
     gap: 8,
-    paddingVertical: 4,
   },
-  cityChip: {
+  filterPill: {
     paddingVertical: 6,
     paddingHorizontal: 12,
-    borderRadius: 20,
-    backgroundColor: "#F3F4F6",
+    borderRadius: 8,
+    backgroundColor: "#FFFFFF",
     borderWidth: 1,
-    borderColor: "#E5E7EB",
+    borderColor: "#CBD5E1",
   },
-  cityChipActive: {
-    backgroundColor: "#164E3A",
-    borderColor: "#164E3A",
+  filterPillActive: {
+    backgroundColor: "#2563EB",
+    borderColor: "#2563EB",
   },
-  cityChipText: {
+  filterPillText: {
     fontSize: 12.5,
     fontWeight: "600",
-    color: "#4B5563",
+    color: "#334155",
   },
-  cityChipTextActive: {
+  filterPillTextActive: {
     color: "#FFFFFF",
   },
-  subFiltersRow: {
+  secondaryFiltersRow: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     flexWrap: "wrap",
-    gap: 14,
+    gap: 12,
+    paddingTop: 8,
     borderTopWidth: 1,
-    borderTopColor: "#F3F4F6",
-    paddingTop: 12,
+    borderTopColor: "#E2E8F0",
   },
   bedFiltersGroup: {
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
   },
-  subFilterLabel: {
-    fontSize: 12.5,
-    fontWeight: "600",
-    color: "#4B5563",
-  },
-  bedChip: {
-    paddingVertical: 4,
+  miniFilterPill: {
+    paddingVertical: 5,
     paddingHorizontal: 10,
     borderRadius: 6,
-    backgroundColor: "#F3F4F6",
-  },
-  bedChipActive: {
-    backgroundColor: "#ECFDF5",
+    backgroundColor: "#FFFFFF",
     borderWidth: 1,
-    borderColor: "#10B981",
+    borderColor: "#CBD5E1",
   },
-  bedChipText: {
+  miniFilterPillActive: {
+    backgroundColor: "#0F172A",
+    borderColor: "#0F172A",
+  },
+  miniFilterPillText: {
     fontSize: 12,
-    color: "#4B5563",
     fontWeight: "600",
+    color: "#475569",
   },
-  bedChipTextActive: {
-    color: "#065F46",
-    fontWeight: "800",
+  miniFilterPillTextActive: {
+    color: "#FFFFFF",
   },
   petToggle: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 8,
-    paddingVertical: 4,
-    paddingHorizontal: 10,
+    gap: 6,
+    paddingVertical: 6,
+    paddingHorizontal: 12,
     borderRadius: 6,
+    backgroundColor: "#FFFFFF",
+    borderWidth: 1,
+    borderColor: "#CBD5E1",
   },
   petToggleActive: {
-    backgroundColor: "#ECFDF5",
-  },
-  checkbox: {
-    width: 18,
-    height: 18,
-    borderRadius: 4,
-    borderWidth: 1.5,
-    borderColor: "#9CA3AF",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  checkboxActive: {
-    backgroundColor: "#10B981",
-    borderColor: "#10B981",
+    backgroundColor: "#2563EB",
+    borderColor: "#2563EB",
   },
   petToggleText: {
-    fontSize: 12.5,
-    color: "#4B5563",
-    fontWeight: "500",
+    fontSize: 12,
+    fontWeight: "600",
+    color: "#475569",
   },
   petToggleTextActive: {
-    color: "#065F46",
-    fontWeight: "700",
+    color: "#FFFFFF",
   },
-  sectionWhite: {
-    backgroundColor: "#FFFFFF",
+  resultsSection: {
+    backgroundColor: "#F8FAFC",
     paddingVertical: 48,
   },
   resultsCountRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
     marginBottom: 24,
   },
   resultsCountText: {
-    fontSize: 15,
-    color: "#4B5563",
-  },
-  criteriaLink: {
-    fontSize: 13,
-    fontWeight: "600",
-    color: "#164E3A",
-    textDecorationLine: "underline",
+    fontSize: 14,
+    color: "#64748B",
   },
   propertiesGrid: {
     gap: 24,
@@ -710,103 +621,98 @@ const styles = StyleSheet.create({
   },
   propertyCard: {
     backgroundColor: "#FFFFFF",
-    borderRadius: 10,
+    borderRadius: 14,
     borderWidth: 1,
-    borderColor: "#E5E7EB",
+    borderColor: "#E2E8F0",
     overflow: "hidden",
+    shadowColor: "#0F172A",
+    shadowOpacity: 0.05,
+    shadowRadius: 12,
+    elevation: 2,
   },
-  cardImageWrap: {
+  imageWrap: {
     position: "relative",
-  },
-  propImage: {
     width: "100%",
     height: 200,
-    backgroundColor: "#E5E7EB",
+  },
+  propertyImg: {
+    width: "100%",
+    height: "100%",
+    resizeMode: "cover",
   },
   pricePill: {
     position: "absolute",
     bottom: 12,
     left: 12,
-    backgroundColor: "rgba(22, 78, 58, 0.95)",
-    paddingVertical: 6,
-    paddingHorizontal: 12,
+    backgroundColor: "#0F172A",
+    paddingVertical: 5,
+    paddingHorizontal: 10,
     borderRadius: 6,
   },
   pricePillText: {
     color: "#FFFFFF",
-    fontSize: 14.5,
+    fontSize: 14,
     fontWeight: "800",
   },
-  typeBadge: {
+  statusPill: {
     position: "absolute",
     top: 12,
     right: 12,
-    backgroundColor: "rgba(255, 255, 255, 0.92)",
+    backgroundColor: "#2563EB",
     paddingVertical: 4,
     paddingHorizontal: 8,
     borderRadius: 4,
   },
-  typeBadgeText: {
-    fontSize: 11,
-    fontWeight: "700",
-    color: "#164E3A",
+  statusPillText: {
+    color: "#FFFFFF",
+    fontSize: 10.5,
+    fontWeight: "800",
   },
   cardContent: {
-    padding: 16,
+    padding: 18,
     gap: 8,
   },
-  cityRow: {
+  cityLocationRow: {
     flexDirection: "row",
     alignItems: "center",
     gap: 4,
   },
-  cityText: {
-    fontSize: 11.5,
-    fontWeight: "600",
-    color: "#059669",
-  },
-  propertyTitle: {
-    fontSize: 16.5,
+  cityLocationText: {
+    fontSize: 12,
+    color: "#2563EB",
     fontWeight: "700",
-    color: "#111827",
   },
-  propertyAddress: {
+  cardPropertyTitle: {
+    fontSize: 17,
+    fontWeight: "800",
+    color: "#0F172A",
+  },
+  cardAddress: {
     fontSize: 13,
-    color: "#6B7280",
-    marginTop: -2,
+    color: "#64748B",
   },
   specsRow: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 12,
-    paddingVertical: 6,
-    borderTopWidth: 1,
-    borderBottomWidth: 1,
-    borderColor: "#F3F4F6",
+    justifyContent: "space-between",
+    backgroundColor: "#F8FAFC",
+    padding: 10,
+    borderRadius: 8,
     marginVertical: 4,
   },
   specItem: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 5,
+    gap: 4,
   },
-  specText: {
+  specVal: {
     fontSize: 12.5,
-    color: "#4B5563",
+    color: "#334155",
     fontWeight: "600",
   },
-  availabilityRow: {
+  cardButtonsRow: {
     flexDirection: "row",
-    alignItems: "center",
-    gap: 6,
-  },
-  availText: {
-    fontSize: 12,
-    color: "#6B7280",
-  },
-  cardActionsRow: {
-    flexDirection: "row",
-    gap: 8,
+    gap: 10,
     marginTop: 6,
   },
   detailsBtn: {
@@ -815,16 +721,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     gap: 6,
-    backgroundColor: "#ECFDF5",
+    backgroundColor: "#F1F5F9",
     paddingVertical: 10,
-    borderRadius: 6,
-    borderWidth: 1,
-    borderColor: "#A7F3D0",
+    borderRadius: 8,
   },
   detailsBtnText: {
-    fontSize: 12.5,
+    fontSize: 13,
     fontWeight: "700",
-    color: "#164E3A",
+    color: "#0F172A",
   },
   applyBtn: {
     flex: 1,
@@ -832,263 +736,207 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     gap: 6,
-    backgroundColor: "#164E3A",
+    backgroundColor: "#2563EB",
     paddingVertical: 10,
-    borderRadius: 6,
+    borderRadius: 8,
   },
   applyBtnText: {
-    fontSize: 12.5,
+    fontSize: 13,
     fontWeight: "700",
     color: "#FFFFFF",
   },
-  emptyStateBox: {
+  noResultsBox: {
     alignItems: "center",
     paddingVertical: 60,
-    gap: 12,
+    gap: 10,
   },
-  emptyStateTitle: {
+  noResultsTitle: {
     fontSize: 18,
     fontWeight: "700",
-    color: "#111827",
+    color: "#0F172A",
   },
-  emptyStateSub: {
-    fontSize: 13.5,
-    color: "#6B7280",
-    textAlign: "center",
-    maxWidth: 420,
+  noResultsSub: {
+    fontSize: 14,
+    color: "#64748B",
   },
-  resetFiltersBtn: {
-    backgroundColor: "#164E3A",
+  clearFiltersBtn: {
+    backgroundColor: "#2563EB",
     paddingVertical: 10,
     paddingHorizontal: 18,
-    borderRadius: 6,
-    marginTop: 6,
+    borderRadius: 8,
+    marginTop: 8,
   },
-  resetFiltersBtnText: {
+  clearFiltersText: {
     color: "#FFFFFF",
-    fontSize: 13,
+    fontSize: 13.5,
     fontWeight: "700",
   },
   modalOverlay: {
     flex: 1,
-    backgroundColor: "rgba(0,0,0,0.65)",
+    backgroundColor: "rgba(15, 23, 42, 0.65)",
     justifyContent: "center",
     alignItems: "center",
     padding: 16,
   },
   modalCard: {
     width: "100%",
-    maxHeight: "90%",
     backgroundColor: "#FFFFFF",
-    borderRadius: 12,
+    borderRadius: 16,
     overflow: "hidden",
+    maxHeight: "92%",
+    shadowColor: "#0F172A",
+    shadowOpacity: 0.25,
+    shadowRadius: 24,
+    elevation: 10,
   },
   modalHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     paddingVertical: 16,
-    paddingHorizontal: 20,
+    paddingHorizontal: 22,
     borderBottomWidth: 1,
-    borderBottomColor: "#E5E7EB",
-    backgroundColor: "#F9FAFB",
+    borderBottomColor: "#E2E8F0",
+    backgroundColor: "#F8FAFC",
   },
-  modalPropertyTitle: {
+  modalPropTitle: {
     fontSize: 17,
     fontWeight: "800",
-    color: "#111827",
+    color: "#0F172A",
   },
-  modalPropertyAddress: {
-    fontSize: 12.5,
-    color: "#6B7280",
+  modalPropAddress: {
+    fontSize: 12,
+    color: "#64748B",
     marginTop: 2,
   },
   modalCloseBtn: {
     padding: 6,
-    borderRadius: 6,
-    backgroundColor: "#E5E7EB",
+    borderRadius: 8,
   },
   modalScroll: {
     flexGrow: 0,
   },
-  modalImage: {
+  modalPropImage: {
     width: "100%",
     height: 240,
-    borderRadius: 8,
-    backgroundColor: "#E5E7EB",
+    borderRadius: 12,
   },
-  modalSpecsBar: {
+  modalPriceHighlight: {
     flexDirection: "row",
+    justifyContent: "space-between",
     alignItems: "center",
-    justifyContent: "space-around",
-    backgroundColor: "#F9FAFB",
-    padding: 14,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
-  },
-  modalPriceBlock: {
-    flexDirection: "row",
-    alignItems: "baseline",
-    gap: 4,
-  },
-  modalPriceValue: {
-    fontSize: 20,
-    fontWeight: "900",
-    color: "#164E3A",
-  },
-  modalPriceSub: {
-    fontSize: 12,
-    color: "#6B7280",
-  },
-  modalDivider: {
-    width: 1,
-    height: 28,
-    backgroundColor: "#D1D5DB",
-  },
-  modalSpecItem: {
-    alignItems: "center",
-  },
-  modalSpecNum: {
-    fontSize: 16,
-    fontWeight: "700",
-    color: "#111827",
-  },
-  modalSpecLbl: {
-    fontSize: 11,
-    color: "#6B7280",
-  },
-  modalSection: {
-    gap: 8,
-  },
-  modalSectionHeading: {
-    fontSize: 14,
-    fontWeight: "700",
-    color: "#111827",
-  },
-  modalDescriptionText: {
-    fontSize: 13.5,
-    color: "#4B5563",
-    lineHeight: 20,
-  },
-  featuresList: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    gap: 8,
-  },
-  featurePill: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 6,
-    backgroundColor: "#F0FDF4",
-    paddingVertical: 5,
-    paddingHorizontal: 10,
-    borderRadius: 6,
-    borderWidth: 1,
-    borderColor: "#BBF7D0",
-  },
-  featurePillText: {
-    fontSize: 12,
-    color: "#166534",
-    fontWeight: "500",
-  },
-  petPolicyBox: {
-    backgroundColor: "#FFFBEB",
-    padding: 12,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: "#FDE68A",
-    gap: 4,
-  },
-  petPolicyHeading: {
-    fontSize: 12,
-    fontWeight: "700",
-    color: "#92400E",
-  },
-  petPolicyText: {
-    fontSize: 12.5,
-    color: "#B45309",
-    lineHeight: 17,
-  },
-  inquiryFormCard: {
-    backgroundColor: "#F9FAFB",
+    backgroundColor: "#EFF6FF",
     padding: 16,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: "#BFDBFE",
+  },
+  modalPriceLabel: {
+    fontSize: 11,
+    fontWeight: "800",
+    color: "#1E40AF",
+    letterSpacing: 0.8,
+  },
+  modalPriceVal: {
+    fontSize: 22,
+    fontWeight: "900",
+    color: "#1D4ED8",
+  },
+  modalApplyNowBtn: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+    backgroundColor: "#2563EB",
+    paddingVertical: 10,
+    paddingHorizontal: 16,
     borderRadius: 8,
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
-    gap: 12,
   },
-  inquiryCardTitle: {
-    fontSize: 15,
+  modalApplyNowText: {
+    color: "#FFFFFF",
+    fontSize: 13.5,
     fontWeight: "700",
-    color: "#111827",
   },
-  inquiryCardSub: {
-    fontSize: 11.5,
-    color: "#6B7280",
-    marginTop: -8,
-  },
-  inquiryFields: {
+  modalSpecsGrid: {
+    flexDirection: "row",
     gap: 10,
   },
-  inputGroup: {
-    gap: 4,
-  },
-  label: {
-    fontSize: 12,
-    fontWeight: "600",
-    color: "#374151",
-  },
-  input: {
+  modalSpecBox: {
+    flex: 1,
+    backgroundColor: "#F8FAFC",
+    borderRadius: 8,
+    padding: 12,
+    alignItems: "center",
     borderWidth: 1,
-    borderColor: "#D1D5DB",
-    borderRadius: 6,
-    paddingVertical: 8,
-    paddingHorizontal: 10,
+    borderColor: "#E2E8F0",
+  },
+  modalSpecLabel: {
+    fontSize: 11,
+    color: "#64748B",
+  },
+  modalSpecVal: {
     fontSize: 13,
-    backgroundColor: "#FFFFFF",
+    fontWeight: "700",
+    color: "#0F172A",
+    marginTop: 2,
   },
-  textArea: {
-    minHeight: 60,
-    textAlignVertical: "top",
+  amenitiesSection: {
+    gap: 8,
   },
-  inputRow: {
-    flexDirection: "row",
-    gap: 10,
+  amenitiesHeading: {
+    fontSize: 14,
+    fontWeight: "800",
+    color: "#0F172A",
   },
-  chipsRow: {
-    flexDirection: "row",
-    flexWrap: "wrap",
+  amenitiesGrid: {
     gap: 6,
   },
-  chip: {
-    paddingVertical: 5,
-    paddingHorizontal: 9,
-    borderRadius: 6,
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
-    backgroundColor: "#FFFFFF",
-  },
-  chipActive: {
-    borderColor: "#164E3A",
-    backgroundColor: "#ECFDF5",
-  },
-  chipText: {
-    fontSize: 11.5,
-    color: "#4B5563",
-  },
-  chipTextActive: {
-    color: "#164E3A",
-    fontWeight: "700",
-  },
-  submitInquiryBtn: {
-    backgroundColor: "#164E3A",
-    paddingVertical: 11,
-    borderRadius: 7,
+  amenityItem: {
+    flexDirection: "row",
     alignItems: "center",
+    gap: 8,
+  },
+  amenityText: {
+    fontSize: 13,
+    color: "#334155",
+  },
+  inquiryBox: {
+    backgroundColor: "#F8FAFC",
+    borderRadius: 12,
+    padding: 18,
+    borderWidth: 1,
+    borderColor: "#E2E8F0",
+  },
+  inquiryTitle: {
+    fontSize: 15,
+    fontWeight: "800",
+    color: "#0F172A",
+  },
+  inquirySub: {
+    fontSize: 12,
+    color: "#64748B",
+    marginTop: 2,
+  },
+  inquiryInput: {
+    backgroundColor: "#FFFFFF",
+    borderWidth: 1,
+    borderColor: "#CBD5E1",
+    borderRadius: 8,
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    fontSize: 13,
+    color: "#0F172A",
+  },
+  inquirySubmitBtn: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 8,
+    backgroundColor: "#2563EB",
+    paddingVertical: 12,
+    borderRadius: 8,
     marginTop: 4,
   },
-  submitInquiryBtnText: {
+  inquirySubmitText: {
     color: "#FFFFFF",
     fontSize: 13.5,
     fontWeight: "700",
@@ -1101,27 +949,11 @@ const styles = StyleSheet.create({
   inquirySuccessTitle: {
     fontSize: 16,
     fontWeight: "800",
-    color: "#164E3A",
+    color: "#0F172A",
   },
-  inquirySuccessText: {
+  inquirySuccessSub: {
     fontSize: 12.5,
-    color: "#4B5563",
+    color: "#64748B",
     textAlign: "center",
-    lineHeight: 18,
-  },
-  modalApplyPrimary: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: 8,
-    backgroundColor: "#059669",
-    paddingVertical: 13,
-    borderRadius: 8,
-    marginTop: 4,
-  },
-  modalApplyPrimaryText: {
-    color: "#FFFFFF",
-    fontSize: 14,
-    fontWeight: "700",
   },
 });

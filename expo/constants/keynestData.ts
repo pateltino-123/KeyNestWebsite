@@ -9,6 +9,8 @@ export interface ServiceAreaCity {
   propertyTypes: string[];
   ownerContext: string;
   operationalConsiderations: string;
+  schoolDistrict?: string;
+  schoolRating?: string;
   faqs: { question: string; answer: string }[];
 }
 
@@ -25,6 +27,8 @@ export interface RentalProperty {
   price: number;
   deposit: number;
   availableDate: string;
+  status?: string;
+  schoolDistrict?: string;
   petsAllowed: boolean;
   petTerms: string;
   propertyType: "Single Family" | "Townhome" | "Condo" | "Luxury Home";
@@ -66,11 +70,27 @@ export const KEYNEST_INFO = {
     {
       name: "Dinesh Donthula",
       title: "Authorized Manager & Head of Operations",
+      role: "Authorized Manager & Head of Operations",
       bio: "Over 15 years of North Texas real estate investment, asset management, and operations experience. Specializing in systematic property operations, investor asset growth, and vendor workflow governance.",
     },
     {
       name: "Purvang Patel",
       title: "Authorized Manager & Managing Director",
+      role: "Authorized Manager & Managing Director",
+      bio: "Technology and process specialist with deep North Texas residential market experience. Champion of transparent accounting, AppFolio technology integration, and customer-first property management.",
+    },
+  ],
+  leadership: [
+    {
+      name: "Dinesh Donthula",
+      title: "Authorized Manager & Head of Operations",
+      role: "Authorized Manager & Head of Operations",
+      bio: "Over 15 years of North Texas real estate investment, asset management, and operations experience. Specializing in systematic property operations, investor asset growth, and vendor workflow governance.",
+    },
+    {
+      name: "Purvang Patel",
+      title: "Authorized Manager & Managing Director",
+      role: "Authorized Manager & Managing Director",
       bio: "Technology and process specialist with deep North Texas residential market experience. Champion of transparent accounting, AppFolio technology integration, and customer-first property management.",
     },
   ],

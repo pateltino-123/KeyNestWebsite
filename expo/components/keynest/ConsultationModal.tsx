@@ -10,8 +10,7 @@ import {
   useWindowDimensions,
   ActivityIndicator,
 } from "react-native";
-import { X, Calendar, CheckCircle2, ShieldCheck } from "lucide-react-native";
-import { KEYNEST_INFO } from "@/constants/keynestData";
+import { X, Calendar, CheckCircle2, ShieldCheck, ArrowRight } from "lucide-react-native";
 
 interface ConsultationModalProps {
   visible: boolean;
@@ -28,7 +27,6 @@ export default function ConsultationModal({ visible, onClose }: ConsultationModa
   const [topic, setTopic] = useState("Switching from Another Property Manager");
   const [managerPreference, setManagerPreference] = useState("First Available Authorized Manager");
   const [preferredDay, setPreferredDay] = useState("This Week (Morning)");
-  const [propertyCount, setPropertyCount] = useState("1 Single Family");
   const [message, setMessage] = useState("");
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -43,7 +41,7 @@ export default function ConsultationModal({ visible, onClose }: ConsultationModa
     setTimeout(() => {
       setIsSubmitting(false);
       setSubmitted(true);
-    }, 700);
+    }, 600);
   };
 
   const handleReset = () => {
@@ -59,68 +57,50 @@ export default function ConsultationModal({ visible, onClose }: ConsultationModa
           <View style={styles.modalHeader}>
             <View style={styles.headerTitleRow}>
               <View style={styles.iconCircle}>
-                <Calendar size={20} color="#164E3A" />
+                <Calendar size={20} color="#2563EB" />
               </View>
               <View>
                 <Text style={styles.modalTitle}>Schedule a Consultation</Text>
                 <Text style={styles.modalSubtitle}>
-                  Direct consultation with KeyNest management leadership
+                  Direct discussion with KeyNest management leadership
                 </Text>
               </View>
             </View>
             <TouchableOpacity onPress={onClose} style={styles.closeBtn} accessibilityLabel="Close modal">
-              <X size={20} color="#6B7280" />
+              <X size={20} color="#64748B" />
             </TouchableOpacity>
           </View>
 
-          <ScrollView style={styles.modalScroll} contentContainerStyle={{ padding: 20 }}>
+          <ScrollView style={styles.modalScroll} contentContainerStyle={{ padding: 24 }}>
             {!submitted ? (
               <View style={styles.formContainer}>
                 <View style={styles.brokerNotice}>
-                  <ShieldCheck size={16} color="#059669" />
+                  <ShieldCheck size={16} color="#2563EB" />
                   <Text style={styles.brokerNoticeText}>
-                    Authorized Managers: Dinesh Donthula & Purvang Patel | Under Fair Deal Realty Inc.
+                    Authorized Managers: Dinesh Donthula & Purvang Patel • Fair Deal Realty Inc.
                   </Text>
                 </View>
 
-                {/* Consultation Topic */}
+                {/* Manager Preference */}
                 <View style={styles.inputGroup}>
-                  <Text style={styles.label}>Consultation Topic *</Text>
-                  <View style={styles.chipsWrap}>
+                  <Text style={styles.label}>Manager Preference</Text>
+                  <View style={styles.pillsRow}>
                     {[
-                      "Switching from Another Property Manager",
-                      "First-Time Landlord Onboarding",
-                      "Multi-Property Portfolio Review",
-                      "Controlled Pilot Program Inquiry",
-                    ].map((item) => (
-                      <TouchableOpacity
-                        key={item}
-                        style={[styles.chip, topic === item && styles.chipActive]}
-                        onPress={() => setTopic(item)}
-                      >
-                        <Text style={[styles.chipText, topic === item && styles.chipTextActive]}>
-                          {item}
-                        </Text>
-                      </TouchableOpacity>
-                    ))}
-                  </View>
-                </View>
-
-                {/* Preferred Manager */}
-                <View style={styles.inputGroup}>
-                  <Text style={styles.label}>Requested Manager</Text>
-                  <View style={styles.chipsWrap}>
-                    {[
-                      "First Available Authorized Manager",
-                      "Dinesh Donthula (Ops Lead)",
-                      "Purvang Patel (Tech & Portals)",
+                      "First Available",
+                      "Dinesh Donthula",
+                      "Purvang Patel",
                     ].map((mgr) => (
                       <TouchableOpacity
                         key={mgr}
-                        style={[styles.chip, managerPreference === mgr && styles.chipActive]}
+                        style={[styles.pill, managerPreference.includes(mgr.split(" ")[0]) && styles.pillActive]}
                         onPress={() => setManagerPreference(mgr)}
                       >
-                        <Text style={[styles.chipText, managerPreference === mgr && styles.chipTextActive]}>
+                        <Text
+                          style={[
+                            styles.pillText,
+                            managerPreference.includes(mgr.split(" ")[0]) && styles.pillTextActive,
+                          ]}
+                        >
                           {mgr}
                         </Text>
                       </TouchableOpacity>
@@ -128,37 +108,63 @@ export default function ConsultationModal({ visible, onClose }: ConsultationModa
                   </View>
                 </View>
 
-                {/* Property Count & Time Preference */}
-                <View style={styles.inputRow}>
-                  <View style={[styles.inputGroup, { flex: 1 }]}>
-                    <Text style={styles.label}>Number of Properties</Text>
-                    <TextInput
-                      style={styles.input}
-                      value={propertyCount}
-                      onChangeText={setPropertyCount}
-                      placeholder="e.g. 1 home, 3 homes"
-                      placeholderTextColor="#9CA3AF"
-                    />
-                  </View>
-                  <View style={[styles.inputGroup, { flex: 1 }]}>
-                    <Text style={styles.label}>Preferred Time Window</Text>
-                    <TextInput
-                      style={styles.input}
-                      value={preferredDay}
-                      onChangeText={setPreferredDay}
-                      placeholder="e.g. Weekday morning"
-                      placeholderTextColor="#9CA3AF"
-                    />
+                {/* Topic */}
+                <View style={styles.inputGroup}>
+                  <Text style={styles.label}>Primary Discussion Topic</Text>
+                  <View style={styles.pillsRow}>
+                    {[
+                      "Switching Managers",
+                      "New Rental Owner",
+                      "Portfolio (2+ Homes)",
+                      "Pricing & Services",
+                    ].map((top) => (
+                      <TouchableOpacity
+                        key={top}
+                        style={[styles.pill, topic.includes(top.split(" ")[0]) && styles.pillActive]}
+                        onPress={() => setTopic(top)}
+                      >
+                        <Text
+                          style={[
+                            styles.pillText,
+                            topic.includes(top.split(" ")[0]) && styles.pillTextActive,
+                          ]}
+                        >
+                          {top}
+                        </Text>
+                      </TouchableOpacity>
+                    ))}
                   </View>
                 </View>
 
-                {/* Contact Information */}
+                {/* Preferred Timing */}
+                <View style={styles.inputGroup}>
+                  <Text style={styles.label}>Preferred Time Frame</Text>
+                  <View style={styles.pillsRow}>
+                    {[
+                      "Morning (9am - 12pm)",
+                      "Afternoon (1pm - 4pm)",
+                      "Saturday Morning",
+                    ].map((time) => (
+                      <TouchableOpacity
+                        key={time}
+                        style={[styles.pill, preferredDay === time && styles.pillActive]}
+                        onPress={() => setPreferredDay(time)}
+                      >
+                        <Text style={[styles.pillText, preferredDay === time && styles.pillTextActive]}>
+                          {time}
+                        </Text>
+                      </TouchableOpacity>
+                    ))}
+                  </View>
+                </View>
+
+                {/* Contact Inputs */}
                 <View style={styles.inputGroup}>
                   <Text style={styles.label}>Your Name *</Text>
                   <TextInput
                     style={styles.input}
-                    placeholder="Full Name"
-                    placeholderTextColor="#9CA3AF"
+                    placeholder="e.g. Robert Smith"
+                    placeholderTextColor="#94A3B8"
                     value={name}
                     onChangeText={setName}
                   />
@@ -166,40 +172,39 @@ export default function ConsultationModal({ visible, onClose }: ConsultationModa
 
                 <View style={styles.inputRow}>
                   <View style={[styles.inputGroup, { flex: 1 }]}>
-                    <Text style={styles.label}>Email Address *</Text>
+                    <Text style={styles.label}>Email *</Text>
                     <TextInput
                       style={styles.input}
-                      placeholder="name@domain.com"
-                      placeholderTextColor="#9CA3AF"
-                      keyboardType="email-address"
-                      autoCapitalize="none"
+                      placeholder="robert@example.com"
+                      placeholderTextColor="#94A3B8"
                       value={email}
                       onChangeText={setEmail}
+                      keyboardType="email-address"
+                      autoCapitalize="none"
                     />
                   </View>
                   <View style={[styles.inputGroup, { flex: 1 }]}>
-                    <Text style={styles.label}>Phone Number *</Text>
+                    <Text style={styles.label}>Phone *</Text>
                     <TextInput
                       style={styles.input}
-                      placeholder="(972) 000-0000"
-                      placeholderTextColor="#9CA3AF"
-                      keyboardType="phone-pad"
+                      placeholder="(469) 555-0199"
+                      placeholderTextColor="#94A3B8"
                       value={phone}
                       onChangeText={setPhone}
+                      keyboardType="phone-pad"
                     />
                   </View>
                 </View>
 
                 <View style={styles.inputGroup}>
-                  <Text style={styles.label}>Questions or Specific Goals (Optional)</Text>
+                  <Text style={styles.label}>Property Address or Notes (Optional)</Text>
                   <TextInput
-                    style={[styles.input, styles.textArea]}
-                    multiline
-                    numberOfLines={3}
-                    placeholder="Current rental location, tenant turnover challenges, HOA considerations..."
-                    placeholderTextColor="#9CA3AF"
+                    style={[styles.input, { height: 70, textAlignVertical: "top" }]}
+                    placeholder="e.g. 4-bed single family in Frisco, currently rented until end of month."
+                    placeholderTextColor="#94A3B8"
                     value={message}
                     onChangeText={setMessage}
+                    multiline
                   />
                 </View>
 
@@ -207,33 +212,45 @@ export default function ConsultationModal({ visible, onClose }: ConsultationModa
                   style={styles.submitBtn}
                   onPress={handleSubmit}
                   disabled={isSubmitting}
+                  activeOpacity={0.85}
                 >
                   {isSubmitting ? (
                     <ActivityIndicator color="#FFFFFF" />
                   ) : (
-                    <Text style={styles.submitBtnText}>Confirm Consultation Request</Text>
+                    <>
+                      <Text style={styles.submitBtnText}>Confirm Consultation Request</Text>
+                      <ArrowRight size={16} color="#FFFFFF" />
+                    </>
                   )}
                 </TouchableOpacity>
               </View>
             ) : (
-              <View style={styles.successBox}>
-                <View style={styles.successIcon}>
-                  <CheckCircle2 size={48} color="#10B981" />
+              <View style={styles.successContainer}>
+                <View style={styles.successIconCircle}>
+                  <CheckCircle2 size={36} color="#10B981" />
                 </View>
-                <Text style={styles.successHeading}>Consultation Booked!</Text>
-                <Text style={styles.successText}>
-                  Thank you, <Text style={{ fontWeight: "700" }}>{name}</Text>. Our team has received your request for <Text style={{ fontWeight: "600" }}>{topic}</Text>.
+                <Text style={styles.successTitle}>Consultation Request Confirmed</Text>
+                <Text style={styles.successSub}>
+                  Thank you, {name}. A member of KeyNest leadership will reach out via {phone || email} during your requested {preferredDay} window.
                 </Text>
-                <View style={styles.detailsCard}>
-                  <Text style={styles.detailsLine}>• Preferred Manager: {managerPreference}</Text>
-                  <Text style={styles.detailsLine}>• Target Time: {preferredDay}</Text>
-                  <Text style={styles.detailsLine}>• Portfolio Size: {propertyCount}</Text>
+
+                <View style={styles.summaryCard}>
+                  <View style={styles.summaryRow}>
+                    <Text style={styles.summaryLabel}>Topic:</Text>
+                    <Text style={styles.summaryValue}>{topic}</Text>
+                  </View>
+                  <View style={styles.summaryRow}>
+                    <Text style={styles.summaryLabel}>Assigned Lead:</Text>
+                    <Text style={styles.summaryValue}>{managerPreference}</Text>
+                  </View>
+                  <View style={styles.summaryRow}>
+                    <Text style={styles.summaryLabel}>Brokerage:</Text>
+                    <Text style={styles.summaryValue}>Fair Deal Realty Inc.</Text>
+                  </View>
                 </View>
-                <Text style={styles.confirmSub}>
-                  You will receive a calendar invitation and introductory email from our office at {KEYNEST_INFO.officeAddress}.
-                </Text>
-                <TouchableOpacity style={styles.closeDoneBtn} onPress={handleReset}>
-                  <Text style={styles.closeDoneBtnText}>Done</Text>
+
+                <TouchableOpacity style={styles.doneBtn} onPress={handleReset}>
+                  <Text style={styles.doneBtnText}>Close</Text>
                 </TouchableOpacity>
               </View>
             )}
@@ -247,59 +264,59 @@ export default function ConsultationModal({ visible, onClose }: ConsultationModa
 const styles = StyleSheet.create({
   modalOverlay: {
     flex: 1,
-    backgroundColor: "rgba(0,0,0,0.6)",
+    backgroundColor: "rgba(15, 23, 42, 0.65)",
     justifyContent: "center",
     alignItems: "center",
     padding: 16,
   },
   modalCard: {
     width: "100%",
-    maxHeight: "90%",
     backgroundColor: "#FFFFFF",
-    borderRadius: 12,
+    borderRadius: 16,
     overflow: "hidden",
-    shadowColor: "#000",
+    maxHeight: "90%",
+    shadowColor: "#0F172A",
     shadowOpacity: 0.25,
-    shadowRadius: 16,
-    elevation: 8,
+    shadowRadius: 24,
+    elevation: 10,
   },
   modalHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingVertical: 16,
-    paddingHorizontal: 20,
+    paddingVertical: 18,
+    paddingHorizontal: 24,
     borderBottomWidth: 1,
-    borderBottomColor: "#E5E7EB",
-    backgroundColor: "#F9FAFB",
+    borderBottomColor: "#E2E8F0",
+    backgroundColor: "#F8FAFC",
   },
   headerTitleRow: {
     flexDirection: "row",
     alignItems: "center",
     gap: 12,
+    flex: 1,
   },
   iconCircle: {
     width: 38,
     height: 38,
-    borderRadius: 8,
-    backgroundColor: "#D1FAE5",
+    borderRadius: 10,
+    backgroundColor: "#EFF6FF",
     justifyContent: "center",
     alignItems: "center",
   },
   modalTitle: {
     fontSize: 18,
     fontWeight: "800",
-    color: "#164E3A",
+    color: "#0F172A",
   },
   modalSubtitle: {
     fontSize: 12,
-    color: "#6B7280",
-    marginTop: 2,
+    color: "#64748B",
+    marginTop: 1,
   },
   closeBtn: {
     padding: 6,
-    borderRadius: 6,
-    backgroundColor: "#E5E7EB",
+    borderRadius: 8,
   },
   modalScroll: {
     flexGrow: 0,
@@ -311,135 +328,142 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-    backgroundColor: "#ECFDF5",
+    backgroundColor: "#EFF6FF",
     padding: 10,
-    borderRadius: 6,
+    borderRadius: 8,
     borderWidth: 1,
-    borderColor: "#A7F3D0",
+    borderColor: "#BFDBFE",
   },
   brokerNoticeText: {
-    fontSize: 11.5,
-    color: "#065F46",
+    fontSize: 12,
+    color: "#1E40AF",
+    fontWeight: "600",
     flex: 1,
   },
   inputGroup: {
     gap: 6,
   },
-  label: {
-    fontSize: 13,
-    fontWeight: "600",
-    color: "#374151",
-  },
-  chipsWrap: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    gap: 6,
-  },
-  chip: {
-    paddingVertical: 6,
-    paddingHorizontal: 10,
-    borderRadius: 6,
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
-    backgroundColor: "#F9FAFB",
-  },
-  chipActive: {
-    borderColor: "#164E3A",
-    backgroundColor: "#ECFDF5",
-  },
-  chipText: {
-    fontSize: 12,
-    color: "#4B5563",
-    fontWeight: "500",
-  },
-  chipTextActive: {
-    color: "#164E3A",
-    fontWeight: "700",
-  },
   inputRow: {
     flexDirection: "row",
     gap: 12,
   },
-  input: {
-    borderWidth: 1,
-    borderColor: "#D1D5DB",
-    borderRadius: 7,
-    paddingVertical: 9,
-    paddingHorizontal: 12,
-    fontSize: 14,
-    color: "#111827",
-    backgroundColor: "#FFFFFF",
+  label: {
+    fontSize: 13,
+    fontWeight: "600",
+    color: "#1E293B",
   },
-  textArea: {
-    minHeight: 65,
-    textAlignVertical: "top",
+  input: {
+    backgroundColor: "#F8FAFC",
+    borderWidth: 1,
+    borderColor: "#CBD5E1",
+    borderRadius: 8,
+    paddingVertical: 10,
+    paddingHorizontal: 14,
+    fontSize: 14,
+    color: "#0F172A",
+  },
+  pillsRow: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 8,
+  },
+  pill: {
+    paddingVertical: 7,
+    paddingHorizontal: 12,
+    borderRadius: 8,
+    backgroundColor: "#F1F5F9",
+    borderWidth: 1,
+    borderColor: "#E2E8F0",
+  },
+  pillActive: {
+    backgroundColor: "#2563EB",
+    borderColor: "#2563EB",
+  },
+  pillText: {
+    fontSize: 12.5,
+    fontWeight: "600",
+    color: "#475569",
+  },
+  pillTextActive: {
+    color: "#FFFFFF",
   },
   submitBtn: {
-    backgroundColor: "#164E3A",
-    paddingVertical: 13,
-    borderRadius: 8,
+    flexDirection: "row",
     alignItems: "center",
+    justifyContent: "center",
+    gap: 8,
+    backgroundColor: "#2563EB",
+    paddingVertical: 14,
+    borderRadius: 10,
     marginTop: 8,
+    shadowColor: "#2563EB",
+    shadowOpacity: 0.25,
+    shadowRadius: 10,
+    elevation: 3,
   },
   submitBtnText: {
     color: "#FFFFFF",
-    fontSize: 14.5,
+    fontSize: 15,
     fontWeight: "700",
   },
-  successBox: {
+  successContainer: {
     alignItems: "center",
     paddingVertical: 16,
-    gap: 12,
+    gap: 14,
   },
-  successIcon: {
-    width: 64,
-    height: 64,
-    borderRadius: 32,
+  successIconCircle: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
     backgroundColor: "#D1FAE5",
     justifyContent: "center",
     alignItems: "center",
   },
-  successHeading: {
+  successTitle: {
     fontSize: 20,
     fontWeight: "800",
-    color: "#164E3A",
+    color: "#0F172A",
+    textAlign: "center",
   },
-  successText: {
+  successSub: {
     fontSize: 13.5,
-    color: "#4B5563",
+    color: "#64748B",
     textAlign: "center",
-    lineHeight: 19,
+    lineHeight: 20,
   },
-  detailsCard: {
+  summaryCard: {
     width: "100%",
-    backgroundColor: "#F9FAFB",
+    backgroundColor: "#F8FAFC",
+    borderRadius: 10,
     padding: 14,
-    borderRadius: 8,
     borderWidth: 1,
-    borderColor: "#E5E7EB",
-    gap: 6,
+    borderColor: "#E2E8F0",
+    gap: 8,
   },
-  detailsLine: {
+  summaryRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  summaryLabel: {
     fontSize: 12.5,
-    color: "#374151",
+    color: "#64748B",
   },
-  confirmSub: {
-    fontSize: 12,
-    color: "#6B7280",
-    textAlign: "center",
-    lineHeight: 17,
+  summaryValue: {
+    fontSize: 12.5,
+    fontWeight: "700",
+    color: "#0F172A",
   },
-  closeDoneBtn: {
+  doneBtn: {
     width: "100%",
-    backgroundColor: "#164E3A",
+    backgroundColor: "#0F172A",
     paddingVertical: 12,
     borderRadius: 8,
     alignItems: "center",
-    marginTop: 6,
+    marginTop: 8,
   },
-  closeDoneBtnText: {
+  doneBtnText: {
     color: "#FFFFFF",
     fontSize: 14,
-    fontWeight: "700",
+    fontWeight: "600",
   },
 });

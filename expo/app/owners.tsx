@@ -14,21 +14,20 @@ import {
   ExternalLink,
   CheckCircle2,
   Lock,
+  ArrowLeft,
 } from "lucide-react-native";
-import WebsiteLayout, { useWebsiteModals } from "@/components/keynest/WebsiteLayout";
+import WebsiteLayout from "@/components/keynest/WebsiteLayout";
 import { KEYNEST_INFO } from "@/constants/keynestData";
 
 export default function OwnersPage() {
   const { width } = useWindowDimensions();
   const isDesktop = width >= 1024;
-  const { openConsultation } = useWebsiteModals();
 
   // 4-Step Interactive Owner Onboarding Intake State
   const [step, setStep] = useState(1);
   const [propertyAddress, setPropertyAddress] = useState("");
   const [city, setCity] = useState("The Colony");
   const [propertyType, setPropertyType] = useState("Single Family");
-  const [units, setUnits] = useState("1");
   const [occupancy, setOccupancy] = useState("Vacant (Ready to Lease)");
   const [targetRent, setTargetRent] = useState("");
   const [ownerName, setOwnerName] = useState("");
@@ -50,7 +49,6 @@ export default function OwnersPage() {
     if (step < 3) {
       setStep(step + 1);
     } else {
-      // Final step submit
       if (!ownerName.trim() || !ownerEmail.trim() || !ownerPhone.trim()) {
         alert("Please provide your full contact information.");
         return;
@@ -59,7 +57,7 @@ export default function OwnersPage() {
       setTimeout(() => {
         setIsSubmitting(false);
         setIntakeCompleted(true);
-      }, 800);
+      }, 700);
     }
   };
 
@@ -69,7 +67,7 @@ export default function OwnersPage() {
       <View style={styles.headerHero}>
         <View style={styles.innerContainer}>
           <View style={styles.badgePill}>
-            <ShieldCheck size={14} color="#10B981" />
+            <ShieldCheck size={14} color="#38BDF8" />
             <Text style={styles.badgePillText}>Under the Brokerage of Fair Deal Realty Inc.</Text>
           </View>
           <Text style={styles.pageTitle}>Property Owner Center</Text>
@@ -79,41 +77,38 @@ export default function OwnersPage() {
         </View>
       </View>
 
-      {/* 1. AppFolio Owner Portal Banner & Quick Actions */}
+      {/* 1. AppFolio Owner Portal Banner */}
       <View style={styles.sectionLight}>
         <View style={styles.innerContainer}>
           <View style={[styles.portalBox, { flexDirection: isDesktop ? "row" : "column" }]}>
             <View style={{ flex: 1, gap: 10 }}>
               <View style={styles.portalTag}>
-                <Lock size={12} color="#059669" />
-                <Text style={styles.portalTagText}>SECURE CLIENT LOG IN</Text>
+                <Lock size={12} color="#2563EB" />
+                <Text style={styles.portalTagText}>APPFOLIO OWNER PORTAL</Text>
               </View>
-              <Text style={styles.portalTitle}>AppFolio Owner Portal Access</Text>
+              <Text style={styles.portalTitle}>Real-Time Owner Accounting & Documents</Text>
               <Text style={styles.portalDesc}>
-                Log in to review real-time rent receipts, download monthly cash-flow statements, inspect maintenance repair work orders with before/after photos, and download annual 1099 tax packages.
+                Log into your encrypted AppFolio portal to view real-time balance ledgers, direct ACH disbursement records, download year-end 1099 tax packages, and review maintenance invoices with zero markup.
               </Text>
               <View style={styles.portalPillsRow}>
-                <Text style={styles.portalPill}>✓ Direct ACH Deposits around the 10th</Text>
-                <Text style={styles.portalPill}>✓ 24/7 Maintenance Invoices</Text>
-                <Text style={styles.portalPill}>✓ Digital Lease Vault</Text>
+                <Text style={styles.portalPill}>✓ Monthly ACH around 10th</Text>
+                <Text style={styles.portalPill}>✓ Instant 1099 Tax Archives</Text>
+                <Text style={styles.portalPill}>✓ Paid Vendor Invoice Copies</Text>
               </View>
             </View>
 
             <View style={styles.portalActionCol}>
               <TouchableOpacity
-                style={styles.openPortalPrimaryBtn}
+                style={styles.portalLoginBtn}
                 onPress={openAppFolioOwnerPortal}
                 activeOpacity={0.85}
               >
-                <Text style={styles.openPortalPrimaryText}>Launch AppFolio Owner Portal</Text>
+                <Text style={styles.portalLoginBtnText}>Open Owner Portal</Text>
                 <ExternalLink size={16} color="#FFFFFF" />
               </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.helpPortalBtn}
-                onPress={openConsultation}
-              >
-                <Text style={styles.helpPortalText}>Need Portal Login Help?</Text>
-              </TouchableOpacity>
+              <Text style={styles.portalHelpText}>
+                Need login assistance? Contact Dinesh or Purvang at {KEYNEST_INFO.email}
+              </Text>
             </View>
           </View>
         </View>
@@ -122,62 +117,63 @@ export default function OwnersPage() {
       {/* 2. Interactive 4-Step Owner Intake Flow */}
       <View style={styles.sectionWhite}>
         <View style={styles.innerContainer}>
-          <View style={styles.sectionHeaderCentered}>
-            <Text style={styles.sectionOverline}>START PROPERTY ONBOARDING</Text>
-            <Text style={styles.sectionTitle}>New Property Intake Form</Text>
-            <Text style={styles.sectionSubtitle}>
-              Complete our structured onboarding intake. Submissions are routed directly to KeyNest Acquisition & Onboarding Leads under Fair Deal Realty Inc.
-            </Text>
-          </View>
+          <View style={styles.intakeWrapper}>
+            <View style={styles.intakeHeader}>
+              <Text style={styles.intakeOverline}>ONBOARD A PROPERTY</Text>
+              <Text style={styles.intakeTitle}>New Owner Onboarding Intake</Text>
+              <Text style={styles.intakeSubtitle}>
+                Tell us about your North Texas rental property to begin setup under Fair Deal Realty Inc.
+              </Text>
+            </View>
 
-          <View style={styles.intakeCard}>
-            {/* Step Indicators */}
-            {!intakeCompleted && (
-              <View style={styles.stepProgressBar}>
-                {[1, 2, 3].map((num) => (
-                  <View key={num} style={styles.stepProgressItem}>
-                    <View
-                      style={[
-                        styles.stepCircle,
-                        step === num && styles.stepCircleActive,
-                        step > num && styles.stepCircleDone,
-                      ]}
-                    >
-                      <Text
-                        style={[
-                          styles.stepNum,
-                          (step === num || step > num) && styles.stepNumActive,
-                        ]}
-                      >
-                        {num}
-                      </Text>
-                    </View>
+            {/* Step Progress Indicators */}
+            <View style={styles.stepProgressRow}>
+              {[
+                { num: 1, label: "Property Specs" },
+                { num: 2, label: "Occupancy & Rent" },
+                { num: 3, label: "Contact & Owner" },
+              ].map((s) => (
+                <View key={s.num} style={styles.stepIndicatorItem}>
+                  <View
+                    style={[
+                      styles.stepCircle,
+                      step === s.num && styles.stepCircleActive,
+                      step > s.num && styles.stepCircleCompleted,
+                    ]}
+                  >
                     <Text
                       style={[
-                        styles.stepProgressLabel,
-                        step === num && styles.stepProgressLabelActive,
+                        styles.stepCircleText,
+                        (step === s.num || step > s.num) && styles.stepCircleTextActive,
                       ]}
                     >
-                      {num === 1 ? "Property Specs" : num === 2 ? "Status & Rent" : "Owner Details"}
+                      {step > s.num ? "✓" : s.num}
                     </Text>
                   </View>
-                ))}
-              </View>
-            )}
+                  <Text
+                    style={[
+                      styles.stepLabel,
+                      step === s.num && styles.stepLabelActive,
+                    ]}
+                  >
+                    {s.label}
+                  </Text>
+                </View>
+              ))}
+            </View>
 
+            {/* Form Steps */}
             {!intakeCompleted ? (
-              <View style={styles.stepFormContent}>
-                {/* Step 1: Property Specs */}
+              <View style={styles.intakeFormCard}>
                 {step === 1 && (
-                  <View style={styles.formFieldsBlock}>
-                    <Text style={styles.stepHeaderTitle}>Step 1: Property Location & Architecture</Text>
-
+                  <View style={styles.stepContent}>
+                    <Text style={styles.stepHeading}>Step 1: Property Location & Details</Text>
                     <View style={styles.inputGroup}>
                       <Text style={styles.inputLabel}>Property Street Address *</Text>
                       <TextInput
-                        style={styles.textInput}
-                        placeholder="e.g. 4218 Shoreline Trail"
-                        placeholderTextColor="#9CA3AF"
+                        style={styles.inputField}
+                        placeholder="e.g. 5204 Shoreline Trail"
+                        placeholderTextColor="#94A3B8"
                         value={propertyAddress}
                         onChangeText={setPropertyAddress}
                       />
@@ -185,75 +181,42 @@ export default function OwnersPage() {
 
                     <View style={styles.inputRow}>
                       <View style={[styles.inputGroup, { flex: 1 }]}>
-                        <Text style={styles.inputLabel}>North Texas City *</Text>
+                        <Text style={styles.inputLabel}>City</Text>
                         <TextInput
-                          style={styles.textInput}
-                          placeholder="e.g. The Colony, Frisco, Plano"
-                          placeholderTextColor="#9CA3AF"
+                          style={styles.inputField}
                           value={city}
                           onChangeText={setCity}
                         />
                       </View>
-                      <View style={[styles.inputGroup, { width: 140 }]}>
-                        <Text style={styles.inputLabel}>Number of Units</Text>
+                      <View style={[styles.inputGroup, { flex: 1 }]}>
+                        <Text style={styles.inputLabel}>Property Type</Text>
                         <TextInput
-                          style={styles.textInput}
-                          value={units}
-                          onChangeText={setUnits}
-                          keyboardType="numeric"
+                          style={styles.inputField}
+                          value={propertyType}
+                          onChangeText={setPropertyType}
                         />
-                      </View>
-                    </View>
-
-                    <View style={styles.inputGroup}>
-                      <Text style={styles.inputLabel}>Property Type</Text>
-                      <View style={styles.chipsRow}>
-                        {["Single Family", "Townhome", "Condominium", "Multi-Family"].map((t) => (
-                          <TouchableOpacity
-                            key={t}
-                            style={[styles.chipBtn, propertyType === t && styles.chipBtnActive]}
-                            onPress={() => setPropertyType(t)}
-                          >
-                            <Text
-                              style={[
-                                styles.chipBtnText,
-                                propertyType === t && styles.chipBtnTextActive,
-                              ]}
-                            >
-                              {t}
-                            </Text>
-                          </TouchableOpacity>
-                        ))}
                       </View>
                     </View>
                   </View>
                 )}
 
-                {/* Step 2: Occupancy & Rent */}
                 {step === 2 && (
-                  <View style={styles.formFieldsBlock}>
-                    <Text style={styles.stepHeaderTitle}>Step 2: Current Occupancy & Target Rent</Text>
-
+                  <View style={styles.stepContent}>
+                    <Text style={styles.stepHeading}>Step 2: Occupancy & Financial Goals</Text>
                     <View style={styles.inputGroup}>
                       <Text style={styles.inputLabel}>Current Occupancy Status</Text>
                       <View style={styles.chipsRow}>
                         {[
                           "Vacant (Ready to Lease)",
-                          "Tenant Occupied (Lease in Place)",
-                          "Notice to Vacate Given",
-                          "Currently Owner Occupied",
+                          "Tenant Occupied (Transfer)",
+                          "Under Construction / Rehab",
                         ].map((occ) => (
                           <TouchableOpacity
                             key={occ}
-                            style={[styles.chipBtn, occupancy === occ && styles.chipBtnActive]}
+                            style={[styles.chip, occupancy === occ && styles.chipActive]}
                             onPress={() => setOccupancy(occ)}
                           >
-                            <Text
-                              style={[
-                                styles.chipBtnText,
-                                occupancy === occ && styles.chipBtnTextActive,
-                              ]}
-                            >
+                            <Text style={[styles.chipText, occupancy === occ && styles.chipTextActive]}>
                               {occ}
                             </Text>
                           </TouchableOpacity>
@@ -265,20 +228,20 @@ export default function OwnersPage() {
                       <View style={[styles.inputGroup, { flex: 1 }]}>
                         <Text style={styles.inputLabel}>Target Monthly Rent ($)</Text>
                         <TextInput
-                          style={styles.textInput}
-                          placeholder="e.g. 2650"
-                          placeholderTextColor="#9CA3AF"
-                          keyboardType="numeric"
+                          style={styles.inputField}
+                          placeholder="e.g. 2700"
+                          placeholderTextColor="#94A3B8"
                           value={targetRent}
                           onChangeText={setTargetRent}
+                          keyboardType="numeric"
                         />
                       </View>
                       <View style={[styles.inputGroup, { flex: 1 }]}>
                         <Text style={styles.inputLabel}>HOA Name (If Applicable)</Text>
                         <TextInput
-                          style={styles.textInput}
-                          placeholder="e.g. Twin Creeks HOA"
-                          placeholderTextColor="#9CA3AF"
+                          style={styles.inputField}
+                          placeholder="e.g. Austin Waters HOA"
+                          placeholderTextColor="#94A3B8"
                           value={hoaName}
                           onChangeText={setHoaName}
                         />
@@ -287,17 +250,15 @@ export default function OwnersPage() {
                   </View>
                 )}
 
-                {/* Step 3: Owner Contact */}
                 {step === 3 && (
-                  <View style={styles.formFieldsBlock}>
-                    <Text style={styles.stepHeaderTitle}>Step 3: Owner Contact & Routing Details</Text>
-
+                  <View style={styles.stepContent}>
+                    <Text style={styles.stepHeading}>Step 3: Owner Contact Information</Text>
                     <View style={styles.inputGroup}>
-                      <Text style={styles.inputLabel}>Owner / Investor Full Name *</Text>
+                      <Text style={styles.inputLabel}>Your Full Legal Name *</Text>
                       <TextInput
-                        style={styles.textInput}
-                        placeholder="Your Name"
-                        placeholderTextColor="#9CA3AF"
+                        style={styles.inputField}
+                        placeholder="e.g. Jane Doe"
+                        placeholderTextColor="#94A3B8"
                         value={ownerName}
                         onChangeText={setOwnerName}
                       />
@@ -307,89 +268,77 @@ export default function OwnersPage() {
                       <View style={[styles.inputGroup, { flex: 1 }]}>
                         <Text style={styles.inputLabel}>Email Address *</Text>
                         <TextInput
-                          style={styles.textInput}
-                          placeholder="owner@domain.com"
-                          placeholderTextColor="#9CA3AF"
-                          keyboardType="email-address"
-                          autoCapitalize="none"
+                          style={styles.inputField}
+                          placeholder="jane@example.com"
+                          placeholderTextColor="#94A3B8"
                           value={ownerEmail}
                           onChangeText={setOwnerEmail}
+                          keyboardType="email-address"
+                          autoCapitalize="none"
                         />
                       </View>
                       <View style={[styles.inputGroup, { flex: 1 }]}>
                         <Text style={styles.inputLabel}>Phone Number *</Text>
                         <TextInput
-                          style={styles.textInput}
-                          placeholder="(972) 000-0000"
-                          placeholderTextColor="#9CA3AF"
-                          keyboardType="phone-pad"
+                          style={styles.inputField}
+                          placeholder="(469) 555-0199"
+                          placeholderTextColor="#94A3B8"
                           value={ownerPhone}
                           onChangeText={setOwnerPhone}
+                          keyboardType="phone-pad"
                         />
                       </View>
-                    </View>
-
-                    <View style={styles.routingNoticeBox}>
-                      <ShieldCheck size={16} color="#059669" />
-                      <Text style={styles.routingNoticeText}>
-                        Lead Routing: KeyNest Acquisition Queue • Fair Deal Realty Inc.
-                      </Text>
                     </View>
                   </View>
                 )}
 
-                {/* Navigation Buttons */}
-                <View style={styles.formNavButtonsRow}>
-                  {step > 1 && (
+                {/* Next / Back Buttons */}
+                <View style={styles.intakeNavRow}>
+                  {step > 1 ? (
                     <TouchableOpacity
-                      style={styles.prevBtn}
+                      style={styles.backBtn}
                       onPress={() => setStep(step - 1)}
                     >
-                      <Text style={styles.prevBtnText}>← Back</Text>
+                      <ArrowLeft size={16} color="#475569" />
+                      <Text style={styles.backBtnText}>Back</Text>
                     </TouchableOpacity>
-                  )}
+                  ) : <View />}
+
                   <TouchableOpacity
-                    style={[styles.nextBtn, { flex: step === 1 ? 1 : 0.6 }]}
+                    style={styles.nextBtn}
                     onPress={handleNextStep}
                     disabled={isSubmitting}
                   >
                     {isSubmitting ? (
                       <ActivityIndicator color="#FFFFFF" />
                     ) : (
-                      <Text style={styles.nextBtnText}>
-                        {step === 3 ? "Submit Onboarding Intake" : "Continue to Step " + (step + 1) + " →"}
-                      </Text>
+                      <>
+                        <Text style={styles.nextBtnText}>
+                          {step === 3 ? "Submit Property Intake" : "Continue →"}
+                        </Text>
+                      </>
                     )}
                   </TouchableOpacity>
                 </View>
               </View>
             ) : (
-              /* Intake Completed View */
-              <View style={styles.completedBox}>
-                <View style={styles.completedIconBadge}>
-                  <CheckCircle2 size={48} color="#10B981" />
+              <View style={styles.intakeSuccessCard}>
+                <View style={styles.successIconBox}>
+                  <CheckCircle2 size={44} color="#10B981" />
                 </View>
-                <Text style={styles.completedTitle}>Property Intake Received!</Text>
-                <Text style={styles.completedText}>
-                  Thank you, <Text style={{ fontWeight: "700" }}>{ownerName}</Text>. We have registered <Text style={{ fontWeight: "600" }}>{propertyAddress}, {city}</Text> into our onboarding system.
+                <Text style={styles.intakeSuccessTitle}>Property Intake Received!</Text>
+                <Text style={styles.intakeSuccessSub}>
+                  Thank you, {ownerName}. Dinesh Donthula and Purvang Patel will review title records and prepare your Texas standard property management agreement.
                 </Text>
-
-                <View style={styles.checklistSummaryBox}>
-                  <Text style={styles.checkSummaryHeading}>Required Documents for Launch:</Text>
-                  <Text style={styles.checkItem}>1. Copy of recorded Deed or Settlement Statement</Text>
-                  <Text style={styles.checkItem}>2. Landlord Hazard & Liability Insurance Dec Page (Fair Deal Realty Inc. as additional interest)</Text>
-                  <Text style={styles.checkItem}>3. HOA Bylaws and Rental Restriction Verification</Text>
-                  <Text style={styles.checkItem}>4. Signed Texas REALTORS® Property Management Agreement</Text>
-                </View>
-
                 <TouchableOpacity
-                  style={styles.doneIntakeBtn}
+                  style={styles.resetIntakeBtn}
                   onPress={() => {
                     setIntakeCompleted(false);
                     setStep(1);
+                    setPropertyAddress("");
                   }}
                 >
-                  <Text style={styles.doneIntakeBtnText}>Submit Another Property</Text>
+                  <Text style={styles.resetIntakeBtnText}>Onboard Another Property</Text>
                 </TouchableOpacity>
               </View>
             )}
@@ -397,43 +346,52 @@ export default function OwnersPage() {
         </View>
       </View>
 
-      {/* 3. Owner Operational FAQs & Standards */}
+      {/* 3. Monthly Accounting Timeline */}
       <View style={styles.sectionLight}>
         <View style={styles.innerContainer}>
-          <View style={styles.sectionHeaderCentered}>
-            <Text style={styles.sectionOverline}>OWNER POLICIES</Text>
-            <Text style={styles.sectionTitle}>Frequently Asked Owner Questions</Text>
-            <Text style={styles.sectionSubtitle}>
-              Clear operating answers on spending limits, statements, and tenant placements.
-            </Text>
+          <View style={styles.timelineHeader}>
+            <Text style={styles.intakeOverline}>CASH FLOW PREDICTABILITY</Text>
+            <Text style={styles.intakeTitle}>The Monthly Distribution Schedule</Text>
           </View>
 
-          <View style={styles.faqList}>
-            <View style={styles.faqCard}>
-              <Text style={styles.faqQ}>What is the standard maintenance spending authorization limit?</Text>
-              <Text style={styles.faqA}>
-                In our Texas REALTORS® management agreement, our default non-emergency repair authority limit is $350–$500. Any repair estimated above this threshold requires explicit owner approval via email or the AppFolio owner portal, except in life-safety emergencies (active flooding, freeze protection, gas leak).
+          <View style={[styles.timelineGrid, { flexDirection: isDesktop ? "row" : "column" }]}>
+            <View style={styles.timelineCard}>
+              <View style={styles.timelineDateBadge}>
+                <Text style={styles.timelineDateText}>1ST OF MONTH</Text>
+              </View>
+              <Text style={styles.timelineCardTitle}>Rent Due Online</Text>
+              <Text style={styles.timelineCardDesc}>
+                Tenants submit rent via AppFolio zero-fee ACH or debit. Automated balance reminders notify residents 3 days prior.
               </Text>
             </View>
 
-            <View style={styles.faqCard}>
-              <Text style={styles.faqQ}>When are owner statements and ACH funds disbursed?</Text>
-              <Text style={styles.faqA}>
-                Rent is due from tenants on the 1st of each month and considered late after the 3rd. After rent clears our broker trust account, owner ACH disbursements are processed directly to your bank account between the 10th and 12th of each month, accompanied by an itemized cash-flow statement.
+            <View style={styles.timelineCard}>
+              <View style={styles.timelineDateBadge}>
+                <Text style={styles.timelineDateText}>5TH OF MONTH</Text>
+              </View>
+              <Text style={styles.timelineCardTitle}>Grace Period Closes</Text>
+              <Text style={styles.timelineCardDesc}>
+                Statutory late fees assessed automatically under Texas Property Code. Management team initiates immediate follow-up.
               </Text>
             </View>
 
-            <View style={styles.faqCard}>
-              <Text style={styles.faqQ}>How are tenant security deposits handled?</Text>
-              <Text style={styles.faqA}>
-                Under Texas law and TREC rules, tenant security deposits must be held in a dedicated, broker-supervised escrow trust account managed by Fair Deal Realty Inc. Security deposits are never commingled with operating funds.
+            <View style={[styles.timelineCard, styles.timelineCardHighlight]}>
+              <View style={[styles.timelineDateBadge, { backgroundColor: "#2563EB" }]}>
+                <Text style={[styles.timelineDateText, { color: "#FFFFFF" }]}>10TH OF MONTH</Text>
+              </View>
+              <Text style={styles.timelineCardTitle}>Owner ACH Direct Deposit</Text>
+              <Text style={styles.timelineCardDesc}>
+                Rental disbursements transferred directly into your designated bank account once funds clear our broker trust escrow.
               </Text>
             </View>
 
-            <View style={styles.faqCard}>
-              <Text style={styles.faqQ}>Can I use my own home warranty or contractors?</Text>
-              <Text style={styles.faqA}>
-                Yes. If you have an active home warranty or preferred vendor, you can specify this during onboarding. However, for emergencies, if the warranty dispatch cannot respond within 4 hours, KeyNest will dispatch our licensed vendors to protect your asset.
+            <View style={styles.timelineCard}>
+              <View style={styles.timelineDateBadge}>
+                <Text style={styles.timelineDateText}>15TH OF MONTH</Text>
+              </View>
+              <Text style={styles.timelineCardTitle}>Statement Published</Text>
+              <Text style={styles.timelineCardDesc}>
+                Complete cash-flow statement, receipts, and vendor invoice copies uploaded to your AppFolio portal archives.
               </Text>
             </View>
           </View>
@@ -445,95 +403,95 @@ export default function OwnersPage() {
 
 const styles = StyleSheet.create({
   headerHero: {
-    backgroundColor: "#164E3A",
-    paddingVertical: 52,
+    backgroundColor: "#0B1120",
+    paddingVertical: 72,
     borderBottomWidth: 1,
-    borderBottomColor: "#1D644B",
+    borderBottomColor: "#1E293B",
   },
   innerContainer: {
     maxWidth: 1240,
     width: "100%",
     marginHorizontal: "auto",
-    paddingHorizontal: 16,
+    paddingHorizontal: 20,
   },
   badgePill: {
     alignSelf: "flex-start",
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-    backgroundColor: "#103C2D",
+    backgroundColor: "#1E293B",
     paddingVertical: 6,
     paddingHorizontal: 12,
     borderRadius: 20,
     borderWidth: 1,
-    borderColor: "#1E5642",
-    marginBottom: 12,
+    borderColor: "#334155",
+    marginBottom: 16,
   },
   badgePillText: {
-    color: "#D1FAE5",
+    color: "#E2E8F0",
     fontSize: 12.5,
     fontWeight: "600",
   },
   pageTitle: {
-    fontSize: 36,
+    fontSize: 40,
     fontWeight: "900",
     color: "#FFFFFF",
-    letterSpacing: -0.5,
-    marginBottom: 10,
+    letterSpacing: -1,
+    marginBottom: 12,
   },
   pageSubtitle: {
-    fontSize: 16,
-    color: "#D1D5DB",
-    lineHeight: 24,
-    maxWidth: 720,
+    fontSize: 16.5,
+    color: "#94A3B8",
+    maxWidth: 760,
+    lineHeight: 25,
+  },
+  sectionLight: {
+    backgroundColor: "#F8FAFC",
+    paddingVertical: 64,
   },
   sectionWhite: {
     backgroundColor: "#FFFFFF",
-    paddingVertical: 64,
-  },
-  sectionLight: {
-    backgroundColor: "#F8FAF9",
-    paddingVertical: 56,
+    paddingVertical: 72,
   },
   portalBox: {
     backgroundColor: "#FFFFFF",
-    borderRadius: 12,
-    borderWidth: 1.5,
-    borderColor: "#10B981",
-    padding: 28,
+    borderRadius: 16,
+    borderWidth: 1,
+    borderColor: "#E2E8F0",
+    padding: 32,
     justifyContent: "space-between",
     alignItems: "center",
     gap: 24,
-    shadowColor: "#059669",
-    shadowOpacity: 0.1,
-    shadowRadius: 12,
-    elevation: 4,
+    shadowColor: "#0F172A",
+    shadowOpacity: 0.05,
+    shadowRadius: 16,
+    elevation: 3,
   },
   portalTag: {
     alignSelf: "flex-start",
     flexDirection: "row",
     alignItems: "center",
     gap: 6,
-    backgroundColor: "#ECFDF5",
+    backgroundColor: "#EFF6FF",
     paddingVertical: 4,
-    paddingHorizontal: 8,
-    borderRadius: 4,
+    paddingHorizontal: 10,
+    borderRadius: 6,
   },
   portalTagText: {
-    fontSize: 10.5,
+    fontSize: 11,
     fontWeight: "800",
-    color: "#065F46",
-    letterSpacing: 0.5,
+    color: "#2563EB",
+    letterSpacing: 0.8,
   },
   portalTitle: {
     fontSize: 22,
     fontWeight: "800",
-    color: "#111827",
+    color: "#0F172A",
   },
   portalDesc: {
     fontSize: 14,
-    color: "#4B5563",
-    lineHeight: 21,
+    color: "#475569",
+    lineHeight: 22,
   },
   portalPillsRow: {
     flexDirection: "row",
@@ -542,312 +500,288 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   portalPill: {
-    fontSize: 12,
+    fontSize: 12.5,
     fontWeight: "600",
-    color: "#166534",
-    backgroundColor: "#F0FDF4",
-    paddingVertical: 4,
-    paddingHorizontal: 10,
-    borderRadius: 4,
+    color: "#2563EB",
   },
   portalActionCol: {
-    gap: 10,
-    minWidth: 260,
+    alignItems: "center",
+    gap: 8,
   },
-  openPortalPrimaryBtn: {
+  portalLoginBtn: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
     gap: 8,
-    backgroundColor: "#164E3A",
+    backgroundColor: "#2563EB",
     paddingVertical: 14,
-    paddingHorizontal: 20,
-    borderRadius: 8,
-  },
-  openPortalPrimaryText: {
-    color: "#FFFFFF",
-    fontSize: 14,
-    fontWeight: "700",
-  },
-  helpPortalBtn: {
-    alignItems: "center",
-    paddingVertical: 8,
-  },
-  helpPortalText: {
-    color: "#164E3A",
-    fontSize: 13,
-    fontWeight: "600",
-  },
-  sectionHeaderCentered: {
-    alignItems: "center",
-    textAlign: "center",
-    marginBottom: 36,
-    gap: 8,
-  },
-  sectionOverline: {
-    fontSize: 12,
-    fontWeight: "800",
-    color: "#059669",
-    letterSpacing: 1,
-  },
-  sectionTitle: {
-    fontSize: 30,
-    fontWeight: "800",
-    color: "#0F261E",
-    letterSpacing: -0.5,
-  },
-  sectionSubtitle: {
-    fontSize: 15,
-    color: "#4B5563",
-    maxWidth: 680,
-    textAlign: "center",
-    lineHeight: 22,
-  },
-  intakeCard: {
-    maxWidth: 720,
-    width: "100%",
-    marginHorizontal: "auto",
-    backgroundColor: "#FFFFFF",
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
-    padding: 28,
-    shadowColor: "#000",
-    shadowOpacity: 0.05,
-    shadowRadius: 10,
+    paddingHorizontal: 24,
+    borderRadius: 10,
+    shadowColor: "#2563EB",
+    shadowOpacity: 0.25,
+    shadowRadius: 8,
     elevation: 3,
   },
-  stepProgressBar: {
+  portalLoginBtnText: {
+    color: "#FFFFFF",
+    fontSize: 15,
+    fontWeight: "700",
+  },
+  portalHelpText: {
+    fontSize: 11.5,
+    color: "#64748B",
+    textAlign: "center",
+  },
+  intakeWrapper: {
+    maxWidth: 780,
+    width: "100%",
+    marginHorizontal: "auto",
+    gap: 24,
+  },
+  intakeHeader: {
+    alignItems: "center",
+    textAlign: "center",
+  },
+  intakeOverline: {
+    fontSize: 12,
+    fontWeight: "800",
+    color: "#2563EB",
+    letterSpacing: 1,
+    marginBottom: 6,
+  },
+  intakeTitle: {
+    fontSize: 28,
+    fontWeight: "800",
+    color: "#0F172A",
+    marginBottom: 8,
+  },
+  intakeSubtitle: {
+    fontSize: 15,
+    color: "#64748B",
+    textAlign: "center",
+  },
+  stepProgressRow: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: 28,
-    borderBottomWidth: 1,
-    borderBottomColor: "#F3F4F6",
-    paddingBottom: 16,
+    paddingHorizontal: 20,
+    marginVertical: 12,
   },
-  stepProgressItem: {
-    flexDirection: "row",
+  stepIndicatorItem: {
     alignItems: "center",
-    gap: 8,
+    gap: 6,
   },
   stepCircle: {
-    width: 28,
-    height: 28,
-    borderRadius: 14,
-    backgroundColor: "#F3F4F6",
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    backgroundColor: "#F1F5F9",
+    borderWidth: 1,
+    borderColor: "#CBD5E1",
     justifyContent: "center",
     alignItems: "center",
   },
   stepCircleActive: {
-    backgroundColor: "#164E3A",
+    backgroundColor: "#2563EB",
+    borderColor: "#2563EB",
   },
-  stepCircleDone: {
+  stepCircleCompleted: {
     backgroundColor: "#10B981",
+    borderColor: "#10B981",
   },
-  stepNum: {
-    fontSize: 12,
+  stepCircleText: {
+    fontSize: 13,
     fontWeight: "700",
-    color: "#6B7280",
+    color: "#64748B",
   },
-  stepNumActive: {
+  stepCircleTextActive: {
     color: "#FFFFFF",
   },
-  stepProgressLabel: {
-    fontSize: 12.5,
-    fontWeight: "600",
-    color: "#6B7280",
+  stepLabel: {
+    fontSize: 12,
+    color: "#64748B",
+    fontWeight: "500",
   },
-  stepProgressLabelActive: {
-    color: "#164E3A",
+  stepLabelActive: {
+    color: "#0F172A",
     fontWeight: "700",
   },
-  stepFormContent: {
+  intakeFormCard: {
+    backgroundColor: "#F8FAFC",
+    borderRadius: 14,
+    borderWidth: 1,
+    borderColor: "#E2E8F0",
+    padding: 28,
+    gap: 20,
+  },
+  stepContent: {
     gap: 16,
   },
-  formFieldsBlock: {
-    gap: 14,
-  },
-  stepHeaderTitle: {
+  stepHeading: {
     fontSize: 16,
     fontWeight: "800",
-    color: "#111827",
-    marginBottom: 4,
+    color: "#0F172A",
   },
   inputGroup: {
     gap: 6,
   },
-  inputLabel: {
-    fontSize: 13,
-    fontWeight: "600",
-    color: "#374151",
-  },
-  textInput: {
-    borderWidth: 1,
-    borderColor: "#D1D5DB",
-    borderRadius: 7,
-    paddingVertical: 10,
-    paddingHorizontal: 12,
-    fontSize: 14,
-    color: "#111827",
-    backgroundColor: "#FFFFFF",
-  },
   inputRow: {
     flexDirection: "row",
     gap: 12,
+  },
+  inputLabel: {
+    fontSize: 13,
+    fontWeight: "600",
+    color: "#334155",
+  },
+  inputField: {
+    backgroundColor: "#FFFFFF",
+    borderWidth: 1,
+    borderColor: "#CBD5E1",
+    borderRadius: 8,
+    paddingVertical: 10,
+    paddingHorizontal: 14,
+    fontSize: 14,
+    color: "#0F172A",
   },
   chipsRow: {
     flexDirection: "row",
     flexWrap: "wrap",
     gap: 8,
   },
-  chipBtn: {
-    paddingVertical: 7,
+  chip: {
+    paddingVertical: 8,
     paddingHorizontal: 12,
-    borderRadius: 6,
+    borderRadius: 8,
+    backgroundColor: "#FFFFFF",
     borderWidth: 1,
-    borderColor: "#E5E7EB",
-    backgroundColor: "#F9FAFB",
+    borderColor: "#CBD5E1",
   },
-  chipBtnActive: {
-    borderColor: "#164E3A",
-    backgroundColor: "#ECFDF5",
+  chipActive: {
+    backgroundColor: "#2563EB",
+    borderColor: "#2563EB",
   },
-  chipBtnText: {
+  chipText: {
     fontSize: 12.5,
-    color: "#4B5563",
+    fontWeight: "600",
+    color: "#475569",
   },
-  chipBtnTextActive: {
-    color: "#164E3A",
-    fontWeight: "700",
+  chipTextActive: {
+    color: "#FFFFFF",
   },
-  routingNoticeBox: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
-    backgroundColor: "#ECFDF5",
-    padding: 10,
-    borderRadius: 6,
-    borderWidth: 1,
-    borderColor: "#A7F3D0",
-    marginTop: 4,
-  },
-  routingNoticeText: {
-    fontSize: 11.5,
-    color: "#065F46",
-    flex: 1,
-  },
-  formNavButtonsRow: {
+  intakeNavRow: {
     flexDirection: "row",
     justifyContent: "space-between",
-    gap: 12,
-    marginTop: 14,
+    alignItems: "center",
+    paddingTop: 12,
     borderTopWidth: 1,
-    borderTopColor: "#F3F4F6",
-    paddingTop: 16,
+    borderTopColor: "#E2E8F0",
   },
-  prevBtn: {
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: "#D1D5DB",
+  backBtn: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+    paddingVertical: 10,
+    paddingHorizontal: 14,
   },
-  prevBtnText: {
-    color: "#4B5563",
-    fontSize: 13.5,
+  backBtnText: {
+    fontSize: 14,
     fontWeight: "600",
+    color: "#475569",
   },
   nextBtn: {
-    backgroundColor: "#164E3A",
+    backgroundColor: "#2563EB",
     paddingVertical: 12,
-    paddingHorizontal: 20,
+    paddingHorizontal: 22,
     borderRadius: 8,
-    alignItems: "center",
-    justifyContent: "center",
   },
   nextBtnText: {
     color: "#FFFFFF",
     fontSize: 14,
     fontWeight: "700",
   },
-  completedBox: {
+  intakeSuccessCard: {
+    backgroundColor: "#F8FAFC",
+    borderRadius: 14,
+    borderWidth: 1,
+    borderColor: "#E2E8F0",
+    padding: 36,
     alignItems: "center",
-    paddingVertical: 20,
-    gap: 14,
+    gap: 12,
   },
-  completedIconBadge: {
-    width: 68,
-    height: 68,
-    borderRadius: 34,
+  successIconBox: {
+    width: 64,
+    height: 64,
+    borderRadius: 32,
     backgroundColor: "#D1FAE5",
     justifyContent: "center",
     alignItems: "center",
   },
-  completedTitle: {
+  intakeSuccessTitle: {
     fontSize: 22,
     fontWeight: "800",
-    color: "#164E3A",
+    color: "#0F172A",
   },
-  completedText: {
+  intakeSuccessSub: {
     fontSize: 14,
-    color: "#4B5563",
+    color: "#64748B",
     textAlign: "center",
-    lineHeight: 21,
+    lineHeight: 22,
+    maxWidth: 500,
   },
-  checklistSummaryBox: {
-    width: "100%",
-    backgroundColor: "#F9FAFB",
-    padding: 16,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
-    gap: 6,
-  },
-  checkSummaryHeading: {
-    fontSize: 13,
-    fontWeight: "700",
-    color: "#111827",
-    marginBottom: 4,
-  },
-  checkItem: {
-    fontSize: 12.5,
-    color: "#374151",
-    lineHeight: 18,
-  },
-  doneIntakeBtn: {
-    backgroundColor: "#164E3A",
+  resetIntakeBtn: {
+    backgroundColor: "#0F172A",
     paddingVertical: 12,
-    paddingHorizontal: 24,
+    paddingHorizontal: 20,
     borderRadius: 8,
-    marginTop: 6,
+    marginTop: 8,
   },
-  doneIntakeBtnText: {
+  resetIntakeBtnText: {
     color: "#FFFFFF",
     fontSize: 14,
-    fontWeight: "700",
+    fontWeight: "600",
   },
-  faqList: {
+  timelineHeader: {
+    alignItems: "center",
+    marginBottom: 36,
+    textAlign: "center",
+  },
+  timelineGrid: {
     gap: 16,
-    maxWidth: 900,
-    marginHorizontal: "auto",
-    width: "100%",
   },
-  faqCard: {
+  timelineCard: {
+    flex: 1,
     backgroundColor: "#FFFFFF",
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
+    borderRadius: 12,
     padding: 20,
+    borderWidth: 1,
+    borderColor: "#E2E8F0",
     gap: 8,
   },
-  faqQ: {
+  timelineCardHighlight: {
+    borderColor: "#2563EB",
+    borderWidth: 2,
+    backgroundColor: "#EFF6FF",
+  },
+  timelineDateBadge: {
+    alignSelf: "flex-start",
+    backgroundColor: "#F1F5F9",
+    paddingVertical: 3,
+    paddingHorizontal: 8,
+    borderRadius: 4,
+  },
+  timelineDateText: {
+    fontSize: 10.5,
+    fontWeight: "800",
+    color: "#475569",
+    letterSpacing: 0.5,
+  },
+  timelineCardTitle: {
     fontSize: 16,
     fontWeight: "700",
-    color: "#111827",
+    color: "#0F172A",
   },
-  faqA: {
-    fontSize: 13.5,
-    color: "#4B5563",
-    lineHeight: 21,
+  timelineCardDesc: {
+    fontSize: 13,
+    color: "#64748B",
+    lineHeight: 19,
   },
 });

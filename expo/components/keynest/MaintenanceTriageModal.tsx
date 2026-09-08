@@ -18,8 +18,8 @@ import {
   Wrench,
   CheckCircle2,
   Clock,
-  ExternalLink,
   ShieldAlert,
+  ArrowRight,
 } from "lucide-react-native";
 import { KEYNEST_INFO } from "@/constants/keynestData";
 
@@ -42,7 +42,6 @@ export default function MaintenanceTriageModal({
   const [phone, setPhone] = useState("");
   const [issueCategory, setIssueCategory] = useState("Plumbing");
   const [description, setDescription] = useState("");
-  const [entryPermission, setEntryPermission] = useState("Yes, enter if not home");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const callEmergency = () => {
@@ -55,14 +54,14 @@ export default function MaintenanceTriageModal({
 
   const handleRoutineSubmit = () => {
     if (!residentName.trim() || !propertyAddress.trim() || !description.trim()) {
-      alert("Please complete the resident name, property address, and issue description.");
+      alert("Please complete your name, property address, and issue description.");
       return;
     }
     setIsSubmitting(true);
     setTimeout(() => {
       setIsSubmitting(false);
       setTriageStep("success");
-    }, 700);
+    }, 600);
   };
 
   const handleClose = () => {
@@ -78,7 +77,7 @@ export default function MaintenanceTriageModal({
           <View style={styles.modalHeader}>
             <View style={styles.headerTitleRow}>
               <View style={styles.iconCircle}>
-                <Wrench size={20} color="#164E3A" />
+                <Wrench size={20} color="#2563EB" />
               </View>
               <View>
                 <Text style={styles.modalTitle}>Maintenance & Repair Triage</Text>
@@ -88,158 +87,141 @@ export default function MaintenanceTriageModal({
               </View>
             </View>
             <TouchableOpacity onPress={handleClose} style={styles.closeBtn} accessibilityLabel="Close modal">
-              <X size={20} color="#6B7280" />
+              <X size={20} color="#64748B" />
             </TouchableOpacity>
           </View>
 
-          <ScrollView style={styles.modalScroll} contentContainerStyle={{ padding: 20 }}>
+          <ScrollView style={styles.modalScroll} contentContainerStyle={{ padding: 24 }}>
             {/* Step 1: Classification Choice */}
             {triageStep === "classification" && (
               <View style={styles.contentWrap}>
-                <Text style={styles.promptTitle}>What kind of issue are you experiencing?</Text>
+                <Text style={styles.promptTitle}>Select Issue Severity Level</Text>
                 <Text style={styles.promptSub}>
-                  To ensure resident safety and rapid vendor response, we triage all requests immediately.
+                  KeyNest follows a strict 3-tier triage system to ensure true safety threats receive immediate emergency attention.
                 </Text>
 
-                {/* Emergency Option Card */}
+                {/* Severity Card 1: Emergency */}
                 <TouchableOpacity
-                  style={styles.triageOptionCardDanger}
-                  onPress={() => setTriageStep("emergency")}
-                  activeOpacity={0.8}
+                  style={[styles.severityCard, styles.severityEmergency]}
+                  onPress={() => {
+                    setSelectedUrgency("Emergency");
+                    setTriageStep("emergency");
+                  }}
+                  activeOpacity={0.85}
                 >
-                  <View style={styles.optionHeader}>
-                    <View style={styles.dangerIconBadge}>
-                      <AlertTriangle size={20} color="#DC2626" />
-                    </View>
-                    <View style={{ flex: 1 }}>
-                      <Text style={styles.dangerTitle}>Emergency Maintenance (Immediate Action)</Text>
-                      <Text style={styles.dangerSub}>
-                        Active water flooding, smell of natural gas, electrical fire hazards, sewage backup, or AC out with heat &gt; 90°F.
-                      </Text>
-                    </View>
+                  <View style={styles.severityIconCircleRed}>
+                    <ShieldAlert size={22} color="#DC2626" />
                   </View>
-                  <View style={styles.cardFooterDanger}>
-                    <Text style={styles.cardFooterTextDanger}>View 24/7 Hotline & Emergency Steps →</Text>
+                  <View style={{ flex: 1 }}>
+                    <View style={styles.severityBadgeRed}>
+                      <Text style={styles.severityBadgeRedText}>TIER 1: EMERGENCY (IMMEDIATE)</Text>
+                    </View>
+                    <Text style={styles.severityTitle}>Active Flooding, Fire, Gas, or Complete AC Loss (&gt;90°F)</Text>
+                    <Text style={styles.severityDesc}>
+                      Threats to life or major property damage. Dispatched 24/7/365 within 1–2 hours.
+                    </Text>
                   </View>
                 </TouchableOpacity>
 
-                {/* Urgent Option Card */}
+                {/* Severity Card 2: Urgent */}
                 <TouchableOpacity
-                  style={styles.triageOptionCardUrgent}
+                  style={[styles.severityCard, styles.severityUrgent]}
                   onPress={() => {
                     setSelectedUrgency("Urgent");
                     setTriageStep("routine");
                   }}
-                  activeOpacity={0.8}
+                  activeOpacity={0.85}
                 >
-                  <View style={styles.optionHeader}>
-                    <View style={styles.urgentIconBadge}>
-                      <Clock size={20} color="#D97706" />
-                    </View>
-                    <View style={{ flex: 1 }}>
-                      <Text style={styles.urgentTitle}>Urgent Request (24-Hour Dispatch)</Text>
-                      <Text style={styles.urgentSub}>
-                        Water heater failure, refrigerator not cooling, minor pipe leak with shut-off valve secure, garage door stuck.
-                      </Text>
-                    </View>
+                  <View style={styles.severityIconCircleAmber}>
+                    <AlertTriangle size={22} color="#D97706" />
                   </View>
-                  <View style={styles.cardFooterUrgent}>
-                    <Text style={styles.cardFooterTextUrgent}>Submit Urgent Work Order →</Text>
+                  <View style={{ flex: 1 }}>
+                    <View style={styles.severityBadgeAmber}>
+                      <Text style={styles.severityBadgeAmberText}>TIER 2: URGENT (12–24 HOURS)</Text>
+                    </View>
+                    <Text style={styles.severityTitle}>Water Heater Failure, Refrigerator Out, Minor Drain Leak</Text>
+                    <Text style={styles.severityDesc}>
+                      Essential appliances or partial plumbing impairments. Vendor dispatched same or next business day.
+                    </Text>
                   </View>
                 </TouchableOpacity>
 
-                {/* Routine Option Card */}
+                {/* Severity Card 3: Routine */}
                 <TouchableOpacity
-                  style={styles.triageOptionCardRoutine}
+                  style={[styles.severityCard, styles.severityRoutine]}
                   onPress={() => {
                     setSelectedUrgency("Routine");
                     setTriageStep("routine");
                   }}
-                  activeOpacity={0.8}
+                  activeOpacity={0.85}
                 >
-                  <View style={styles.optionHeader}>
-                    <View style={styles.routineIconBadge}>
-                      <Wrench size={20} color="#164E3A" />
-                    </View>
-                    <View style={{ flex: 1 }}>
-                      <Text style={styles.routineTitle}>Routine Maintenance (24–48 Hour Target)</Text>
-                      <Text style={styles.routineSub}>
-                        Dripping faucet, garbage disposal jam, sprinkler head adjustment, interior door latch, light fixtures.
-                      </Text>
-                    </View>
+                  <View style={styles.severityIconCircleBlue}>
+                    <Clock size={22} color="#2563EB" />
                   </View>
-                  <View style={styles.cardFooterRoutine}>
-                    <Text style={styles.cardFooterTextRoutine}>Submit Routine Ticket or Open Portal →</Text>
-                  </View>
-                </TouchableOpacity>
-
-                {/* Direct AppFolio Link */}
-                <View style={styles.directPortalLinkBox}>
-                  <Text style={styles.directPortalText}>
-                    Existing resident? For fastest tracking and photo uploads:
-                  </Text>
-                  <TouchableOpacity
-                    style={styles.appFolioBtn}
-                    onPress={openAppFolioPortal}
-                  >
-                    <Text style={styles.appFolioBtnText}>Open AppFolio Resident Portal</Text>
-                    <ExternalLink size={14} color="#164E3A" />
-                  </TouchableOpacity>
-                </View>
-              </View>
-            )}
-
-            {/* Emergency View */}
-            {triageStep === "emergency" && (
-              <View style={styles.contentWrap}>
-                <View style={styles.emergencyAlertBanner}>
-                  <ShieldAlert size={28} color="#B91C1C" />
                   <View style={{ flex: 1 }}>
-                    <Text style={styles.emergencyAlertHeading}>EMERGENCY PROTOCOL ACTIVE</Text>
-                    <Text style={styles.emergencyAlertBody}>
-                      If there is an immediate threat to life, fire, or gas explosion hazard, immediately call 911 first, then notify KeyNest.
+                    <View style={styles.severityBadgeBlue}>
+                      <Text style={styles.severityBadgeBlueText}>TIER 3: ROUTINE (24–48 HOURS)</Text>
+                    </View>
+                    <Text style={styles.severityTitle}>Dripping Faucet, Garbage Disposal, Fence Latch, Light Fixture</Text>
+                    <Text style={styles.severityDesc}>
+                      Non-urgent cosmetic or convenience items. Scheduled directly via your AppFolio tenant portal.
                     </Text>
-                  </View>
-                </View>
-
-                <View style={styles.emergencyActionsList}>
-                  <Text style={styles.actionsListHeading}>Immediate Steps Before Technician Arrival:</Text>
-                  <Text style={styles.actionItem}>
-                    1. <Text style={{ fontWeight: "700" }}>Active Water Leak:</Text> Shut off the main water valve at the house or street cut-off immediately to prevent structural damage.
-                  </Text>
-                  <Text style={styles.actionItem}>
-                    2. <Text style={{ fontWeight: "700" }}>Smell of Gas:</Text> Evacuate premises immediately. Do not flip light switches or ignite flames. Call Atmos Energy (1-866-322-8667) and 911.
-                  </Text>
-                  <Text style={styles.actionItem}>
-                    3. <Text style={{ fontWeight: "700" }}>Electrical Sparking:</Text> Turn off the relevant breaker at the electrical subpanel if safe to do so.
-                  </Text>
-                </View>
-
-                {/* Emergency Phone CTA */}
-                <TouchableOpacity style={styles.emergencyCallBtn} onPress={callEmergency}>
-                  <PhoneCall size={22} color="#FFFFFF" />
-                  <View>
-                    <Text style={styles.callBtnMain}>Call 24/7 Dispatch: {KEYNEST_INFO.emergencyPhone}</Text>
-                    <Text style={styles.callBtnSub}>Live on-call coordinator available 24/7/365</Text>
                   </View>
                 </TouchableOpacity>
 
                 <TouchableOpacity
-                  style={styles.backBtn}
-                  onPress={() => setTriageStep("classification")}
+                  style={styles.directPortalLink}
+                  onPress={openAppFolioPortal}
                 >
-                  <Text style={styles.backBtnText}>← Back to Maintenance Options</Text>
+                  <Text style={styles.directPortalLinkText}>
+                    Already have an active ticket? Track it in AppFolio →
+                  </Text>
                 </TouchableOpacity>
               </View>
             )}
 
-            {/* Routine & Urgent Ticket Submission Form */}
+            {/* Step 2A: Emergency Escalation */}
+            {triageStep === "emergency" && (
+              <View style={styles.contentWrap}>
+                <View style={styles.emergencyWarningBanner}>
+                  <ShieldAlert size={28} color="#DC2626" />
+                  <Text style={styles.emergencyWarningTitle}>Emergency Hotline Protocol</Text>
+                  <Text style={styles.emergencyWarningText}>
+                    If this is a gas leak or fire, vacate the premises immediately and call 911. For active water floods, turn off the main water shutoff valve immediately.
+                  </Text>
+                </View>
+
+                <View style={styles.emergencyActionCard}>
+                  <Text style={styles.emergencyActionLabel}>24/7 DEDICATED EMERGENCY HOTLINE:</Text>
+                  <Text style={styles.emergencyPhoneNumber}>{KEYNEST_INFO.emergencyPhone}</Text>
+                  <Text style={styles.emergencyActionSub}>
+                    Answered by local on-call technicians authorized under Fair Deal Realty Inc.
+                  </Text>
+
+                  <TouchableOpacity style={styles.callNowBtn} onPress={callEmergency}>
+                    <PhoneCall size={18} color="#FFFFFF" />
+                    <Text style={styles.callNowBtnText}>Call Emergency Hotline Now</Text>
+                  </TouchableOpacity>
+                </View>
+
+                <TouchableOpacity
+                  style={styles.backLink}
+                  onPress={() => setTriageStep("classification")}
+                >
+                  <Text style={styles.backLinkText}>← Back to Severity Selection</Text>
+                </TouchableOpacity>
+              </View>
+            )}
+
+            {/* Step 2B: Ticket Intake Form (Urgent / Routine) */}
             {triageStep === "routine" && (
-              <View style={styles.formWrap}>
-                <View style={styles.urgencyBadgeRow}>
-                  <Text style={styles.ticketTypeTag}>Classification: {selectedUrgency.toUpperCase()}</Text>
+              <View style={styles.contentWrap}>
+                <View style={styles.selectedUrgencyBanner}>
+                  <Text style={styles.selectedUrgencyBannerText}>
+                    Logging: <Text style={{ fontWeight: "700" }}>{selectedUrgency} Priority Request</Text>
+                  </Text>
                   <TouchableOpacity onPress={() => setTriageStep("classification")}>
-                    <Text style={styles.changeTagLink}>Change</Text>
+                    <Text style={styles.changeUrgencyLink}>Change</Text>
                   </TouchableOpacity>
                 </View>
 
@@ -247,19 +229,19 @@ export default function MaintenanceTriageModal({
                   <Text style={styles.label}>Resident Full Name *</Text>
                   <TextInput
                     style={styles.input}
-                    placeholder="e.g. John Doe"
-                    placeholderTextColor="#9CA3AF"
+                    placeholder="e.g. John Smith"
+                    placeholderTextColor="#94A3B8"
                     value={residentName}
                     onChangeText={setResidentName}
                   />
                 </View>
 
                 <View style={styles.inputGroup}>
-                  <Text style={styles.label}>Property Street Address & City *</Text>
+                  <Text style={styles.label}>Rental Property Address *</Text>
                   <TextInput
                     style={styles.input}
-                    placeholder="e.g. 4218 Shoreline Trail, The Colony"
-                    placeholderTextColor="#9CA3AF"
+                    placeholder="e.g. 5204 Lakewood Drive, The Colony"
+                    placeholderTextColor="#94A3B8"
                     value={propertyAddress}
                     onChangeText={setPropertyAddress}
                   />
@@ -267,24 +249,24 @@ export default function MaintenanceTriageModal({
 
                 <View style={styles.inputRow}>
                   <View style={[styles.inputGroup, { flex: 1 }]}>
-                    <Text style={styles.label}>Contact Phone Number *</Text>
+                    <Text style={styles.label}>Phone Number *</Text>
                     <TextInput
                       style={styles.input}
-                      keyboardType="phone-pad"
-                      placeholder="(972) 000-0000"
-                      placeholderTextColor="#9CA3AF"
+                      placeholder="(469) 555-0199"
+                      placeholderTextColor="#94A3B8"
                       value={phone}
                       onChangeText={setPhone}
+                      keyboardType="phone-pad"
                     />
                   </View>
                   <View style={[styles.inputGroup, { flex: 1 }]}>
-                    <Text style={styles.label}>Category</Text>
+                    <Text style={styles.label}>Issue Category</Text>
                     <TextInput
                       style={styles.input}
+                      placeholder="Plumbing / HVAC / Electrical"
+                      placeholderTextColor="#94A3B8"
                       value={issueCategory}
                       onChangeText={setIssueCategory}
-                      placeholder="Plumbing, HVAC, Electrical, Appliance"
-                      placeholderTextColor="#9CA3AF"
                     />
                   </View>
                 </View>
@@ -292,77 +274,60 @@ export default function MaintenanceTriageModal({
                 <View style={styles.inputGroup}>
                   <Text style={styles.label}>Detailed Description of the Issue *</Text>
                   <TextInput
-                    style={[styles.input, styles.textArea]}
-                    multiline
-                    numberOfLines={4}
-                    placeholder="Where is the issue located? When did it start? Any troubleshooting steps taken?"
-                    placeholderTextColor="#9CA3AF"
+                    style={[styles.input, { height: 80, textAlignVertical: "top" }]}
+                    placeholder="Describe where the issue is, when it started, and if any breaker was tripped or valve shut."
+                    placeholderTextColor="#94A3B8"
                     value={description}
                     onChangeText={setDescription}
+                    multiline
                   />
                 </View>
 
-                <View style={styles.inputGroup}>
-                  <Text style={styles.label}>Permission to Enter</Text>
-                  <View style={styles.chipsRow}>
-                    {["Yes, enter if not home", "No, schedule appointment with me"].map((opt) => (
-                      <TouchableOpacity
-                        key={opt}
-                        style={[styles.chip, entryPermission === opt && styles.chipActive]}
-                        onPress={() => setEntryPermission(opt)}
-                      >
-                        <Text style={[styles.chipText, entryPermission === opt && styles.chipTextActive]}>
-                          {opt}
-                        </Text>
-                      </TouchableOpacity>
-                    ))}
-                  </View>
-                </View>
-
                 <TouchableOpacity
-                  style={styles.submitWorkOrderBtn}
+                  style={styles.submitBtn}
                   onPress={handleRoutineSubmit}
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (
                     <ActivityIndicator color="#FFFFFF" />
                   ) : (
-                    <Text style={styles.submitWorkOrderBtnText}>Dispatch Request to Operations Queue</Text>
+                    <>
+                      <Text style={styles.submitBtnText}>Submit Maintenance Ticket</Text>
+                      <ArrowRight size={16} color="#FFFFFF" />
+                    </>
                   )}
-                </TouchableOpacity>
-
-                <TouchableOpacity
-                  style={styles.backBtn}
-                  onPress={() => setTriageStep("classification")}
-                >
-                  <Text style={styles.backBtnText}>← Back to Triage Options</Text>
                 </TouchableOpacity>
               </View>
             )}
 
-            {/* Submission Success */}
+            {/* Step 3: Success Confirmation */}
             {triageStep === "success" && (
               <View style={styles.successWrap}>
-                <View style={styles.successBadge}>
-                  <CheckCircle2 size={50} color="#10B981" />
+                <View style={styles.successIconCircle}>
+                  <CheckCircle2 size={40} color="#10B981" />
                 </View>
-                <Text style={styles.successTitle}>Maintenance Work Order Logged!</Text>
+                <Text style={styles.successTitle}>Maintenance Ticket Created</Text>
                 <Text style={styles.successSub}>
-                  Your ticket has entered {"KeyNest's"} 6-step escalation workflow.
+                  Your ticket has been logged into KeyNest maintenance triage and routed to our local North Texas trade partner network.
                 </Text>
 
-                <View style={styles.stepsMiniCard}>
-                  <Text style={styles.miniCardTitle}>6-Step SLA Process:</Text>
-                  <Text style={styles.miniStep}>1. Intake logged in KeyNest Operations Queue.</Text>
-                  <Text style={styles.miniStep}>2. Triaged & owner spending limit verified ($350–$500).</Text>
-                  <Text style={styles.miniStep}>3. Vetted, insured technician assigned.</Text>
-                  <Text style={styles.miniStep}>4. Technician contacts you to confirm access window.</Text>
-                  <Text style={styles.miniStep}>5. Work documented with before/after photos.</Text>
-                  <Text style={styles.miniStep}>6. Closed out on AppFolio portal statement.</Text>
+                <View style={styles.ticketDetailsCard}>
+                  <View style={styles.ticketRow}>
+                    <Text style={styles.ticketLabel}>Status:</Text>
+                    <Text style={styles.ticketVal}>Triage Stage 2 (Vendor Dispatched)</Text>
+                  </View>
+                  <View style={styles.ticketRow}>
+                    <Text style={styles.ticketLabel}>Property:</Text>
+                    <Text style={styles.ticketVal}>{propertyAddress}</Text>
+                  </View>
+                  <View style={styles.ticketRow}>
+                    <Text style={styles.ticketLabel}>Severity:</Text>
+                    <Text style={styles.ticketVal}>{selectedUrgency}</Text>
+                  </View>
                 </View>
 
-                <TouchableOpacity style={styles.closeSuccessBtn} onPress={handleClose}>
-                  <Text style={styles.closeSuccessBtnText}>Done</Text>
+                <TouchableOpacity style={styles.doneBtn} onPress={handleClose}>
+                  <Text style={styles.doneBtnText}>Close Window</Text>
                 </TouchableOpacity>
               </View>
             )}
@@ -376,59 +341,59 @@ export default function MaintenanceTriageModal({
 const styles = StyleSheet.create({
   modalOverlay: {
     flex: 1,
-    backgroundColor: "rgba(0,0,0,0.65)",
+    backgroundColor: "rgba(15, 23, 42, 0.65)",
     justifyContent: "center",
     alignItems: "center",
     padding: 16,
   },
   modalCard: {
     width: "100%",
-    maxHeight: "90%",
     backgroundColor: "#FFFFFF",
-    borderRadius: 12,
+    borderRadius: 16,
     overflow: "hidden",
-    shadowColor: "#000",
+    maxHeight: "90%",
+    shadowColor: "#0F172A",
     shadowOpacity: 0.25,
-    shadowRadius: 16,
-    elevation: 8,
+    shadowRadius: 24,
+    elevation: 10,
   },
   modalHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingVertical: 16,
-    paddingHorizontal: 20,
+    paddingVertical: 18,
+    paddingHorizontal: 24,
     borderBottomWidth: 1,
-    borderBottomColor: "#E5E7EB",
-    backgroundColor: "#F9FAFB",
+    borderBottomColor: "#E2E8F0",
+    backgroundColor: "#F8FAFC",
   },
   headerTitleRow: {
     flexDirection: "row",
     alignItems: "center",
     gap: 12,
+    flex: 1,
   },
   iconCircle: {
     width: 38,
     height: 38,
-    borderRadius: 8,
-    backgroundColor: "#D1FAE5",
+    borderRadius: 10,
+    backgroundColor: "#EFF6FF",
     justifyContent: "center",
     alignItems: "center",
   },
   modalTitle: {
     fontSize: 17,
     fontWeight: "800",
-    color: "#164E3A",
+    color: "#0F172A",
   },
   modalSubtitle: {
     fontSize: 12,
-    color: "#6B7280",
-    marginTop: 2,
+    color: "#64748B",
+    marginTop: 1,
   },
   closeBtn: {
     padding: 6,
-    borderRadius: 6,
-    backgroundColor: "#E5E7EB",
+    borderRadius: 8,
   },
   modalScroll: {
     flexGrow: 0,
@@ -437,366 +402,311 @@ const styles = StyleSheet.create({
     gap: 14,
   },
   promptTitle: {
-    fontSize: 16,
-    fontWeight: "700",
-    color: "#111827",
+    fontSize: 17,
+    fontWeight: "800",
+    color: "#0F172A",
   },
   promptSub: {
     fontSize: 13,
-    color: "#6B7280",
-    marginTop: -8,
+    color: "#64748B",
+    lineHeight: 19,
+    marginBottom: 4,
   },
-  triageOptionCardDanger: {
-    backgroundColor: "#FEF2F2",
-    borderRadius: 8,
-    borderWidth: 1.5,
-    borderColor: "#FCA5A5",
-    padding: 14,
-    gap: 10,
-  },
-  optionHeader: {
+  severityCard: {
     flexDirection: "row",
-    gap: 12,
+    gap: 14,
+    padding: 16,
+    borderRadius: 12,
+    borderWidth: 1.5,
   },
-  dangerIconBadge: {
-    width: 36,
-    height: 36,
-    borderRadius: 8,
+  severityEmergency: {
+    backgroundColor: "#FEF2F2",
+    borderColor: "#FECACA",
+  },
+  severityUrgent: {
+    backgroundColor: "#FFFBEB",
+    borderColor: "#FDE68A",
+  },
+  severityRoutine: {
+    backgroundColor: "#F8FAFC",
+    borderColor: "#E2E8F0",
+  },
+  severityIconCircleRed: {
+    width: 42,
+    height: 42,
+    borderRadius: 10,
     backgroundColor: "#FEE2E2",
     justifyContent: "center",
     alignItems: "center",
   },
-  dangerTitle: {
-    fontSize: 14,
-    fontWeight: "800",
-    color: "#991B1B",
-  },
-  dangerSub: {
-    fontSize: 12,
-    color: "#B91C1C",
-    lineHeight: 16,
-    marginTop: 2,
-  },
-  cardFooterDanger: {
-    borderTopWidth: 1,
-    borderTopColor: "#FECACA",
-    paddingTop: 8,
-  },
-  cardFooterTextDanger: {
-    fontSize: 12,
-    fontWeight: "700",
-    color: "#DC2626",
-  },
-  triageOptionCardUrgent: {
-    backgroundColor: "#FFFBEB",
-    borderRadius: 8,
-    borderWidth: 1.5,
-    borderColor: "#FDE68A",
-    padding: 14,
-    gap: 10,
-  },
-  urgentIconBadge: {
-    width: 36,
-    height: 36,
-    borderRadius: 8,
+  severityIconCircleAmber: {
+    width: 42,
+    height: 42,
+    borderRadius: 10,
     backgroundColor: "#FEF3C7",
     justifyContent: "center",
     alignItems: "center",
   },
-  urgentTitle: {
-    fontSize: 14,
-    fontWeight: "800",
-    color: "#92400E",
-  },
-  urgentSub: {
-    fontSize: 12,
-    color: "#B45309",
-    lineHeight: 16,
-    marginTop: 2,
-  },
-  cardFooterUrgent: {
-    borderTopWidth: 1,
-    borderTopColor: "#FDE68A",
-    paddingTop: 8,
-  },
-  cardFooterTextUrgent: {
-    fontSize: 12,
-    fontWeight: "700",
-    color: "#D97706",
-  },
-  triageOptionCardRoutine: {
-    backgroundColor: "#F0FDF4",
-    borderRadius: 8,
-    borderWidth: 1.5,
-    borderColor: "#BBF7D0",
-    padding: 14,
-    gap: 10,
-  },
-  routineIconBadge: {
-    width: 36,
-    height: 36,
-    borderRadius: 8,
-    backgroundColor: "#DCFCE7",
+  severityIconCircleBlue: {
+    width: 42,
+    height: 42,
+    borderRadius: 10,
+    backgroundColor: "#EFF6FF",
     justifyContent: "center",
     alignItems: "center",
   },
-  routineTitle: {
-    fontSize: 14,
+  severityBadgeRed: {
+    alignSelf: "flex-start",
+    backgroundColor: "#DC2626",
+    paddingVertical: 2,
+    paddingHorizontal: 8,
+    borderRadius: 4,
+    marginBottom: 4,
+  },
+  severityBadgeRedText: {
+    color: "#FFFFFF",
+    fontSize: 10.5,
     fontWeight: "800",
-    color: "#166534",
+    letterSpacing: 0.5,
   },
-  routineSub: {
-    fontSize: 12,
-    color: "#15803D",
-    lineHeight: 16,
-    marginTop: 2,
+  severityBadgeAmber: {
+    alignSelf: "flex-start",
+    backgroundColor: "#D97706",
+    paddingVertical: 2,
+    paddingHorizontal: 8,
+    borderRadius: 4,
+    marginBottom: 4,
   },
-  cardFooterRoutine: {
-    borderTopWidth: 1,
-    borderTopColor: "#BBF7D0",
-    paddingTop: 8,
-  },
-  cardFooterTextRoutine: {
-    fontSize: 12,
-    fontWeight: "700",
-    color: "#166534",
-  },
-  directPortalLinkBox: {
-    backgroundColor: "#F9FAFB",
-    padding: 14,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
-    alignItems: "center",
-    gap: 8,
-    marginTop: 6,
-  },
-  directPortalText: {
-    fontSize: 12,
-    color: "#4B5563",
-  },
-  appFolioBtn: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 6,
-    backgroundColor: "#ECFDF5",
-    paddingVertical: 7,
-    paddingHorizontal: 14,
-    borderRadius: 6,
-    borderWidth: 1,
-    borderColor: "#A7F3D0",
-  },
-  appFolioBtnText: {
-    fontSize: 12.5,
-    fontWeight: "700",
-    color: "#164E3A",
-  },
-  emergencyAlertBanner: {
-    backgroundColor: "#FEF2F2",
-    padding: 14,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: "#FCA5A5",
-    flexDirection: "row",
-    gap: 12,
-  },
-  emergencyAlertHeading: {
-    fontSize: 14,
+  severityBadgeAmberText: {
+    color: "#FFFFFF",
+    fontSize: 10.5,
     fontWeight: "800",
-    color: "#991B1B",
+    letterSpacing: 0.5,
   },
-  emergencyAlertBody: {
+  severityBadgeBlue: {
+    alignSelf: "flex-start",
+    backgroundColor: "#2563EB",
+    paddingVertical: 2,
+    paddingHorizontal: 8,
+    borderRadius: 4,
+    marginBottom: 4,
+  },
+  severityBadgeBlueText: {
+    color: "#FFFFFF",
+    fontSize: 10.5,
+    fontWeight: "800",
+    letterSpacing: 0.5,
+  },
+  severityTitle: {
+    fontSize: 14,
+    fontWeight: "700",
+    color: "#0F172A",
+    lineHeight: 20,
+  },
+  severityDesc: {
     fontSize: 12,
-    color: "#7F1D1D",
+    color: "#64748B",
     marginTop: 4,
     lineHeight: 17,
   },
-  emergencyActionsList: {
-    backgroundColor: "#F9FAFB",
-    padding: 14,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
-    gap: 8,
+  directPortalLink: {
+    alignSelf: "center",
+    paddingVertical: 6,
   },
-  actionsListHeading: {
+  directPortalLinkText: {
+    color: "#2563EB",
     fontSize: 13,
-    fontWeight: "700",
-    color: "#111827",
+    fontWeight: "600",
+    textDecorationLine: "underline",
   },
-  actionItem: {
-    fontSize: 12.5,
-    color: "#374151",
-    lineHeight: 18,
+  emergencyWarningBanner: {
+    alignItems: "center",
+    backgroundColor: "#FEF2F2",
+    borderRadius: 12,
+    padding: 18,
+    gap: 8,
+    borderWidth: 1,
+    borderColor: "#FECACA",
   },
-  emergencyCallBtn: {
-    backgroundColor: "#DC2626",
-    paddingVertical: 14,
-    paddingHorizontal: 16,
-    borderRadius: 8,
+  emergencyWarningTitle: {
+    fontSize: 17,
+    fontWeight: "800",
+    color: "#991B1B",
+  },
+  emergencyWarningText: {
+    fontSize: 13,
+    color: "#7F1D1D",
+    textAlign: "center",
+    lineHeight: 19,
+  },
+  emergencyActionCard: {
+    backgroundColor: "#F8FAFC",
+    borderRadius: 12,
+    padding: 20,
+    alignItems: "center",
+    gap: 8,
+    borderWidth: 1,
+    borderColor: "#E2E8F0",
+  },
+  emergencyActionLabel: {
+    fontSize: 11,
+    fontWeight: "800",
+    color: "#64748B",
+    letterSpacing: 0.8,
+  },
+  emergencyPhoneNumber: {
+    fontSize: 26,
+    fontWeight: "900",
+    color: "#0F172A",
+  },
+  emergencyActionSub: {
+    fontSize: 12,
+    color: "#64748B",
+    textAlign: "center",
+  },
+  callNowBtn: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
-    gap: 12,
+    gap: 8,
+    backgroundColor: "#DC2626",
+    paddingVertical: 13,
+    paddingHorizontal: 24,
+    borderRadius: 8,
     marginTop: 6,
   },
-  callBtnMain: {
+  callNowBtnText: {
     color: "#FFFFFF",
     fontSize: 15,
-    fontWeight: "800",
+    fontWeight: "700",
   },
-  callBtnSub: {
-    color: "#FEE2E2",
-    fontSize: 11,
+  backLink: {
+    alignSelf: "center",
+    paddingVertical: 8,
   },
-  backBtn: {
-    paddingVertical: 10,
-    alignItems: "center",
-  },
-  backBtnText: {
+  backLinkText: {
+    color: "#64748B",
     fontSize: 13,
-    color: "#4B5563",
     fontWeight: "600",
   },
-  formWrap: {
-    gap: 12,
-  },
-  urgencyBadgeRow: {
+  selectedUrgencyBanner: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: "#F3F4F6",
-    paddingVertical: 6,
-    paddingHorizontal: 10,
-    borderRadius: 6,
+    backgroundColor: "#EFF6FF",
+    padding: 12,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: "#BFDBFE",
   },
-  ticketTypeTag: {
-    fontSize: 12,
-    fontWeight: "700",
-    color: "#1F2937",
+  selectedUrgencyBannerText: {
+    fontSize: 13,
+    color: "#1E40AF",
   },
-  changeTagLink: {
-    fontSize: 12,
+  changeUrgencyLink: {
     color: "#2563EB",
-    fontWeight: "600",
+    fontSize: 13,
+    fontWeight: "700",
+    textDecorationLine: "underline",
   },
   inputGroup: {
     gap: 6,
-  },
-  label: {
-    fontSize: 13,
-    fontWeight: "600",
-    color: "#374151",
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: "#D1D5DB",
-    borderRadius: 7,
-    paddingVertical: 9,
-    paddingHorizontal: 12,
-    fontSize: 14,
-    color: "#111827",
-    backgroundColor: "#FFFFFF",
-  },
-  textArea: {
-    minHeight: 70,
-    textAlignVertical: "top",
   },
   inputRow: {
     flexDirection: "row",
     gap: 12,
   },
-  chipsRow: {
-    flexDirection: "row",
-    gap: 8,
-    flexWrap: "wrap",
+  label: {
+    fontSize: 13,
+    fontWeight: "600",
+    color: "#1E293B",
   },
-  chip: {
-    paddingVertical: 6,
-    paddingHorizontal: 10,
-    borderRadius: 6,
+  input: {
+    backgroundColor: "#F8FAFC",
     borderWidth: 1,
-    borderColor: "#E5E7EB",
-    backgroundColor: "#F9FAFB",
-  },
-  chipActive: {
-    borderColor: "#164E3A",
-    backgroundColor: "#ECFDF5",
-  },
-  chipText: {
-    fontSize: 12,
-    color: "#4B5563",
-  },
-  chipTextActive: {
-    color: "#164E3A",
-    fontWeight: "700",
-  },
-  submitWorkOrderBtn: {
-    backgroundColor: "#164E3A",
-    paddingVertical: 13,
+    borderColor: "#CBD5E1",
     borderRadius: 8,
-    alignItems: "center",
-    marginTop: 8,
-  },
-  submitWorkOrderBtnText: {
-    color: "#FFFFFF",
+    paddingVertical: 10,
+    paddingHorizontal: 14,
     fontSize: 14,
+    color: "#0F172A",
+  },
+  submitBtn: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 8,
+    backgroundColor: "#2563EB",
+    paddingVertical: 14,
+    borderRadius: 10,
+    marginTop: 8,
+    shadowColor: "#2563EB",
+    shadowOpacity: 0.25,
+    shadowRadius: 10,
+    elevation: 3,
+  },
+  submitBtnText: {
+    color: "#FFFFFF",
+    fontSize: 15,
     fontWeight: "700",
   },
   successWrap: {
     alignItems: "center",
-    paddingVertical: 14,
-    gap: 12,
+    paddingVertical: 16,
+    gap: 14,
   },
-  successBadge: {
-    width: 64,
-    height: 64,
-    borderRadius: 32,
+  successIconCircle: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
     backgroundColor: "#D1FAE5",
     justifyContent: "center",
     alignItems: "center",
   },
   successTitle: {
-    fontSize: 19,
+    fontSize: 20,
     fontWeight: "800",
-    color: "#164E3A",
-  },
-  successSub: {
-    fontSize: 13,
-    color: "#4B5563",
+    color: "#0F172A",
     textAlign: "center",
   },
-  stepsMiniCard: {
+  successSub: {
+    fontSize: 13.5,
+    color: "#64748B",
+    textAlign: "center",
+    lineHeight: 20,
+  },
+  ticketDetailsCard: {
     width: "100%",
-    backgroundColor: "#F9FAFB",
+    backgroundColor: "#F8FAFC",
+    borderRadius: 10,
     padding: 14,
-    borderRadius: 8,
     borderWidth: 1,
-    borderColor: "#E5E7EB",
-    gap: 6,
+    borderColor: "#E2E8F0",
+    gap: 8,
   },
-  miniCardTitle: {
-    fontSize: 13,
+  ticketRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  ticketLabel: {
+    fontSize: 12.5,
+    color: "#64748B",
+  },
+  ticketVal: {
+    fontSize: 12.5,
     fontWeight: "700",
-    color: "#111827",
-    marginBottom: 4,
+    color: "#0F172A",
   },
-  miniStep: {
-    fontSize: 12,
-    color: "#4B5563",
-    lineHeight: 17,
-  },
-  closeSuccessBtn: {
+  doneBtn: {
     width: "100%",
-    backgroundColor: "#164E3A",
+    backgroundColor: "#0F172A",
     paddingVertical: 12,
     borderRadius: 8,
     alignItems: "center",
-    marginTop: 6,
+    marginTop: 8,
   },
-  closeSuccessBtnText: {
+  doneBtnText: {
     color: "#FFFFFF",
     fontSize: 14,
-    fontWeight: "700",
+    fontWeight: "600",
   },
 });

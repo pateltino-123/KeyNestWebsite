@@ -19,7 +19,6 @@ import WebsiteLayout from "@/components/keynest/WebsiteLayout";
 import { KEYNEST_INFO } from "@/constants/keynestData";
 
 export default function CompliancePage() {
-
   const openUrl = (url: string) => {
     Linking.openURL(url).catch(() => {});
   };
@@ -30,7 +29,7 @@ export default function CompliancePage() {
       <View style={styles.headerHero}>
         <View style={styles.innerContainer}>
           <View style={styles.badgePill}>
-            <ShieldCheck size={14} color="#10B981" />
+            <ShieldCheck size={14} color="#38BDF8" />
             <Text style={styles.badgePillText}>Texas Real Estate Commission (TREC) Regulatory Notices</Text>
           </View>
           <Text style={styles.pageTitle}>Regulatory Compliance & Broker Disclosures</Text>
@@ -46,7 +45,7 @@ export default function CompliancePage() {
             {/* 1. Broker Identification & Relationship */}
             <View style={styles.complianceCard}>
               <View style={styles.cardHeader}>
-                <Building size={22} color="#164E3A" />
+                <Building size={22} color="#2563EB" />
                 <Text style={styles.cardHeading}>Brokerage Identification & Operating Entity</Text>
               </View>
               <Text style={styles.bodyParagraph}>
@@ -63,10 +62,10 @@ export default function CompliancePage() {
               </View>
             </View>
 
-            {/* 2. Mandatory TREC Notices (IABS and Consumer Protection Notice) */}
+            {/* 2. Mandatory TREC Notices */}
             <View style={styles.complianceCard}>
               <View style={styles.cardHeader}>
-                <FileText size={22} color="#164E3A" />
+                <FileText size={22} color="#2563EB" />
                 <Text style={styles.cardHeading}>Texas Real Estate Commission (TREC) Mandatory Notices</Text>
               </View>
               <Text style={styles.bodyParagraph}>
@@ -82,7 +81,7 @@ export default function CompliancePage() {
                     <Text style={styles.trecBtnTitle}>TREC Information About Brokerage Services (IABS)</Text>
                     <Text style={styles.trecBtnSub}>Learn about the different types of brokerage representation and consumer duties.</Text>
                   </View>
-                  <ExternalLink size={16} color="#164E3A" />
+                  <ExternalLink size={16} color="#2563EB" />
                 </TouchableOpacity>
 
                 <TouchableOpacity
@@ -93,68 +92,38 @@ export default function CompliancePage() {
                     <Text style={styles.trecBtnTitle}>TREC Consumer Protection Notice</Text>
                     <Text style={styles.trecBtnSub}>Official TREC notice regarding broker licensing, recovery funds, and filing complaints.</Text>
                   </View>
-                  <ExternalLink size={16} color="#164E3A" />
+                  <ExternalLink size={16} color="#2563EB" />
                 </TouchableOpacity>
               </View>
             </View>
 
-            {/* 3. Fair Housing & Equal Opportunity */}
+            {/* 3. Fair Housing Policy */}
             <View style={styles.complianceCard}>
               <View style={styles.cardHeader}>
-                <Scale size={22} color="#164E3A" />
-                <Text style={styles.cardHeading}>Fair Housing & Equal Opportunity Policy</Text>
-              </View>
-              <View style={styles.equalHousingBadge}>
-                <Text style={styles.equalHousingBadgeText}>EQUAL HOUSING OPPORTUNITY</Text>
+                <Scale size={22} color="#2563EB" />
+                <Text style={styles.cardHeading}>Equal Housing Opportunity & Fair Housing Statement</Text>
               </View>
               <Text style={styles.bodyParagraph}>
-                KeyNest Realty Property Management and Fair Deal Realty Inc. are fully committed to the letter and spirit of the U.S. policy for the achievement of equal housing opportunity throughout the Nation.
+                KeyNest Realty and Fair Deal Realty Inc. conduct business in strict accordance with Federal, State, and Local Fair Housing laws. We do not discriminate against any applicant or resident based on:
               </Text>
-              <Text style={styles.bodyParagraph}>
-                We encourage and support an affirmative advertising and marketing program in which there are no barriers to obtaining housing because of race, color, religion, sex, handicap/disability, familial status, or national origin. All rental applications are evaluated strictly against published, objective selection criteria.
-              </Text>
-            </View>
-
-            {/* 4. Trust Account & Financial Governance */}
-            <View style={styles.complianceCard}>
-              <View style={styles.cardHeader}>
-                <Lock size={22} color="#164E3A" />
-                <Text style={styles.cardHeading}>Security Deposit Trust Accounting</Text>
-              </View>
-              <Text style={styles.bodyParagraph}>
-                In strict compliance with Chapter 92 of the Texas Property Code and Texas Real Estate Commission regulations:
-              </Text>
-              <View style={styles.infoGrid}>
-                <Text style={styles.infoLine}>• All resident security deposits are held in a separate, broker-supervised escrow trust account managed by Fair Deal Realty Inc.</Text>
-                <Text style={styles.infoLine}>• Tenant funds are never commingled with company operating accounts.</Text>
-                <Text style={styles.infoLine}>• Security deposit itemization and disbursements are executed within statutory 30-day deadlines upon surrender of possession.</Text>
+              <View style={styles.protectedClassesRow}>
+                {["Race", "Color", "National Origin", "Religion", "Sex", "Familial Status", "Disability"].map((cls) => (
+                  <View key={cls} style={styles.classPill}>
+                    <CheckCircle2 size={13} color="#2563EB" />
+                    <Text style={styles.classPillText}>{cls}</Text>
+                  </View>
+                ))}
               </View>
             </View>
 
-            {/* 5. Privacy & Data Security Disclosures */}
+            {/* 4. Security Deposit Trust Accounts */}
             <View style={styles.complianceCard}>
               <View style={styles.cardHeader}>
-                <ShieldCheck size={22} color="#164E3A" />
-                <Text style={styles.cardHeading}>Privacy Policy & Secure Data Routing</Text>
+                <Lock size={22} color="#2563EB" />
+                <Text style={styles.cardHeading}>Security Deposit & Trust Escrow Accounting</Text>
               </View>
               <Text style={styles.bodyParagraph}>
-                KeyNest Realty takes user privacy and data security seriously. We adhere to the following principles:
-              </Text>
-              <View style={styles.infoGrid}>
-                <Text style={styles.infoLine}>• No Sensitive Financial Data on Web Forms: Sensitive identity documents, Social Security numbers, bank account logins, and tenant credit screenings are processed solely through encrypted AppFolio software platforms.</Text>
-                <Text style={styles.infoLine}>• No Selling of Personal Information: Lead inquiries, owner contacts, and phone numbers are never sold or rented to third-party marketing firms.</Text>
-                <Text style={styles.infoLine}>• Communications Consent: In accordance with TCPA and CTIA standards, users submitting inquiries consent to communication regarding their specific real estate inquiries.</Text>
-              </View>
-            </View>
-
-            {/* 6. Advertising Governance */}
-            <View style={styles.complianceCard}>
-              <View style={styles.cardHeader}>
-                <CheckCircle2 size={22} color="#164E3A" />
-                <Text style={styles.cardHeading}>Texas Advertising Rules & Supportable Claims</Text>
-              </View>
-              <Text style={styles.bodyParagraph}>
-                Under TREC Rule §535.155, all real estate advertising must clearly identify the licensed broker and must not mislead the public. KeyNest Realty does not make unsupported performance guarantees such as {"\""}guaranteed faster leasing{"\""} or {"\""}maximum returns.{"\""} Every rental analysis reflects current comparative market data, and all final leasing terms are governed by written agreements.
+                All tenant security deposits collected by KeyNest Realty are deposited into an FDIC-insured broker trust escrow account governed by Texas Property Code Chapter 92. Security deposits are never commingled with operating funds.
               </Text>
             </View>
           </View>
@@ -166,97 +135,94 @@ export default function CompliancePage() {
 
 const styles = StyleSheet.create({
   headerHero: {
-    backgroundColor: "#164E3A",
-    paddingVertical: 52,
+    backgroundColor: "#0B1120",
+    paddingVertical: 72,
     borderBottomWidth: 1,
-    borderBottomColor: "#1D644B",
+    borderBottomColor: "#1E293B",
   },
   innerContainer: {
-    maxWidth: 1080,
+    maxWidth: 1240,
     width: "100%",
     marginHorizontal: "auto",
-    paddingHorizontal: 16,
+    paddingHorizontal: 20,
   },
   badgePill: {
     alignSelf: "flex-start",
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-    backgroundColor: "#103C2D",
+    backgroundColor: "#1E293B",
     paddingVertical: 6,
     paddingHorizontal: 12,
     borderRadius: 20,
     borderWidth: 1,
-    borderColor: "#1E5642",
-    marginBottom: 12,
+    borderColor: "#334155",
+    marginBottom: 16,
   },
   badgePillText: {
-    color: "#D1FAE5",
+    color: "#E2E8F0",
     fontSize: 12.5,
     fontWeight: "600",
   },
   pageTitle: {
-    fontSize: 34,
+    fontSize: 38,
     fontWeight: "900",
     color: "#FFFFFF",
-    letterSpacing: -0.5,
-    marginBottom: 10,
+    letterSpacing: -1,
+    marginBottom: 12,
   },
   pageSubtitle: {
-    fontSize: 15.5,
-    color: "#D1D5DB",
-    lineHeight: 23,
+    fontSize: 16.5,
+    color: "#94A3B8",
     maxWidth: 760,
+    lineHeight: 25,
   },
   sectionWhite: {
     backgroundColor: "#FFFFFF",
-    paddingVertical: 56,
+    paddingVertical: 72,
   },
   contentStack: {
+    maxWidth: 900,
+    width: "100%",
+    marginHorizontal: "auto",
     gap: 24,
   },
   complianceCard: {
-    backgroundColor: "#FFFFFF",
-    borderRadius: 10,
+    backgroundColor: "#F8FAFC",
+    borderRadius: 14,
     borderWidth: 1,
-    borderColor: "#E5E7EB",
-    padding: 24,
-    gap: 12,
-    shadowColor: "#000",
-    shadowOpacity: 0.03,
-    shadowRadius: 6,
-    elevation: 2,
+    borderColor: "#E2E8F0",
+    padding: 28,
+    gap: 14,
   },
   cardHeader: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: "#F3F4F6",
-    paddingBottom: 10,
+    gap: 12,
+    marginBottom: 4,
   },
   cardHeading: {
-    fontSize: 17,
+    fontSize: 18,
     fontWeight: "800",
-    color: "#111827",
+    color: "#0F172A",
   },
   bodyParagraph: {
-    fontSize: 13.5,
-    color: "#374151",
-    lineHeight: 21,
+    fontSize: 14,
+    color: "#475569",
+    lineHeight: 22,
   },
   infoGrid: {
-    backgroundColor: "#F9FAFB",
-    padding: 14,
-    borderRadius: 8,
+    backgroundColor: "#FFFFFF",
+    borderRadius: 10,
+    padding: 16,
     borderWidth: 1,
-    borderColor: "#E5E7EB",
-    gap: 6,
+    borderColor: "#E2E8F0",
+    gap: 8,
   },
   infoLine: {
     fontSize: 13,
-    color: "#4B5563",
-    lineHeight: 19,
+    color: "#334155",
+    fontWeight: "500",
   },
   trecButtonsGroup: {
     gap: 12,
@@ -266,34 +232,43 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    backgroundColor: "#F0FDF4",
+    backgroundColor: "#FFFFFF",
+    borderRadius: 10,
     padding: 16,
-    borderRadius: 8,
     borderWidth: 1,
-    borderColor: "#BBF7D0",
-    gap: 12,
+    borderColor: "#CBD5E1",
+    gap: 14,
   },
   trecBtnTitle: {
     fontSize: 14.5,
-    fontWeight: "800",
-    color: "#164E3A",
+    fontWeight: "700",
+    color: "#0F172A",
   },
   trecBtnSub: {
     fontSize: 12,
-    color: "#065F46",
+    color: "#64748B",
     marginTop: 2,
   },
-  equalHousingBadge: {
-    alignSelf: "flex-start",
-    backgroundColor: "#164E3A",
-    paddingVertical: 4,
-    paddingHorizontal: 10,
-    borderRadius: 4,
+  protectedClassesRow: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 8,
+    marginTop: 6,
   },
-  equalHousingBadgeText: {
-    color: "#FFFFFF",
-    fontSize: 11,
-    fontWeight: "800",
-    letterSpacing: 0.6,
+  classPill: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+    backgroundColor: "#EFF6FF",
+    paddingVertical: 6,
+    paddingHorizontal: 10,
+    borderRadius: 6,
+    borderWidth: 1,
+    borderColor: "#BFDBFE",
+  },
+  classPillText: {
+    fontSize: 12,
+    fontWeight: "600",
+    color: "#1E40AF",
   },
 });

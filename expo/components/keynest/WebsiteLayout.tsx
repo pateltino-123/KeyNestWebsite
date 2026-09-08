@@ -107,11 +107,11 @@ export default function WebsiteLayout({ children }: WebsiteLayoutProps) {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: "#113A2F",
+    backgroundColor: "#0B1120",
   },
   layoutRoot: {
     flex: 1,
-    backgroundColor: "#F8FAF9",
+    backgroundColor: "#F8FAFC",
   },
   mainScroll: {
     flex: 1,

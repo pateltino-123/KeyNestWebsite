@@ -41,7 +41,7 @@ export default function Footer() {
         <View style={styles.innerContainer}>
           <View style={styles.brokerageBannerContent}>
             <View style={styles.brokerageIconBox}>
-              <ShieldCheck size={20} color="#10B981" />
+              <ShieldCheck size={20} color="#38BDF8" />
             </View>
             <View style={{ flex: 1 }}>
               <Text style={styles.brokerageBannerTitle}>
@@ -81,19 +81,19 @@ export default function Footer() {
 
               <View style={styles.contactList}>
                 <View style={styles.contactItem}>
-                  <MapPin size={16} color="#34D399" style={styles.contactIcon} />
+                  <MapPin size={16} color="#60A5FA" style={styles.contactIcon} />
                   <Text style={styles.contactText}>{KEYNEST_INFO.officeAddress}</Text>
                 </View>
                 <View style={styles.contactItem}>
-                  <Phone size={16} color="#34D399" style={styles.contactIcon} />
+                  <Phone size={16} color="#60A5FA" style={styles.contactIcon} />
                   <Text style={styles.contactText}>Office: {KEYNEST_INFO.phone}</Text>
                 </View>
                 <View style={styles.contactItem}>
-                  <Mail size={16} color="#34D399" style={styles.contactIcon} />
+                  <Mail size={16} color="#60A5FA" style={styles.contactIcon} />
                   <Text style={styles.contactText}>{KEYNEST_INFO.email}</Text>
                 </View>
                 <View style={styles.contactItem}>
-                  <Clock size={16} color="#34D399" style={styles.contactIcon} />
+                  <Clock size={16} color="#60A5FA" style={styles.contactIcon} />
                   <Text style={styles.contactText}>{KEYNEST_INFO.hours}</Text>
                 </View>
               </View>
@@ -149,43 +149,37 @@ export default function Footer() {
               </View>
             </View>
 
-            {/* Column 4: Brokerage Oversight & Regulatory */}
-            <View style={[styles.col, { width: isDesktop ? "24%" : isTablet ? "48%" : "100%" }]}>
-              <Text style={styles.colTitle}>Brokerage & Compliance</Text>
-              <View style={styles.brokerageCard}>
-                <View style={styles.brokerageCardHeader}>
-                  <Building size={16} color="#10B981" />
-                  <Text style={styles.brokerageCardTitle}>Fair Deal Realty Inc.</Text>
+            {/* Column 4: Brokerage Leadership */}
+            <View style={[styles.col, { width: isDesktop ? "24%" : "100%" }]}>
+              <Text style={styles.colTitle}>Brokerage & Leadership</Text>
+              <View style={styles.leadershipCard}>
+                <View style={styles.leadHeader}>
+                  <Building size={16} color="#60A5FA" />
+                  <Text style={styles.leadBrokerName}>Fair Deal Realty Inc.</Text>
                 </View>
-                <Text style={styles.brokerageCardText}>
-                  Authorized Managers:{"\n"}
-                  <Text style={{ fontWeight: "700", color: "#FFFFFF" }}>Dinesh Donthula</Text> &{" "}
-                  <Text style={{ fontWeight: "700", color: "#FFFFFF" }}>Purvang Patel</Text>
-                </Text>
-                <Text style={styles.brokerageCardText}>
-                  TREC supervision and compliance, trust accounting procedures, transaction-file risk review, and regulated property-management activity.
-                </Text>
+                <Text style={styles.leadSub}>Sponsoring Texas Brokerage</Text>
+                <View style={styles.leadDivider} />
+                <Text style={styles.leadLabel}>Authorized Property Managers:</Text>
+                <Text style={styles.leadManagerName}>• {KEYNEST_INFO.authorizedManagers[0].name}</Text>
+                <Text style={styles.leadManagerName}>• {KEYNEST_INFO.authorizedManagers[1].name}</Text>
+                <Text style={styles.leadAddress}>{KEYNEST_INFO.officeAddress}</Text>
               </View>
 
-              <View style={styles.trecLinksBox}>
+              <View style={styles.complianceLinksBox}>
                 <TouchableOpacity
-                  style={styles.trecButton}
-                  onPress={() => navigateTo("/compliance")}
-                >
-                  <Text style={styles.trecButtonText}>Texas Real Estate Commission (TREC)</Text>
-                  <ExternalLink size={13} color="#34D399" />
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={styles.trecSubButton}
+                  style={styles.trecBtn}
                   onPress={() => openUrl(KEYNEST_INFO.trecIabsUrl)}
                 >
-                  <Text style={styles.trecSubText}>• Information About Brokerage Services (IABS)</Text>
+                  <Text style={styles.trecBtnText}>TREC IABS Form</Text>
+                  <ExternalLink size={12} color="#93C5FD" />
                 </TouchableOpacity>
+
                 <TouchableOpacity
-                  style={styles.trecSubButton}
+                  style={styles.trecBtn}
                   onPress={() => openUrl(KEYNEST_INFO.trecConsumerNoticeUrl)}
                 >
-                  <Text style={styles.trecSubText}>• TREC Consumer Protection Notice</Text>
+                  <Text style={styles.trecBtnText}>Consumer Protection Notice</Text>
+                  <ExternalLink size={12} color="#93C5FD" />
                 </TouchableOpacity>
               </View>
             </View>
@@ -193,36 +187,28 @@ export default function Footer() {
         </View>
       </View>
 
-      {/* Bottom Legal & Equal Housing Disclaimer */}
-      <View style={styles.bottomBar}>
+      {/* Legal & TREC Statutory Bottom Bar */}
+      <View style={styles.bottomLegalBar}>
         <View style={styles.innerContainer}>
-          <View style={styles.bottomBarContent}>
-            <View style={styles.equalHousingBox}>
-              <View style={styles.equalHousingBadge}>
-                <Text style={styles.equalHousingBadgeText}>EQUAL HOUSING OPPORTUNITY</Text>
-              </View>
-              <Text style={styles.legalDisclaimer}>
-                KeyNest Realty Property Management strictly complies with federal, Texas state, and local Fair Housing laws. We do not discriminate on the basis of race, color, religion, sex, disability, familial status, or national origin. All residential leases and property management agreements are subject to broker approval under Fair Deal Realty Inc. All contractual obligations remain in broker-approved management agreements and leases.
+          <View style={[styles.bottomBarRow, { flexDirection: isDesktop ? "row" : "column" }]}>
+            <View style={styles.bottomBarLeft}>
+              <Text style={styles.bottomLegalNotice}>
+                © {new Date().getFullYear()} KeyNest Realty. All rights reserved. KeyNest Realty Property Management operates under the active brokerage of Fair Deal Realty Inc., a Texas licensed real estate brokerage. Equal Housing Opportunity.
               </Text>
             </View>
 
-            <View style={styles.copyrightRow}>
-              <Text style={styles.copyrightText}>
-                © {new Date().getFullYear()} DoubleDee LLC d/b/a KeyNest Realty. All rights reserved. Under the brokerage of Fair Deal Realty Inc.
-              </Text>
-              <View style={styles.legalLinks}>
-                <TouchableOpacity onPress={() => navigateTo("/compliance")}>
-                  <Text style={styles.legalLink}>TREC Disclosures</Text>
-                </TouchableOpacity>
-                <Text style={styles.legalLinkDot}>•</Text>
-                <TouchableOpacity onPress={() => navigateTo("/compliance")}>
-                  <Text style={styles.legalLink}>Privacy Policy</Text>
-                </TouchableOpacity>
-                <Text style={styles.legalLinkDot}>•</Text>
-                <TouchableOpacity onPress={() => navigateTo("/compliance")}>
-                  <Text style={styles.legalLink}>Terms of Service</Text>
-                </TouchableOpacity>
-              </View>
+            <View style={styles.bottomBarRight}>
+              <TouchableOpacity onPress={() => navigateTo("/compliance")}>
+                <Text style={styles.bottomLink}>Compliance & Disclosures</Text>
+              </TouchableOpacity>
+              <Text style={styles.dot}>•</Text>
+              <TouchableOpacity onPress={() => navigateTo("/compliance")}>
+                <Text style={styles.bottomLink}>Fair Housing</Text>
+              </TouchableOpacity>
+              <Text style={styles.dot}>•</Text>
+              <TouchableOpacity onPress={() => navigateTo("/contact")}>
+                <Text style={styles.bottomLink}>Contact</Text>
+              </TouchableOpacity>
             </View>
           </View>
         </View>
@@ -233,33 +219,32 @@ export default function Footer() {
 
 const styles = StyleSheet.create({
   footerContainer: {
-    backgroundColor: "#0F261E",
-    width: "100%",
+    backgroundColor: "#0B1120",
     borderTopWidth: 1,
-    borderTopColor: "#164E3A",
+    borderTopColor: "#1E293B",
   },
   innerContainer: {
     maxWidth: 1240,
     width: "100%",
     marginHorizontal: "auto",
-    paddingHorizontal: 16,
+    paddingHorizontal: 20,
   },
   brokerageBanner: {
-    backgroundColor: "#164E3A",
-    paddingVertical: 14,
+    backgroundColor: "#0F172A",
+    paddingVertical: 16,
     borderBottomWidth: 1,
-    borderBottomColor: "#1D644B",
+    borderBottomColor: "#1E293B",
   },
   brokerageBannerContent: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 12,
+    gap: 14,
   },
   brokerageIconBox: {
-    width: 36,
-    height: 36,
-    borderRadius: 8,
-    backgroundColor: "#103C2D",
+    width: 38,
+    height: 38,
+    borderRadius: 10,
+    backgroundColor: "#1E293B",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -270,15 +255,15 @@ const styles = StyleSheet.create({
     letterSpacing: 0.2,
   },
   brokerageBannerSubtitle: {
-    color: "#A7F3D0",
-    fontSize: 12,
+    color: "#94A3B8",
+    fontSize: 12.5,
     marginTop: 2,
   },
   mainFooter: {
-    paddingVertical: 48,
+    paddingVertical: 56,
   },
   footerColumns: {
-    gap: 28,
+    gap: 32,
     justifyContent: "space-between",
   },
   col: {
@@ -288,175 +273,162 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 10,
-    marginBottom: 14,
+    marginBottom: 16,
   },
   footerLogoMark: {
-    width: 36,
-    height: 36,
-    borderRadius: 8,
-    backgroundColor: "#10B981",
+    width: 38,
+    height: 38,
+    borderRadius: 10,
+    backgroundColor: "#2563EB",
     justifyContent: "center",
     alignItems: "center",
   },
   footerLogoTitle: {
-    fontSize: 19,
+    fontSize: 20,
     fontWeight: "800",
     color: "#FFFFFF",
     letterSpacing: -0.3,
   },
   footerLogoSub: {
-    fontSize: 11,
-    color: "#34D399",
+    fontSize: 11.5,
+    color: "#60A5FA",
     fontWeight: "600",
     marginTop: -2,
   },
   companyBio: {
-    color: "#9CA3AF",
-    fontSize: 13,
-    lineHeight: 20,
-    marginBottom: 18,
+    color: "#94A3B8",
+    fontSize: 13.5,
+    lineHeight: 21,
+    marginBottom: 20,
   },
   contactList: {
-    gap: 8,
+    gap: 10,
   },
   contactItem: {
     flexDirection: "row",
     alignItems: "flex-start",
-    gap: 8,
+    gap: 10,
   },
   contactIcon: {
     marginTop: 2,
   },
   contactText: {
-    color: "#D1D5DB",
+    color: "#CBD5E1",
     fontSize: 13,
-    lineHeight: 18,
+    lineHeight: 19,
     flex: 1,
   },
   colTitle: {
     fontSize: 15,
     fontWeight: "700",
     color: "#FFFFFF",
-    marginBottom: 16,
+    marginBottom: 18,
     letterSpacing: 0.3,
   },
   linkList: {
-    gap: 10,
+    gap: 11,
   },
   footerLink: {
-    color: "#9CA3AF",
+    color: "#94A3B8",
     fontSize: 13.5,
     paddingVertical: 2,
   },
-  brokerageCard: {
-    backgroundColor: "#14372B",
-    padding: 14,
-    borderRadius: 8,
+  leadershipCard: {
+    backgroundColor: "#111827",
+    padding: 16,
+    borderRadius: 12,
     borderWidth: 1,
-    borderColor: "#1E5642",
-    marginBottom: 14,
+    borderColor: "#1E293B",
   },
-  brokerageCardHeader: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 6,
-    marginBottom: 6,
-  },
-  brokerageCardTitle: {
-    fontSize: 13.5,
-    fontWeight: "700",
-    color: "#FFFFFF",
-  },
-  brokerageCardText: {
-    fontSize: 11.5,
-    color: "#A7F3D0",
-    lineHeight: 16,
-    marginTop: 4,
-  },
-  trecLinksBox: {
-    gap: 6,
-  },
-  trecButton: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    backgroundColor: "#184234",
-    paddingVertical: 8,
-    paddingHorizontal: 10,
-    borderRadius: 6,
-    borderWidth: 1,
-    borderColor: "#235B47",
-  },
-  trecButtonText: {
-    color: "#34D399",
-    fontSize: 12,
-    fontWeight: "600",
-  },
-  trecSubButton: {
-    paddingLeft: 6,
-    paddingVertical: 2,
-  },
-  trecSubText: {
-    color: "#9CA3AF",
-    fontSize: 11.5,
-  },
-  bottomBar: {
-    backgroundColor: "#091712",
-    paddingVertical: 22,
-    borderTopWidth: 1,
-    borderTopColor: "#133126",
-  },
-  bottomBarContent: {
-    gap: 16,
-  },
-  equalHousingBox: {
-    gap: 6,
-  },
-  equalHousingBadge: {
-    alignSelf: "flex-start",
-    backgroundColor: "#184234",
-    paddingHorizontal: 8,
-    paddingVertical: 3,
-    borderRadius: 4,
-    borderWidth: 1,
-    borderColor: "#235B47",
-  },
-  equalHousingBadgeText: {
-    color: "#34D399",
-    fontSize: 10,
-    fontWeight: "700",
-    letterSpacing: 0.5,
-  },
-  legalDisclaimer: {
-    color: "#6B7280",
-    fontSize: 11,
-    lineHeight: 16,
-  },
-  copyrightRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    flexWrap: "wrap",
-    gap: 10,
-    paddingTop: 12,
-    borderTopWidth: 1,
-    borderTopColor: "#142D23",
-  },
-  copyrightText: {
-    color: "#6B7280",
-    fontSize: 11.5,
-  },
-  legalLinks: {
+  leadHeader: {
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
   },
-  legalLink: {
-    color: "#9CA3AF",
-    fontSize: 11.5,
+  leadBrokerName: {
+    color: "#FFFFFF",
+    fontSize: 14,
+    fontWeight: "700",
   },
-  legalLinkDot: {
-    color: "#4B5563",
-    fontSize: 10,
+  leadSub: {
+    color: "#60A5FA",
+    fontSize: 11.5,
+    marginTop: 2,
+  },
+  leadDivider: {
+    height: 1,
+    backgroundColor: "#1E293B",
+    marginVertical: 10,
+  },
+  leadLabel: {
+    color: "#94A3B8",
+    fontSize: 11.5,
+    marginBottom: 4,
+  },
+  leadManagerName: {
+    color: "#E2E8F0",
+    fontSize: 12.5,
+    fontWeight: "600",
+    lineHeight: 18,
+  },
+  leadAddress: {
+    color: "#64748B",
+    fontSize: 11,
+    marginTop: 8,
+    lineHeight: 15,
+  },
+  complianceLinksBox: {
+    marginTop: 14,
+    gap: 8,
+  },
+  trecBtn: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    backgroundColor: "#1E293B",
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: "#334155",
+  },
+  trecBtnText: {
+    color: "#93C5FD",
+    fontSize: 12,
+    fontWeight: "600",
+  },
+  bottomLegalBar: {
+    backgroundColor: "#070A11",
+    paddingVertical: 20,
+    borderTopWidth: 1,
+    borderTopColor: "#111827",
+  },
+  bottomBarRow: {
+    justifyContent: "space-between",
+    alignItems: "center",
+    gap: 12,
+  },
+  bottomBarLeft: {
+    flex: 1,
+  },
+  bottomLegalNotice: {
+    color: "#64748B",
+    fontSize: 12,
+    lineHeight: 18,
+  },
+  bottomBarRight: {
+    flexDirection: "row",
+    alignItems: "center",
+    flexWrap: "wrap",
+    gap: 8,
+  },
+  bottomLink: {
+    color: "#94A3B8",
+    fontSize: 12,
+    fontWeight: "500",
+  },
+  dot: {
+    color: "#475569",
+    fontSize: 12,
   },
 });

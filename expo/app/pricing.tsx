@@ -10,9 +10,10 @@ import {
 import {
   ShieldCheck,
   CheckCircle2,
-  Calendar,
-  Info,
   DollarSign,
+  ArrowRight,
+  ChevronDown,
+  ChevronUp,
 } from "lucide-react-native";
 import WebsiteLayout, { useWebsiteModals } from "@/components/keynest/WebsiteLayout";
 import {
@@ -23,11 +24,12 @@ import {
 export default function PricingPage() {
   const { width } = useWindowDimensions();
   const isDesktop = width >= 1024;
-  const isTablet = width >= 640 && width < 1024;
   const { openRentalAnalysis, openConsultation } = useWebsiteModals();
 
   // Interactive Fee Calculator State
   const [calcMonthlyRent, setCalcMonthlyRent] = useState("2600");
+  const [expandedAddon, setExpandedAddon] = useState<number | null>(null);
+
   const rentNumber = parseFloat(calcMonthlyRent) || 2600;
 
   // Percentage Plan Cost (8.9%)
@@ -40,7 +42,6 @@ export default function PricingPage() {
 
   // Leasing Only (85% one-time placement, amortized over 12 months for comparison)
   const placementFee = Math.round(rentNumber * 0.85);
-  const placementMonthlyAmortized = Math.round(placementFee / 12);
 
   return (
     <WebsiteLayout>
@@ -48,7 +49,7 @@ export default function PricingPage() {
       <View style={styles.headerHero}>
         <View style={styles.innerContainer}>
           <View style={styles.badgePill}>
-            <ShieldCheck size={14} color="#10B981" />
+            <ShieldCheck size={14} color="#38BDF8" />
             <Text style={styles.badgePillText}>Under the Brokerage of Fair Deal Realty Inc.</Text>
           </View>
           <Text style={styles.pageTitle}>Simple, Transparent Pricing</Text>
@@ -58,14 +59,14 @@ export default function PricingPage() {
         </View>
       </View>
 
-      {/* 1. The Three Core Plans (Slide 14 requirements) */}
+      {/* 1. The Three Core Plans */}
       <View style={styles.sectionWhite}>
         <View style={styles.innerContainer}>
           <View style={styles.sectionHeaderCentered}>
             <Text style={styles.sectionOverline}>SELECT YOUR SERVICE MODEL</Text>
             <Text style={styles.sectionTitle}>Choose the Plan That Fits Your Goals</Text>
             <Text style={styles.sectionSubtitle}>
-              Whether you want full-service operational peace of mind or professional placement for self-management, our pricing is straightforward and transparent.
+              Whether you want full-service operational peace of mind or professional tenant placement for self-management, our pricing is transparent and aligned.
             </Text>
           </View>
 
@@ -98,35 +99,29 @@ export default function PricingPage() {
 
                 <Text style={styles.planSummary}>{plan.summary}</Text>
 
-                <View style={styles.planBestForBox}>
-                  <Text style={styles.bestForHeading}>Best For:</Text>
-                  <Text style={styles.bestForText}>{plan.bestFor}</Text>
-                </View>
-
-                <View style={styles.featuresList}>
-                  <Text style={styles.featuresHeading}>WHAT’S INCLUDED:</Text>
+                <View style={styles.planFeaturesList}>
                   {plan.features.map((feat, idx) => (
-                    <View key={idx} style={styles.featureRow}>
-                      <CheckCircle2 size={15} color="#059669" />
-                      <Text style={styles.featureText}>{feat}</Text>
+                    <View key={idx} style={styles.planFeatureRow}>
+                      <CheckCircle2 size={16} color="#2563EB" style={{ marginTop: 2 }} />
+                      <Text style={styles.planFeatureText}>{feat}</Text>
                     </View>
                   ))}
                 </View>
 
                 <TouchableOpacity
                   style={[
-                    styles.selectPlanBtn,
-                    plan.highlighted && styles.selectPlanBtnHighlighted,
+                    styles.planCtaBtn,
+                    plan.highlighted && styles.planCtaBtnHighlighted,
                   ]}
-                  onPress={() => openRentalAnalysis()}
+                  onPress={openConsultation}
                 >
                   <Text
                     style={[
-                      styles.selectPlanBtnText,
-                      plan.highlighted && styles.selectPlanBtnTextHighlighted,
+                      styles.planCtaBtnText,
+                      plan.highlighted && styles.planCtaBtnTextHighlighted,
                     ]}
                   >
-                    Select Model & Get Analysis
+                    Select {plan.name}
                   </Text>
                 </TouchableOpacity>
               </View>
@@ -135,148 +130,171 @@ export default function PricingPage() {
         </View>
       </View>
 
-      {/* 2. Interactive Fee & Net Proceeds ROI Calculator */}
-      <View style={styles.sectionLight}>
+      {/* 2. Interactive ROI & Fee Comparison Tool */}
+      <View style={styles.sectionAlt}>
         <View style={styles.innerContainer}>
-          <View style={styles.sectionHeaderCentered}>
-            <Text style={styles.sectionOverline}>INTERACTIVE ESTIMATOR</Text>
-            <Text style={styles.sectionTitle}>Calculate Your Management Proceeds</Text>
-            <Text style={styles.sectionSubtitle}>
-              Slide or enter your anticipated monthly rent to compare estimated monthly management costs and net distributions.
-            </Text>
-          </View>
+          <View style={styles.calculatorWrapper}>
+            <View style={styles.calcTitleRow}>
+              <View style={styles.calcIconBadge}>
+                <DollarSign size={20} color="#2563EB" />
+              </View>
+              <View>
+                <Text style={styles.calcHeading}>Interactive Fee Comparison Tool</Text>
+                <Text style={styles.calcSub}>
+                  Adjust the monthly rent to compare exact fees and your projected net disbursement
+                </Text>
+              </View>
+            </View>
 
-          <View style={styles.calculatorCard}>
-            <View style={styles.calcInputSection}>
-              <Text style={styles.calcInputLabel}>Enter Estimated Monthly Rent ($):</Text>
-              <View style={styles.rentInputBox}>
-                <DollarSign size={20} color="#164E3A" />
+            <View style={styles.calcInputRow}>
+              <Text style={styles.calcInputLabel}>Monthly Rental Rate:</Text>
+              <View style={styles.inputWithPrefix}>
+                <Text style={styles.currencyPrefix}>$</Text>
                 <TextInput
-                  style={styles.rentTextInput}
+                  style={styles.calcInputField}
                   value={calcMonthlyRent}
                   onChangeText={setCalcMonthlyRent}
                   keyboardType="numeric"
                   placeholder="2600"
+                  placeholderTextColor="#94A3B8"
                 />
+                <Text style={styles.currencySuffix}>/mo</Text>
               </View>
-
-              {/* Quick Rent Preset Chips */}
-              <View style={styles.presetChipsRow}>
-                {["2200", "2600", "3000", "3500", "4200"].map((amt) => (
+              <View style={styles.quickRentPills}>
+                {["2200", "2600", "3000", "3500"].map((rent) => (
                   <TouchableOpacity
-                    key={amt}
-                    style={[styles.presetChip, calcMonthlyRent === amt && styles.presetChipActive]}
-                    onPress={() => setCalcMonthlyRent(amt)}
+                    key={rent}
+                    style={[styles.quickRentBtn, calcMonthlyRent === rent && styles.quickRentBtnActive]}
+                    onPress={() => setCalcMonthlyRent(rent)}
                   >
-                    <Text style={[styles.presetChipText, calcMonthlyRent === amt && styles.presetChipTextActive]}>
-                      ${amt}/mo
+                    <Text style={[styles.quickRentText, calcMonthlyRent === rent && styles.quickRentTextActive]}>
+                      ${rent}
                     </Text>
                   </TouchableOpacity>
                 ))}
               </View>
             </View>
 
-            <View style={styles.calcDivider} />
-
-            {/* Side-by-side comparison */}
+            {/* Comparison Cards Grid */}
             <View
               style={[
-                styles.comparisonRow,
-                { flexDirection: isDesktop ? "row" : isTablet ? "row" : "column" },
+                styles.comparisonGrid,
+                { flexDirection: isDesktop ? "row" : "column" },
               ]}
             >
-              {/* Percentage Col */}
-              <View style={styles.comparisonCol}>
-                <View style={styles.comparisonHeader}>
-                  <Text style={styles.compPlanTitle}>Full Service (8.9%)</Text>
-                  <Text style={styles.compBadgeGreen}>Most Popular</Text>
+              {/* Card 1: Percentage */}
+              <View style={[styles.compareCard, styles.compareCardHighlighted]}>
+                <View style={styles.compareBadge}>
+                  <Text style={styles.compareBadgeText}>RECOMMENDED</Text>
                 </View>
-                <Text style={styles.compFeeAmt}>${percentageCost} / mo</Text>
-                <Text style={styles.compFeeSub}>Management Fee</Text>
-
-                <View style={styles.compProceedsBox}>
-                  <Text style={styles.compProceedsLabel}>ESTIMATED NET TO OWNER</Text>
-                  <Text style={styles.compProceedsAmt}>${percentageNet.toLocaleString()} / mo</Text>
+                <Text style={styles.compareTitle}>Full-Service Percentage</Text>
+                <Text style={styles.compareRateText}>8.9% of collected rent</Text>
+                <View style={styles.compareDivider} />
+                <View style={styles.compareMetricRow}>
+                  <Text style={styles.compareMetricLabel}>Monthly Fee:</Text>
+                  <Text style={styles.compareMetricVal}>${percentageCost}/mo</Text>
                 </View>
-                <Text style={styles.compNote}>$0 fee during vacancy. Includes full 24/7 maintenance triage.</Text>
+                <View style={styles.compareMetricRow}>
+                  <Text style={styles.compareMetricLabel}>Net to Owner:</Text>
+                  <Text style={styles.compareNetVal}>${percentageNet}/mo</Text>
+                </View>
+                <View style={styles.compareMetricRow}>
+                  <Text style={styles.compareMetricLabel}>Annual Net:</Text>
+                  <Text style={styles.compareAnnualVal}>${(percentageNet * 12).toLocaleString()}/yr</Text>
+                </View>
+                <Text style={styles.compareNote}>✓ $0 during vacancy • Includes all 7 lifecycle stages</Text>
               </View>
 
-              {/* Flat Fee Col */}
-              <View style={styles.comparisonCol}>
-                <View style={styles.comparisonHeader}>
-                  <Text style={styles.compPlanTitle}>Flat Monthly Fee</Text>
-                  <Text style={styles.compBadgeAmber}>Fixed Dollar</Text>
+              {/* Card 2: Flat Fee */}
+              <View style={styles.compareCard}>
+                <Text style={styles.compareTitle}>Predictable Flat Fee</Text>
+                <Text style={styles.compareRateText}>$129/mo fixed</Text>
+                <View style={styles.compareDivider} />
+                <View style={styles.compareMetricRow}>
+                  <Text style={styles.compareMetricLabel}>Monthly Fee:</Text>
+                  <Text style={styles.compareMetricVal}>${flatFeeCost}/mo</Text>
                 </View>
-                <Text style={styles.compFeeAmt}>${flatFeeCost} / mo</Text>
-                <Text style={styles.compFeeSub}>Fixed Regardless of Rent</Text>
-
-                <View style={styles.compProceedsBox}>
-                  <Text style={styles.compProceedsLabel}>ESTIMATED NET TO OWNER</Text>
-                  <Text style={styles.compProceedsAmt}>${flatFeeNet.toLocaleString()} / mo</Text>
+                <View style={styles.compareMetricRow}>
+                  <Text style={styles.compareMetricLabel}>Net to Owner:</Text>
+                  <Text style={styles.compareNetVal}>${flatFeeNet}/mo</Text>
                 </View>
-                <Text style={styles.compNote}>Significant savings on rents above $2,500/mo.</Text>
+                <View style={styles.compareMetricRow}>
+                  <Text style={styles.compareMetricLabel}>Annual Net:</Text>
+                  <Text style={styles.compareAnnualVal}>${(flatFeeNet * 12).toLocaleString()}/yr</Text>
+                </View>
+                <Text style={styles.compareNote}>✓ Best for rents &gt;$2,800/mo seeking cost certainty</Text>
               </View>
 
-              {/* Leasing Only Col */}
-              <View style={styles.comparisonCol}>
-                <View style={styles.comparisonHeader}>
-                  <Text style={styles.compPlanTitle}>Leasing Only (85%)</Text>
-                  <Text style={styles.compBadgeGray}>One-Time</Text>
+              {/* Card 3: Placement Only */}
+              <View style={styles.compareCard}>
+                <Text style={styles.compareTitle}>Leasing & Placement</Text>
+                <Text style={styles.compareRateText}>85% of 1st Month (One-Time)</Text>
+                <View style={styles.compareDivider} />
+                <View style={styles.compareMetricRow}>
+                  <Text style={styles.compareMetricLabel}>One-Time Placement:</Text>
+                  <Text style={styles.compareMetricVal}>${placementFee}</Text>
                 </View>
-                <Text style={styles.compFeeAmt}>${placementFee}</Text>
-                <Text style={styles.compFeeSub}>One-Time Placement Fee</Text>
-
-                <View style={styles.compProceedsBox}>
-                  <Text style={styles.compProceedsLabel}>12-MO AMORTIZED COST</Text>
-                  <Text style={styles.compProceedsAmt}>~${placementMonthlyAmortized} / mo</Text>
+                <View style={styles.compareMetricRow}>
+                  <Text style={styles.compareMetricLabel}>Ongoing Monthly:</Text>
+                  <Text style={styles.compareNetVal}>$0/mo</Text>
                 </View>
-                <Text style={styles.compNote}>Owner manages ongoing repairs and rent collection.</Text>
+                <View style={styles.compareMetricRow}>
+                  <Text style={styles.compareMetricLabel}>Annual Gross Net:</Text>
+                  <Text style={styles.compareAnnualVal}>${((rentNumber * 12) - placementFee).toLocaleString()}/yr</Text>
+                </View>
+                <Text style={styles.compareNote}>✓ You handle ongoing tenant calls and maintenance</Text>
               </View>
             </View>
 
-            <View style={styles.calcFooterCta}>
-              <TouchableOpacity style={styles.calcCtaBtn} onPress={openConsultation}>
-                <Calendar size={16} color="#FFFFFF" />
-                <Text style={styles.calcCtaBtnText}>Review These Numbers with Dinesh or Purvang</Text>
+            <View style={styles.calcActionRow}>
+              <TouchableOpacity style={styles.calcCtaBtn} onPress={() => openRentalAnalysis()}>
+                <Text style={styles.calcCtaBtnText}>Request Complete Rental Analysis for Your Address</Text>
+                <ArrowRight size={16} color="#FFFFFF" />
               </TouchableOpacity>
             </View>
           </View>
         </View>
       </View>
 
-      {/* 3. Add-On Fee Schedule (Slide 14 required itemization) */}
+      {/* 3. Published Add-On Fee Schedule */}
       <View style={styles.sectionWhite}>
         <View style={styles.innerContainer}>
           <View style={styles.sectionHeaderCentered}>
             <Text style={styles.sectionOverline}>FULL TRANSPARENCY</Text>
-            <Text style={styles.sectionTitle}>Add-On Fee Schedule</Text>
+            <Text style={styles.sectionTitle}>Published Add-On Fee Schedule</Text>
             <Text style={styles.sectionSubtitle}>
-              Every potential fee is disclosed up front. All fees match the broker-approved Texas REALTORS® Property Management Agreement.
+              Every fee is disclosed upfront. No hidden onboarding setup costs, no vendor invoice markups.
             </Text>
           </View>
 
-          <View style={styles.addOnTable}>
-            <View style={styles.tableHeaderRow}>
-              <Text style={[styles.thCell, { width: "32%" }]}>SERVICE TYPE</Text>
-              <Text style={[styles.thCell, { width: "24%" }]}>APPROVED FEE</Text>
-              <Text style={[styles.thCell, { width: "44%" }]}>DESCRIPTION & POLICY</Text>
-            </View>
-
-            {ADD_ON_FEES.map((item, idx) => (
-              <View key={idx} style={[styles.tableBodyRow, idx % 2 === 1 && styles.tableBodyRowAlt]}>
-                <Text style={[styles.tdCellBold, { width: "32%" }]}>{item.service}</Text>
-                <Text style={[styles.tdCellPrice, { width: "24%" }]}>{item.fee}</Text>
-                <Text style={[styles.tdCellDesc, { width: "44%" }]}>{item.description}</Text>
-              </View>
-            ))}
-          </View>
-
-          {/* Important Footnote from Slide 14 */}
-          <View style={styles.feeNoticeBox}>
-            <Info size={18} color="#164E3A" />
-            <Text style={styles.feeNoticeText}>
-              <Text style={{ fontWeight: "700" }}>Zero Maintenance Markups:</Text> We do not add hidden 10%–20% surcharges to contractor bills. We pass through licensed vendor invoices at exact cost. All fees remain governed by broker-approved agreements under Fair Deal Realty Inc.
-            </Text>
+          <View style={styles.addonsList}>
+            {ADD_ON_FEES.map((fee, idx) => {
+              const isExpanded = expandedAddon === idx;
+              return (
+                <View key={idx} style={styles.addonItem}>
+                  <TouchableOpacity
+                    style={styles.addonHeader}
+                    onPress={() => setExpandedAddon(isExpanded ? null : idx)}
+                    activeOpacity={0.8}
+                  >
+                    <View style={{ flex: 1 }}>
+                      <Text style={styles.addonName}>{fee.service}</Text>
+                      <Text style={styles.addonCost}>{fee.fee}</Text>
+                    </View>
+                    {isExpanded ? (
+                      <ChevronUp size={20} color="#2563EB" />
+                    ) : (
+                      <ChevronDown size={20} color="#64748B" />
+                    )}
+                  </TouchableOpacity>
+                  {isExpanded && (
+                    <View style={styles.addonBody}>
+                      <Text style={styles.addonDesc}>{fee.description}</Text>
+                    </View>
+                  )}
+                </View>
+              );
+            })}
           </View>
         </View>
       </View>
@@ -286,440 +304,406 @@ export default function PricingPage() {
 
 const styles = StyleSheet.create({
   headerHero: {
-    backgroundColor: "#164E3A",
-    paddingVertical: 52,
+    backgroundColor: "#0B1120",
+    paddingVertical: 72,
     borderBottomWidth: 1,
-    borderBottomColor: "#1D644B",
+    borderBottomColor: "#1E293B",
   },
   innerContainer: {
     maxWidth: 1240,
     width: "100%",
     marginHorizontal: "auto",
-    paddingHorizontal: 16,
+    paddingHorizontal: 20,
   },
   badgePill: {
     alignSelf: "flex-start",
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-    backgroundColor: "#103C2D",
+    backgroundColor: "#1E293B",
     paddingVertical: 6,
     paddingHorizontal: 12,
     borderRadius: 20,
     borderWidth: 1,
-    borderColor: "#1E5642",
-    marginBottom: 12,
+    borderColor: "#334155",
+    marginBottom: 16,
   },
   badgePillText: {
-    color: "#D1FAE5",
+    color: "#E2E8F0",
     fontSize: 12.5,
     fontWeight: "600",
   },
   pageTitle: {
-    fontSize: 36,
+    fontSize: 40,
     fontWeight: "900",
     color: "#FFFFFF",
-    letterSpacing: -0.5,
-    marginBottom: 10,
+    letterSpacing: -1,
+    marginBottom: 12,
   },
   pageSubtitle: {
-    fontSize: 16,
-    color: "#D1D5DB",
-    lineHeight: 24,
-    maxWidth: 720,
+    fontSize: 16.5,
+    color: "#94A3B8",
+    maxWidth: 760,
+    lineHeight: 25,
   },
   sectionWhite: {
     backgroundColor: "#FFFFFF",
-    paddingVertical: 64,
+    paddingVertical: 72,
   },
-  sectionLight: {
-    backgroundColor: "#F8FAF9",
-    paddingVertical: 60,
+  sectionAlt: {
+    backgroundColor: "#F8FAFC",
+    paddingVertical: 72,
   },
   sectionHeaderCentered: {
     alignItems: "center",
+    marginBottom: 48,
     textAlign: "center",
-    marginBottom: 40,
-    gap: 8,
   },
   sectionOverline: {
     fontSize: 12,
     fontWeight: "800",
-    color: "#059669",
-    letterSpacing: 1,
+    color: "#2563EB",
+    letterSpacing: 1.2,
+    marginBottom: 8,
   },
   sectionTitle: {
-    fontSize: 30,
+    fontSize: 32,
     fontWeight: "800",
-    color: "#0F261E",
+    color: "#0F172A",
     letterSpacing: -0.5,
+    textAlign: "center",
+    marginBottom: 12,
   },
   sectionSubtitle: {
-    fontSize: 15,
-    color: "#4B5563",
-    maxWidth: 680,
+    fontSize: 16,
+    color: "#64748B",
+    maxWidth: 720,
     textAlign: "center",
-    lineHeight: 22,
+    lineHeight: 24,
   },
   plansGrid: {
-    justifyContent: "space-between",
     gap: 24,
+    justifyContent: "space-between",
   },
   planCard: {
     backgroundColor: "#FFFFFF",
-    borderRadius: 12,
+    borderRadius: 16,
     borderWidth: 1,
-    borderColor: "#E5E7EB",
-    padding: 26,
-    position: "relative",
-    gap: 10,
-    shadowColor: "#000",
+    borderColor: "#E2E8F0",
+    padding: 28,
+    gap: 12,
+    shadowColor: "#0F172A",
     shadowOpacity: 0.04,
-    shadowRadius: 8,
+    shadowRadius: 12,
     elevation: 2,
   },
   planCardHighlighted: {
-    borderColor: "#164E3A",
+    borderColor: "#2563EB",
     borderWidth: 2,
-    shadowColor: "#164E3A",
+    shadowColor: "#2563EB",
     shadowOpacity: 0.12,
-    shadowRadius: 14,
-    elevation: 4,
+    shadowRadius: 20,
+    elevation: 6,
   },
   planBadgeWrap: {
     alignSelf: "flex-start",
-    backgroundColor: "#ECFDF5",
+    backgroundColor: "#2563EB",
     paddingVertical: 4,
     paddingHorizontal: 10,
-    borderRadius: 20,
-    borderWidth: 1,
-    borderColor: "#A7F3D0",
-    marginBottom: 4,
+    borderRadius: 6,
   },
   planBadgeText: {
+    color: "#FFFFFF",
     fontSize: 10.5,
     fontWeight: "800",
-    color: "#065F46",
-    letterSpacing: 0.6,
+    letterSpacing: 0.8,
   },
   planName: {
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: "800",
-    color: "#111827",
+    color: "#0F172A",
   },
   planRate: {
     fontSize: 26,
     fontWeight: "900",
-    color: "#164E3A",
+    color: "#2563EB",
   },
   planVacancy: {
-    fontSize: 12,
-    fontWeight: "600",
-    color: "#059669",
+    fontSize: 13,
+    color: "#10B981",
+    fontWeight: "700",
   },
   planDivider: {
     height: 1,
-    backgroundColor: "#F3F4F6",
-    marginVertical: 6,
-  },
-  planSummary: {
-    fontSize: 13,
-    color: "#4B5563",
-    lineHeight: 19,
-  },
-  planBestForBox: {
-    backgroundColor: "#F9FAFB",
-    padding: 10,
-    borderRadius: 6,
-    gap: 2,
-  },
-  bestForHeading: {
-    fontSize: 11,
-    fontWeight: "700",
-    color: "#6B7280",
-  },
-  bestForText: {
-    fontSize: 12,
-    color: "#374151",
-    lineHeight: 16,
-  },
-  featuresList: {
-    gap: 8,
-    marginVertical: 8,
-  },
-  featuresHeading: {
-    fontSize: 11,
-    fontWeight: "800",
-    color: "#9CA3AF",
-    letterSpacing: 0.6,
-    marginBottom: 4,
-  },
-  featureRow: {
-    flexDirection: "row",
-    alignItems: "flex-start",
-    gap: 8,
-  },
-  featureText: {
-    fontSize: 12.5,
-    color: "#374151",
-    lineHeight: 17,
-    flex: 1,
-  },
-  selectPlanBtn: {
-    backgroundColor: "#F3F4F6",
-    paddingVertical: 12,
-    borderRadius: 8,
-    alignItems: "center",
-    marginTop: 8,
-  },
-  selectPlanBtnHighlighted: {
-    backgroundColor: "#164E3A",
-  },
-  selectPlanBtnText: {
-    fontSize: 13.5,
-    fontWeight: "700",
-    color: "#1F2937",
-  },
-  selectPlanBtnTextHighlighted: {
-    color: "#FFFFFF",
-  },
-  calculatorCard: {
-    backgroundColor: "#FFFFFF",
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
-    padding: 28,
-    gap: 20,
-    maxWidth: 960,
-    marginHorizontal: "auto",
-    width: "100%",
-    shadowColor: "#000",
-    shadowOpacity: 0.05,
-    shadowRadius: 10,
-    elevation: 3,
-  },
-  calcInputSection: {
-    alignItems: "center",
-    gap: 12,
-  },
-  calcInputLabel: {
-    fontSize: 16,
-    fontWeight: "700",
-    color: "#111827",
-  },
-  rentInputBox: {
-    flexDirection: "row",
-    alignItems: "center",
-    borderWidth: 2,
-    borderColor: "#164E3A",
-    borderRadius: 8,
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    backgroundColor: "#FFFFFF",
-    gap: 6,
-  },
-  rentTextInput: {
-    fontSize: 24,
-    fontWeight: "800",
-    color: "#164E3A",
-    minWidth: 100,
-    textAlign: "center",
-  },
-  presetChipsRow: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    gap: 8,
-  },
-  presetChip: {
-    paddingVertical: 6,
-    paddingHorizontal: 12,
-    borderRadius: 20,
-    backgroundColor: "#F3F4F6",
-  },
-  presetChipActive: {
-    backgroundColor: "#164E3A",
-  },
-  presetChipText: {
-    fontSize: 12.5,
-    fontWeight: "600",
-    color: "#4B5563",
-  },
-  presetChipTextActive: {
-    color: "#FFFFFF",
-  },
-  calcDivider: {
-    height: 1,
-    backgroundColor: "#E5E7EB",
-  },
-  comparisonRow: {
-    justifyContent: "space-between",
-    gap: 16,
-  },
-  comparisonCol: {
-    flex: 1,
-    backgroundColor: "#F9FAFB",
-    padding: 18,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
-    gap: 8,
-  },
-  comparisonHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  compPlanTitle: {
-    fontSize: 14,
-    fontWeight: "800",
-    color: "#111827",
-  },
-  compBadgeGreen: {
-    fontSize: 10,
-    fontWeight: "700",
-    color: "#065F46",
-    backgroundColor: "#D1FAE5",
-    paddingVertical: 2,
-    paddingHorizontal: 6,
-    borderRadius: 4,
-  },
-  compBadgeAmber: {
-    fontSize: 10,
-    fontWeight: "700",
-    color: "#92400E",
-    backgroundColor: "#FEF3C7",
-    paddingVertical: 2,
-    paddingHorizontal: 6,
-    borderRadius: 4,
-  },
-  compBadgeGray: {
-    fontSize: 10,
-    fontWeight: "700",
-    color: "#4B5563",
-    backgroundColor: "#E5E7EB",
-    paddingVertical: 2,
-    paddingHorizontal: 6,
-    borderRadius: 4,
-  },
-  compFeeAmt: {
-    fontSize: 22,
-    fontWeight: "900",
-    color: "#164E3A",
-  },
-  compFeeSub: {
-    fontSize: 12,
-    color: "#6B7280",
-    marginTop: -4,
-  },
-  compProceedsBox: {
-    backgroundColor: "#FFFFFF",
-    padding: 10,
-    borderRadius: 6,
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
-    gap: 2,
+    backgroundColor: "#E2E8F0",
     marginVertical: 4,
   },
-  compProceedsLabel: {
-    fontSize: 10,
-    fontWeight: "700",
-    color: "#059669",
-    letterSpacing: 0.5,
+  planSummary: {
+    fontSize: 13.5,
+    color: "#475569",
+    lineHeight: 20,
   },
-  compProceedsAmt: {
-    fontSize: 18,
-    fontWeight: "800",
-    color: "#111827",
+  planFeaturesList: {
+    gap: 10,
+    marginVertical: 8,
   },
-  compNote: {
-    fontSize: 11.5,
-    color: "#6B7280",
-    lineHeight: 16,
+  planFeatureRow: {
+    flexDirection: "row",
+    alignItems: "flex-start",
+    gap: 10,
   },
-  calcFooterCta: {
+  planFeatureText: {
+    fontSize: 13,
+    color: "#334155",
+    lineHeight: 18,
+    flex: 1,
+  },
+  planCtaBtn: {
+    backgroundColor: "#F8FAFC",
+    borderWidth: 1,
+    borderColor: "#CBD5E1",
+    paddingVertical: 13,
+    borderRadius: 8,
     alignItems: "center",
     marginTop: 8,
+  },
+  planCtaBtnHighlighted: {
+    backgroundColor: "#2563EB",
+    borderColor: "#2563EB",
+  },
+  planCtaBtnText: {
+    color: "#0F172A",
+    fontSize: 14,
+    fontWeight: "700",
+  },
+  planCtaBtnTextHighlighted: {
+    color: "#FFFFFF",
+  },
+  calculatorWrapper: {
+    backgroundColor: "#FFFFFF",
+    borderRadius: 16,
+    padding: 32,
+    borderWidth: 1,
+    borderColor: "#E2E8F0",
+    gap: 24,
+    shadowColor: "#0F172A",
+    shadowOpacity: 0.05,
+    shadowRadius: 16,
+    elevation: 3,
+  },
+  calcTitleRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 14,
+  },
+  calcIconBadge: {
+    width: 44,
+    height: 44,
+    borderRadius: 10,
+    backgroundColor: "#EFF6FF",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  calcHeading: {
+    fontSize: 20,
+    fontWeight: "800",
+    color: "#0F172A",
+  },
+  calcSub: {
+    fontSize: 13.5,
+    color: "#64748B",
+  },
+  calcInputRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    flexWrap: "wrap",
+    gap: 16,
+    backgroundColor: "#F8FAFC",
+    padding: 16,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: "#E2E8F0",
+  },
+  calcInputLabel: {
+    fontSize: 14,
+    fontWeight: "700",
+    color: "#0F172A",
+  },
+  inputWithPrefix: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#FFFFFF",
+    borderWidth: 1,
+    borderColor: "#CBD5E1",
+    borderRadius: 8,
+    paddingHorizontal: 12,
+  },
+  currencyPrefix: {
+    fontSize: 16,
+    fontWeight: "700",
+    color: "#64748B",
+    marginRight: 4,
+  },
+  calcInputField: {
+    fontSize: 16,
+    fontWeight: "800",
+    color: "#0F172A",
+    paddingVertical: 8,
+    width: 90,
+  },
+  currencySuffix: {
+    fontSize: 13,
+    color: "#64748B",
+  },
+  quickRentPills: {
+    flexDirection: "row",
+    gap: 6,
+  },
+  quickRentBtn: {
+    paddingVertical: 6,
+    paddingHorizontal: 10,
+    borderRadius: 6,
+    backgroundColor: "#FFFFFF",
+    borderWidth: 1,
+    borderColor: "#CBD5E1",
+  },
+  quickRentBtnActive: {
+    backgroundColor: "#2563EB",
+    borderColor: "#2563EB",
+  },
+  quickRentText: {
+    fontSize: 12,
+    fontWeight: "600",
+    color: "#475569",
+  },
+  quickRentTextActive: {
+    color: "#FFFFFF",
+  },
+  comparisonGrid: {
+    gap: 16,
+  },
+  compareCard: {
+    flex: 1,
+    backgroundColor: "#F8FAFC",
+    borderRadius: 12,
+    padding: 20,
+    borderWidth: 1,
+    borderColor: "#E2E8F0",
+    gap: 10,
+  },
+  compareCardHighlighted: {
+    backgroundColor: "#EFF6FF",
+    borderColor: "#BFDBFE",
+  },
+  compareBadge: {
+    alignSelf: "flex-start",
+    backgroundColor: "#2563EB",
+    paddingVertical: 2,
+    paddingHorizontal: 6,
+    borderRadius: 4,
+  },
+  compareBadgeText: {
+    color: "#FFFFFF",
+    fontSize: 10,
+    fontWeight: "800",
+  },
+  compareTitle: {
+    fontSize: 17,
+    fontWeight: "800",
+    color: "#0F172A",
+  },
+  compareRateText: {
+    fontSize: 13,
+    color: "#2563EB",
+    fontWeight: "600",
+  },
+  compareDivider: {
+    height: 1,
+    backgroundColor: "#CBD5E1",
+    marginVertical: 4,
+  },
+  compareMetricRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  compareMetricLabel: {
+    fontSize: 13,
+    color: "#64748B",
+  },
+  compareMetricVal: {
+    fontSize: 13,
+    fontWeight: "700",
+    color: "#0F172A",
+  },
+  compareNetVal: {
+    fontSize: 16,
+    fontWeight: "800",
+    color: "#2563EB",
+  },
+  compareAnnualVal: {
+    fontSize: 14,
+    fontWeight: "700",
+    color: "#10B981",
+  },
+  compareNote: {
+    fontSize: 11.5,
+    color: "#64748B",
+    marginTop: 4,
+  },
+  calcActionRow: {
+    alignItems: "center",
   },
   calcCtaBtn: {
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-    backgroundColor: "#164E3A",
-    paddingVertical: 12,
-    paddingHorizontal: 22,
+    backgroundColor: "#2563EB",
+    paddingVertical: 14,
+    paddingHorizontal: 24,
     borderRadius: 8,
   },
   calcCtaBtnText: {
     color: "#FFFFFF",
-    fontSize: 13.5,
+    fontSize: 14.5,
     fontWeight: "700",
   },
-  addOnTable: {
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
-    borderRadius: 8,
-    overflow: "hidden",
-    maxWidth: 960,
-    marginHorizontal: "auto",
+  addonsList: {
+    maxWidth: 880,
     width: "100%",
-  },
-  tableHeaderRow: {
-    flexDirection: "row",
-    backgroundColor: "#164E3A",
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-  },
-  thCell: {
-    color: "#FFFFFF",
-    fontSize: 11.5,
-    fontWeight: "800",
-    letterSpacing: 0.6,
-  },
-  tableBodyRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#FFFFFF",
-    paddingVertical: 14,
-    paddingHorizontal: 16,
-    borderTopWidth: 1,
-    borderTopColor: "#F3F4F6",
-  },
-  tableBodyRowAlt: {
-    backgroundColor: "#F9FAFB",
-  },
-  tdCellBold: {
-    fontSize: 13.5,
-    fontWeight: "700",
-    color: "#111827",
-  },
-  tdCellPrice: {
-    fontSize: 13.5,
-    fontWeight: "800",
-    color: "#059669",
-  },
-  tdCellDesc: {
-    fontSize: 12.5,
-    color: "#4B5563",
-    lineHeight: 17,
-  },
-  feeNoticeBox: {
-    flexDirection: "row",
-    alignItems: "flex-start",
+    marginHorizontal: "auto",
     gap: 12,
-    backgroundColor: "#F0FDF4",
-    padding: 16,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: "#BBF7D0",
-    marginTop: 24,
-    maxWidth: 960,
-    marginHorizontal: "auto",
-    width: "100%",
   },
-  feeNoticeText: {
-    fontSize: 12.5,
-    color: "#166534",
-    lineHeight: 18,
-    flex: 1,
+  addonItem: {
+    backgroundColor: "#F8FAFC",
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: "#E2E8F0",
+    overflow: "hidden",
+  },
+  addonHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: 18,
+  },
+  addonName: {
+    fontSize: 15,
+    fontWeight: "700",
+    color: "#0F172A",
+  },
+  addonCost: {
+    fontSize: 13,
+    fontWeight: "700",
+    color: "#2563EB",
+    marginTop: 2,
+  },
+  addonBody: {
+    paddingHorizontal: 18,
+    paddingBottom: 18,
+  },
+  addonDesc: {
+    fontSize: 13.5,
+    color: "#475569",
+    lineHeight: 20,
   },
 });
