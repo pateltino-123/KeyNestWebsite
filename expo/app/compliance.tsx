@@ -29,7 +29,7 @@ export default function CompliancePage() {
       <View style={styles.headerHero}>
         <View style={styles.innerContainer}>
           <View style={styles.badgePill}>
-            <ShieldCheck size={14} color="#3B6E99" />
+            <ShieldCheck size={14} color="#367A5E" />
             <Text style={styles.badgePillText}>Texas Real Estate Commission (TREC) Regulatory Notices</Text>
           </View>
           <Text style={styles.pageTitle}>Regulatory Compliance & Broker Disclosures</Text>
@@ -45,7 +45,7 @@ export default function CompliancePage() {
             {/* 1. Broker Identification & Relationship */}
             <View style={styles.complianceCard}>
               <View style={styles.cardHeader}>
-                <Building size={22} color="#3B6E99" />
+                <Building size={22} color="#367A5E" />
                 <Text style={styles.cardHeading}>Brokerage Identification & Operating Entity</Text>
               </View>
               <Text style={styles.bodyParagraph}>
@@ -65,7 +65,7 @@ export default function CompliancePage() {
             {/* 2. Mandatory TREC Notices */}
             <View style={styles.complianceCard}>
               <View style={styles.cardHeader}>
-                <FileText size={22} color="#3B6E99" />
+                <FileText size={22} color="#367A5E" />
                 <Text style={styles.cardHeading}>Texas Real Estate Commission (TREC) Mandatory Notices</Text>
               </View>
               <Text style={styles.bodyParagraph}>
@@ -81,7 +81,7 @@ export default function CompliancePage() {
                     <Text style={styles.trecBtnTitle}>TREC Information About Brokerage Services (IABS)</Text>
                     <Text style={styles.trecBtnSub}>Learn about the different types of brokerage representation and consumer duties.</Text>
                   </View>
-                  <ExternalLink size={16} color="#3B6E99" />
+                  <ExternalLink size={16} color="#367A5E" />
                 </TouchableOpacity>
 
                 <TouchableOpacity
@@ -92,7 +92,7 @@ export default function CompliancePage() {
                     <Text style={styles.trecBtnTitle}>TREC Consumer Protection Notice</Text>
                     <Text style={styles.trecBtnSub}>Official TREC notice regarding broker licensing, recovery funds, and filing complaints.</Text>
                   </View>
-                  <ExternalLink size={16} color="#3B6E99" />
+                  <ExternalLink size={16} color="#367A5E" />
                 </TouchableOpacity>
               </View>
             </View>
@@ -100,7 +100,7 @@ export default function CompliancePage() {
             {/* 3. Fair Housing Policy */}
             <View style={styles.complianceCard}>
               <View style={styles.cardHeader}>
-                <Scale size={22} color="#3B6E99" />
+                <Scale size={22} color="#367A5E" />
                 <Text style={styles.cardHeading}>Equal Housing Opportunity & Fair Housing Statement</Text>
               </View>
               <Text style={styles.bodyParagraph}>
@@ -109,7 +109,7 @@ export default function CompliancePage() {
               <View style={styles.protectedClassesRow}>
                 {["Race", "Color", "National Origin", "Religion", "Sex", "Familial Status", "Disability"].map((cls) => (
                   <View key={cls} style={styles.classPill}>
-                    <CheckCircle2 size={13} color="#3B6E99" />
+                    <CheckCircle2 size={13} color="#367A5E" />
                     <Text style={styles.classPillText}>{cls}</Text>
                   </View>
                 ))}
@@ -119,7 +119,7 @@ export default function CompliancePage() {
             {/* 4. Security Deposit Trust Accounts */}
             <View style={styles.complianceCard}>
               <View style={styles.cardHeader}>
-                <Lock size={22} color="#3B6E99" />
+                <Lock size={22} color="#367A5E" />
                 <Text style={styles.cardHeading}>Security Deposit & Trust Escrow Accounting</Text>
               </View>
               <Text style={styles.bodyParagraph}>
@@ -151,16 +151,16 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-    backgroundColor: "#EBF2F7",
+    backgroundColor: "#EDF5F1",
     paddingVertical: 6,
     paddingHorizontal: 12,
     borderRadius: 20,
     borderWidth: 1,
-    borderColor: "#C8D9E8",
+    borderColor: "#C7E0D3",
     marginBottom: 16,
   },
   badgePillText: {
-    color: "#2E567A",
+    color: "#285C47",
     fontSize: 12.5,
     fontWeight: "600",
   },
@@ -259,16 +259,16 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 6,
-    backgroundColor: "#EBF2F7",
+    backgroundColor: "#EDF5F1",
     paddingVertical: 6,
     paddingHorizontal: 10,
     borderRadius: 6,
     borderWidth: 1,
-    borderColor: "#C8D9E8",
+    borderColor: "#C7E0D3",
   },
   classPillText: {
     fontSize: 12,
     fontWeight: "600",
-    color: "#2E567A",
+    color: "#285C47",
   },
 });

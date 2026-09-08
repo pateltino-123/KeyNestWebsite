@@ -49,7 +49,7 @@ export default function PricingPage() {
       <View style={styles.headerHero}>
         <View style={styles.innerContainer}>
           <View style={styles.badgePill}>
-            <ShieldCheck size={14} color="#3B6E99" />
+            <ShieldCheck size={14} color="#367A5E" />
             <Text style={styles.badgePillText}>Under the Brokerage of Fair Deal Realty Inc.</Text>
           </View>
           <Text style={styles.pageTitle}>Simple, Transparent Pricing</Text>
@@ -102,7 +102,7 @@ export default function PricingPage() {
                 <View style={styles.planFeaturesList}>
                   {plan.features.map((feat, idx) => (
                     <View key={idx} style={styles.planFeatureRow}>
-                      <CheckCircle2 size={16} color="#3B6E99" style={{ marginTop: 2 }} />
+                      <CheckCircle2 size={16} color="#367A5E" style={{ marginTop: 2 }} />
                       <Text style={styles.planFeatureText}>{feat}</Text>
                     </View>
                   ))}
@@ -136,7 +136,7 @@ export default function PricingPage() {
           <View style={styles.calculatorWrapper}>
             <View style={styles.calcTitleRow}>
               <View style={styles.calcIconBadge}>
-                <DollarSign size={20} color="#3B6E99" />
+                <DollarSign size={20} color="#367A5E" />
               </View>
               <View>
                 <Text style={styles.calcHeading}>Interactive Fee Comparison Tool</Text>
@@ -282,7 +282,7 @@ export default function PricingPage() {
                       <Text style={styles.addonCost}>{fee.fee}</Text>
                     </View>
                     {isExpanded ? (
-                      <ChevronUp size={20} color="#3B6E99" />
+                      <ChevronUp size={20} color="#367A5E" />
                     ) : (
                       <ChevronDown size={20} color="#737B85" />
                     )}
@@ -320,16 +320,16 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-    backgroundColor: "#EBF2F7",
+    backgroundColor: "#EDF5F1",
     paddingVertical: 6,
     paddingHorizontal: 12,
     borderRadius: 20,
     borderWidth: 1,
-    borderColor: "#C8D9E8",
+    borderColor: "#C7E0D3",
     marginBottom: 16,
   },
   badgePillText: {
-    color: "#2E567A",
+    color: "#285C47",
     fontSize: 12.5,
     fontWeight: "600",
   },
@@ -362,7 +362,7 @@ const styles = StyleSheet.create({
   sectionOverline: {
     fontSize: 12,
     fontWeight: "800",
-    color: "#3B6E99",
+    color: "#367A5E",
     letterSpacing: 1.2,
     marginBottom: 8,
   },
@@ -398,16 +398,16 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   planCardHighlighted: {
-    borderColor: "#3B6E99",
+    borderColor: "#367A5E",
     borderWidth: 2,
-    shadowColor: "#3B6E99",
+    shadowColor: "#367A5E",
     shadowOpacity: 0.12,
     shadowRadius: 20,
     elevation: 6,
   },
   planBadgeWrap: {
     alignSelf: "flex-start",
-    backgroundColor: "#3B6E99",
+    backgroundColor: "#367A5E",
     paddingVertical: 4,
     paddingHorizontal: 10,
     borderRadius: 6,
@@ -426,7 +426,7 @@ const styles = StyleSheet.create({
   planRate: {
     fontSize: 26,
     fontWeight: "900",
-    color: "#3B6E99",
+    color: "#367A5E",
   },
   planVacancy: {
     fontSize: 13,
@@ -468,8 +468,8 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   planCtaBtnHighlighted: {
-    backgroundColor: "#3B6E99",
-    borderColor: "#3B6E99",
+    backgroundColor: "#367A5E",
+    borderColor: "#367A5E",
   },
   planCtaBtnText: {
     color: "#22252A",
@@ -500,7 +500,7 @@ const styles = StyleSheet.create({
     width: 44,
     height: 44,
     borderRadius: 10,
-    backgroundColor: "#EBF2F7",
+    backgroundColor: "#EDF5F1",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -568,8 +568,8 @@ const styles = StyleSheet.create({
     borderColor: "#E8E2D5",
   },
   quickRentBtnActive: {
-    backgroundColor: "#3B6E99",
-    borderColor: "#3B6E99",
+    backgroundColor: "#367A5E",
+    borderColor: "#367A5E",
   },
   quickRentText: {
     fontSize: 12,
@@ -592,12 +592,12 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   compareCardHighlighted: {
-    backgroundColor: "#EBF2F7",
-    borderColor: "#C8D9E8",
+    backgroundColor: "#EDF5F1",
+    borderColor: "#C7E0D3",
   },
   compareBadge: {
     alignSelf: "flex-start",
-    backgroundColor: "#3B6E99",
+    backgroundColor: "#367A5E",
     paddingVertical: 2,
     paddingHorizontal: 6,
     borderRadius: 4,
@@ -614,7 +614,7 @@ const styles = StyleSheet.create({
   },
   compareRateText: {
     fontSize: 13,
-    color: "#3B6E99",
+    color: "#367A5E",
     fontWeight: "600",
   },
   compareDivider: {
@@ -638,7 +638,7 @@ const styles = StyleSheet.create({
   compareNetVal: {
     fontSize: 16,
     fontWeight: "800",
-    color: "#3B6E99",
+    color: "#367A5E",
   },
   compareAnnualVal: {
     fontSize: 14,
@@ -657,7 +657,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-    backgroundColor: "#3B6E99",
+    backgroundColor: "#367A5E",
     paddingVertical: 14,
     paddingHorizontal: 24,
     borderRadius: 8,
@@ -694,7 +694,7 @@ const styles = StyleSheet.create({
   addonCost: {
     fontSize: 13,
     fontWeight: "700",
-    color: "#3B6E99",
+    color: "#367A5E",
     marginTop: 2,
   },
   addonBody: {

@@ -59,7 +59,7 @@ export default function AboutPage() {
       <View style={styles.headerHero}>
         <View style={styles.innerContainer}>
           <View style={styles.badgePill}>
-            <ShieldCheck size={14} color="#3B6E99" />
+            <ShieldCheck size={14} color="#367A5E" />
             <Text style={styles.badgePillText}>Under the Brokerage of Fair Deal Realty Inc.</Text>
           </View>
           <Text style={styles.pageTitle}>About KeyNest Realty</Text>
@@ -87,19 +87,19 @@ export default function AboutPage() {
 
               <View style={styles.missionPoints}>
                 <View style={styles.missionPointItem}>
-                  <CheckCircle2 size={18} color="#3B6E99" />
+                  <CheckCircle2 size={18} color="#367A5E" />
                   <Text style={styles.missionPointText}>
                     Direct access to authorized local managers (Dinesh Donthula & Purvang Patel)
                   </Text>
                 </View>
                 <View style={styles.missionPointItem}>
-                  <CheckCircle2 size={18} color="#3B6E99" />
+                  <CheckCircle2 size={18} color="#367A5E" />
                   <Text style={styles.missionPointText}>
                     100% fiduciary trust accounting under broker Fair Deal Realty Inc.
                   </Text>
                 </View>
                 <View style={styles.missionPointItem}>
-                  <CheckCircle2 size={18} color="#3B6E99" />
+                  <CheckCircle2 size={18} color="#367A5E" />
                   <Text style={styles.missionPointText}>
                     Zero fee markups on maintenance invoices passed through at exact cost
                   </Text>
@@ -110,7 +110,7 @@ export default function AboutPage() {
             <View style={[styles.splitColRight, { width: isDesktop ? "44%" : "100%" }]}>
               <View style={styles.brokerageCard}>
                 <View style={styles.brokerageCardBadge}>
-                  <Building size={16} color="#3B6E99" />
+                  <Building size={16} color="#367A5E" />
                   <Text style={styles.brokerageCardBadgeText}>SPONSORING BROKERAGE</Text>
                 </View>
                 <Text style={styles.brokerageCardName}>Fair Deal Realty Inc.</Text>
@@ -173,7 +173,7 @@ export default function AboutPage() {
                   ]}
                 >
                   <View style={styles.valueIconBox}>
-                    <Icon size={24} color="#3B6E99" />
+                    <Icon size={24} color="#367A5E" />
                   </View>
                   <View style={{ flex: 1, gap: 6 }}>
                     <Text style={styles.valueTitle}>{val.title}</Text>
@@ -206,7 +206,7 @@ export default function AboutPage() {
             {KEYNEST_INFO.authorizedManagers.map((leader, idx) => (
               <View key={idx} style={styles.leaderCard}>
                 <View style={styles.leaderAvatarCircle}>
-                  <Users size={32} color="#3B6E99" />
+                  <Users size={32} color="#367A5E" />
                 </View>
                 <Text style={styles.leaderName}>{leader.name}</Text>
                 <Text style={styles.leaderRole}>{leader.title}</Text>
@@ -214,11 +214,11 @@ export default function AboutPage() {
 
                 <View style={styles.leaderContactRow}>
                   <View style={styles.leaderContactItem}>
-                    <Phone size={14} color="#3B6E99" />
+                    <Phone size={14} color="#367A5E" />
                     <Text style={styles.leaderContactText}>{KEYNEST_INFO.phone}</Text>
                   </View>
                   <View style={styles.leaderContactItem}>
-                    <Mail size={14} color="#3B6E99" />
+                    <Mail size={14} color="#367A5E" />
                     <Text style={styles.leaderContactText}>{KEYNEST_INFO.email}</Text>
                   </View>
                 </View>
@@ -260,16 +260,16 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-    backgroundColor: "#EBF2F7",
+    backgroundColor: "#EDF5F1",
     paddingVertical: 6,
     paddingHorizontal: 12,
     borderRadius: 20,
     borderWidth: 1,
-    borderColor: "#C8D9E8",
+    borderColor: "#C7E0D3",
     marginBottom: 16,
   },
   badgePillText: {
-    color: "#2E567A",
+    color: "#285C47",
     fontSize: 12.5,
     fontWeight: "600",
   },
@@ -305,7 +305,7 @@ const styles = StyleSheet.create({
   sectionOverline: {
     fontSize: 12,
     fontWeight: "800",
-    color: "#3B6E99",
+    color: "#367A5E",
     letterSpacing: 1.2,
     marginBottom: 6,
   },
@@ -351,7 +351,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 6,
-    backgroundColor: "#EBF2F7",
+    backgroundColor: "#EDF5F1",
     paddingVertical: 4,
     paddingHorizontal: 10,
     borderRadius: 6,
@@ -359,7 +359,7 @@ const styles = StyleSheet.create({
   brokerageCardBadgeText: {
     fontSize: 11,
     fontWeight: "800",
-    color: "#2E567A",
+    color: "#285C47",
     letterSpacing: 0.8,
   },
   brokerageCardName: {
@@ -400,7 +400,7 @@ const styles = StyleSheet.create({
   trecNavBtnText: {
     fontSize: 13,
     fontWeight: "700",
-    color: "#3B6E99",
+    color: "#367A5E",
   },
   sectionHeaderCentered: {
     alignItems: "center",
@@ -440,7 +440,7 @@ const styles = StyleSheet.create({
     width: 48,
     height: 48,
     borderRadius: 12,
-    backgroundColor: "#EBF2F7",
+    backgroundColor: "#EDF5F1",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -473,7 +473,7 @@ const styles = StyleSheet.create({
     width: 68,
     height: 68,
     borderRadius: 34,
-    backgroundColor: "#EBF2F7",
+    backgroundColor: "#EDF5F1",
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 6,
@@ -486,7 +486,7 @@ const styles = StyleSheet.create({
   leaderRole: {
     fontSize: 13,
     fontWeight: "700",
-    color: "#3B6E99",
+    color: "#367A5E",
   },
   leaderBio: {
     fontSize: 13.5,
@@ -520,7 +520,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-    backgroundColor: "#3B6E99",
+    backgroundColor: "#367A5E",
     paddingVertical: 14,
     paddingHorizontal: 22,
     borderRadius: 8,

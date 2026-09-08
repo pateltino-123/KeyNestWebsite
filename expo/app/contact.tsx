@@ -69,7 +69,7 @@ export default function ContactPage() {
       <View style={styles.headerHero}>
         <View style={styles.innerContainer}>
           <View style={styles.badgePill}>
-            <ShieldCheck size={14} color="#3B6E99" />
+            <ShieldCheck size={14} color="#367A5E" />
             <Text style={styles.badgePillText}>Under the Brokerage of Fair Deal Realty Inc.</Text>
           </View>
           <Text style={styles.pageTitle}>Service Territory & Contact</Text>
@@ -90,7 +90,7 @@ export default function ContactPage() {
           >
             <View style={styles.officeBarItem}>
               <View style={styles.iconCircle}>
-                <Building size={20} color="#3B6E99" />
+                <Building size={20} color="#367A5E" />
               </View>
               <View>
                 <Text style={styles.officeItemLabel}>Corporate Headquarters</Text>
@@ -101,7 +101,7 @@ export default function ContactPage() {
 
             <View style={styles.officeBarItem}>
               <View style={styles.iconCircle}>
-                <Phone size={20} color="#3B6E99" />
+                <Phone size={20} color="#367A5E" />
               </View>
               <View>
                 <Text style={styles.officeItemLabel}>Direct Phone Lines</Text>
@@ -114,7 +114,7 @@ export default function ContactPage() {
 
             <View style={styles.officeBarItem}>
               <View style={styles.iconCircle}>
-                <Mail size={20} color="#3B6E99" />
+                <Mail size={20} color="#367A5E" />
               </View>
               <View>
                 <Text style={styles.officeItemLabel}>Email Inquiries</Text>
@@ -153,7 +153,7 @@ export default function ContactPage() {
                   style={[styles.cityTabBtn, isActive && styles.cityTabBtnActive]}
                   onPress={() => setActiveCityId(city.id)}
                 >
-                  <MapPin size={14} color={isActive ? "#FFFFFF" : "#3B6E99"} />
+                  <MapPin size={14} color={isActive ? "#FFFFFF" : "#367A5E"} />
                   <Text style={[styles.cityTabText, isActive && styles.cityTabTextActive]}>
                     {city.name}
                   </Text>
@@ -355,14 +355,14 @@ export default function ContactPage() {
                         style={styles.actionBtn}
                         onPress={() => callPhone(KEYNEST_INFO.phone)}
                       >
-                        <Phone size={13} color="#3B6E99" />
+                        <Phone size={13} color="#367A5E" />
                         <Text style={styles.actionBtnText}>Call Office</Text>
                       </TouchableOpacity>
                       <TouchableOpacity
                         style={styles.actionBtn}
                         onPress={() => emailAddress(KEYNEST_INFO.email)}
                       >
-                        <Mail size={13} color="#3B6E99" />
+                        <Mail size={13} color="#367A5E" />
                         <Text style={styles.actionBtnText}>Email Direct</Text>
                       </TouchableOpacity>
                     </View>
@@ -370,7 +370,7 @@ export default function ContactPage() {
                 ))}
 
                 <View style={styles.trecNoteCard}>
-                  <ShieldCheck size={16} color="#3B6E99" />
+                  <ShieldCheck size={16} color="#367A5E" />
                   <Text style={styles.trecNoteText}>
                     Texas Real Estate Commission Consumer Notice: Real estate licensees are required to provide the TREC Information About Brokerage Services (IABS) to all prospective clients.
                   </Text>
@@ -402,16 +402,16 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-    backgroundColor: "#EBF2F7",
+    backgroundColor: "#EDF5F1",
     paddingVertical: 6,
     paddingHorizontal: 12,
     borderRadius: 20,
     borderWidth: 1,
-    borderColor: "#C8D9E8",
+    borderColor: "#C7E0D3",
     marginBottom: 16,
   },
   badgePillText: {
-    color: "#2E567A",
+    color: "#285C47",
     fontSize: 12.5,
     fontWeight: "600",
   },
@@ -448,7 +448,7 @@ const styles = StyleSheet.create({
     width: 44,
     height: 44,
     borderRadius: 10,
-    backgroundColor: "#EBF2F7",
+    backgroundColor: "#EDF5F1",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -465,12 +465,12 @@ const styles = StyleSheet.create({
   officePhoneLink: {
     fontSize: 15,
     fontWeight: "800",
-    color: "#3B6E99",
+    color: "#367A5E",
   },
   officeEmailLink: {
     fontSize: 14,
     fontWeight: "700",
-    color: "#3B6E99",
+    color: "#367A5E",
   },
   officeItemSub: {
     fontSize: 11.5,
@@ -493,7 +493,7 @@ const styles = StyleSheet.create({
   sectionOverline: {
     fontSize: 12,
     fontWeight: "800",
-    color: "#3B6E99",
+    color: "#367A5E",
     letterSpacing: 1.2,
     marginBottom: 8,
   },
@@ -530,8 +530,8 @@ const styles = StyleSheet.create({
     borderColor: "#E8E2D5",
   },
   cityTabBtnActive: {
-    backgroundColor: "#3B6E99",
-    borderColor: "#3B6E99",
+    backgroundColor: "#367A5E",
+    borderColor: "#367A5E",
   },
   cityTabText: {
     fontSize: 13.5,
@@ -702,8 +702,8 @@ const styles = StyleSheet.create({
     borderColor: "#E8E2D5",
   },
   roleChipActive: {
-    backgroundColor: "#3B6E99",
-    borderColor: "#3B6E99",
+    backgroundColor: "#367A5E",
+    borderColor: "#367A5E",
   },
   roleChipText: {
     fontSize: 12,
@@ -718,7 +718,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     gap: 8,
-    backgroundColor: "#3B6E99",
+    backgroundColor: "#367A5E",
     paddingVertical: 14,
     borderRadius: 8,
     marginTop: 6,
@@ -796,7 +796,7 @@ const styles = StyleSheet.create({
   managerRole: {
     fontSize: 12.5,
     fontWeight: "700",
-    color: "#3B6E99",
+    color: "#367A5E",
   },
   managerBroker: {
     fontSize: 11.5,
@@ -811,31 +811,31 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 6,
-    backgroundColor: "#EBF2F7",
+    backgroundColor: "#EDF5F1",
     paddingVertical: 6,
     paddingHorizontal: 12,
     borderRadius: 6,
     borderWidth: 1,
-    borderColor: "#C8D9E8",
+    borderColor: "#C7E0D3",
   },
   actionBtnText: {
     fontSize: 12,
     fontWeight: "700",
-    color: "#2E567A",
+    color: "#285C47",
   },
   trecNoteCard: {
-    backgroundColor: "#EBF2F7",
+    backgroundColor: "#EDF5F1",
     borderRadius: 10,
     padding: 14,
     flexDirection: "row",
     alignItems: "flex-start",
     gap: 10,
     borderWidth: 1,
-    borderColor: "#C8D9E8",
+    borderColor: "#C7E0D3",
   },
   trecNoteText: {
     fontSize: 11.5,
-    color: "#2E567A",
+    color: "#285C47",
     lineHeight: 16,
     flex: 1,
   },

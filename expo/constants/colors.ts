@@ -1,5 +1,5 @@
 // KeyNest Realty Color Tokens
-// Palette: Warm Beige (#FDFBF7 / #F7F3EB), Deep Charcoal (#22252A), and Soft Slate Blue (#3B6E99)
+// Palette: Warm Beige (#FDFBF7 / #F7F3EB), Deep Charcoal (#22252A), and Soft Sage Green (#367A5E)
 
 export const PALETTE = {
   // Warm Beige & Off-white canvas
@@ -19,13 +19,21 @@ export const PALETTE = {
   charcoalFooter: "#1A1D21",
   charcoalCard: "#23272D",
 
-  // Soft Slate Blue Accents
-  softBlue: "#3B6E99",
-  softBlueHover: "#2E567A",
-  softBlueLight: "#EBF2F7",
-  softBluePill: "#E4EDF5",
-  softBlueBorder: "#C8D9E8",
-  softBlueDark: "#234461",
+  // Soft Sage Green Accents (appealing, calming, natural)
+  softGreen: "#367A5E",
+  softGreenHover: "#285C47",
+  softGreenLight: "#EDF5F1",
+  softGreenPill: "#E4F0E8",
+  softGreenBorder: "#C7E0D3",
+  softGreenDark: "#1E4636",
+
+  // Soft Blue backward-compatibility aliases mapped to Soft Sage Green
+  softBlue: "#367A5E",
+  softBlueHover: "#285C47",
+  softBlueLight: "#EDF5F1",
+  softBluePill: "#E4F0E8",
+  softBlueBorder: "#C7E0D3",
+  softBlueDark: "#1E4636",
 
   // Utility
   white: "#FFFFFF",
@@ -39,11 +47,11 @@ export const PALETTE = {
 };
 
 export const lightTheme = {
-  primary: PALETTE.softBlue,
-  primaryLight: "#5485B0",
-  accent: PALETTE.softBlue,
-  accentLight: PALETTE.softBlueLight,
-  accentDark: PALETTE.softBlueHover,
+  primary: PALETTE.softGreen,
+  primaryLight: "#489474",
+  accent: PALETTE.softGreen,
+  accentLight: PALETTE.softGreenLight,
+  accentDark: PALETTE.softGreenHover,
   brandNavy: PALETTE.charcoal,
   gold: "#C67D26",
   background: PALETTE.warmBeigeBg,
@@ -68,11 +76,11 @@ export const lightTheme = {
 };
 
 export const darkTheme = {
-  primary: "#5A8EB9",
-  primaryLight: "#7AA9D0",
-  accent: "#5A8EB9",
-  accentLight: "#1F2E3E",
-  accentDark: "#2B5173",
+  primary: "#5EAB86",
+  primaryLight: "#82C7A5",
+  accent: "#5EAB86",
+  accentLight: "#1D2D24",
+  accentDark: "#214332",
   brandNavy: PALETTE.charcoalHeading,
   gold: "#E0953C",
   background: "#16181B",

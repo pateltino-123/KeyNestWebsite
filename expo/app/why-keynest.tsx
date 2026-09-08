@@ -97,7 +97,7 @@ export default function WhyKeyNestPage() {
       <View style={styles.headerHero}>
         <View style={styles.innerContainer}>
           <View style={styles.badgePill}>
-            <ShieldCheck size={14} color="#3B6E99" />
+            <ShieldCheck size={14} color="#367A5E" />
             <Text style={styles.badgePillText}>Under the Brokerage of Fair Deal Realty Inc.</Text>
           </View>
           <Text style={styles.pageTitle}>Why Owners Choose KeyNest</Text>
@@ -135,7 +135,7 @@ export default function WhyKeyNestPage() {
                   ]}
                 >
                   <View style={styles.pillarIconBox}>
-                    <Icon size={22} color="#3B6E99" />
+                    <Icon size={22} color="#367A5E" />
                   </View>
                   <Text style={styles.pillarTitle}>{pil.title}</Text>
                   <Text style={styles.pillarDesc}>{pil.desc}</Text>
@@ -273,16 +273,16 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-    backgroundColor: "#EBF2F7",
+    backgroundColor: "#EDF5F1",
     paddingVertical: 6,
     paddingHorizontal: 12,
     borderRadius: 20,
     borderWidth: 1,
-    borderColor: "#C8D9E8",
+    borderColor: "#C7E0D3",
     marginBottom: 16,
   },
   badgePillText: {
-    color: "#2E567A",
+    color: "#285C47",
     fontSize: 12.5,
     fontWeight: "600",
   },
@@ -315,7 +315,7 @@ const styles = StyleSheet.create({
   sectionOverline: {
     fontSize: 12,
     fontWeight: "800",
-    color: "#3B6E99",
+    color: "#367A5E",
     letterSpacing: 1.2,
     marginBottom: 8,
   },
@@ -354,7 +354,7 @@ const styles = StyleSheet.create({
     width: 44,
     height: 44,
     borderRadius: 10,
-    backgroundColor: "#EBF2F7",
+    backgroundColor: "#EDF5F1",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -402,8 +402,8 @@ const styles = StyleSheet.create({
     gap: 4,
   },
   tableColKeynest: {
-    backgroundColor: "#EBF2F7",
-    borderColor: "#C8D9E8",
+    backgroundColor: "#EDF5F1",
+    borderColor: "#C7E0D3",
   },
   colLabel: {
     fontSize: 11,
@@ -413,7 +413,7 @@ const styles = StyleSheet.create({
   colLabelKeynest: {
     fontSize: 11,
     fontWeight: "800",
-    color: "#2E567A",
+    color: "#285C47",
   },
   colValText: {
     fontSize: 13,
@@ -423,7 +423,7 @@ const styles = StyleSheet.create({
   colValTextKeynest: {
     fontSize: 13,
     fontWeight: "700",
-    color: "#2E567A",
+    color: "#285C47",
     lineHeight: 18,
   },
   guaranteesGrid: {
@@ -443,7 +443,7 @@ const styles = StyleSheet.create({
     width: 32,
     height: 32,
     borderRadius: 16,
-    backgroundColor: "#3B6E99",
+    backgroundColor: "#367A5E",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -472,7 +472,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-    backgroundColor: "#3B6E99",
+    backgroundColor: "#367A5E",
     paddingVertical: 14,
     paddingHorizontal: 24,
     borderRadius: 8,

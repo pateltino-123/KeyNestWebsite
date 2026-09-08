@@ -41,7 +41,7 @@ export default function Footer() {
         <View style={styles.innerContainer}>
           <View style={styles.brokerageBannerContent}>
             <View style={styles.brokerageIconBox}>
-              <ShieldCheck size={20} color="#5A8EB9" />
+              <ShieldCheck size={20} color="#5EAB86" />
             </View>
             <View style={{ flex: 1 }}>
               <Text style={styles.brokerageBannerTitle}>
@@ -81,19 +81,19 @@ export default function Footer() {
 
               <View style={styles.contactList}>
                 <View style={styles.contactItem}>
-                  <MapPin size={15} color="#5A8EB9" style={styles.contactIcon} />
+                  <MapPin size={15} color="#5EAB86" style={styles.contactIcon} />
                   <Text style={styles.contactText}>{KEYNEST_INFO.officeAddress}</Text>
                 </View>
                 <View style={styles.contactItem}>
-                  <Phone size={15} color="#5A8EB9" style={styles.contactIcon} />
+                  <Phone size={15} color="#5EAB86" style={styles.contactIcon} />
                   <Text style={styles.contactText}>Office: {KEYNEST_INFO.phone}</Text>
                 </View>
                 <View style={styles.contactItem}>
-                  <Mail size={15} color="#5A8EB9" style={styles.contactIcon} />
+                  <Mail size={15} color="#5EAB86" style={styles.contactIcon} />
                   <Text style={styles.contactText}>{KEYNEST_INFO.email}</Text>
                 </View>
                 <View style={styles.contactItem}>
-                  <Clock size={15} color="#5A8EB9" style={styles.contactIcon} />
+                  <Clock size={15} color="#5EAB86" style={styles.contactIcon} />
                   <Text style={styles.contactText}>{KEYNEST_INFO.hours}</Text>
                 </View>
               </View>
@@ -151,7 +151,7 @@ export default function Footer() {
               <Text style={styles.colTitle}>Brokerage & Leadership</Text>
               <View style={styles.leadershipCard}>
                 <View style={styles.leadHeader}>
-                  <Building size={16} color="#5A8EB9" />
+                  <Building size={16} color="#5EAB86" />
                   <Text style={styles.leadBrokerName}>Fair Deal Realty Inc.</Text>
                 </View>
                 <Text style={styles.leadSub}>Sponsoring Texas Brokerage</Text>
@@ -168,7 +168,7 @@ export default function Footer() {
                   onPress={() => openUrl(KEYNEST_INFO.trecIabsUrl)}
                 >
                   <Text style={styles.trecBtnText}>TREC IABS Form</Text>
-                  <ExternalLink size={12} color="#5A8EB9" />
+                  <ExternalLink size={12} color="#5EAB86" />
                 </TouchableOpacity>
 
                 <TouchableOpacity
@@ -176,7 +176,7 @@ export default function Footer() {
                   onPress={() => openUrl(KEYNEST_INFO.trecConsumerNoticeUrl)}
                 >
                   <Text style={styles.trecBtnText}>Consumer Protection Notice</Text>
-                  <ExternalLink size={12} color="#5A8EB9" />
+                  <ExternalLink size={12} color="#5EAB86" />
                 </TouchableOpacity>
               </View>
             </View>
@@ -276,7 +276,7 @@ const styles = StyleSheet.create({
     width: 36,
     height: 36,
     borderRadius: 8,
-    backgroundColor: "#3B6E99",
+    backgroundColor: "#367A5E",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -288,7 +288,7 @@ const styles = StyleSheet.create({
   },
   footerLogoSub: {
     fontSize: 11,
-    color: "#7AA9D0",
+    color: "#82C7A5",
     fontWeight: "600",
     marginTop: -2,
   },
@@ -348,7 +348,7 @@ const styles = StyleSheet.create({
     fontWeight: "700",
   },
   leadSub: {
-    color: "#7AA9D0",
+    color: "#82C7A5",
     fontSize: 11,
     marginTop: 2,
   },
@@ -390,7 +390,7 @@ const styles = StyleSheet.create({
     borderColor: "#303742",
   },
   trecBtnText: {
-    color: "#7AA9D0",
+    color: "#82C7A5",
     fontSize: 12,
     fontWeight: "600",
   },

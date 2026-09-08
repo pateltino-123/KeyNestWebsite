@@ -139,7 +139,7 @@ export default function HomePage() {
             {/* Hero Left Copy */}
             <View style={[styles.heroTextCol, { width: isDesktop ? "54%" : "100%" }]}>
               <View style={styles.badgePill}>
-                <ShieldCheck size={14} color="#3B6E99" />
+                <ShieldCheck size={14} color="#367A5E" />
                 <Text style={styles.badgePillText}>Under the Brokerage of Fair Deal Realty Inc.</Text>
               </View>
 
@@ -178,15 +178,15 @@ export default function HomePage() {
               {/* Trust badges */}
               <View style={styles.trustBadgesRow}>
                 <View style={styles.trustBadgeItem}>
-                  <CheckCircle2 size={16} color="#3B6E99" />
+                  <CheckCircle2 size={16} color="#367A5E" />
                   <Text style={styles.trustBadgeText}>TREC Licensed & Supervised</Text>
                 </View>
                 <View style={styles.trustBadgeItem}>
-                  <CheckCircle2 size={16} color="#3B6E99" />
+                  <CheckCircle2 size={16} color="#367A5E" />
                   <Text style={styles.trustBadgeText}>Zero Management Fee When Vacant</Text>
                 </View>
                 <View style={styles.trustBadgeItem}>
-                  <CheckCircle2 size={16} color="#3B6E99" />
+                  <CheckCircle2 size={16} color="#367A5E" />
                   <Text style={styles.trustBadgeText}>AppFolio Modern Portal</Text>
                 </View>
               </View>
@@ -197,7 +197,7 @@ export default function HomePage() {
               <View style={styles.calculatorCard}>
                 <View style={styles.calcHeaderRow}>
                   <View style={styles.calcIconBox}>
-                    <Calculator size={18} color="#3B6E99" />
+                    <Calculator size={18} color="#367A5E" />
                   </View>
                   <View>
                     <Text style={styles.calcCardTitle}>Instant Rent & Return Estimator</Text>
@@ -320,13 +320,13 @@ export default function HomePage() {
                   activeOpacity={0.85}
                 >
                   <View style={styles.svcIconBox}>
-                    <Icon size={22} color="#3B6E99" />
+                    <Icon size={22} color="#367A5E" />
                   </View>
                   <Text style={styles.svcTitle}>{svc.title}</Text>
                   <Text style={styles.svcDesc}>{svc.desc}</Text>
                   <View style={styles.svcLearnMore}>
                     <Text style={styles.svcLearnMoreText}>Explore Service</Text>
-                    <ChevronRight size={15} color="#3B6E99" />
+                    <ChevronRight size={15} color="#367A5E" />
                   </View>
                 </TouchableOpacity>
               );
@@ -373,7 +373,7 @@ export default function HomePage() {
           </View>
 
           <View style={styles.governanceQuoteBox}>
-            <ShieldCheck size={26} color="#3B6E99" />
+            <ShieldCheck size={26} color="#367A5E" />
             <View style={{ flex: 1 }}>
               <Text style={styles.governanceQuoteTitle}>Brokerage Oversight Guarantee</Text>
               <Text style={styles.governanceQuoteText}>
@@ -413,7 +413,7 @@ export default function HomePage() {
               >
                 <View style={styles.cityCardTop}>
                   <View style={styles.cityPinBadge}>
-                    <MapPin size={16} color="#3B6E99" />
+                    <MapPin size={16} color="#367A5E" />
                   </View>
                   <Text style={styles.cityName}>{city.name}</Text>
                 </View>
@@ -442,7 +442,7 @@ export default function HomePage() {
               onPress={() => router.push("/contact" as never)}
             >
               <Text style={styles.viewAllCitiesBtnText}>Explore All 7 Service Territory Profiles</Text>
-              <ArrowRight size={16} color="#3B6E99" />
+              <ArrowRight size={16} color="#367A5E" />
             </TouchableOpacity>
           </View>
         </View>
@@ -500,7 +500,7 @@ export default function HomePage() {
                   >
                     <Text style={styles.faqQuestion}>{faq.q}</Text>
                     {isExpanded ? (
-                      <ChevronUp size={20} color="#3B6E99" />
+                      <ChevronUp size={20} color="#367A5E" />
                     ) : (
                       <ChevronDown size={20} color="#737B85" />
                     )}
@@ -566,7 +566,7 @@ const styles = StyleSheet.create({
     letterSpacing: -1.2,
   },
   heroHeadlineHighlight: {
-    color: "#3B6E99",
+    color: "#367A5E",
   },
   heroSubhead: {
     fontSize: 17,
@@ -583,11 +583,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-    backgroundColor: "#3B6E99",
+    backgroundColor: "#367A5E",
     paddingVertical: 14,
     paddingHorizontal: 22,
     borderRadius: 8,
-    shadowColor: "#3B6E99",
+    shadowColor: "#367A5E",
     shadowOpacity: 0.2,
     shadowRadius: 8,
     elevation: 3,
@@ -654,7 +654,7 @@ const styles = StyleSheet.create({
     width: 38,
     height: 38,
     borderRadius: 8,
-    backgroundColor: "#EBF2F7",
+    backgroundColor: "#EDF5F1",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -689,8 +689,8 @@ const styles = StyleSheet.create({
     borderColor: "#E8E2D5",
   },
   calcChipActive: {
-    backgroundColor: "#3B6E99",
-    borderColor: "#3B6E99",
+    backgroundColor: "#367A5E",
+    borderColor: "#367A5E",
   },
   calcChipText: {
     fontSize: 12,
@@ -756,7 +756,7 @@ const styles = StyleSheet.create({
   calcNetValue: {
     fontSize: 22,
     fontWeight: "900",
-    color: "#3B6E99",
+    color: "#367A5E",
   },
   calcAnnualNote: {
     fontSize: 11.5,
@@ -799,7 +799,7 @@ const styles = StyleSheet.create({
   sectionOverline: {
     fontSize: 12,
     fontWeight: "800",
-    color: "#3B6E99",
+    color: "#367A5E",
     letterSpacing: 1.2,
     marginBottom: 8,
   },
@@ -838,7 +838,7 @@ const styles = StyleSheet.create({
     width: 44,
     height: 44,
     borderRadius: 8,
-    backgroundColor: "#EBF2F7",
+    backgroundColor: "#EDF5F1",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -862,11 +862,11 @@ const styles = StyleSheet.create({
   svcLearnMoreText: {
     fontSize: 13.5,
     fontWeight: "700",
-    color: "#3B6E99",
+    color: "#367A5E",
   },
   lifecycleCtaBox: {
     marginTop: 36,
-    backgroundColor: "#EBF2F7",
+    backgroundColor: "#EDF5F1",
     padding: 22,
     borderRadius: 10,
     flexDirection: "row",
@@ -875,16 +875,16 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     gap: 16,
     borderWidth: 1,
-    borderColor: "#C8D9E8",
+    borderColor: "#C7E0D3",
   },
   lifecycleCtaText: {
     fontSize: 14.5,
-    color: "#2E567A",
+    color: "#285C47",
     fontWeight: "600",
     flex: 1,
   },
   lifecycleCtaBtn: {
-    backgroundColor: "#3B6E99",
+    backgroundColor: "#367A5E",
     paddingVertical: 10,
     paddingHorizontal: 18,
     borderRadius: 7,
@@ -912,14 +912,14 @@ const styles = StyleSheet.create({
     width: 34,
     height: 34,
     borderRadius: 17,
-    backgroundColor: "#EBF2F7",
+    backgroundColor: "#EDF5F1",
     justifyContent: "center",
     alignItems: "center",
   },
   advantageNumberText: {
     fontSize: 15,
     fontWeight: "800",
-    color: "#3B6E99",
+    color: "#367A5E",
   },
   advantageTitle: {
     fontSize: 16,
@@ -975,7 +975,7 @@ const styles = StyleSheet.create({
     width: 32,
     height: 32,
     borderRadius: 7,
-    backgroundColor: "#EBF2F7",
+    backgroundColor: "#EDF5F1",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -1011,7 +1011,7 @@ const styles = StyleSheet.create({
   cityActionText: {
     fontSize: 12.5,
     fontWeight: "700",
-    color: "#3B6E99",
+    color: "#367A5E",
   },
   viewAllCitiesRow: {
     marginTop: 32,
@@ -1021,15 +1021,15 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-    backgroundColor: "#EBF2F7",
+    backgroundColor: "#EDF5F1",
     paddingVertical: 11,
     paddingHorizontal: 20,
     borderRadius: 7,
     borderWidth: 1,
-    borderColor: "#C8D9E8",
+    borderColor: "#C7E0D3",
   },
   viewAllCitiesBtnText: {
-    color: "#2E567A",
+    color: "#285C47",
     fontSize: 13.5,
     fontWeight: "700",
   },
@@ -1045,7 +1045,7 @@ const styles = StyleSheet.create({
   pricingBannerOverline: {
     fontSize: 12,
     fontWeight: "800",
-    color: "#7AA9D0",
+    color: "#82C7A5",
     letterSpacing: 1,
     marginBottom: 6,
   },
@@ -1065,7 +1065,7 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   pricingPrimaryBtn: {
-    backgroundColor: "#3B6E99",
+    backgroundColor: "#367A5E",
     paddingVertical: 13,
     paddingHorizontal: 22,
     borderRadius: 7,

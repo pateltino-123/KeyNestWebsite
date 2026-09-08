@@ -57,7 +57,7 @@ export default function ConsultationModal({ visible, onClose }: ConsultationModa
           <View style={styles.modalHeader}>
             <View style={styles.headerTitleRow}>
               <View style={styles.iconCircle}>
-                <Calendar size={20} color="#3B6E99" />
+                <Calendar size={20} color="#367A5E" />
               </View>
               <View>
                 <Text style={styles.modalTitle}>Schedule a Consultation</Text>
@@ -75,7 +75,7 @@ export default function ConsultationModal({ visible, onClose }: ConsultationModa
             {!submitted ? (
               <View style={styles.formContainer}>
                 <View style={styles.brokerNotice}>
-                  <ShieldCheck size={16} color="#3B6E99" />
+                  <ShieldCheck size={16} color="#367A5E" />
                   <Text style={styles.brokerNoticeText}>
                     Authorized Managers: Dinesh Donthula & Purvang Patel • Fair Deal Realty Inc.
                   </Text>
@@ -300,7 +300,7 @@ const styles = StyleSheet.create({
     width: 38,
     height: 38,
     borderRadius: 8,
-    backgroundColor: "#EBF2F7",
+    backgroundColor: "#EDF5F1",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -328,15 +328,15 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-    backgroundColor: "#EBF2F7",
+    backgroundColor: "#EDF5F1",
     padding: 10,
     borderRadius: 8,
     borderWidth: 1,
-    borderColor: "#C8D9E8",
+    borderColor: "#C7E0D3",
   },
   brokerNoticeText: {
     fontSize: 12,
-    color: "#2E567A",
+    color: "#285C47",
     fontWeight: "600",
     flex: 1,
   },
@@ -376,8 +376,8 @@ const styles = StyleSheet.create({
     borderColor: "#E8E2D5",
   },
   pillActive: {
-    backgroundColor: "#3B6E99",
-    borderColor: "#3B6E99",
+    backgroundColor: "#367A5E",
+    borderColor: "#367A5E",
   },
   pillText: {
     fontSize: 12.5,
@@ -392,11 +392,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     gap: 8,
-    backgroundColor: "#3B6E99",
+    backgroundColor: "#367A5E",
     paddingVertical: 13,
     borderRadius: 8,
     marginTop: 8,
-    shadowColor: "#3B6E99",
+    shadowColor: "#367A5E",
     shadowOpacity: 0.18,
     shadowRadius: 6,
     elevation: 2,

@@ -69,14 +69,14 @@ export default function Header({
       <View style={styles.topBanner}>
         <View style={styles.topBannerContent}>
           <View style={styles.topBannerLeft}>
-            <ShieldCheck size={14} color="#3B6E99" />
+            <ShieldCheck size={14} color="#367A5E" />
             <Text style={styles.topBannerText}>
               <Text style={styles.boldText}>KeyNest Realty</Text> • Under the Brokerage of{" "}
               <Text style={styles.boldText}>Fair Deal Realty Inc.</Text> • TREC Licensed
             </Text>
           </View>
           <View style={styles.topBannerRight}>
-            <Phone size={13} color="#3B6E99" />
+            <Phone size={13} color="#367A5E" />
             <Text style={styles.topBannerPhone}>Office: {KEYNEST_INFO.phone}</Text>
             <View style={styles.topBannerDivider} />
             <TouchableOpacity
@@ -146,7 +146,7 @@ export default function Header({
                   onPress={() => setPortalDropdownOpen(!portalDropdownOpen)}
                   accessibilityRole="button"
                 >
-                  <Key size={14} color="#3B6E99" />
+                  <Key size={14} color="#367A5E" />
                   <Text style={styles.portalButtonText}>Client Portals</Text>
                   <ChevronDown size={14} color="#737B85" />
                 </TouchableOpacity>
@@ -165,7 +165,7 @@ export default function Header({
                       }}
                     >
                       <View style={styles.dropdownItemIconCircle}>
-                        <Key size={14} color="#3B6E99" />
+                        <Key size={14} color="#367A5E" />
                       </View>
                       <View style={{ flex: 1 }}>
                         <Text style={styles.dropdownItemTitle}>Owner Portal</Text>
@@ -185,7 +185,7 @@ export default function Header({
                       }}
                     >
                       <View style={styles.dropdownItemIconCircle}>
-                        <Users size={14} color="#3B6E99" />
+                        <Users size={14} color="#367A5E" />
                       </View>
                       <View style={{ flex: 1 }}>
                         <Text style={styles.dropdownItemTitle}>Resident Portal</Text>
@@ -270,7 +270,7 @@ export default function Header({
                       style={[styles.mobileNavItem, isActive && styles.mobileNavItemActive]}
                       onPress={() => navigateTo(item.href)}
                     >
-                      <Icon size={18} color={isActive ? "#3B6E99" : "#737B85"} />
+                      <Icon size={18} color={isActive ? "#367A5E" : "#737B85"} />
                       <Text style={[styles.mobileNavText, isActive && styles.mobileNavTextActive]}>
                         {item.label}
                       </Text>
@@ -292,7 +292,7 @@ export default function Header({
                     }
                   }}
                 >
-                  <Key size={16} color="#3B6E99" />
+                  <Key size={16} color="#367A5E" />
                   <Text style={styles.mobilePortalBtnText}>AppFolio Owner Portal</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
@@ -306,7 +306,7 @@ export default function Header({
                     }
                   }}
                 >
-                  <Users size={16} color="#3B6E99" />
+                  <Users size={16} color="#367A5E" />
                   <Text style={styles.mobilePortalBtnText}>AppFolio Resident Portal</Text>
                 </TouchableOpacity>
               </View>
@@ -399,7 +399,7 @@ const styles = StyleSheet.create({
     color: "#22252A",
   },
   topBannerPhone: {
-    color: "#3B6E99",
+    color: "#367A5E",
     fontSize: 12,
     fontWeight: "600",
   },
@@ -409,7 +409,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#E8E2D5",
   },
   topBannerLink: {
-    color: "#3B6E99",
+    color: "#367A5E",
     fontSize: 12,
     fontWeight: "600",
     textDecorationLine: "underline",
@@ -436,10 +436,10 @@ const styles = StyleSheet.create({
     width: 38,
     height: 38,
     borderRadius: 9,
-    backgroundColor: "#3B6E99",
+    backgroundColor: "#367A5E",
     justifyContent: "center",
     alignItems: "center",
-    shadowColor: "#3B6E99",
+    shadowColor: "#367A5E",
     shadowOpacity: 0.15,
     shadowRadius: 6,
     elevation: 2,
@@ -458,7 +458,7 @@ const styles = StyleSheet.create({
   logoTextSub: {
     fontSize: 20,
     fontWeight: "700",
-    color: "#3B6E99",
+    color: "#367A5E",
     letterSpacing: -0.4,
   },
   logoBrokerSub: {
@@ -478,7 +478,7 @@ const styles = StyleSheet.create({
     borderRadius: 6,
   },
   navItemActive: {
-    backgroundColor: "#EBF2F7",
+    backgroundColor: "#EDF5F1",
   },
   navItemText: {
     fontSize: 13.5,
@@ -486,7 +486,7 @@ const styles = StyleSheet.create({
     color: "#4A515A",
   },
   navItemTextActive: {
-    color: "#3B6E99",
+    color: "#367A5E",
     fontWeight: "700",
   },
   actionButtonsContainer: {
@@ -542,7 +542,7 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
     borderRadius: 7,
-    backgroundColor: "#EBF2F7",
+    backgroundColor: "#EDF5F1",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -564,11 +564,11 @@ const styles = StyleSheet.create({
   primaryCtaButton: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#3B6E99",
+    backgroundColor: "#367A5E",
     paddingVertical: 9,
     paddingHorizontal: 16,
     borderRadius: 7,
-    shadowColor: "#3B6E99",
+    shadowColor: "#367A5E",
     shadowOpacity: 0.18,
     shadowRadius: 6,
     elevation: 2,
@@ -612,7 +612,7 @@ const styles = StyleSheet.create({
     width: 32,
     height: 32,
     borderRadius: 8,
-    backgroundColor: "#3B6E99",
+    backgroundColor: "#367A5E",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -645,7 +645,7 @@ const styles = StyleSheet.create({
     borderRadius: 7,
   },
   mobileNavItemActive: {
-    backgroundColor: "#EBF2F7",
+    backgroundColor: "#EDF5F1",
   },
   mobileNavText: {
     fontSize: 14.5,
@@ -653,7 +653,7 @@ const styles = StyleSheet.create({
     fontWeight: "500",
   },
   mobileNavTextActive: {
-    color: "#3B6E99",
+    color: "#367A5E",
     fontWeight: "700",
   },
   mobilePortalSection: {
@@ -692,7 +692,7 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   mobilePrimaryCta: {
-    backgroundColor: "#3B6E99",
+    backgroundColor: "#367A5E",
     paddingVertical: 12,
     borderRadius: 7,
     alignItems: "center",

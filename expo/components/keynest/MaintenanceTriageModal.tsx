@@ -77,7 +77,7 @@ export default function MaintenanceTriageModal({
           <View style={styles.modalHeader}>
             <View style={styles.headerTitleRow}>
               <View style={styles.iconCircle}>
-                <Wrench size={20} color="#3B6E99" />
+                <Wrench size={20} color="#367A5E" />
               </View>
               <View>
                 <Text style={styles.modalTitle}>Maintenance & Repair Triage</Text>
@@ -377,7 +377,7 @@ const styles = StyleSheet.create({
     width: 38,
     height: 38,
     borderRadius: 8,
-    backgroundColor: "#EBF2F7",
+    backgroundColor: "#EDF5F1",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -451,7 +451,7 @@ const styles = StyleSheet.create({
     width: 42,
     height: 42,
     borderRadius: 8,
-    backgroundColor: "#EBF2F7",
+    backgroundColor: "#EDF5F1",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -485,7 +485,7 @@ const styles = StyleSheet.create({
   },
   severityBadgeBlue: {
     alignSelf: "flex-start",
-    backgroundColor: "#3B6E99",
+    backgroundColor: "#367A5E",
     paddingVertical: 2,
     paddingHorizontal: 8,
     borderRadius: 4,
@@ -514,7 +514,7 @@ const styles = StyleSheet.create({
     paddingVertical: 6,
   },
   directPortalLinkText: {
-    color: "#3B6E99",
+    color: "#367A5E",
     fontSize: 13,
     fontWeight: "600",
     textDecorationLine: "underline",
@@ -592,18 +592,18 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: "#EBF2F7",
+    backgroundColor: "#EDF5F1",
     padding: 12,
     borderRadius: 8,
     borderWidth: 1,
-    borderColor: "#C8D9E8",
+    borderColor: "#C7E0D3",
   },
   selectedUrgencyBannerText: {
     fontSize: 13,
-    color: "#2E567A",
+    color: "#285C47",
   },
   changeUrgencyLink: {
-    color: "#3B6E99",
+    color: "#367A5E",
     fontSize: 13,
     fontWeight: "700",
     textDecorationLine: "underline",
@@ -635,11 +635,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     gap: 8,
-    backgroundColor: "#3B6E99",
+    backgroundColor: "#367A5E",
     paddingVertical: 13,
     borderRadius: 8,
     marginTop: 8,
-    shadowColor: "#3B6E99",
+    shadowColor: "#367A5E",
     shadowOpacity: 0.18,
     shadowRadius: 6,
     elevation: 2,

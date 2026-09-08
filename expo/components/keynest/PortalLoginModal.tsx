@@ -49,7 +49,7 @@ export default function PortalLoginModal({
           <View style={styles.modalHeader}>
             <View style={styles.headerLeft}>
               <View style={styles.lockIconBox}>
-                <Lock size={18} color="#3B6E99" />
+                <Lock size={18} color="#367A5E" />
               </View>
               <View>
                 <Text style={styles.modalTitle}>KeyNest Client Portals</Text>
@@ -67,7 +67,7 @@ export default function PortalLoginModal({
               style={[styles.tabBtn, activeTab === "owner" && styles.tabBtnActive]}
               onPress={() => setActiveTab("owner")}
             >
-              <Key size={16} color={activeTab === "owner" ? "#3B6E99" : "#737B85"} />
+              <Key size={16} color={activeTab === "owner" ? "#367A5E" : "#737B85"} />
               <Text style={[styles.tabBtnText, activeTab === "owner" && styles.tabBtnTextActive]}>
                 Owner Portal
               </Text>
@@ -76,7 +76,7 @@ export default function PortalLoginModal({
               style={[styles.tabBtn, activeTab === "tenant" && styles.tabBtnActive]}
               onPress={() => setActiveTab("tenant")}
             >
-              <Users size={16} color={activeTab === "tenant" ? "#3B6E99" : "#737B85"} />
+              <Users size={16} color={activeTab === "tenant" ? "#367A5E" : "#737B85"} />
               <Text style={[styles.tabBtnText, activeTab === "tenant" && styles.tabBtnTextActive]}>
                 Resident Portal
               </Text>
@@ -97,15 +97,15 @@ export default function PortalLoginModal({
 
                 <View style={styles.featuresGrid}>
                   <View style={styles.featureItem}>
-                    <DollarSign size={16} color="#3B6E99" />
+                    <DollarSign size={16} color="#367A5E" />
                     <Text style={styles.featureText}>Monthly Direct ACH Cash-Flow Ledgers</Text>
                   </View>
                   <View style={styles.featureItem}>
-                    <FileText size={16} color="#3B6E99" />
+                    <FileText size={16} color="#367A5E" />
                     <Text style={styles.featureText}>Signed Texas Leases & Inspection Reports</Text>
                   </View>
                   <View style={styles.featureItem}>
-                    <Wrench size={16} color="#3B6E99" />
+                    <Wrench size={16} color="#367A5E" />
                     <Text style={styles.featureText}>Itemized Vendor Invoices (Zero Markup)</Text>
                   </View>
                 </View>
@@ -137,15 +137,15 @@ export default function PortalLoginModal({
 
                 <View style={styles.featuresGrid}>
                   <View style={styles.featureItem}>
-                    <CreditCard size={16} color="#3B6E99" />
+                    <CreditCard size={16} color="#367A5E" />
                     <Text style={styles.featureText}>Fast Zero-Fee ACH Autopay & Card Options</Text>
                   </View>
                   <View style={styles.featureItem}>
-                    <Wrench size={16} color="#3B6E99" />
+                    <Wrench size={16} color="#367A5E" />
                     <Text style={styles.featureText}>Submit Photos & Track Real-Time Repairs</Text>
                   </View>
                   <View style={styles.featureItem}>
-                    <FileText size={16} color="#3B6E99" />
+                    <FileText size={16} color="#367A5E" />
                     <Text style={styles.featureText}>Digital Lease Records & Payment Receipts</Text>
                   </View>
                 </View>
@@ -214,7 +214,7 @@ const styles = StyleSheet.create({
     width: 38,
     height: 38,
     borderRadius: 8,
-    backgroundColor: "#EBF2F7",
+    backgroundColor: "#EDF5F1",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -249,7 +249,7 @@ const styles = StyleSheet.create({
     borderBottomColor: "transparent",
   },
   tabBtnActive: {
-    borderBottomColor: "#3B6E99",
+    borderBottomColor: "#367A5E",
     backgroundColor: "#FFFFFF",
   },
   tabBtnText: {
@@ -258,7 +258,7 @@ const styles = StyleSheet.create({
     color: "#737B85",
   },
   tabBtnTextActive: {
-    color: "#3B6E99",
+    color: "#367A5E",
     fontWeight: "700",
   },
   contentBody: {
@@ -269,7 +269,7 @@ const styles = StyleSheet.create({
   },
   portalBadge: {
     alignSelf: "flex-start",
-    backgroundColor: "#EBF2F7",
+    backgroundColor: "#EDF5F1",
     paddingVertical: 4,
     paddingHorizontal: 10,
     borderRadius: 6,
@@ -277,7 +277,7 @@ const styles = StyleSheet.create({
   portalBadgeText: {
     fontSize: 11,
     fontWeight: "800",
-    color: "#3B6E99",
+    color: "#367A5E",
     letterSpacing: 0.8,
   },
   portalHeading: {
@@ -313,11 +313,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     gap: 8,
-    backgroundColor: "#3B6E99",
+    backgroundColor: "#367A5E",
     paddingVertical: 13,
     borderRadius: 8,
     marginTop: 6,
-    shadowColor: "#3B6E99",
+    shadowColor: "#367A5E",
     shadowOpacity: 0.18,
     shadowRadius: 6,
     elevation: 2,

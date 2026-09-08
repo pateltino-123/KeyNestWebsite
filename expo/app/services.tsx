@@ -37,7 +37,7 @@ export default function ServicesPage() {
       <View style={styles.headerHero}>
         <View style={styles.innerContainer}>
           <View style={styles.badgePill}>
-            <ShieldCheck size={14} color="#3B6E99" />
+            <ShieldCheck size={14} color="#367A5E" />
             <Text style={styles.badgePillText}>Under the Brokerage of Fair Deal Realty Inc.</Text>
           </View>
           <Text style={styles.pageTitle}>Full Management Lifecycle</Text>
@@ -120,14 +120,14 @@ export default function ServicesPage() {
                       <Text style={styles.stageNumberBadgeText}>STAGE {stage.stageNumber}</Text>
                     </View>
                     <View style={styles.slaBadge}>
-                      <Clock size={12} color="#3B6E99" />
+                      <Clock size={12} color="#367A5E" />
                       <Text style={styles.slaBadgeText}>Standard SLA: {stage.sla}</Text>
                     </View>
                   </View>
 
                   <View style={styles.stageTitleRow}>
                     <View style={styles.iconCircle}>
-                      <Icon size={22} color="#3B6E99" />
+                      <Icon size={22} color="#367A5E" />
                     </View>
                     <View style={{ flex: 1 }}>
                       <Text style={styles.stageMainTitle}>{stage.title}</Text>
@@ -269,7 +269,7 @@ const styles = StyleSheet.create({
   sectionOverline: {
     fontSize: 12,
     fontWeight: "800",
-    color: "#3B6E99",
+    color: "#367A5E",
     letterSpacing: 1,
     marginBottom: 6,
   },
@@ -282,7 +282,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-    backgroundColor: "#3B6E99",
+    backgroundColor: "#367A5E",
     paddingVertical: 10,
     paddingHorizontal: 18,
     borderRadius: 7,
@@ -315,8 +315,8 @@ const styles = StyleSheet.create({
     borderColor: "#E8E2D5",
   },
   stageTabItemActive: {
-    backgroundColor: "#EBF2F7",
-    borderColor: "#3B6E99",
+    backgroundColor: "#EDF5F1",
+    borderColor: "#367A5E",
   },
   tabNumberCircle: {
     width: 22,
@@ -329,8 +329,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   tabNumberCircleActive: {
-    backgroundColor: "#3B6E99",
-    borderColor: "#3B6E99",
+    backgroundColor: "#367A5E",
+    borderColor: "#367A5E",
   },
   tabNumberText: {
     fontSize: 11,
@@ -346,7 +346,7 @@ const styles = StyleSheet.create({
     color: "#4A515A",
   },
   tabLabelActive: {
-    color: "#3B6E99",
+    color: "#367A5E",
     fontWeight: "700",
   },
   stagesList: {
@@ -361,9 +361,9 @@ const styles = StyleSheet.create({
     gap: 16,
   },
   lifecycleCardHighlighted: {
-    borderColor: "#3B6E99",
+    borderColor: "#367A5E",
     borderWidth: 1.5,
-    shadowColor: "#3B6E99",
+    shadowColor: "#367A5E",
     shadowOpacity: 0.08,
     shadowRadius: 12,
     elevation: 3,
@@ -389,7 +389,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 6,
-    backgroundColor: "#EBF2F7",
+    backgroundColor: "#EDF5F1",
     paddingVertical: 4,
     paddingHorizontal: 10,
     borderRadius: 6,
@@ -397,7 +397,7 @@ const styles = StyleSheet.create({
   slaBadgeText: {
     fontSize: 12,
     fontWeight: "700",
-    color: "#3B6E99",
+    color: "#367A5E",
   },
   stageTitleRow: {
     flexDirection: "row",
@@ -408,7 +408,7 @@ const styles = StyleSheet.create({
     width: 42,
     height: 42,
     borderRadius: 8,
-    backgroundColor: "#EBF2F7",
+    backgroundColor: "#EDF5F1",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -435,12 +435,12 @@ const styles = StyleSheet.create({
     borderColor: "#E8E2D5",
   },
   detailBoxRight: {
-    backgroundColor: "#EBF2F7",
+    backgroundColor: "#EDF5F1",
     borderRadius: 8,
     padding: 16,
     gap: 6,
     borderWidth: 1,
-    borderColor: "#C8D9E8",
+    borderColor: "#C7E0D3",
   },
   detailLabel: {
     fontSize: 11,
@@ -451,7 +451,7 @@ const styles = StyleSheet.create({
   detailLabelBlue: {
     fontSize: 11,
     fontWeight: "800",
-    color: "#2E567A",
+    color: "#285C47",
     letterSpacing: 0.6,
   },
   detailText: {
@@ -468,7 +468,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 6,
-    backgroundColor: "#3B6E99",
+    backgroundColor: "#367A5E",
     paddingVertical: 10,
     paddingHorizontal: 16,
     borderRadius: 7,
@@ -519,7 +519,7 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   bottomPrimaryBtn: {
-    backgroundColor: "#3B6E99",
+    backgroundColor: "#367A5E",
     paddingVertical: 13,
     paddingHorizontal: 20,
     borderRadius: 7,

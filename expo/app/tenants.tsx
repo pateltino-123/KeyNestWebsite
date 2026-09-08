@@ -45,7 +45,7 @@ export default function TenantsPage() {
       <View style={styles.headerHero}>
         <View style={styles.innerContainer}>
           <View style={styles.badgePill}>
-            <ShieldCheck size={14} color="#3B6E99" />
+            <ShieldCheck size={14} color="#367A5E" />
             <Text style={styles.badgePillText}>Under the Brokerage of Fair Deal Realty Inc.</Text>
           </View>
           <Text style={styles.pageTitle}>Tenant & Resident Center</Text>
@@ -61,7 +61,7 @@ export default function TenantsPage() {
           <View style={[styles.portalBox, { flexDirection: isDesktop ? "row" : "column" }]}>
             <View style={{ flex: 1, gap: 10 }}>
               <View style={styles.portalTag}>
-                <CreditCard size={12} color="#3B6E99" />
+                <CreditCard size={12} color="#367A5E" />
                 <Text style={styles.portalTagText}>APPFOLIO RESIDENT PORTAL</Text>
               </View>
               <Text style={styles.portalTitle}>Manage Your Rent & Lease Online</Text>
@@ -144,7 +144,7 @@ export default function TenantsPage() {
                 <Text style={styles.stepTitle}>{st.title}</Text>
                 <Text style={styles.stepDesc}>{st.description}</Text>
                 <View style={styles.stepTimeRow}>
-                  <Clock size={12} color="#3B6E99" />
+                  <Clock size={12} color="#367A5E" />
                   <Text style={styles.stepTimeText}>{st.channel}</Text>
                 </View>
               </View>
@@ -175,7 +175,7 @@ export default function TenantsPage() {
             {RENTAL_CRITERIA_POINTS.map((crit, idx) => (
               <View key={idx} style={styles.criteriaItem}>
                 <View style={styles.criteriaCheckCircle}>
-                  <CheckCircle2 size={16} color="#3B6E99" />
+                  <CheckCircle2 size={16} color="#367A5E" />
                 </View>
                 <View style={{ flex: 1 }}>
                   <Text style={styles.criteriaItemTitle}>{crit.title}</Text>
@@ -186,7 +186,7 @@ export default function TenantsPage() {
           </View>
 
           <View style={styles.fairHousingBox}>
-            <Scale size={20} color="#3B6E99" />
+            <Scale size={20} color="#367A5E" />
             <Text style={styles.fairHousingText}>
               Equal Housing Opportunity: KeyNest Realty and Fair Deal Realty Inc. strictly prohibit discrimination based on race, color, religion, sex, disability, familial status, or national origin.
             </Text>
@@ -215,16 +215,16 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-    backgroundColor: "#EBF2F7",
+    backgroundColor: "#EDF5F1",
     paddingVertical: 6,
     paddingHorizontal: 12,
     borderRadius: 20,
     borderWidth: 1,
-    borderColor: "#C8D9E8",
+    borderColor: "#C7E0D3",
     marginBottom: 16,
   },
   badgePillText: {
-    color: "#2E567A",
+    color: "#285C47",
     fontSize: 12.5,
     fontWeight: "600",
   },
@@ -268,7 +268,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 6,
-    backgroundColor: "#EBF2F7",
+    backgroundColor: "#EDF5F1",
     paddingVertical: 4,
     paddingHorizontal: 10,
     borderRadius: 6,
@@ -276,7 +276,7 @@ const styles = StyleSheet.create({
   portalTagText: {
     fontSize: 11,
     fontWeight: "800",
-    color: "#2E567A",
+    color: "#285C47",
     letterSpacing: 0.8,
   },
   portalTitle: {
@@ -298,7 +298,7 @@ const styles = StyleSheet.create({
   portalPill: {
     fontSize: 12.5,
     fontWeight: "600",
-    color: "#3B6E99",
+    color: "#367A5E",
   },
   portalActionCol: {
     alignItems: "center",
@@ -308,11 +308,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-    backgroundColor: "#3B6E99",
+    backgroundColor: "#367A5E",
     paddingVertical: 14,
     paddingHorizontal: 24,
     borderRadius: 10,
-    shadowColor: "#3B6E99",
+    shadowColor: "#367A5E",
     shadowOpacity: 0.25,
     shadowRadius: 8,
     elevation: 3,
@@ -326,7 +326,7 @@ const styles = StyleSheet.create({
     paddingVertical: 6,
   },
   triageSecondaryBtnText: {
-    color: "#3B6E99",
+    color: "#367A5E",
     fontSize: 13,
     fontWeight: "700",
   },
@@ -338,7 +338,7 @@ const styles = StyleSheet.create({
   sectionOverline: {
     fontSize: 12,
     fontWeight: "800",
-    color: "#3B6E99",
+    color: "#367A5E",
     letterSpacing: 1.2,
     marginBottom: 8,
   },
@@ -445,7 +445,7 @@ const styles = StyleSheet.create({
   stepTimeText: {
     fontSize: 12,
     fontWeight: "600",
-    color: "#3B6E99",
+    color: "#367A5E",
   },
   triageActionWrap: {
     marginTop: 36,
@@ -455,7 +455,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-    backgroundColor: "#3B6E99",
+    backgroundColor: "#367A5E",
     paddingVertical: 14,
     paddingHorizontal: 24,
     borderRadius: 8,
@@ -485,7 +485,7 @@ const styles = StyleSheet.create({
     width: 28,
     height: 28,
     borderRadius: 14,
-    backgroundColor: "#EBF2F7",
+    backgroundColor: "#EDF5F1",
     justifyContent: "center",
     alignItems: "center",
     marginTop: 2,
@@ -506,18 +506,18 @@ const styles = StyleSheet.create({
     width: "100%",
     marginHorizontal: "auto",
     marginTop: 24,
-    backgroundColor: "#EBF2F7",
+    backgroundColor: "#EDF5F1",
     borderRadius: 10,
     padding: 16,
     flexDirection: "row",
     alignItems: "center",
     gap: 12,
     borderWidth: 1,
-    borderColor: "#C8D9E8",
+    borderColor: "#C7E0D3",
   },
   fairHousingText: {
     fontSize: 12.5,
-    color: "#2E567A",
+    color: "#285C47",
     lineHeight: 18,
     flex: 1,
   },

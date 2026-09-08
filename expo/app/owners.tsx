@@ -67,7 +67,7 @@ export default function OwnersPage() {
       <View style={styles.headerHero}>
         <View style={styles.innerContainer}>
           <View style={styles.badgePill}>
-            <ShieldCheck size={14} color="#3B6E99" />
+            <ShieldCheck size={14} color="#367A5E" />
             <Text style={styles.badgePillText}>Under the Brokerage of Fair Deal Realty Inc.</Text>
           </View>
           <Text style={styles.pageTitle}>Property Owner Center</Text>
@@ -83,7 +83,7 @@ export default function OwnersPage() {
           <View style={[styles.portalBox, { flexDirection: isDesktop ? "row" : "column" }]}>
             <View style={{ flex: 1, gap: 10 }}>
               <View style={styles.portalTag}>
-                <Lock size={12} color="#3B6E99" />
+                <Lock size={12} color="#367A5E" />
                 <Text style={styles.portalTagText}>APPFOLIO OWNER PORTAL</Text>
               </View>
               <Text style={styles.portalTitle}>Real-Time Owner Accounting & Documents</Text>
@@ -376,7 +376,7 @@ export default function OwnersPage() {
             </View>
 
             <View style={[styles.timelineCard, styles.timelineCardHighlight]}>
-              <View style={[styles.timelineDateBadge, { backgroundColor: "#3B6E99" }]}>
+              <View style={[styles.timelineDateBadge, { backgroundColor: "#367A5E" }]}>
                 <Text style={[styles.timelineDateText, { color: "#FFFFFF" }]}>10TH OF MONTH</Text>
               </View>
               <Text style={styles.timelineCardTitle}>Owner ACH Direct Deposit</Text>
@@ -419,16 +419,16 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-    backgroundColor: "#EBF2F7",
+    backgroundColor: "#EDF5F1",
     paddingVertical: 6,
     paddingHorizontal: 12,
     borderRadius: 20,
     borderWidth: 1,
-    borderColor: "#C8D9E8",
+    borderColor: "#C7E0D3",
     marginBottom: 16,
   },
   badgePillText: {
-    color: "#2E567A",
+    color: "#285C47",
     fontSize: 12.5,
     fontWeight: "600",
   },
@@ -472,7 +472,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 6,
-    backgroundColor: "#EBF2F7",
+    backgroundColor: "#EDF5F1",
     paddingVertical: 4,
     paddingHorizontal: 10,
     borderRadius: 6,
@@ -480,7 +480,7 @@ const styles = StyleSheet.create({
   portalTagText: {
     fontSize: 11,
     fontWeight: "800",
-    color: "#2E567A",
+    color: "#285C47",
     letterSpacing: 0.8,
   },
   portalTitle: {
@@ -502,7 +502,7 @@ const styles = StyleSheet.create({
   portalPill: {
     fontSize: 12.5,
     fontWeight: "600",
-    color: "#3B6E99",
+    color: "#367A5E",
   },
   portalActionCol: {
     alignItems: "center",
@@ -512,11 +512,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-    backgroundColor: "#3B6E99",
+    backgroundColor: "#367A5E",
     paddingVertical: 14,
     paddingHorizontal: 24,
     borderRadius: 10,
-    shadowColor: "#3B6E99",
+    shadowColor: "#367A5E",
     shadowOpacity: 0.25,
     shadowRadius: 8,
     elevation: 3,
@@ -544,7 +544,7 @@ const styles = StyleSheet.create({
   intakeOverline: {
     fontSize: 12,
     fontWeight: "800",
-    color: "#3B6E99",
+    color: "#367A5E",
     letterSpacing: 1,
     marginBottom: 6,
   },
@@ -580,8 +580,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   stepCircleActive: {
-    backgroundColor: "#3B6E99",
-    borderColor: "#3B6E99",
+    backgroundColor: "#367A5E",
+    borderColor: "#367A5E",
   },
   stepCircleCompleted: {
     backgroundColor: "#166534",
@@ -656,8 +656,8 @@ const styles = StyleSheet.create({
     borderColor: "#E8E2D5",
   },
   chipActive: {
-    backgroundColor: "#3B6E99",
-    borderColor: "#3B6E99",
+    backgroundColor: "#367A5E",
+    borderColor: "#367A5E",
   },
   chipText: {
     fontSize: 12.5,
@@ -688,7 +688,7 @@ const styles = StyleSheet.create({
     color: "#4A515A",
   },
   nextBtn: {
-    backgroundColor: "#3B6E99",
+    backgroundColor: "#367A5E",
     paddingVertical: 12,
     paddingHorizontal: 22,
     borderRadius: 8,
@@ -757,9 +757,9 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   timelineCardHighlight: {
-    borderColor: "#3B6E99",
+    borderColor: "#367A5E",
     borderWidth: 2,
-    backgroundColor: "#EBF2F7",
+    backgroundColor: "#EDF5F1",
   },
   timelineDateBadge: {
     alignSelf: "flex-start",
