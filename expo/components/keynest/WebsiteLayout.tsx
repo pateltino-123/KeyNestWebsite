@@ -27,7 +27,7 @@ interface WebsiteLayoutProps {
   children: React.ReactNode;
 }
 
-export default function WebsiteLayout({ children }: WebsiteLayoutProps) {
+export function WebsiteModalsProvider({ children }: WebsiteLayoutProps) {
   const [rentalAnalysisVisible, setRentalAnalysisVisible] = useState(false);
   const [analysisCity, setAnalysisCity] = useState("");
   const [consultationVisible, setConsultationVisible] = useState(false);
@@ -62,24 +62,8 @@ export default function WebsiteLayout({ children }: WebsiteLayoutProps) {
         openPortalModal,
       }}
     >
-      <SafeAreaView style={styles.safeArea}>
-        <View style={styles.layoutRoot}>
-          <Header
-            onRequestRentalAnalysis={() => openRentalAnalysis()}
-            onOpenConsultation={openConsultation}
-            onOpenPortalModal={openPortalModal}
-          />
-
-          <ScrollView
-            style={styles.mainScroll}
-            contentContainerStyle={styles.scrollContent}
-            showsVerticalScrollIndicator={true}
-          >
-            <View style={styles.contentBody}>{children}</View>
-            <Footer />
-          </ScrollView>
-
-          {/* Global Modals */}
+      {children}
+      {/* Global Modals */}
           <RentalAnalysisModal
             visible={rentalAnalysisVisible}
             onClose={() => setRentalAnalysisVisible(false)}
@@ -98,9 +82,31 @@ export default function WebsiteLayout({ children }: WebsiteLayoutProps) {
             onClose={() => setPortalVisible(false)}
             defaultTab={portalDefaultTab}
           />
-        </View>
-      </SafeAreaView>
     </LayoutContext.Provider>
+  );
+}
+
+export default function WebsiteLayout({ children }: WebsiteLayoutProps) {
+  const { openRentalAnalysis, openConsultation, openPortalModal } = useWebsiteModals();
+
+  return (
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.layoutRoot}>
+        <Header
+          onRequestRentalAnalysis={() => openRentalAnalysis()}
+          onOpenConsultation={openConsultation}
+          onOpenPortalModal={openPortalModal}
+        />
+        <ScrollView
+          style={styles.mainScroll}
+          contentContainerStyle={styles.scrollContent}
+          showsVerticalScrollIndicator={true}
+        >
+          <View style={styles.contentBody}>{children}</View>
+          <Footer />
+        </ScrollView>
+      </View>
+    </SafeAreaView>
   );
 }
 

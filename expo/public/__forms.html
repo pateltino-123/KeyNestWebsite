@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta charset="utf-8" /><title>Forms</title></head>
+  <body>
+    <!-- Static form so Netlify Forms registers "rental-analysis" at deploy time; submitted via fetch from RentalAnalysisModal -->
+    <form name="rental-analysis" method="POST" data-netlify="true" hidden>
+      <input name="name" />
+      <input name="email" />
+      <input name="phone" />
+      <input name="address" />
+      <input name="city" />
+      <input name="bedrooms" />
+      <input name="bathrooms" />
+      <input name="condition" />
+      <input name="estimate" />
+    </form>
+    <form name="consultation" method="POST" data-netlify="true" hidden>
+      <input name="name" />
+      <input name="email" />
+      <input name="phone" />
+      <input name="topic" />
+      <input name="managerPreference" />
+      <input name="preferredDay" />
+      <textarea name="message"></textarea>
+    </form>
+  </body>
+</html>

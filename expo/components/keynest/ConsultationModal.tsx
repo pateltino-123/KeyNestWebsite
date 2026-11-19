@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -32,20 +32,56 @@ export default function ConsultationModal({ visible, onClose }: ConsultationModa
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = () => {
+  const resetForm = () => {
+    setName("");
+    setEmail("");
+    setPhone("");
+    setTopic("Switching from Another Property Manager");
+    setManagerPreference("First Available Authorized Manager");
+    setPreferredDay("This Week (Morning)");
+    setMessage("");
+    setIsSubmitting(false);
+    setSubmitted(false);
+  };
+
+  useEffect(() => {
+    resetForm();
+  }, [visible]);
+
+  const handleSubmit = async () => {
     if (!name.trim() || !email.trim() || !phone.trim()) {
       alert("Please enter your name, email, and phone number.");
       return;
     }
     setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      const res = await fetch("/__forms.html", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({
+          "form-name": "consultation",
+          name: name.trim(),
+          email: email.trim(),
+          phone: phone.trim(),
+          topic,
+          managerPreference,
+          preferredDay,
+          message: message.trim(),
+        }).toString(),
+      });
+      if (!res.ok) {
+        throw new Error(`Submission failed (${res.status})`);
+      }
       setSubmitted(true);
-    }, 600);
+    } catch {
+      alert("We couldn't send your request. Please try again or call us directly.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleReset = () => {
-    setSubmitted(false);
+    resetForm();
     onClose();
   };
 

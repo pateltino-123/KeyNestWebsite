@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -39,22 +39,71 @@ export default function RentalAnalysisModal({
   const [submitted, setSubmitted] = useState(false);
   const [estimatedRent, setEstimatedRent] = useState<{ low: number; high: number } | null>(null);
 
+  const resetForm = () => {
+    setAddress("");
+    setCity(prefillCity || "The Colony");
+    setBeds("4");
+    setBaths("2.5");
+    setCondition("Good");
+    setOwnerName("");
+    setOwnerEmail("");
+    setOwnerPhone("");
+    setIsSubmitting(false);
+    setSubmitted(false);
+    setEstimatedRent(null);
+  };
+
+  // Reset on every open and close so stale data never carries over
+  useEffect(() => {
+    resetForm();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [visible, prefillCity]);
+
   const calculateEstimate = () => {
     let base = 2300;
-    const bedNum = parseInt(beds) || 3;
+    const bedNum = beds === "5+" ? 5 : parseInt(beds, 10) || 3;
     base += (bedNum - 3) * 350;
     if (city.toLowerCase().includes("frisco") || city.toLowerCase().includes("prosper")) {
       base += 400;
     } else if (city.toLowerCase().includes("plano") || city.toLowerCase().includes("the colony")) {
       base += 200;
     }
-    if (condition === "Excellent" || condition === "Renovated") {
+    if (condition === "Turnkey / Like New") {
       base += 250;
+    } else if (condition === "Needs Minor Paint/Clean") {
+      base -= 100;
+    } else if (condition === "Needs Renovation") {
+      base -= 250;
     }
     return { low: base - 150, high: base + 200 };
   };
 
-  const handleSubmit = () => {
+  const submitLead = async (est: { low: number; high: number }) => {
+    const body = new URLSearchParams({
+      "form-name": "rental-analysis",
+      name: ownerName.trim(),
+      email: ownerEmail.trim(),
+      phone: ownerPhone.trim(),
+      address: address.trim(),
+      city,
+      bedrooms: beds,
+      bathrooms: baths,
+      condition,
+      estimate: `$${est.low} - $${est.high} / month`,
+    }).toString();
+
+    // Netlify Forms detects the form in public/__forms.html at deploy time
+    const res = await fetch("/__forms.html", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body,
+    });
+    if (!res.ok) {
+      throw new Error(`Submission failed (${res.status})`);
+    }
+  };
+
+  const handleSubmit = async () => {
     if (!address.trim() || !ownerName.trim() || !ownerEmail.trim()) {
       alert("Please enter your property address, name, and email.");
       return;
@@ -63,16 +112,21 @@ export default function RentalAnalysisModal({
     setIsSubmitting(true);
     const est = calculateEstimate();
 
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      await submitLead(est);
       setEstimatedRent(est);
       setSubmitted(true);
-    }, 700);
+    } catch {
+      alert(
+        "We couldn't send your request. Please try again or call us directly."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleReset = () => {
-    setSubmitted(false);
-    setEstimatedRent(null);
+    resetForm();
     onClose();
   };
 
