@@ -6,6 +6,7 @@ import React, { useEffect } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 import { useTheme, ThemeProvider } from "@/contexts/ThemeContext";
+import { WebsiteModalsProvider } from "@/components/keynest/WebsiteLayout";
 import ErrorBoundary from "@/components/ErrorBoundary";
 
 SplashScreen.preventAutoHideAsync().catch(() => {});
@@ -47,7 +48,9 @@ function AppContent() {
   return (
     <ErrorBoundary>
       <ThemeProvider>
-        <RootLayoutNav />
+        <WebsiteModalsProvider>
+          <RootLayoutNav />
+        </WebsiteModalsProvider>
       </ThemeProvider>
     </ErrorBoundary>
   );
