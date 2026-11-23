@@ -60,7 +60,7 @@ export const KEYNEST_INFO = {
   brokerage: "Fair Deal Realty Inc.",
   brokerageFullLine: "KeyNest Realty Property Management, under the brokerage of Fair Deal Realty Inc.",
   officeAddress: "4815 State Hwy 121, Suite 2, The Colony, TX 75056",
-  phone: "(972) 833-2898",
+  phone: "(972) 798-2110",
   emergencyPhone: "(972) 833-2899",
   email: "info@keynestrealty.com",
   leasingEmail: "leasing@keynestrealty.com",
