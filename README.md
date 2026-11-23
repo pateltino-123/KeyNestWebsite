@@ -11,7 +11,7 @@ Serving single-family, condo, and multi-family residential rental owners and res
 - **Sponsoring Brokerage:** Fair Deal Realty Inc. (Texas Real Estate Commission Licensed)
 - **Supervising Broker:** Purvang Patel (Broker License #0588636)
 - **Corporate Office:** 4815 State Hwy 121, Suite 2, The Colony, TX 75056
-- **Direct Phone:** (469) 215-1440
+- **Direct Phone:** (972) 798-2110
 - **Email:** info@keynestrealty.com
 
 ---
